@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  dotenv: {
+    NG_APP_VERSION: process.env.NG_APP_VERSION,
+  },
 };

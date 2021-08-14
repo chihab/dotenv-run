@@ -1,0 +1,28 @@
+{
+  "name": "ngx-env",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "chihab <chihab@gmail.com>",
+  "homepage": "",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "builders.json"
+  ],
+  "builders": "builders.json",
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "node dist/builders/schema-generate.js",
+    "watch": "tsc -w",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "devDependencies": {
+    "cpy": "^8.1.2"
+  },
+  "peerDependencies": {
+    "dotenv": "*",
+    "@angular-devkit/architect": ">=0.1100.0 < 0.1200.0",
+    "@angular-devkit/core": "^11.0.0"
+  }
+}

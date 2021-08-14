@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  dotenv: {
+    NG_APP_VERSION: process.env.NG_APP_VERSION,
+  },
 };
 
 /*

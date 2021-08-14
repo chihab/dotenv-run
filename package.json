@@ -1,12 +1,19 @@
 {
-  "name": "ngx-env",
-  "version": "0.0.0",
+  "name": "ng-env-demo",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:env": "ng run ng-env-demo:serve-env",
     "build": "ng build",
+    "build:env": "ng run ng-env-demo:build-env",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "build:builder": "lerna run watch --scope 'ngx-env'",
+    "build:dotenv-run": "lerna run build --scope 'dotenv-run'",
+    "run:echo": "echo $Z_APP",
+    "dotenv-run": "dotenv-run node index.js",
+    "dotenv-cli-run": "dotenv node index.js"
   },
   "private": true,
   "dependencies": {
@@ -30,10 +37,23 @@
     "@types/node": "^12.11.1",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
-    "karma-chrome-launcher": "~3.1.0",
+    "karma-chrome-launcher": "~3.0.0",
     "karma-coverage": "~2.0.3",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
-    "typescript": "~4.3.2"
+    "lerna": "^4.0.0",
+    "typescript": "~4.3.2",
+    "dotenv-cli": "^4.0.0",
+    "dotenv": "10.0.0",
+    "dotenv-run": "*",
+    "ngx-env": "*"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "@types/exit"
+    ]
   }
 }
