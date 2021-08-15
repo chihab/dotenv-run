@@ -1,0 +1,11 @@
+{
+  "$schema": "../../node_modules/@angular-devkit/schematics/collection-schema.json",
+  "schematics": {
+    "ng-add": {
+      "description": "Add ngx-env to your Angular Application",
+      "factory": "./dist/schematics/ng-add/index",
+      "schema": "./dist/schematics/ng-add/schema.json",
+      "aliases": ["install"]
+    }
+  }
+}

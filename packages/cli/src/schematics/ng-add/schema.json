@@ -1,0 +1,7 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "ngx-env-ng-add",
+  "title": "ngx-env schematic",
+  "type": "object",
+  "properties": {}
+}

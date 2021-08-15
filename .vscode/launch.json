@@ -5,9 +5,9 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "start:env",
+      "name": "start:demo",
       "request": "launch",
-      "runtimeArgs": ["run-script", "start:env"],
+      "runtimeArgs": ["run-script", "start:demo"],
       "runtimeExecutable": "npm",
       "skipFiles": ["<node_internals>/**"],
       "type": "pwa-node"
