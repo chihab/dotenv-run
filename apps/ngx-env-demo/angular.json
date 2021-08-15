@@ -1,12 +1,12 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "../../node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
     "analytics": false
   },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-env-demo": {
+    "ngx-env-demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -20,7 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-env-demo",
+            "outputPath": "dist/ngx-env-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -65,7 +65,7 @@
         "build-env": {
           "builder": "@ngx-env/cli:browser",
           "options": {
-            "outputPath": "dist/ng-env-demo",
+            "outputPath": "dist/ngx-env-demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -125,10 +125,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ng-env-demo:build:production"
+              "browserTarget": "ngx-env-demo:build:production"
             },
             "development": {
-              "browserTarget": "ng-env-demo:build:development"
+              "browserTarget": "ngx-env-demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -138,10 +138,10 @@
           "builder": "@ngx-env/cli:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ng-env-demo:build-env:production"
+              "browserTarget": "ngx-env-demo:build-env:production"
             },
             "development": {
-              "browserTarget": "ng-env-demo:build-env:development"
+              "browserTarget": "ngx-env-demo:build-env:development"
             }
           },
           "defaultConfiguration": "development"
@@ -149,7 +149,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-env-demo:build"
+            "browserTarget": "ngx-env-demo:build"
           }
         },
         "test": {
@@ -167,5 +167,5 @@
       }
     }
   },
-  "defaultProject": "ng-env-demo"
+  "defaultProject": "ngx-env-demo"
 }

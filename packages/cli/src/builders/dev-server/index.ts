@@ -10,6 +10,7 @@ import {
 import { serveWebpackBrowser } from '@angular-devkit/build-angular/src/dev-server';
 import { from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import browser from '../browser';
 import { plugin } from '../plugin';
 
 export const buildWithPlugin = (
@@ -18,6 +19,7 @@ export const buildWithPlugin = (
 ): ReturnType<typeof serveWebpackBrowser> => {
   async function setup() {
     const browserTarget = targetFromTargetString(pluginOptions.browserTarget);
+    console.log(browserTarget);
     return context.getTargetOptions(
       browserTarget
     ) as unknown as DevServerBuilderOptions;
