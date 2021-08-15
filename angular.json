@@ -63,7 +63,7 @@
           "defaultConfiguration": "production"
         },
         "build-env": {
-          "builder": "ngx-env:browser",
+          "builder": "@ngx-env/cli:browser",
           "options": {
             "outputPath": "dist/ng-env-demo",
             "index": "src/index.html",
@@ -135,7 +135,7 @@
         },
 
         "serve-env": {
-          "builder": "ngx-env:dev-server",
+          "builder": "@ngx-env/cli:dev-server",
           "configurations": {
             "production": {
               "browserTarget": "ng-env-demo:build-env:production"

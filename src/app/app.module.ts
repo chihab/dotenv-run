@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { NgxEnvModule } from '@ngx-env/core';
 import { AppComponent } from './app.component';
-import { EnvPipe } from './env.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    EnvPipe
-  ],
-  imports: [
-    BrowserModule
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, NgxEnvModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
