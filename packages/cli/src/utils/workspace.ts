@@ -26,10 +26,9 @@ export function getWorkspace(host: Tree): {
   }
 
   const content = configBuffer.toString();
-  let workspace: Workspace = JSON.parse(content);
-
+  let workspace: Workspace;
   try {
-    console.log(content);
+    workspace = JSON.parse(content);
   } catch (e: any) {
     throw new SchematicsException(
       `Could not parse angular.json: ${e?.message}`

@@ -1,5 +1,9 @@
 import * as cpy from 'cpy';
 
+async function copySchema(name: string) {
+  await cpy([`src/schematics/${name}/schema.json`], `dist/schematics/${name}`);
+}
+
 export default async function () {
-  await cpy(['src/schematics/ng-add/schema.json'], 'dist/schematics/ng-add');
+  await copySchema('ng-add');
 }

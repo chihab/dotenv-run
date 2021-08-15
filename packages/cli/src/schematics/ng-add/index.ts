@@ -30,11 +30,7 @@ function writeBuilder(
 export function builder(options: any): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const { path: workspacePath, workspace } = getWorkspace(tree);
-    console.log(workspacePath);
-    console.log(workspace);
-    // // get the workspace details
 
-    // // getting project name
     if (!options.project) {
       if (workspace.defaultProject) {
         options.project = workspace.defaultProject;
@@ -45,7 +41,6 @@ export function builder(options: any): Rule {
       }
     }
 
-    // // Validating project name
     const project: WorkspaceProject = workspace.projects[options.project];
     if (!project) {
       throw new SchematicsException(
@@ -53,7 +48,6 @@ export function builder(options: any): Rule {
       );
     }
 
-    // Checking if it is application
     if (project.projectType !== 'application') {
       throw new SchematicsException(
         `Deploy requires an Angular project type of "application" in angular.json`
