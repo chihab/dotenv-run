@@ -11,8 +11,7 @@
   },
   "private": true,
   "devDependencies": {
-    "lerna": "^4.0.0",
-    "@ngx-env/cli": "*"
+    "lerna": "^4.0.0"
   },
   "workspaces": [
     "packages/*",

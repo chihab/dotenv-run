@@ -10,9 +10,8 @@ export class AppComponent {
   title = 'ng-env-demo';
   constructor() {
     console.log(process.env);
-    console.log(process.env.USERDOMAIN);
     console.log(process.env.NODE_ENV);
     console.log(process.env.NG_APP_ENVIRONMENT);
-    console.log(environment.dotenv.NG_APP_VERSION);
+    console.log(environment.process.NG_APP_VERSION);
   }
 }

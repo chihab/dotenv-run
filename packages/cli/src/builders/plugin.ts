@@ -1,14 +1,15 @@
 import { config } from 'dotenv';
+import * as dotenv_expand from 'dotenv-expand';
 import { Configuration } from 'webpack';
 import * as webpack from 'webpack';
 
-const dotenv = config().parsed;
+const env = config();
+dotenv_expand(env);
 function getClientEnvironment(prefix: RegExp) {
   return Object.keys(process.env)
-    .concat(Object.keys(dotenv))
     .filter((key) => prefix.test(key))
     .reduce((env, key) => {
-      const value = dotenv[key] || process.env[key];
+      const value = env[key] || process.env[key];
       if (value !== undefined) env[key] = JSON.stringify(value);
       return env;
     }, {});
@@ -21,12 +22,10 @@ export function plugin(options?: any) {
       webpackConfig.plugins.push(
         new webpack.DefinePlugin({ 'process.env': env })
       );
-      return Promise.resolve(webpackConfig);
+      return webpackConfig;
     },
-    indexHtml: (content: string) => {
-      // Inject variables in Window
-      console.log(content);
-      return Promise.resolve(content);
+    indexHtml: async (content: string) => {
+      return content.replace('%NG_APP_WEBSITE_NAME%', 'Hello World');
     },
   };
 }
