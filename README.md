@@ -8,13 +8,13 @@
 
 # Quick start
 
-1. Fork and clone the project
+1. Add @ngx-env to your CLI project
 
 ```sh
 ng add @ngx-env/cli
 ```
 
-2. Define Environment Variables
+2. Define Environment Variables in `.env`
 
 ```sh
 NG_APP_ENABLE_ANALYTICS=false
@@ -28,7 +28,7 @@ npm start
 NG_APP_BRANCH_NAME=`git branch --show-current` npm run build
 ```
 
-4. Usage in TypeScript
+4. Use in TypeScript
 
 ```ts
 @Component({
@@ -40,21 +40,21 @@ export class FooterComponent {
 }
 ```
 
-# Table of contents
-
-# Comsuming Environment Variables
+# Using Environment Variables
 
 Your project can consume variables declared in your environment as if they were declared locally in your JS files.
 
 These environment variables can be useful for displaying information conditionally based on where the project is deployed or consuming sensitive data that lives outside of version control.
 
-By default you will have `NODE_ENV` defined for you, and any other environment variables starting with `NG_APP_`.
+## Important ⚠
+
+**By default you will have `NODE_ENV` defined for you, and any other environment variables starting with `NG_APP_`.**
 
 > Do not store any secrets (such as private API keys) in your Angular app!
 >
 > Environment variables are embedded into the build, meaning anyone can view them by inspecting your app's files.
 
-## NG_APP
+## `NG_APP*`
 
 **The environment variables are embedded during the build time**.
 
@@ -67,7 +67,7 @@ Any other variables except `NODE_ENV` will be ignored to avoid accidentally expo
 
 These environment variables will be defined for you on `process.env`. For example, having an environment variable named `NG_APP_NOT_SECRET_CODE` will be exposed in your JS as `process.env.NG_APP_NOT_SECRET_CODE`.
 
-## NODE_ENV
+## `NODE_ENV`
 
 There is also a built-in environment variable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`.
 
