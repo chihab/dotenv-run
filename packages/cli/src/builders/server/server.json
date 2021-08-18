@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Custom webpack karma schema for Build Facade",
-  "description": "Karma target options",
+  "$id": "BuildCustomWebpackServerSchema",
+  "title": "Custom webpack server schema for Build Facade",
   "type": "object",
   "properties": {
     "main": {
@@ -10,39 +10,8 @@
     },
     "tsConfig": {
       "type": "string",
+      "default": "tsconfig.app.json",
       "description": "The name of the TypeScript configuration file."
-    },
-    "karmaConfig": {
-      "type": "string",
-      "description": "The name of the Karma configuration file."
-    },
-    "polyfills": {
-      "type": "string",
-      "description": "The name of the polyfills file."
-    },
-    "assets": {
-      "type": "array",
-      "description": "List of static application assets.",
-      "default": [],
-      "items": {
-        "$ref": "#/definitions/assetPattern"
-      }
-    },
-    "scripts": {
-      "description": "Global scripts to be included in the build.",
-      "type": "array",
-      "default": [],
-      "items": {
-        "$ref": "#/definitions/extraEntryPoint"
-      }
-    },
-    "styles": {
-      "description": "Global styles to be included in the build.",
-      "type": "array",
-      "default": [],
-      "items": {
-        "$ref": "#/definitions/extraEntryPoint"
-      }
     },
     "inlineStyleLanguage": {
       "description": "The stylesheet language to use for the application's inline component styles.",
@@ -65,16 +34,52 @@
       },
       "additionalProperties": false
     },
-    "include": {
+    "optimization": {
+      "description": "Enables optimization of the build output. Including minification of scripts and styles, tree-shaking and dead-code elimination. For more information, see https://angular.io/guide/workspace-config#optimization-configuration.",
+      "x-user-analytics": 16,
+      "default": true,
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "scripts": {
+              "type": "boolean",
+              "description": "Enables optimization of the scripts output.",
+              "default": true
+            },
+            "styles": {
+              "type": "boolean",
+              "description": "Enables optimization of the styles output.",
+              "default": true
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "boolean"
+        }
+      ]
+    },
+    "fileReplacements": {
+      "description": "Replace compilation source files with other compilation source files in the build.",
       "type": "array",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/fileReplacement"
       },
-      "description": "Globs of files to include, relative to workspace or project root. \nThere are 2 special cases:\n - when a path to directory is provided, all spec files ending \".spec.@(ts|tsx)\" will be included\n - when a path to a file is provided, and a matching spec file exists it will be included instead"
+      "default": []
+    },
+    "outputPath": {
+      "type": "string",
+      "description": "Path where output will be placed."
+    },
+    "resourcesOutputPath": {
+      "type": "string",
+      "description": "The path where style resources will be placed, relative to outputPath.",
+      "default": ""
     },
     "sourceMap": {
       "description": "Output source maps for scripts and styles. For more information, see https://angular.io/guide/workspace-config#source-map-configuration.",
-      "default": true,
+      "default": false,
       "oneOf": [
         {
           "type": "object",
@@ -89,6 +94,11 @@
               "description": "Output source maps for all styles.",
               "default": true
             },
+            "hidden": {
+              "type": "boolean",
+              "description": "Output source maps used for error reporting tools.",
+              "default": false
+            },
             "vendor": {
               "type": "boolean",
               "description": "Resolve vendor packages source maps.",
@@ -102,85 +112,109 @@
         }
       ]
     },
+    "deployUrl": {
+      "type": "string",
+      "description": "URL where files will be deployed."
+    },
+    "verbose": {
+      "type": "boolean",
+      "description": "Adds more details to output logging.",
+      "default": false
+    },
     "progress": {
       "type": "boolean",
       "description": "Log progress to the console while building.",
       "default": true
     },
-    "watch": {
-      "type": "boolean",
-      "description": "Run build when files change."
+    "i18nMissingTranslation": {
+      "type": "string",
+      "description": "How to handle missing translations for i18n.",
+      "enum": ["warning", "error", "ignore"],
+      "default": "warning"
     },
-    "poll": {
-      "type": "number",
-      "description": "Enable and define the file watching poll time period in milliseconds."
+    "localize": {
+      "description": "Translate the bundles in one or more locales.",
+      "oneOf": [
+        {
+          "type": "boolean",
+          "description": "Translate all locales."
+        },
+        {
+          "type": "array",
+          "description": "List of locales ID's to translate.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-zA-Z]{2,3}(-[a-zA-Z]{4})?(-([a-zA-Z]{2}|[0-9]{3}))?(-[a-zA-Z]{5,8})?(-x(-[a-zA-Z0-9]{1,8})+)?$"
+          }
+        }
+      ]
+    },
+    "outputHashing": {
+      "type": "string",
+      "description": "Define the output filename cache-busting hashing mode.",
+      "default": "none",
+      "enum": ["none", "all", "media", "bundles"]
+    },
+    "deleteOutputPath": {
+      "type": "boolean",
+      "description": "Delete the output path before building.",
+      "default": true
     },
     "preserveSymlinks": {
       "type": "boolean",
       "description": "Do not use the real path when resolving modules. If unset then will default to `true` if NodeJS option --preserve-symlinks is set."
     },
-    "browsers": {
-      "type": "string",
-      "description": "Override which browsers tests are run against."
-    },
-    "codeCoverage": {
+    "extractLicenses": {
       "type": "boolean",
-      "description": "Output a code coverage report.",
+      "description": "Extract all licenses in a separate file, in the case of production builds only.",
+      "default": true
+    },
+    "showCircularDependencies": {
+      "type": "boolean",
+      "description": "Show circular dependency warnings on builds.",
+      "default": false,
+      "x-deprecated": "The recommended method to detect circular dependencies in project code is to use either a lint rule or other external tooling."
+    },
+    "namedChunks": {
+      "type": "boolean",
+      "description": "Use file name for lazy loaded chunks.",
       "default": false
     },
-    "codeCoverageExclude": {
+    "bundleDependencies": {
+      "description": "Which external dependencies to bundle into the bundle. By default, all of node_modules will be bundled.",
+      "default": true,
+      "oneOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "string",
+          "enum": ["none", "all"]
+        }
+      ]
+    },
+    "externalDependencies": {
+      "description": "Exclude the listed external dependencies from being bundled into the bundle. Instead, the created bundle relies on these dependencies to be available during runtime.",
       "type": "array",
-      "description": "Globs to exclude from code coverage.",
       "items": {
         "type": "string"
       },
       "default": []
     },
-    "fileReplacements": {
-      "description": "Replace compilation source files with other compilation source files in the build.",
-      "type": "array",
-      "items": {
-        "oneOf": [
-          {
-            "type": "object",
-            "properties": {
-              "src": {
-                "type": "string"
-              },
-              "replaceWith": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false,
-            "required": ["src", "replaceWith"]
-          },
-          {
-            "type": "object",
-            "properties": {
-              "replace": {
-                "type": "string"
-              },
-              "with": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false,
-            "required": ["replace", "with"]
-          }
-        ]
-      },
-      "default": []
+    "statsJson": {
+      "type": "boolean",
+      "description": "Generates a 'stats.json' file which can be analyzed using tools such as 'webpack-bundle-analyzer'.",
+      "default": false
     },
-    "reporters": {
-      "type": "array",
-      "description": "Karma reporters to use. Directly passed to the karma runner.",
-      "items": {
-        "type": "string"
-      }
+    "watch": {
+      "type": "boolean",
+      "description": "Run build when files change.",
+      "default": false
     },
-    "webWorkerTsConfig": {
-      "type": "string",
-      "description": "TypeScript configuration for Web Worker modules."
+    "poll": {
+      "type": "number",
+      "description": "Enable and define the file watching poll time period in milliseconds."
     },
     "customWebpackConfig": {
       "description": "Custom webpack configuration",
@@ -214,70 +248,42 @@
     }
   },
   "additionalProperties": false,
-  "required": ["main", "tsConfig", "karmaConfig"],
+  "required": ["outputPath", "main", "tsConfig"],
   "definitions": {
-    "assetPattern": {
+    "fileReplacement": {
       "oneOf": [
         {
           "type": "object",
           "properties": {
-            "glob": {
+            "src": {
               "type": "string",
-              "description": "The pattern to match."
+              "pattern": "\\.(([cm]?j|t)sx?|json)$"
             },
-            "input": {
+            "replaceWith": {
               "type": "string",
-              "description": "The input directory path in which to apply 'glob'. Defaults to the project root."
-            },
-            "output": {
-              "type": "string",
-              "description": "Absolute path within the output."
-            },
-            "ignore": {
-              "description": "An array of globs to ignore.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
+              "pattern": "\\.(([cm]?j|t)sx?|json)$"
             }
           },
           "additionalProperties": false,
-          "required": ["glob", "input", "output"]
+          "required": ["src", "replaceWith"]
         },
-        {
-          "type": "string"
-        }
-      ]
-    },
-    "extraEntryPoint": {
-      "oneOf": [
         {
           "type": "object",
           "properties": {
-            "input": {
+            "replace": {
               "type": "string",
-              "description": "The file to include."
+              "pattern": "\\.(([cm]?j|t)sx?|json)$"
             },
-            "bundleName": {
+            "with": {
               "type": "string",
-              "pattern": "^[\\w\\-.]*$",
-              "description": "The bundle name for this extra entry point."
-            },
-            "inject": {
-              "type": "boolean",
-              "description": "If the bundle will be referenced in the HTML file.",
-              "default": true
+              "pattern": "\\.(([cm]?j|t)sx?|json)$"
             }
           },
           "additionalProperties": false,
-          "required": ["input"]
-        },
-        {
-          "type": "string",
-          "description": "The file to include."
+          "required": ["replace", "with"]
         }
       ]
     }
   },
-  "$id": "BuildCustomWebpackKarmaSchema"
+  "description": "Server target options"
 }
