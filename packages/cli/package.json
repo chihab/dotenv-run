@@ -1,14 +1,16 @@
 {
   "name": "@ngx-env/cli",
-  "version": "0.0.0",
-  "description": "> TODO: description",
+  "version": "0.1.0",
+  "description": "Add Environment Variables to your Angular App",
   "author": "chihab <chihab@gmail.com>",
-  "homepage": "",
+  "homepage": "https://github.com/chihab/ngx-env",
   "license": "MIT",
   "main": "dist/index.js",
   "files": [
     "dist",
-    "builders.json"
+    "builders.json",
+    "collection.json",
+    "README.md"
   ],
   "builders": "builders.json",
   "schematics": "./collection.json",
