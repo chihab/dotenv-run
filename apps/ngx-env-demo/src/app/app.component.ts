@@ -7,6 +7,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  version = environment.process.NG_APP_VERSION;
   env = process.env.NODE_ENV;
+  version = environment.env.NG_APP_VERSION;
+  branch = process.env.NG_APP_BRANCH_NAME;
+  home = process.env.USER_HOME;
 }
