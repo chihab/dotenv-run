@@ -1,4 +1,4 @@
-# @ngx-env/cli
+# @ngx-env/cli [WIP - Not ready for production]
 
 <img src="./logo.png" alt="dotenv" width="90px" align="right" />
 
