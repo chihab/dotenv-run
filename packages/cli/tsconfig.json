@@ -13,7 +13,7 @@
     "strictPropertyInitialization": false,
     "strictNullChecks": false,
     "pretty": true,
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": true,
     "stripInternal": true,
     "skipLibCheck": true

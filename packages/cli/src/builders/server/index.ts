@@ -5,7 +5,7 @@ import {
 } from "@angular-devkit/build-angular";
 import { plugin } from "../plugin";
 
-export const buildCustomWebpackServer = (
+export const buildWithPlugin = (
   options: ServerBuilderOptions,
   context: BuilderContext
 ): ReturnType<typeof executeServerBuilder> =>
@@ -15,4 +15,4 @@ export const buildCustomWebpackServer = (
     plugin({ ...options, env: "production" })
   );
 
-export default createBuilder<ServerBuilderOptions>(buildCustomWebpackServer);
+export default createBuilder<ServerBuilderOptions>(buildWithPlugin);

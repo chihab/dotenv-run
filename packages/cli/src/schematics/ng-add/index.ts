@@ -1,11 +1,17 @@
+import { normalize, virtualFs, workspaces } from "@angular-devkit/core";
 import {
+  apply,
+  applyTemplates,
   chain,
+  mergeWith,
+  move,
   Rule,
   SchematicContext,
   SchematicsException,
   Tree,
-} from '@angular-devkit/schematics';
-import { getWorkspace, WorkspaceProject } from '../../utils/workspace';
+  url,
+} from "@angular-devkit/schematics";
+import { getWorkspace, WorkspaceProject } from "../../utils/workspace";
 
 function writeBuilder(
   project: WorkspaceProject,
@@ -36,7 +42,7 @@ export function builder(options: any): Rule {
         options.project = workspace.defaultProject;
       } else {
         throw new SchematicsException(
-          'No Angular project selected and no default project in the workspace'
+          "No Angular project selected and no default project in the workspace"
         );
       }
     }
@@ -44,20 +50,20 @@ export function builder(options: any): Rule {
     const project: WorkspaceProject = workspace.projects[options.project];
     if (!project) {
       throw new SchematicsException(
-        'The specified Angular project is not defined in this workspace'
+        "The specified Angular project is not defined in this workspace"
       );
     }
 
-    if (project.projectType !== 'application') {
+    if (project.projectType !== "application") {
       throw new SchematicsException(
         `Deploy requires an Angular project type of "application" in angular.json`
       );
     }
 
-    writeBuilder(project, 'build', '@ngx-env/cli:browser', true);
-    writeBuilder(project, 'serve', '@ngx-env/cli:dev-server', true);
-    writeBuilder(project, 'test', '@ngx-env/cli:karma');
-    writeBuilder(project, 'server', '@ngx-env/cli:server');
+    writeBuilder(project, "build", "@ngx-env/cli:browser", true);
+    writeBuilder(project, "serve", "@ngx-env/cli:dev-server", true);
+    writeBuilder(project, "test", "@ngx-env/cli:karma");
+    writeBuilder(project, "server", "@ngx-env/cli:server");
 
     tree.overwrite(workspacePath, JSON.stringify(workspace, null, 2));
     return tree;
@@ -65,5 +71,8 @@ export function builder(options: any): Rule {
 }
 
 export default function (options: any): Rule {
-  return chain([builder(options)]);
+  return chain([
+    mergeWith(apply(url("./template"), [move(normalize("./src"))])),
+    builder(options),
+  ]);
 }

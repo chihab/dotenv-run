@@ -4,27 +4,27 @@
     "browser": {
       "implementation": "./dist/builders/browser",
       "schema": "./dist/builders/schemas/browser.json",
-      "description": "Build browser app extended with custom webpack config"
+      "description": "Build browser app extended with ngx-env config"
     },
     "dev-server": {
       "implementation": "./dist/builders/dev-server",
       "schema": "./dist/builders/schemas/dev-server.json",
-      "description": "Dev server extended with custom webpack config"
+      "description": "Dev server extended with ngx-env config"
     },
     "karma": {
       "implementation": "./dist/builders/karma",
       "schema": "./dist/builders/schemas/karma.json",
-      "description": "Karma server extended with custom webpack config"
+      "description": "Karma server extended with ngx-env config"
     },
     "extract-i18n": {
       "implementation": "./dist/builders/extract-i18n",
       "schema": "./dist/builders/schemas/extract-i18n.json",
-      "description": "Extract i18n extended with custom webpack config"
+      "description": "Extract i18n extended with ngx-env config"
     },
     "server": {
       "implementation": "./dist/builders/server",
       "schema": "./dist/builders/schemas/server.json",
-      "description": "Build server app extended with custom webpack config"
+      "description": "Build server app extended with ngx-env config"
     }
   }
 }

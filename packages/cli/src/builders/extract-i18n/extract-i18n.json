@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Custom webpack extract-i18n schema for Build Facade",
+  "title": "ngx-env extract-i18n schema for Build Facade",
   "description": "Extract i18n target options",
   "type": "object",
   "properties": {
@@ -41,5 +41,5 @@
   },
   "additionalProperties": false,
   "required": ["browserTarget"],
-  "$id": "BuildCustomWebpackExtractI18nSchema"
+  "$id": "BuildNgxEnvExtractI18nSchema"
 }

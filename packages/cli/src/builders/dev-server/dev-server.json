@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "Custom webpack dev server schema for Angular build facade",
+  "title": "ngx-env dev server schema for Angular build facade",
   "description": "Dev server target options",
   "type": "object",
   "properties": {
@@ -203,5 +203,5 @@
   },
   "additionalProperties": false,
   "required": ["browserTarget"],
-  "$id": "CustomWebpackDevServerSchema"
+  "$id": "NgxEnvDevServerSchema"
 }
