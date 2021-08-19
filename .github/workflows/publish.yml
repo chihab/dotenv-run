@@ -17,9 +17,9 @@ jobs:
       - run: cp README.md packages/builder/README.md
       - run: cp logo.png packages/builder/
       - run: cp logo.png packages/core/
-      - run: cd packages/builder && npm publish
+      - run: cd packages/builder && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: cd packages/core && npm publish
+      - run: cd packages/core && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
