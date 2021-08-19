@@ -19,7 +19,7 @@ describe('AppComponent', () => {
   it('should get the correct values from the environment', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.version).toEqual('0.0.1');
+    expect(app.version).toBeDefined();
     expect(app.env).toEqual('test');
     expect(app.branch).toEqual('main');
     expect(app.home).toBeUndefined();
