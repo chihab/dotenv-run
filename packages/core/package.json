@@ -1,14 +1,13 @@
 {
   "name": "@ngx-env/core",
-  "version": "0.0.0",
-  "description": "> TODO: description",
+  "version": "0.1.0",
+  "description": "Add Environment Variables to your Angular App",
   "author": "chihab <chihab@gmail.com>",
-  "homepage": "",
+  "homepage": "https://github.com/chihab/ngx-env",
   "license": "MIT",
   "files": [
     "dist"
   ],
-  "builders": "builders.json",
   "scripts": {
     "build": "ng-packagr -p package.json",
     "test": "echo \"Write some tests dude!\" && exit 0",
