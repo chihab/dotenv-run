@@ -12,7 +12,7 @@
     "declaration": false,
     "downlevelIteration": true,
     "paths": {
-      "@ngx-env/core": ["../../packages/lib/src/public_api"]
+      "@ngx-env/core": ["../../packages/core/src/public_api"]
     },
     "experimentalDecorators": true,
     "moduleResolution": "node",

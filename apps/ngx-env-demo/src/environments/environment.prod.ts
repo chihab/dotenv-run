@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  process: {
+  env: {
     NG_APP_VERSION: process.env.NG_APP_VERSION,
   },
 };

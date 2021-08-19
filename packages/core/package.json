@@ -11,7 +11,7 @@
   "builders": "builders.json",
   "scripts": {
     "build": "ng-packagr -p package.json",
-    "test": "echo \"Error: run tests from root\" && exit 1",
+    "test": "echo \"Write some tests dude!\" && exit 0",
     "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1"
   },
   "ngPackage": {

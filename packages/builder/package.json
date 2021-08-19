@@ -1,11 +1,10 @@
 {
-  "name": "@ngx-env/cli",
+  "name": "@ngx-env/builder",
   "version": "0.1.2",
   "description": "Add Environment Variables to your Angular App",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env",
   "license": "MIT",
-  "main": "dist/index.js",
   "files": [
     "dist",
     "builders.json",
@@ -21,7 +20,7 @@
     "start": "tsc -w",
     "build": "tsc",
     "postbuild": "node dist/schema.js",
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Write some tests dude!\" && exit 0"
   },
   "dependencies": {
     "dotenv": "9.0.2",

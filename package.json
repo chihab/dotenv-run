@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "scripts": {
     "start:demo": "lerna exec --scope=@ngx-env/demo -- yarn start",
-    "start:cli": "lerna run start --scope=@ngx-env/cli",
+    "start:cli": "lerna run start --scope=@ngx-env/builder",
     "start:lib": "lerna run start --scope=@ngx-env/core",
     "build": "lerna run build",
-    "build:cli": "lerna run build --scope=@ngx-env/cli",
-    "build:lib": "lerna run build --scope=@ngx-env/core"
+    "build:cli": "lerna run build --scope=@ngx-env/builder",
+    "build:lib": "lerna run build --scope=@ngx-env/core",
+    "test": "lerna run test"
   },
   "private": true,
   "devDependencies": {
