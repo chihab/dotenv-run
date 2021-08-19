@@ -2,15 +2,39 @@ import { config } from "dotenv";
 import * as dotenv_expand from "dotenv-expand";
 import * as webpack from "webpack";
 import { Configuration } from "webpack";
-
-const env = config();
-dotenv_expand(env);
+import * as fs from "fs";
+import * as path from "path";
 
 function escapeStringRegexp(str: string) {
   return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
-function getClientEnvironment(prefix: RegExp) {
+function getClientEnvironment(prefix: RegExp, env: string) {
+  const dotenvBase = path.resolve(process.cwd(), ".env");
+  const dotenvFiles = [
+    `${dotenvBase}.${env}.local`,
+    // Don't include `.env.local` for `test` environment
+    // since normally you expect tests to produce the same
+    // results for everyone
+    env !== "test" && `${dotenvBase}.local`,
+    `${dotenvBase}.${env}`,
+    dotenvBase,
+  ].filter(Boolean);
+  // Load environment variables from .env* files. Suppress warnings using silent
+  // if this file is missing. dotenv will never modify any environment variables
+  // that have already been set.  Variable expansion is supported in .env files.
+  // https://github.com/motdotla/dotenv
+  // https://github.com/motdotla/dotenv-expand
+  dotenvFiles.forEach((dotenvFile) => {
+    console.log(`Checking ${dotenvFile}`);
+    if (fs.existsSync(dotenvFile)) {
+      dotenv_expand(
+        config({
+          path: dotenvFile,
+        })
+      );
+    }
+  });
   return Object.keys(process.env)
     .filter((key) => prefix.test(key))
     .reduce(
@@ -27,7 +51,7 @@ function getClientEnvironment(prefix: RegExp) {
 }
 
 export function plugin(options?: any) {
-  const { raw, stringified } = getClientEnvironment(/^NG_APP/i);
+  const { raw, stringified } = getClientEnvironment(/^NG_APP/i, options.env);
   return {
     webpackConfiguration: async (webpackConfig: Configuration) => {
       webpackConfig.plugins.push(

@@ -62,6 +62,18 @@
           },
           "defaultConfiguration": "production"
         },
+        "serve": {
+          "builder": "@ngx-env/builder:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ngx-env-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "ngx-env-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {

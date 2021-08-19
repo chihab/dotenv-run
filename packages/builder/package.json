@@ -1,6 +1,6 @@
 {
   "name": "@ngx-env/builder",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "description": "Add Environment Variables to your Angular App",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env",
