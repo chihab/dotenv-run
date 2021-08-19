@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 
-**Add environment variables to your Angular apps**
+**Easily inject environment variables into your Angular applications**
 
 # Quick start
 
@@ -45,6 +45,7 @@ export class FooterModule {}
 ```
 {{ 'process.env.NODE_ENV' | env }}
 {{ 'NODE_ENV' | env }}
+{{ 'NG_APP_BRANCH_NAME' | env }}
 ```
 
 # License

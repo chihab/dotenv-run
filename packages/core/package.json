@@ -1,7 +1,7 @@
 {
   "name": "@ngx-env/core",
   "version": "0.1.2",
-  "description": "Add Environment Variables to your Angular App",
+  "description": "Easily inject environment variables into your Angular applications",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env",
   "license": "MIT",

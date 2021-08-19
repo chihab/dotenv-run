@@ -2,6 +2,6 @@
 
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 
-**Add environment variables to your Angular apps**
+**Easily inject environment variables into your Angular applications**
 
 ## [Documentation](https://github.com/chihab/ngx-env)

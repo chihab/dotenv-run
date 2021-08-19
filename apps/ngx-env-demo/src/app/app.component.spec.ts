@@ -23,6 +23,7 @@ describe('AppComponent', () => {
     expect(app.env).toEqual('test');
     expect(app.branch).toEqual('main');
     expect(app.home).toBeUndefined();
+    expect(app.appHome).toBeDefined();
     expect(app.notInTest).toBeUndefined();
   });
 

@@ -4,7 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 
-**Add environment variables to your Angular apps**
+**Easily inject environment variables into your Angular applications**
 
 # Quick start
 
@@ -37,6 +37,7 @@ NG_APP_BRANCH_NAME=`git branch --show-current` npm run build
 export class FooterComponent {
   public version = process.env.NG_APP_VERSION;
   public branch = process.env.NG_APP_BRANCH_NAME;
+  public analyticsFlag = process.env.NG_APP_ENABLE_ANALYTICS;
 }
 ```
 
@@ -44,11 +45,16 @@ export class FooterComponent {
 
 Your project can consume variables declared in your environment as if they were declared locally in your JS files.
 
-These environment variables can be useful for displaying information conditionally based on where the project is deployed or consuming sensitive data that lives outside of version control.
+These environment variables can be useful for:
 
-## Important ⚠
+- displaying information conditionally based on where the project is deployed
+- consuming sensitive data that lives outside of version control.
 
-**By default you will have `NODE_ENV` defined for you, and any other environment variables starting with `NG_APP_`.**
+The environment variables will be defined for you on `process.env`. For example, having an environment variable named `NG_APP_NOT_SECRET_CODE` will be exposed in your JS as `process.env.NG_APP_NOT_SECRET_CODE`.
+
+**The environment variables are embedded during the build time**.
+
+## ⚠ Important
 
 > Do not store any secrets (such as private API keys) in your Angular app!
 >
@@ -56,24 +62,25 @@ These environment variables can be useful for displaying information conditional
 
 ## `NG_APP*`
 
-**The environment variables are embedded during the build time**.
-
-Since Angular CLI produces a static HTML/CSS/JS bundle, it can’t possibly read them at runtime. To read them at runtime, you would need to load HTML into memory on the server and replace placeholders in runtime.
-
 You must create custom environment variables beginning with `NG_APP_`.
-Any other variables except `NODE_ENV` will be ignored to avoid accidentally exposing a private key on the machine that could have the same name.
+
+Any other variables (except `NODE_ENV`) will be ignored to avoid accidentally exposing a private key on the machine that could have the same name. See how to [use system environment variables](#expanding-.env).
 
 **Changing any environment variables will require you to restart the development server if it is running.**
-
-These environment variables will be defined for you on `process.env`. For example, having an environment variable named `NG_APP_NOT_SECRET_CODE` will be exposed in your JS as `process.env.NG_APP_NOT_SECRET_CODE`.
 
 ## `NODE_ENV`
 
 There is also a built-in environment variable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`.
 
-When you run `npm start`, it is always equal to `'development'`, when you run `npm test` it is always equal to `'test'`, and when you run `npm run build` to make a production bundle, it is always equal to `'production'`.
+NODE_ENV is set for you. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
 
-**You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
+| Command         | value       |
+| --------------- | ----------- |
+| ng serve        | development |
+| ng test         | test        |
+| ng build        | production  |
+| ng extract-i18n | production  |
+| ng serve        | production  |
 
 Having access to the `NODE_ENV` is also useful for performing actions conditionally:
 
@@ -169,46 +176,28 @@ NG_APP_NOT_SECRET_CODE=abcdef npm start
 
 ## In `.env`
 
-To define permanent environment variables, create a file called `.env` in the root of your project:
+@ngx-env/builder uses [dotenv](https://github.com/motdotla/dotenv) to support loading environment variables from `.env` files.
 
-```shell
-NG_APP_NOT_SECRET_CODE=abcdef
-```
+`.env` files are to be stored alongside the `package.json`.
 
-> Note: You need to restart the development server after changing `.env` files.
+@ngx-env/builder loads `.env` files with these specific names for the following `NODE_ENV` values, files on the bottom have less priority than files on the top.
 
-`.env` files **should be** checked into source control (with the exclusion of `.env*.local`).
+| valid `.env` filenames   | `NODE_ENV=*` | `NODE_ENV=test` |
+| ------------------------ | ------------ | --------------- |
+| `.env`                   | ✔️           | ✔️              |
+| `.env.local`             | ✔️           | ✖️              |
+| `.env.${NODE_ENV}`       | ✔️           | ✔️              |
+| `.env.${NODE_ENV}.local` | ✔️           | ✔️              |
 
-### What other `.env` files can be used?
+### Expanding `.env`
 
-- `.env`: Default.
-- `.env.local`: Local overrides. **This file is loaded for all environments except test.**
-- `.env.development`, `.env.test`, `.env.production`: Environment-specific settings.
-- `.env.development.local`, `.env.test.local`, `.env.production.local`: Local overrides of environment-specific settings.
+You can expand variables already available on your machine for use in your `.env`
 
-Files on the left have more priority than files on the right:
-
-- `npm start`: `.env.development.local`, `.env.local`, `.env.development`, `.env`
-- `npm run build`: `.env.production.local`, `.env.local`, `.env.production`, `.env`
-- `npm test`: `.env.test.local`, `.env.test`, `.env` (note `.env.local` is missing)
-
-These variables will act as the defaults if the machine does not explicitly set them.
-
-Please refer to the [dotenv documentation](https://github.com/motdotla/dotenv) for more details.
-
-> Note: If you are defining environment variables for development, your CI and/or hosting platform will most likely need
-> these defined as well. Consult their documentation how to do this. For example, see the documentation for [Travis CI](https://docs.travis-ci.com/user/environment-variables/) or [Heroku](https://devcenter.heroku.com/articles/config-vars).
-
-### Expanding Environment Variables In `.env`
-
-Expand variables already on your machine for use in your `.env` file (using [dotenv-expand](https://github.com/motdotla/dotenv-expand)).
-
-For example, to get the environment variable `npm_package_version`:
+For example:
 
 ```shell
 NG_APP_VERSION=$npm_package_version
-# also works:
-# NG_APP_VERSION=${npm_package_version}
+NG_APP_HOSTNAME=$HOSTNAME
 ```
 
 Or expand variables local to the current `.env` file:

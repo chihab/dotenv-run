@@ -11,5 +11,6 @@ export class AppComponent {
   version = environment.env.NG_APP_VERSION;
   branch = process.env.NG_APP_BRANCH_NAME;
   home = process.env.USER_HOME;
+  appHome = process.env.NG_APP_USER_HOME;
   notInTest = process.env.NG_APP_NOT_IN_TEST;
 }
