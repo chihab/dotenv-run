@@ -72,9 +72,9 @@ Any other variables (except `NODE_ENV`) will be ignored to avoid accidentally ex
 
 There is also a built-in environment variable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`.
 
-NODE_ENV is set for you. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
+`NODE_ENV` is set for you. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
 
-| Command         | value       |
+| Command         | Value       |
 | --------------- | ----------- |
 | ng serve        | development |
 | ng test         | test        |
