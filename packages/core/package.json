@@ -1,10 +1,17 @@
 {
   "name": "@ngx-env/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Add Environment Variables to your Angular App",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env",
   "license": "MIT",
+  "keywords": [
+    "angular",
+    "dotenv",
+    "environment",
+    "builder",
+    "schematics"
+  ],
   "files": [
     "dist"
   ],

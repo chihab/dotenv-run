@@ -1,8 +1,8 @@
-# @ngx-env/builder [WIP - Not ready for production]
+# @ngx-env/builder
 
-<img src="./logo.png" alt="dotenv" width="90px" align="right" />
+<img src="https://raw.githubusercontent.com/chihab/ngx-env/main/logo.png" alt="dotenv" width="90px" align="right" />
 
-[![npm version](https://badge.fury.io/js/%40ngx-env%2Fcli.svg)](https://www.npmjs.com/package/@ngx-env/builder)
+[![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 
 **Add environment variables to your Angular apps**
 
@@ -221,5 +221,5 @@ NG_APP_BAR=$DOMAIN/bar
 
 # Credits
 
-- Inspired by [create-react-app](https://github.com/facebook/create-react-app)
+- [create-react-app](https://github.com/facebook/create-react-app)
 - [dotenv](https://github.com/motdotla/dotenv)
