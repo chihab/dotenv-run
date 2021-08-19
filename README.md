@@ -64,7 +64,7 @@ The environment variables will be defined for you on `process.env`. For example,
 
 You must create custom environment variables beginning with `NG_APP_`.
 
-Any other variables (except `NODE_ENV`) will be ignored to avoid accidentally exposing a private key on the machine that could have the same name. See how to [use system environment variables](#expanding-.env).
+Any other variables (except `NODE_ENV`) will be ignored to avoid accidentally exposing a private key on the machine that could have the same name. See how to [use system environment variables](#expanding-env).
 
 **Changing any environment variables will require you to restart the development server if it is running.**
 
@@ -176,11 +176,11 @@ NG_APP_NOT_SECRET_CODE=abcdef npm start
 
 ## In `.env`
 
-@ngx-env/builder uses [dotenv](https://github.com/motdotla/dotenv) to support loading environment variables from `.env` files.
+`@ngx-env/builder` uses [dotenv](https://github.com/motdotla/dotenv) to support loading environment variables from `.env` files.
 
 `.env` files are to be stored alongside the `package.json`.
 
-@ngx-env/builder loads `.env` files with these specific names for the following `NODE_ENV` values, files on the bottom have less priority than files on the top.
+`@ngx-env/builder` loads `.env` files with these specific names for the following `NODE_ENV` values, files on the bottom have less priority than files on the top.
 
 | valid `.env` filenames   | `NODE_ENV=*` | `NODE_ENV=test` |
 | ------------------------ | ------------ | --------------- |
