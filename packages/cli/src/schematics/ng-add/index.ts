@@ -1,7 +1,6 @@
-import { normalize, virtualFs, workspaces } from "@angular-devkit/core";
+import { normalize } from "@angular-devkit/core";
 import {
   apply,
-  applyTemplates,
   chain,
   mergeWith,
   move,
@@ -63,6 +62,7 @@ export function builder(options: any): Rule {
     writeBuilder(project, "build", "@ngx-env/cli:browser", true);
     writeBuilder(project, "serve", "@ngx-env/cli:dev-server", true);
     writeBuilder(project, "test", "@ngx-env/cli:karma");
+    writeBuilder(project, "extract-i18n", "@ngx-env/cli:extract-i18n");
     writeBuilder(project, "server", "@ngx-env/cli:server");
 
     tree.overwrite(workspacePath, JSON.stringify(workspace, null, 2));
