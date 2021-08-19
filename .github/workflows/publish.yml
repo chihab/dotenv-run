@@ -20,6 +20,6 @@ jobs:
       - run: cd packages/builder && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: cd packages/core && npm publish --access public
+      - run: cd packages/core/dist && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

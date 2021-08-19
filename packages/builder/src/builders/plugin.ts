@@ -26,7 +26,6 @@ function getClientEnvironment(prefix: RegExp, env: string) {
   // https://github.com/motdotla/dotenv
   // https://github.com/motdotla/dotenv-expand
   dotenvFiles.forEach((dotenvFile) => {
-    console.log(`Checking ${dotenvFile}`);
     if (fs.existsSync(dotenvFile)) {
       dotenv_expand(
         config({
