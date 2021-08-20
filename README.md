@@ -227,3 +227,7 @@ NG_APP_BAR=$DOMAIN/bar
 
 - [create-react-app](https://github.com/facebook/create-react-app)
 - [dotenv](https://github.com/motdotla/dotenv)
+
+# License
+
+MIT © [Chihab Otmani](mailto:chihab@gmail.com)
