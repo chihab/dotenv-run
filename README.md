@@ -21,24 +21,39 @@ NG_APP_ENABLE_ANALYTICS=false
 NG_APP_VERSION=$npm_package_version
 ```
 
-3. Run CLI commands
-
-```sh
-npm start
-NG_APP_BRANCH_NAME=`git branch --show-current` npm run build
-```
-
-4. Use in TypeScript
+3. Use in TS and HTML
 
 ```ts
 @Component({
   selector: "app-footer",
 })
 export class FooterComponent {
-  public version = process.env.NG_APP_VERSION;
-  public branch = process.env.NG_APP_BRANCH_NAME;
-  public analyticsFlag = process.env.NG_APP_ENABLE_ANALYTICS;
+  version = process.env.NG_APP_VERSION;
+  branch = process.env.NG_APP_BRANCH_NAME;
+  analyticsFlag = process.env.NG_APP_ENABLE_ANALYTICS;
 }
+```
+
+```html
+<!-- Same output -->
+<span> {{ 'process.env.NG_APP_BRANCH_NAME' | env }} </span>
+<span> {{ 'NG_APP_BRANCH_NAME' | env }} </span>
+<span> {{ branch }} </span>
+```
+
+```html
+<!-- index.html -->
+<head>
+  <title>NgApp on %NG_APP_BRANCH_NAME%</title>
+</head>
+```
+
+4. Run your CLI commands
+
+```sh
+npm start
+# Command Line environment variable
+NG_APP_BRANCH_NAME=`git branch --show-current` npm run build
 ```
 
 # Using Environment Variables
@@ -60,7 +75,7 @@ The environment variables will be defined for you on `process.env`. For example,
 >
 > Environment variables are embedded into the build, meaning anyone can view them by inspecting your app's files.
 
-## `NG_APP*`
+## `NG_APP_*`
 
 You must create custom environment variables beginning with `NG_APP_`.
 
@@ -80,7 +95,7 @@ There is also a built-in environment variable called `NODE_ENV`. You can read it
 | ng test         | test        |
 | ng build        | production  |
 | ng extract-i18n | production  |
-| ng serve        | production  |
+| ng server       | production  |
 
 Having access to the `NODE_ENV` is also useful for performing actions conditionally:
 
