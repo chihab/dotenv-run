@@ -230,4 +230,4 @@ NG_APP_BAR=$DOMAIN/bar
 
 # License
 
-MIT © [Chihab Otmani](mailto:chihab@gmail.com)
+MIT © [Chihab Otmani](https://twitter.com/chihabotmani)
