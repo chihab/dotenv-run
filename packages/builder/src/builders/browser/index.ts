@@ -12,7 +12,10 @@ export const buildWithPlugin = (
   return executeBrowserBuilder(
     options,
     context,
-    plugin({ ...options, env: "production" })
+    plugin({
+      ...options,
+      env: options.optimization ? "production" : "development",
+    })
   );
 };
 

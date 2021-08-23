@@ -16,8 +16,8 @@ export const buildWithPlugin = (
   options: DevServerBuilderOptions,
   context: BuilderContext
 ): ReturnType<typeof serveWebpackBrowser> => {
+  const browserTarget = targetFromTargetString(options.browserTarget);
   async function setup() {
-    const browserTarget = targetFromTargetString(options.browserTarget);
     return context.getTargetOptions(
       browserTarget
     ) as unknown as DevServerBuilderOptions;
@@ -28,7 +28,7 @@ export const buildWithPlugin = (
       executeDevServerBuilder(
         options,
         context,
-        plugin({ ..._options, env: "development" })
+        plugin({ ..._options, env: browserTarget.configuration })
       )
     )
   );

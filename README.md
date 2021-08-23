@@ -8,20 +8,20 @@
 
 # Quick start
 
-1. Add @ngx-env to your CLI project
+1. **Add @ngx-env to your CLI project**
 
 ```sh
 ng add @ngx-env/builder
 ```
 
-2. Define Environment Variables in `.env`
+2. **Define Environment Variables in `.env`**
 
 ```sh
 NG_APP_ENABLE_ANALYTICS=false
 NG_APP_VERSION=$npm_package_version
 ```
 
-3. Use in TS and HTML
+3. **Use in TS and HTML**
 
 ```ts
 @Component({
@@ -48,7 +48,7 @@ export class FooterComponent {
 </head>
 ```
 
-4. Run your CLI commands
+4. **Run your CLI commands**
 
 ```sh
 npm start
