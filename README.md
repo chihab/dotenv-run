@@ -19,6 +19,7 @@ ng add @ngx-env/builder
 ```sh
 NG_APP_ENABLE_ANALYTICS=false
 NG_APP_VERSION=$npm_package_version
+NG_APP_COMMIT=$GITHUB_SHA
 ```
 
 3. **Use in TS and HTML**
@@ -30,12 +31,13 @@ NG_APP_VERSION=$npm_package_version
 export class FooterComponent {
   version = process.env.NG_APP_VERSION;
   branch = process.env.NG_APP_BRANCH_NAME;
+  commit = process.env.NG_APP_COMMIT;
   analyticsFlag = process.env.NG_APP_ENABLE_ANALYTICS;
 }
 ```
 
 ```html
-<!-- Same output -->
+<!-- Same output in the spans -->
 <span> {{ 'process.env.NG_APP_BRANCH_NAME' | env }} </span>
 <span> {{ 'NG_APP_BRANCH_NAME' | env }} </span>
 <span> {{ branch }} </span>
@@ -52,7 +54,7 @@ export class FooterComponent {
 
 ```sh
 npm start
-# Command Line environment variable
+NG_APP_BRANCH_NAME=$GITHUB_HEAD_REF ng test
 NG_APP_BRANCH_NAME=`git branch --show-current` npm run build
 ```
 
@@ -94,7 +96,7 @@ There is also a built-in environment variable called `NODE_ENV`. You can read it
 | ng serve        | development |
 | ng test         | test        |
 | ng build        | production  |
-| ng extract-i18n | production  |
+| ng extract-i18n | development |
 | ng server       | production  |
 
 Having access to the `NODE_ENV` is also useful for performing actions conditionally:
