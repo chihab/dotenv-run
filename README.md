@@ -91,13 +91,15 @@ There is also a built-in environment variable called `NODE_ENV`. You can read it
 
 `NODE_ENV` is set for you. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
 
-| Command         | Value       |
-| --------------- | ----------- |
-| ng serve        | development |
-| ng test         | test        |
-| ng build        | production  |
-| ng extract-i18n | development |
-| ng server       | production  |
+| Command                 | NODE_ENV    |
+| ----------------------- | ----------- |
+| ng serve                | development |
+| ng extract-i18n         | development |
+| ng build -c development | development |
+| ng test                 | test        |
+| ng serve -c production  | production  |
+| ng build                | production  |
+| ng server               | production  |
 
 Having access to the `NODE_ENV` is also useful for performing actions conditionally:
 
@@ -113,7 +115,7 @@ When you compile the app with `npm run build`, the minification step will strip 
 
 You have two options to consume an environment variable in your component's template.
 
-1. From your component class
+1. **From your component class**
 
 ```ts
 @Component({
@@ -128,7 +130,7 @@ export class FooterComponent {
 {{ version }}
 ```
 
-2. Using the `env` pipe
+2. **Using the `env` pipe**
 
 ```
 npm install @ngx-env/core
