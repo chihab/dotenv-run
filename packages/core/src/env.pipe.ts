@@ -2,7 +2,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'env',
-  pure: true,
 })
 export class EnvPipe implements PipeTransform {
   transform(variable: string): string {
