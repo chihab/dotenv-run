@@ -228,6 +228,10 @@ NG_APP_FOO=$DOMAIN/foo
 NG_APP_BAR=$DOMAIN/bar
 ```
 
+# How It Works
+
+I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how the it works.
+
 # Credits
 
 - [create-react-app](https://github.com/facebook/create-react-app)
