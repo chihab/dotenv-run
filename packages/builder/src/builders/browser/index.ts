@@ -1,4 +1,8 @@
-import { BuilderContext, createBuilder } from "@angular-devkit/architect";
+import {
+  BuilderContext,
+  createBuilder,
+  targetFromTargetString,
+} from "@angular-devkit/architect";
 import {
   BrowserBuilderOptions,
   executeBrowserBuilder,
@@ -9,14 +13,7 @@ export const buildWithPlugin = (
   options: BrowserBuilderOptions,
   context: BuilderContext
 ): ReturnType<typeof executeBrowserBuilder> => {
-  return executeBrowserBuilder(
-    options,
-    context,
-    plugin({
-      ...options,
-      env: options.optimization ? "production" : "development",
-    })
-  );
+  return executeBrowserBuilder(options, context, plugin());
 };
 
 export default createBuilder<BrowserBuilderOptions>(buildWithPlugin);

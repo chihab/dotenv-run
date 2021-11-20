@@ -1,7 +1,34 @@
-<span id="NODE_ENV">{{ "process.env.NODE_ENV" | env }}</span>
-<span id="VERSION">{{ "process.env.NG_APP_VERSION" | env }}</span>
-<span id="ENVIRONMENT">{{ "process.env.NG_APP_ENVIRONMENT" | env }}</span>
-<span id="NG_APP_BRANCH_NAME">{{
-  "process.env.NG_APP_BRANCH_NAME" | env
-}}</span>
-<span id="USER_HOME">{{ "process.env.USER_HOME" | env }}</span>
+<table>
+  <thead>
+    <th>NAME</th>
+    <th>VALUE</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td>NG_APP_ENV</td>
+      <td>
+        <span id="NG_APP_ENV">{{ "process.env.NG_APP_ENV" | env }}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>VERSION</td>
+      <td>
+        <span id="VERSION">{{ "process.env.NG_APP_VERSION" | env }}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>NG_APP_BRANCH_NAME</td>
+      <td>
+        <span id="NG_APP_BRANCH_NAME">{{
+          "process.env.NG_APP_BRANCH_NAME" | env
+        }}</span>
+      </td>
+    </tr>
+    <tr>
+      <td>USER_HOME</td>
+      <td>
+        <span id="USER_HOME">{{ "process.env.USER_HOME" | env }}</span>
+      </td>
+    </tr>
+  </tbody>
+</table>

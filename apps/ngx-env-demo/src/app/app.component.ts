@@ -7,10 +7,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  env = process.env.NODE_ENV;
+  env = process.env.NG_APP_ENV;
   version = environment.env.NG_APP_VERSION;
   branch = process.env.NG_APP_BRANCH_NAME;
   home = process.env.USER_HOME;
   appHome = process.env.NG_APP_USER_HOME;
   notInTest = process.env.NG_APP_NOT_IN_TEST;
+  constructor() {
+    console.log(process.env);
+  }
 }

@@ -9,15 +9,16 @@ function escapeStringRegexp(str: string) {
   return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
-function getClientEnvironment(prefix: RegExp, env: string) {
+function getClientEnvironment(prefix: RegExp) {
+  const env = process.env.NG_APP_ENV || process.env.NODE_ENV;
   const dotenvBase = path.resolve(process.cwd(), ".env");
   const dotenvFiles = [
-    `${dotenvBase}.${env}.local`,
+    env && `${dotenvBase}.${env}.local`,
     // Don't include `.env.local` for `test` environment
     // since normally you expect tests to produce the same
     // results for everyone
-    env !== "test" && `${dotenvBase}.local`,
-    `${dotenvBase}.${env}`,
+    env && env !== "test" && `${dotenvBase}.local`,
+    env && `${dotenvBase}.${env}`,
     dotenvBase,
   ].filter(Boolean);
   // Load environment variables from .env* files. Suppress warnings using silent
@@ -34,12 +35,16 @@ function getClientEnvironment(prefix: RegExp, env: string) {
       );
     }
   });
-  return Object.keys(process.env)
+  const processEnv = {
+    ...process.env,
+    NG_APP_ENV: env,
+  };
+  return Object.keys(processEnv)
     .filter((key) => prefix.test(key))
     .reduce(
       (env, key) => {
-        env.raw[key] = process.env[key];
-        env.stringified[key] = JSON.stringify(process.env[key]);
+        env.raw[key] = processEnv[key];
+        env.stringified[key] = JSON.stringify(processEnv[key]);
         return env;
       },
       {
@@ -49,14 +54,13 @@ function getClientEnvironment(prefix: RegExp, env: string) {
     );
 }
 
-export function plugin(options?: any) {
-  const { raw, stringified } = getClientEnvironment(/^NG_APP/i, options.env);
+export function plugin() {
+  const { raw, stringified } = getClientEnvironment(/^NG_APP/i);
   return {
     webpackConfiguration: async (webpackConfig: Configuration) => {
       webpackConfig.plugins.push(
         new webpack.DefinePlugin({
           "process.env": stringified,
-          "process.env.NODE_ENV": JSON.stringify(options.env),
         })
       );
       return webpackConfig;
@@ -64,7 +68,7 @@ export function plugin(options?: any) {
     indexHtml: async (content: string) => {
       const rawWithEnv = {
         ...raw,
-        NODE_ENV: options.env,
+        NG_APP_ENV: raw["NG_APP_ENV"],
       };
       return Object.keys(rawWithEnv).reduce(
         (html, key) =>

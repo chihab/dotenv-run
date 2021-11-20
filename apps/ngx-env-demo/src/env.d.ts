@@ -1,3 +1,3 @@
 declare var process: {
-  env: { NODE_ENV: string; [key: string]: any };
+  env: { NG_APP_ENV: string; [key: string]: any };
 };
