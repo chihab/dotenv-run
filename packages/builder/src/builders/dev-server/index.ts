@@ -7,15 +7,15 @@ import {
   DevServerBuilderOptions,
   executeDevServerBuilder,
 } from "@angular-devkit/build-angular";
-import { serveWebpackBrowser } from "@angular-devkit/build-angular/src/dev-server";
-import { from } from "rxjs";
+import { DevServerBuilderOutput } from "@angular-devkit/build-angular";
+import { Observable, from } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { plugin } from "../plugin";
 
 export const buildWithPlugin = (
   options: DevServerBuilderOptions,
   context: BuilderContext
-): ReturnType<typeof serveWebpackBrowser> => {
+): Observable<DevServerBuilderOutput> => {
   const browserTarget = targetFromTargetString(options.browserTarget);
   async function setup() {
     return context.getTargetOptions(
@@ -24,13 +24,22 @@ export const buildWithPlugin = (
   }
 
   return from(setup()).pipe(
-    switchMap((_options) =>
-      executeDevServerBuilder(
-        options,
-        context,
-        plugin({ ..._options, env: browserTarget.configuration })
-      )
-    )
+    switchMap((_options) => {
+      options.sourceMap = _options.sourceMap || {
+        vendor: false,
+        hidden: false,
+        scripts: false,
+        styles: false,
+      };
+      options.optimization =
+        _options.optimization ||
+        ({
+          scripts: true,
+          styles: { minify: true, inlineCritical: true },
+          fonts: { inline: true },
+        } as any); // Retro-compatibility with <= Angular 12
+      return executeDevServerBuilder(options, context, plugin());
+    })
   );
 };
 

@@ -43,8 +43,8 @@ export class FooterModule {}
 ```
 
 ```
-{{ 'process.env.NODE_ENV' | env }}
-{{ 'NODE_ENV' | env }}
+{{ 'process.env.NG_APP_ENV' | env }}
+{{ 'NG_APP_ENV' | env }}
 {{ 'NG_APP_BRANCH_NAME' | env }}
 ```
 

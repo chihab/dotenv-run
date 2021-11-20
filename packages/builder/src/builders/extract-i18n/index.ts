@@ -9,11 +9,7 @@ export const buildWithPlugin = (
   options: ExtractI18nBuilderOptions,
   context: BuilderContext
 ): ReturnType<typeof executeExtractI18nBuilder> => {
-  return executeExtractI18nBuilder(
-    options,
-    context,
-    plugin({ ...options, env: "development" })
-  );
+  return executeExtractI18nBuilder(options, context, plugin());
 };
 
 export default createBuilder<ExtractI18nBuilderOptions>(buildWithPlugin);

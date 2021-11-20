@@ -9,10 +9,6 @@ export const buildWithPlugin = (
   options: ServerBuilderOptions,
   context: BuilderContext
 ): ReturnType<typeof executeServerBuilder> =>
-  executeServerBuilder(
-    options,
-    context,
-    plugin({ ...options, env: "production" })
-  );
+  executeServerBuilder(options, context, plugin());
 
 export default createBuilder<ServerBuilderOptions>(buildWithPlugin);

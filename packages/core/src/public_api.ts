@@ -2,5 +2,6 @@
  * Public API Surface of ngx-env
  */
 
-export * from './core.service';
-export * from './core.module';
+export * from "./env.pipe";
+export * from "./core.service";
+export * from "./core.module";

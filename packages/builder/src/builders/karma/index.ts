@@ -8,6 +8,7 @@ import { plugin } from "../plugin";
 export const buildWithPlugin = (
   options: KarmaBuilderOptions,
   context: BuilderContext
-): ReturnType<typeof executeKarmaBuilder> =>
-  executeKarmaBuilder(options, context, plugin({ ...options, env: "test" }));
+): ReturnType<typeof executeKarmaBuilder> => {
+  return executeKarmaBuilder(options, context, plugin());
+};
 export default createBuilder<KarmaBuilderOptions>(buildWithPlugin);

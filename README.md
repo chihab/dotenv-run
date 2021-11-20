@@ -82,30 +82,20 @@ The environment variables will be defined for you on `process.env`. For example,
 
 You must create custom environment variables beginning with `NG_APP_`.
 
-Any other variables (except `NODE_ENV`) will be ignored to avoid accidentally exposing a private key on the machine that could have the same name. See how to [use system environment variables](#expanding-env).
+Any other variables will be ignored to avoid accidentally exposing a private key on the machine that could have the same name. See how to [use system environment variables](#expanding-env).
 
 **Changing any environment variables will require you to restart the development server if it is running.**
 
-## `NODE_ENV`
+## `NG_APP_ENV`
 
-There is also a built-in environment variable called `NODE_ENV`. You can read it from `process.env.NODE_ENV`.
+There is also a built-in environment variable called `NG_APP_ENV`. You can read it from `process.env.NG_APP_ENV`.
 
-`NODE_ENV` is set for you. **You cannot override `NODE_ENV` manually.** This prevents developers from accidentally deploying a slow development build to production.
+By default `NG_APP_ENV` is set to `NODE_ENV` but you are free to override it.
 
-| Command                 | NODE_ENV    |
-| ----------------------- | ----------- |
-| ng serve                | development |
-| ng extract-i18n         | development |
-| ng build -c development | development |
-| ng test                 | test        |
-| ng serve -c production  | production  |
-| ng build                | production  |
-| ng server               | production  |
-
-Having access to the `NODE_ENV` is also useful for performing actions conditionally:
+Having access to the `NG_APP_ENV` is also useful for performing actions conditionally:
 
 ```js
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NG_APP_ENV !== "production") {
   analytics.disable();
 }
 ```
@@ -148,8 +138,8 @@ export class FooterModule {}
 ```
 
 ```
-{{ 'process.env.NODE_ENV' | env }}
-{{ 'NODE_ENV' | env }}
+{{ 'process.env.NG_APP_ENV' | env }}
+{{ 'NG_APP_ENV' | env }}
 ```
 
 ## Usage in Index.html
@@ -200,14 +190,14 @@ NG_APP_NOT_SECRET_CODE=abcdef npm start
 
 `.env` files are to be stored alongside the `package.json`.
 
-`@ngx-env/builder` loads `.env` files with these specific names for the following `NODE_ENV` values, files on the bottom have less priority than files on the top.
+`@ngx-env/builder` loads `.env` files with these specific names for the following `NG_APP_ENV` values, files on the bottom have less priority than files on the top.
 
-| valid `.env` filenames   | `NODE_ENV=*` | `NODE_ENV=test` |
-| ------------------------ | ------------ | --------------- |
-| `.env`                   | ✔️           | ✔️              |
-| `.env.local`             | ✔️           | ✖️              |
-| `.env.${NODE_ENV}`       | ✔️           | ✔️              |
-| `.env.${NODE_ENV}.local` | ✔️           | ✔️              |
+| valid `.env` filenames     | `NG_APP_ENV=*` | `NG_APP_ENV=test` |
+| -------------------------- | -------------- | ----------------- |
+| `.env`                     | ✔️             | ✔️                |
+| `.env.local`               | ✔️             | ✖️                |
+| `.env.${NG_APP_ENV}`       | ✔️             | ✔️                |
+| `.env.${NG_APP_ENV}.local` | ✔️             | ✔️                |
 
 ### Expanding `.env`
 
@@ -230,7 +220,9 @@ NG_APP_BAR=$DOMAIN/bar
 
 # How It Works
 
-I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how the it works.
+I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how it works.
+
+# Contribute
 
 # Credits
 
