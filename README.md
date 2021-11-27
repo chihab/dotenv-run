@@ -59,6 +59,13 @@ NG_APP_BRANCH_NAME=$GITHUB_HEAD_REF ng test
 NG_APP_BRANCH_NAME=`git branch --show-current` npm run build
 ```
 
+# Compatiblity ⚠️
+
+| Angular  | @ngx-env/builder |
+| -------- | ---------------- |
+| [12, 13] | ^2.0.1           |
+| [8, 12[  | ^1.1.0           |
+
 # Using Environment Variables
 
 Your project can consume variables declared in your environment as if they were declared locally in your JS files.
@@ -221,8 +228,6 @@ NG_APP_BAR=$DOMAIN/bar
 # How It Works
 
 I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how it works.
-
-# Contribute
 
 # Credits
 

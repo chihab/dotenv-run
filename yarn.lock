@@ -18,7 +18,7 @@
     "@angular-devkit/core" "13.0.3"
     rxjs "6.6.7"
 
-"@angular-devkit/build-angular@~13.0.3":
+"@angular-devkit/build-angular@~13.0.0":
   version "13.0.3"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-13.0.3.tgz#763db8882ff86612462a2b6bcdf441ba8e4b29a5"
   integrity sha512-5KFsknpnq3mc0KwcIDjvmqB3trz5cMt48dB0nrc23zkFI9v4hkpalc/OEg/H3G93K0c9g6dcyxmHkNfsU1+CHw==
@@ -110,7 +110,7 @@
     rxjs "6.6.7"
     source-map "0.7.3"
 
-"@angular-devkit/schematics-cli@^13.0.3":
+"@angular-devkit/schematics-cli@^13.0.0":
   version "13.0.3"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics-cli/-/schematics-cli-13.0.3.tgz#ec216398e28ac4c8acf8f4467cd9022d976b2c0e"
   integrity sha512-iGEA3hEbHcmhAkGmrFXKWDnelzhSSJLaZPHr6SLPpztKEU8OFMZxv8NFATc/IpXknEhX3+Tm5DkrOpSc4rJlhA==
@@ -122,7 +122,7 @@
     minimist "1.2.5"
     symbol-observable "4.0.0"
 
-"@angular-devkit/schematics@13.0.3", "@angular-devkit/schematics@^13.0.3":
+"@angular-devkit/schematics@13.0.3", "@angular-devkit/schematics@^13.0.0":
   version "13.0.3"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-13.0.3.tgz#255895e10c2b025df8ee4ff93428cb2249ae5fc0"
   integrity sha512-+Va1E0zJBCg5jqSfITusghoMJgPAwlU+WUs49fuGVCzfJPwfSjTKSrsbhanahMd27+Ys3rovGZq0F2JUdL801A==
@@ -140,7 +140,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/cli@~13.0.3":
+"@angular/cli@~13.0.0":
   version "13.0.3"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-13.0.3.tgz#7d357a80dc612421115b1288291ce6278720d0a4"
   integrity sha512-LDXDXDbQ1MBHVUstu4aNjFbyg5f9hLP52gEKB8Z6fQlf5CB1X5zD6UPcR4IvoYt03EFxg3DHco+ueJQ20oZUWQ==
