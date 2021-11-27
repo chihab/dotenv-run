@@ -1,6 +1,6 @@
 {
   "name": "@ngx-env/core",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Easily inject environment variables into your Angular applications",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env",
@@ -23,8 +23,8 @@
     }
   },
   "peerDependencies": {
-    "@angular/common": "^13.3.0",
-    "@angular/core": "^13.3.0"
+    "@angular/common": "^13.0.0",
+    "@angular/core": "^13.0.0"
   },
   "devDependencies": {
     "ng-packagr": "^13.0.6"

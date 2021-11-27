@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "ngx-env browser schema for Build Facade",
+  "title": "Webpack browser schema for Build Facade.",
   "description": "Browser target options",
   "type": "object",
   "properties": {
@@ -201,7 +201,8 @@
     },
     "deployUrl": {
       "type": "string",
-      "description": "URL where files will be deployed."
+      "description": "URL where files will be deployed.",
+      "x-deprecated": "Use \"baseHref\" option, \"APP_BASE_HREF\" DI token or a combination of both instead. For more information, see https://angular.io/guide/deployment#the-deploy-url."
     },
     "verbose": {
       "type": "boolean",
@@ -236,12 +237,6 @@
           }
         }
       ]
-    },
-    "extractCss": {
-      "type": "boolean",
-      "description": "Extract CSS from global styles into '.css' files instead of '.js'.",
-      "default": true,
-      "x-deprecated": "Deprecated since version 11.0. No longer required to disable CSS extraction for HMR."
     },
     "watch": {
       "type": "boolean",
@@ -359,10 +354,6 @@
         "type": "string"
       },
       "default": []
-    },
-    "indexTransform": {
-      "type": "string",
-      "description": "Path to the file with index.html transform function"
     }
   },
   "additionalProperties": false,
@@ -475,15 +466,7 @@
         "type": {
           "type": "string",
           "description": "The type of budget.",
-          "enum": [
-            "all",
-            "allScript",
-            "any",
-            "anyScript",
-            "anyComponentStyle",
-            "bundle",
-            "initial"
-          ]
+          "enum": ["all", "allScript", "any", "anyScript", "anyComponentStyle", "bundle", "initial"]
         },
         "name": {
           "type": "string",
@@ -521,6 +504,5 @@
       "additionalProperties": false,
       "required": ["type"]
     }
-  },
-  "$id": "BuildNgxEnvBrowserSchema"
+  }
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "BuildNgxEnvServerSchema",
-  "title": "ngx-env server schema for Build Facade",
+  "$id": "BuildAngularWebpackServerSchema",
+  "title": "Universal Target",
   "type": "object",
   "properties": {
     "main": {
@@ -114,7 +114,8 @@
     },
     "deployUrl": {
       "type": "string",
-      "description": "URL where files will be deployed."
+      "description": "URL where files will be deployed.",
+      "x-deprecated": "Use \"baseHref\" browser builder option, \"APP_BASE_HREF\" DI token or a combination of both instead. For more information, see https://angular.io/guide/deployment#the-deploy-url."
     },
     "verbose": {
       "type": "boolean",
@@ -215,10 +216,6 @@
     "poll": {
       "type": "number",
       "description": "Enable and define the file watching poll time period in milliseconds."
-    },
-    "indexTransform": {
-      "type": "string",
-      "description": "Path to the file with index.html transform function"
     }
   },
   "additionalProperties": false,
@@ -258,6 +255,5 @@
         }
       ]
     }
-  },
-  "description": "Server target options"
+  }
 }

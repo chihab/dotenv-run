@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "ngx-env extract-i18n schema for Build Facade",
-  "description": "Extract i18n target options",
+  "title": "Extract i18n Target",
+  "description": "Extract i18n target options for Build Facade.",
   "type": "object",
   "properties": {
     "browserTarget": {
@@ -13,17 +13,7 @@
       "type": "string",
       "description": "Output format for the generated file.",
       "default": "xlf",
-      "enum": [
-        "xmb",
-        "xlf",
-        "xlif",
-        "xliff",
-        "xlf2",
-        "xliff2",
-        "json",
-        "arb",
-        "legacy-migrate"
-      ]
+      "enum": ["xmb", "xlf", "xlif", "xliff", "xlf2", "xliff2", "json", "arb", "legacy-migrate"]
     },
     "progress": {
       "type": "boolean",
@@ -40,6 +30,5 @@
     }
   },
   "additionalProperties": false,
-  "required": ["browserTarget"],
-  "$id": "BuildNgxEnvExtractI18nSchema"
+  "required": ["browserTarget"]
 }
