@@ -26,16 +26,18 @@
   "scripts": {
     "start": "tsc -w",
     "build": "tsc",
+    "copy-dist": "ts-node src/builders/schema-dist.ts",
     "postbuild": "node dist/schema.js",
     "test": "echo \"Write some tests dude!\" && exit 0"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "^13.0.3",
+    "@angular-devkit/schematics": "^13.0.0",
     "cpy": "^8.1.2",
     "dotenv": "9.0.2",
     "dotenv-expand": "5.1.0"
   },
   "devDependencies": {
-    "@angular-devkit/schematics-cli": "^13.0.3"
+    "@angular-devkit/schematics-cli": "^13.0.0",
+    "ts-node": "^10.4.0"
   }
 }

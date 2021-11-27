@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "title": "ngx-env karma schema for Build Facade",
-  "description": "Karma target options",
+  "title": "Karma Target",
+  "description": "Karma target options for Build Facade.",
   "type": "object",
   "properties": {
     "main": {
@@ -181,10 +181,6 @@
     "webWorkerTsConfig": {
       "type": "string",
       "description": "TypeScript configuration for Web Worker modules."
-    },
-    "indexTransform": {
-      "type": "string",
-      "description": "Path to the file with index.html transform function"
     }
   },
   "additionalProperties": false,
@@ -252,6 +248,5 @@
         }
       ]
     }
-  },
-  "$id": "BuildNgxEnvKarmaSchema"
+  }
 }

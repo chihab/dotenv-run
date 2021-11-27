@@ -25,19 +25,6 @@ export const buildWithPlugin = (
 
   return from(setup()).pipe(
     switchMap((_options) => {
-      options.sourceMap = _options.sourceMap || {
-        vendor: false,
-        hidden: false,
-        scripts: false,
-        styles: false,
-      };
-      options.optimization =
-        _options.optimization ||
-        ({
-          scripts: true,
-          styles: { minify: true, inlineCritical: true },
-          fonts: { inline: true },
-        } as any); // Retro-compatibility with <= Angular 12
       return executeDevServerBuilder(options, context, plugin());
     })
   );
