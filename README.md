@@ -229,6 +229,56 @@ NG_APP_BAR=$DOMAIN/bar
 
 I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how it works.
 
+# Good Practices
+
+**Declare your environment variables in the generated `.env.d.ts` file**
+
+```ts
+declare var process: {
+  env: {
+    NG_APP_ENV: string;
+    NG_APP_BASE_URL: string;
+    NG_APP_VERSION: string;
+  };
+};
+```
+
+**Use `process.env` inside `environment.ts` files**
+
+We recommend to consume environment variables in Angular environment files.
+
+- To avoid using `process.env` in your business code.
+
+  If one day you decide that a variable is no longer linked to the environment but rather to an Angular configuration, you'll just have to modify the environment file.
+
+- Be ready for the day when Angular would implement the consumption of environment variables directly in the CLI.
+
+  If the syntax proposed by Angular CLI to access the environment variables turns out to be different, you would only have to modify the environment files.
+
+Example:
+
+`environment.ts`
+
+```ts
+export const environment = {
+  production: false,
+  baseUrl: process.env.NG_APP.BASE_URL,
+  version: process.env.NG_APP_VERSION,
+};
+```
+
+`footer.component.ts`
+
+```ts
+import { environment } from "src/environments/environment";
+
+@Injectable()
+export class SomeService {
+  version = environment.version;
+  baseUrl = environment.baseUrl;
+}
+```
+
 # Credits
 
 - [create-react-app](https://github.com/facebook/create-react-app)
