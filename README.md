@@ -18,36 +18,33 @@ ng add @ngx-env/builder
 2. **Define Environment Variables in `.env`**
 
 ```sh
-NG_APP_ENABLE_ANALYTICS=false
 NG_APP_VERSION=$npm_package_version
 NG_APP_COMMIT=$GITHUB_SHA
+NG_APP_ENABLE_SENTRY=false
 ```
 
 3. **Use in TS and HTML**
 
 ```ts
 @Component({
-  selector: "app-footer",
+  selector: "app-main",
 })
-export class FooterComponent {
-  version = process.env.NG_APP_VERSION;
+export class MainComponent {
   branch = process.env.NG_APP_BRANCH_NAME;
-  commit = process.env.NG_APP_COMMIT;
-  analyticsFlag = process.env.NG_APP_ENABLE_ANALYTICS;
 }
 ```
 
-```html
-<!-- Same output in the spans -->
-<span> {{ 'process.env.NG_APP_BRANCH_NAME' | env }} </span>
-<span> {{ 'NG_APP_BRANCH_NAME' | env }} </span>
+```html 
 <span> {{ branch }} </span>
+<!-- Using @ngx-env/core pipe -->
+<span> {{ 'process.env.NG_APP_VERSION' | env }} </span>
+<span> {{ 'NG_APP_COMMIT' | env }} </span>
 ```
 
 ```html
 <!-- index.html -->
 <head>
-  <title>NgApp on %NG_APP_BRANCH_NAME%</title>
+  <title>NgApp on %NG_APP_BRANCH_NAME% - %NG_APP_COMMIT%</title>
 </head>
 ```
 
@@ -56,7 +53,7 @@ export class FooterComponent {
 ```sh
 npm start
 NG_APP_BRANCH_NAME=$GITHUB_HEAD_REF ng test
-NG_APP_BRANCH_NAME=`git branch --show-current` npm run build
+NG_APP_ENABLE_SENTRY=true npm run build
 ```
 
 # Compatiblity ⚠️
