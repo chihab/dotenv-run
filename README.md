@@ -36,7 +36,7 @@ export class MainComponent {
 
 ```html 
 <span> {{ branch }} </span>
-<!-- Using @ngx-env/core pipe -->
+<!-- Using env pipe from @ngx-env/core -->
 <span> {{ 'process.env.NG_APP_VERSION' | env }} </span>
 <span> {{ 'NG_APP_COMMIT' | env }} </span>
 ```
