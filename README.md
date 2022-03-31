@@ -242,13 +242,13 @@ declare var process: {
 
 **Use `process.env` inside `environment.ts` files**
 
-We recommend to consume environment variables in Angular environment files.
+We recommend to consume environment variables in Angular environment files, for two reasons:
 
 - To avoid using `process.env` in your business code.
 
-  If one day you decide that a variable is no longer linked to the environment but rather to an Angular configuration, you'll just have to modify the environment file.
+  If one day you decide that a variable is no longer linked to the environment but rather to an Angular configuration, you would only have to modify the environment files.
 
-- Be ready for the day when Angular would implement the consumption of environment variables directly in the CLI.
+- To be ready for the day when Angular would implement the consumption of environment variables directly in the CLI.
 
   If the syntax proposed by Angular CLI to access the environment variables turns out to be different, you would only have to modify the environment files.
 
