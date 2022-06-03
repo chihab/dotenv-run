@@ -56,12 +56,12 @@ NG_APP_BRANCH_NAME=$GITHUB_HEAD_REF ng test
 NG_APP_ENABLE_SENTRY=true npm run build
 ```
 
-# Compatiblity ⚠️
+# Compatibility ⚠️
 
 | Angular  | @ngx-env/builder |
 | -------- | ---------------- |
-| [12, 13] | ^2.0.1           |
-| [8, 12[  | ^1.1.0           |
+| [12 - 13] | ^2.0.1           |
+| [8 - 12]  | ^1.1.0           |
 
 # Using Environment Variables
 
