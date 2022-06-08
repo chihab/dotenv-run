@@ -15,6 +15,8 @@
 ng add @ngx-env/builder
 ```
 
+⚠️ On Angular v14 ng-add currently doesn't work on new projects, here is a workaround https://github.com/chihab/ngx-env/issues/18#issuecomment-1149686964. ⚠️
+
 2. **Define Environment Variables in `.env`**
 
 ```sh
@@ -63,7 +65,7 @@ NG_APP_ENABLE_SENTRY=true npm run build
 | [12 - 14] | ^2.0.1          |
 | [8 - 12[  | ^1.1.0          |
 
-⚠️ On Angular v14 ng-add won't work on new projects, here is a workaround https://github.com/chihab/ngx-env/issues/18#issuecomment-1149686964. ⚠️
+⚠️ On Angular v14 ng-add currently doesn't work on new projects, here is a workaround https://github.com/chihab/ngx-env/issues/18#issuecomment-1149686964. ⚠️
 
 # Using Environment Variables
 
