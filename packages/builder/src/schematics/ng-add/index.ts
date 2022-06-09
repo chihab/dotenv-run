@@ -37,30 +37,9 @@ export function builder(options: any): Rule {
     const { path: workspacePath, workspace } = getWorkspace(tree);
 
     if (!options.project) {
-      if (workspace.defaultProject) {
-        options.project = workspace.defaultProject;
-      } else {
-        console.warn("No default project specified in the workspace");
-        const projectNames = Object.getOwnPropertyNames(
-          workspace.projects
-        ).filter(
-          (project) => workspace.projects[project].projectType === "application"
-        );
-        if (projectNames.length === 0) {
-          throw new SchematicsException(
-            "No application project found in the workspace"
-          );
-        }
-        if (projectNames.length > 1) {
-          projectNames.forEach((projectName) =>
-            console.log(` - ng add @ngx-env/builder --project ${projectName}`)
-          );
-          throw new SchematicsException(
-            "Multiple projects detected in the workspace, run one of the commands above"
-          );
-        }
-        options.project = projectNames[0];
-      }
+      throw new SchematicsException(
+        "No Angular project found in the workspace"
+      );
     }
 
     const project: WorkspaceProject = workspace.projects[options.project];
