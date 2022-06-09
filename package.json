@@ -8,6 +8,7 @@
     "build:demo": "lerna run build --scope=@ngx-env/demo",
     "build:cli": "lerna run build --scope=@ngx-env/builder",
     "build:lib": "lerna run build --scope=@ngx-env/core",
+    "ng-add": "lerna exec --scope=@ngx-env/demo -- yarn ng add @ngx-env/builder",
     "test": "lerna run test"
   },
   "private": true,
@@ -17,5 +18,6 @@
   "workspaces": [
     "packages/*",
     "apps/*"
-  ]
+  ],
+  "dependencies": {}
 }

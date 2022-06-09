@@ -13,6 +13,7 @@ jobs:
           node-version: "12.x"
           registry-url: "https://registry.npmjs.org"
       - run: yarn
+      - run: yarn ng-add
       - run: yarn build
       - run: cp README.md packages/builder/README.md
       - run: cp logo.png packages/builder/

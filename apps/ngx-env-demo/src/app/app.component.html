@@ -11,7 +11,7 @@
       </td>
     </tr>
     <tr>
-      <td>VERSION</td>
+      <td>NG_APP_VERSION</td>
       <td>
         <span id="VERSION">{{ "process.env.NG_APP_VERSION" | env }}</span>
       </td>
@@ -25,9 +25,11 @@
       </td>
     </tr>
     <tr>
-      <td>USER_HOME</td>
+      <td>NG_APP_USER_HOME</td>
       <td>
-        <span id="USER_HOME">{{ "process.env.USER_HOME" | env }}</span>
+        <span id="NG_APP_USER_HOME">{{
+          "process.env.NG_APP_USER_HOME" | env
+        }}</span>
       </td>
     </tr>
   </tbody>

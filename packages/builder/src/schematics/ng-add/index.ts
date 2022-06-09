@@ -40,9 +40,26 @@ export function builder(options: any): Rule {
       if (workspace.defaultProject) {
         options.project = workspace.defaultProject;
       } else {
-        throw new SchematicsException(
-          "No Angular project selected and no default project in the workspace"
+        console.warn("No default project specified in the workspace");
+        const projectNames = Object.getOwnPropertyNames(
+          workspace.projects
+        ).filter(
+          (project) => workspace.projects[project].projectType === "application"
         );
+        if (projectNames.length === 0) {
+          throw new SchematicsException(
+            "No application project found in the workspace"
+          );
+        }
+        if (projectNames.length > 1) {
+          projectNames.forEach((projectName) =>
+            console.log(` - ng add @ngx-env/builder --project ${projectName}`)
+          );
+          throw new SchematicsException(
+            "Multiple projects detected in the workspace, run one of the commands above"
+          );
+        }
+        options.project = projectNames[0];
       }
     }
 
@@ -55,7 +72,7 @@ export function builder(options: any): Rule {
 
     if (project.projectType !== "application") {
       throw new SchematicsException(
-        `Deploy requires an Angular project type of "application" in angular.json`
+        `@ngx-env/builder requires an Angular project type of "application" in angular.json`
       );
     }
 
