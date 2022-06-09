@@ -1,6 +1,6 @@
 {
   "name": "@ngx-env/demo",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -17,7 +17,7 @@
     "@angular/platform-browser": "~14.0.0",
     "@angular/platform-browser-dynamic": "~14.0.0",
     "@angular/router": "~14.0.0",
-    "@ngx-env/core": "^2.1.1",
+    "@ngx-env/core": "*",
     "rxjs": "~7.5.1",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.4"
@@ -26,7 +26,7 @@
     "@angular-devkit/build-angular": "~14.0.0",
     "@angular/cli": "~14.0.0",
     "@angular/compiler-cli": "~14.0.0",
-    "@ngx-env/builder": "^2.1.1",
+    "@ngx-env/builder": "^2.2.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "cross-env": "^7.0.3",
