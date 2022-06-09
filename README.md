@@ -15,11 +15,6 @@
 ng add @ngx-env/builder
 ```
 
-For v14
-```sh
-ng add @ngx-env/builder --project demo-app
-```
-
 2. **Define Environment Variables in `.env`**
 
 ```sh
@@ -39,7 +34,7 @@ export class MainComponent {
 }
 ```
 
-```html 
+```html
 <span> {{ branch }} </span>
 <!-- Using env pipe from @ngx-env/core -->
 <span> {{ 'process.env.NG_APP_VERSION' | env }} </span>
@@ -63,11 +58,10 @@ NG_APP_ENABLE_SENTRY=true npm run build
 
 # Compatiblity ⚠️
 
-| Angular  | @ngx-env/builder |
-| -------- | ---------------- |
-| [12 - 14] | ^2.0.1          |
-| [8 - 12[  | ^1.1.0          |
-
+| Angular   | @ngx-env/builder |
+| --------- | ---------------- |
+| [12 - 14] | ^2.0.1           |
+| [8 - 12[  | ^1.1.0           |
 
 # Using Environment Variables
 
