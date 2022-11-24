@@ -231,13 +231,13 @@ I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject
 **Declare your environment variables in the generated `.env.d.ts` file**
 
 ```ts
-declare var process: {
-  env: {
+declare namespace NodeJS {
+  export interface ProcessEnv {
     NG_APP_ENV: string;
     NG_APP_BASE_URL: string;
     NG_APP_VERSION: string;
-  };
-};
+  }
+}
 ```
 
 **Use `process.env` inside `environment.ts` files**
