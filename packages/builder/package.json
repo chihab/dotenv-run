@@ -27,8 +27,7 @@
     "start": "tsc -w",
     "build": "tsc",
     "copy-dist": "ts-node src/builders/schema-dist.ts",
-    "postbuild": "node dist/schema.js",
-    "test": "echo \"Write some tests dude!\" && exit 0"
+    "postbuild": "node dist/schema.js"
   },
   "dependencies": {
     "@angular-devkit/schematics": "^14.0.0",
