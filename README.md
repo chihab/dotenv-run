@@ -60,7 +60,8 @@ NG_APP_ENABLE_SENTRY=true npm run build
 
 | Angular   | @ngx-env/builder |
 | --------- | ---------------- |
-| [12 - 15] | ^2.3.0           |
+| 15        | ^15.0.0          |
+| [12 - 14] | ^2.3.0           |
 | [8 - 12[  | ^1.1.0           |
 
 # Using Environment Variables
