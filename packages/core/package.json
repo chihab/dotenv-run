@@ -1,6 +1,6 @@
 {
   "name": "@ngx-env/core",
-  "version": "2.2.0",
+  "version": "15.0.0",
   "description": "Easily inject environment variables into your Angular applications",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env",
@@ -13,8 +13,7 @@
     "schematics"
   ],
   "scripts": {
-    "build": "ng-packagr",
-    "test": "echo \"Write some tests dude!\" && exit 0"
+    "build": "ng-packagr"
   },
   "peerDependencies": {
     "@angular/common": ">=12.0.0",

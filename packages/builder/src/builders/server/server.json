@@ -36,8 +36,8 @@
     },
     "optimization": {
       "description": "Enables optimization of the build output. Including minification of scripts and styles, tree-shaking and dead-code elimination. For more information, see https://angular.io/guide/workspace-config#optimization-configuration.",
-      "x-user-analytics": 16,
       "default": true,
+      "x-user-analytics": "ep.ng_optimization",
       "oneOf": [
         {
           "type": "object",
@@ -74,8 +74,7 @@
     },
     "resourcesOutputPath": {
       "type": "string",
-      "description": "The path where style resources will be placed, relative to outputPath.",
-      "default": ""
+      "description": "The path where style resources will be placed, relative to outputPath."
     },
     "sourceMap": {
       "description": "Output source maps for scripts and styles. For more information, see https://angular.io/guide/workspace-config#source-map-configuration.",
@@ -117,6 +116,11 @@
       "description": "URL where files will be deployed.",
       "x-deprecated": "Use \"baseHref\" browser builder option, \"APP_BASE_HREF\" DI token or a combination of both instead. For more information, see https://angular.io/guide/deployment#the-deploy-url."
     },
+    "vendorChunk": {
+      "type": "boolean",
+      "description": "Generate a seperate bundle containing only vendor libraries. This option should only be used for development to reduce the incremental compilation time.",
+      "default": false
+    },
     "verbose": {
       "type": "boolean",
       "description": "Adds more details to output logging.",
@@ -130,6 +134,12 @@
     "i18nMissingTranslation": {
       "type": "string",
       "description": "How to handle missing translations for i18n.",
+      "enum": ["warning", "error", "ignore"],
+      "default": "warning"
+    },
+    "i18nDuplicateTranslation": {
+      "type": "string",
+      "description": "How to handle duplicate translations for i18n.",
       "enum": ["warning", "error", "ignore"],
       "default": "warning"
     },
@@ -171,29 +181,10 @@
       "description": "Extract all licenses in a separate file, in the case of production builds only.",
       "default": true
     },
-    "showCircularDependencies": {
-      "type": "boolean",
-      "description": "Show circular dependency warnings on builds.",
-      "default": false,
-      "x-deprecated": "The recommended method to detect circular dependencies in project code is to use either a lint rule or other external tooling."
-    },
     "namedChunks": {
       "type": "boolean",
       "description": "Use file name for lazy loaded chunks.",
       "default": false
-    },
-    "bundleDependencies": {
-      "description": "Which external dependencies to bundle into the bundle. By default, all of node_modules will be bundled.",
-      "default": true,
-      "oneOf": [
-        {
-          "type": "boolean"
-        },
-        {
-          "type": "string",
-          "enum": ["none", "all"]
-        }
-      ]
     },
     "externalDependencies": {
       "description": "Exclude the listed external dependencies from being bundled into the bundle. Instead, the created bundle relies on these dependencies to be available during runtime.",
