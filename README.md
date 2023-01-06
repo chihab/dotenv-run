@@ -3,7 +3,6 @@
 <img src="https://raw.githubusercontent.com/chihab/ngx-env/main/logo.png" alt="dotenv" width="90px" align="right" />
 
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 **Easily inject environment variables into your Angular applications**
 
@@ -55,14 +54,6 @@ npm start
 NG_APP_BRANCH_NAME=$GITHUB_HEAD_REF ng test
 NG_APP_ENABLE_SENTRY=true npm run build
 ```
-
-# Compatiblity ⚠️
-
-| Angular   | @ngx-env/builder |
-| --------- | ---------------- |
-| 15        | ^15.0.0          |
-| [12 - 14] | ^2.3.0           |
-| [8 - 12[  | ^1.1.0           |
 
 # Using Environment Variables
 

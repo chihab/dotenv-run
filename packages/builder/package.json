@@ -31,11 +31,11 @@
   },
   "dependencies": {
     "@angular-devkit/schematics": "^14.0.0",
-    "cpy": "^8.1.2",
     "dotenv": "9.0.2",
     "dotenv-expand": "5.1.0"
   },
   "devDependencies": {
+    "cpy": "^8.1.2",
     "@angular-devkit/schematics-cli": "^14.0.0",
     "ts-node": "^10.8.0"
   },
