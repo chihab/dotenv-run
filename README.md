@@ -268,6 +268,33 @@ export class SomeService {
 }
 ```
 
+# Issues with the `process` variable
+
+If you have issues with the `process`, you probably don't have the `.env.d.ts` file in your source folder.
+
+This file is created by running `ng add @ngx-env/builder`.
+
+Depending on your Angular version and your TS config, the file should either be defined this way:
+
+```ts
+declare namespace NodeJS {
+  export interface ProcessEnv {
+    readonly NG_APP_ENV: string;
+  }
+}
+```
+
+or this way (legacy version):
+
+```ts
+declare var process: {
+  env: {
+    NG_APP_ENV: string;
+    [key: string]: any;
+  };
+};
+```
+
 # Credits
 
 - [create-react-app](https://github.com/facebook/create-react-app)
