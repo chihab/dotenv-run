@@ -1,6 +1,6 @@
 {
   "name": "@ngx-env/demo",
-  "version": "15.0.1",
+  "version": "15.1.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -27,7 +27,7 @@
     "@angular-devkit/build-angular": "~15.0.1",
     "@angular/cli": "~15.0.1",
     "@angular/compiler-cli": "~15.0.1",
-    "@ngx-env/builder": "^15.0.1",
+    "@ngx-env/builder": "^15.1.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "cross-env": "^7.0.3",
