@@ -113,7 +113,7 @@ There is also a built-in environment variable called `NG_APP_ENV`. You can read 
 
 By default `NG_APP_ENV` is set to `NODE_ENV` but you are free to override it.
 
-`NG_APP_ENV` is always available even if you define a custom prefix for your environment variables.
+Note that `NG_APP_ENV` remains available even if you define a custom prefix not matching `NG_APP`.
 
 Having access to the `NG_APP_ENV` is also useful for performing actions conditionally:
 
