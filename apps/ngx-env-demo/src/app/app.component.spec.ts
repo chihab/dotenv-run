@@ -31,8 +31,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const elt: Element = fixture.nativeElement;
     fixture.detectChanges();
-    expect(elt.querySelector('#NG_APP_ENV')?.innerHTML).toEqual('test');
-    expect(elt.querySelector('#NG_APP_BRANCH_NAME')?.innerHTML).toEqual('main');
-    expect(elt.querySelector('#NG_APP_USER_HOME')?.innerHTML).not.toEqual('');
+    expect(elt.querySelector('#ENV')?.innerHTML).toEqual('test');
+    expect(elt.querySelector('#BRANCH_NAME')?.innerHTML).toEqual('main');
+    expect(elt.querySelector('#USER_HOME')?.innerHTML).not.toEqual('');
   });
 });

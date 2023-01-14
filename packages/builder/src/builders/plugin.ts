@@ -4,13 +4,16 @@ import * as webpack from "webpack";
 import { Configuration } from "webpack";
 import * as fs from "fs";
 import * as path from "path";
+import { NgxEnvOptions } from "./ngx-env/ngx-env-schema";
+
+const NG_APP_ENV = 'NG_APP_ENV';
 
 function escapeStringRegexp(str: string) {
   return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
 function getClientEnvironment(prefix: RegExp) {
-  const env = process.env.NG_APP_ENV || process.env.NODE_ENV;
+  const env = process.env[NG_APP_ENV] || process.env.NODE_ENV;
   const dotenvBase = path.resolve(process.cwd(), ".env");
   const dotenvFiles = [
     env && `${dotenvBase}.${env}.local`,
@@ -37,10 +40,10 @@ function getClientEnvironment(prefix: RegExp) {
   });
   const processEnv = {
     ...process.env,
-    NG_APP_ENV: env,
+    [NG_APP_ENV]: env,
   };
   return Object.keys(processEnv)
-    .filter((key) => prefix.test(key))
+    .filter((key) => prefix.test(key) || key === NG_APP_ENV)
     .reduce(
       (env, key) => {
         env.raw[key] = processEnv[key];
@@ -54,8 +57,9 @@ function getClientEnvironment(prefix: RegExp) {
     );
 }
 
-export function plugin() {
-  const { raw, stringified } = getClientEnvironment(/^NG_APP/i);
+export function plugin(options: NgxEnvOptions) {
+  console.log('@ngx-env/builder using prefix', options.prefix)
+  const { raw, stringified } = getClientEnvironment(new RegExp(`^${options.prefix}`, 'i'));
   return {
     webpackConfiguration: async (webpackConfig: Configuration) => {
       webpackConfig.plugins.push(
@@ -68,7 +72,7 @@ export function plugin() {
     indexHtml: async (content: string) => {
       const rawWithEnv = {
         ...raw,
-        NG_APP_ENV: raw["NG_APP_ENV"],
+        [NG_APP_ENV]: raw[NG_APP_ENV],
       };
       return Object.keys(rawWithEnv).reduce(
         (html, key) =>

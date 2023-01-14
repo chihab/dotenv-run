@@ -76,9 +76,34 @@ The environment variables will be defined for you on `process.env`. For example,
 
 ## `NG_APP_*`
 
-You must create custom environment variables beginning with `NG_APP_`.
+You must create custom environment variables beginning with `NG_APP_` or using your custom prefix.
 
-Any other variables will be ignored to avoid accidentally exposing a private key on the machine that could have the same name. See how to [use system environment variables](#expanding-env).
+If you want to have a shorter prefix like `NG_` or if you want to access some domain specific variables directly, you can set the prefix in the `angular.json` configuration
+
+```ts
+  "architect": {
+    "build": {
+      "builder": "@ngx-env/builder:browser",
+      "options": {
+          ...
+          "scripts": []
+          "ngxEnv": {
+            "prefix": "ORG_"
+          }
+      }
+    }
+  }
+```
+
+or using `ng config`
+
+```sh
+ng config projects.YOUR_APP_NAME.architect.build.options.ngxEnv.prefix 'ORG_'
+```
+
+Any other variables not starting with `NG_APP_` or your custom prefix will be ignored to avoid accidentally exposing a private key on the machine that could have the same name. 
+
+See how to [use system environment variables](#expanding-env).
 
 **Changing any environment variables will require you to restart the development server if it is running.**
 
@@ -87,6 +112,8 @@ Any other variables will be ignored to avoid accidentally exposing a private key
 There is also a built-in environment variable called `NG_APP_ENV`. You can read it from `process.env.NG_APP_ENV`.
 
 By default `NG_APP_ENV` is set to `NODE_ENV` but you are free to override it.
+
+Note that `NG_APP_ENV` remains available even if you define a custom prefix not matching `NG_APP`.
 
 Having access to the `NG_APP_ENV` is also useful for performing actions conditionally:
 
@@ -213,6 +240,7 @@ DOMAIN=www.example.com
 NG_APP_FOO=$DOMAIN/foo
 NG_APP_BAR=$DOMAIN/bar
 ```
+
 
 # How It Works
 

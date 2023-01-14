@@ -1,0 +1,12 @@
+{
+    "ngxEnv": {
+        "type": "object",
+        "properties": {
+            "prefix": {
+                "type": "string",
+                "description": "@ngx-env/builder prefix",
+                "default": "NG_APP"
+            }
+        }
+    }
+}
