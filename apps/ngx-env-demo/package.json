@@ -5,7 +5,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "cross-env NODE_ENV=test NG_APP_BRANCH_NAME=main ng test --watch=false"
+    "pretest": "yarn ng config projects.ngx-env-demo.architect.test.options.ngxEnv.prefix 'NGX_'",
+    "test": "cross-env NODE_ENV=test NGX_BRANCH_NAME=main ng test --watch=false"
   },
   "dependencies": {
     "@angular/animations": "~15.0.1",

@@ -3,12 +3,13 @@ import {
   executeServerBuilder,
   ServerBuilderOptions,
 } from "@angular-devkit/build-angular";
+import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { plugin } from "../plugin";
 
 export const buildWithPlugin = (
-  options: ServerBuilderOptions,
+  options: ServerBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): ReturnType<typeof executeServerBuilder> =>
-  executeServerBuilder(options, context, plugin());
+  executeServerBuilder(options, context, plugin(options.ngxEnv));
 
 export default createBuilder<ServerBuilderOptions>(buildWithPlugin);

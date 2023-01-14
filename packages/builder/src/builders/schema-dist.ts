@@ -1,9 +1,3 @@
-/**
- * For each builder
- * - Copy the schema
- * - Validate the generated schema
- */
-
 import * as cpy from "cpy";
 import * as fs from "fs";
 
@@ -26,8 +20,4 @@ function copyDistSchemas() {
   );
 }
 
-(() => {
-  copyDistSchemas();
-})();
-
-// cp node_modules/@angular-devkit/build-angular/src/builders/dev-server/schema.json ./packages/builder/src/builders/dev-server/dev-server.json
+copyDistSchemas();
