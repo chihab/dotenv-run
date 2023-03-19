@@ -6,7 +6,11 @@
     "start": "ng serve",
     "build": "ng build",
     "pretest": "yarn ng config projects.ngx-env-demo.architect.test.options.ngxEnv.prefix 'NGX_'",
-    "test": "cross-env NODE_ENV=test NGX_BRANCH_NAME=main ng test --watch=false"
+    "test": "cross-env NODE_ENV=test NGX_BRANCH_NAME=main ng test --watch=false",
+    "dev:ssr": "ng run ngx-env-demo:serve-ssr",
+    "serve:ssr": "node dist/ngx-env-demo/server/main.js",
+    "build:ssr": "ng build && ng run ngx-env-demo:server",
+    "prerender": "ng run ngx-env-demo:prerender"
   },
   "dependencies": {
     "@angular/animations": "~15.2.3",
@@ -17,8 +21,11 @@
     "@angular/localize": "~15.2.3",
     "@angular/platform-browser": "~15.2.3",
     "@angular/platform-browser-dynamic": "~15.2.3",
+    "@angular/platform-server": "~15.2.3",
     "@angular/router": "~15.2.3",
+    "@nguniversal/express-engine": "^15.2.0",
     "@ngx-env/core": "^15.0.1",
+    "express": "^4.15.2",
     "rxjs": "~7.5.1",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.4"
@@ -27,7 +34,9 @@
     "@angular-devkit/build-angular": "~15.2.4",
     "@angular/cli": "~15.2.4",
     "@angular/compiler-cli": "~15.2.3",
+    "@nguniversal/builders": "^15.2.0",
     "@ngx-env/builder": "^15.1.0",
+    "@types/express": "^4.17.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
     "cross-env": "^7.0.3",
