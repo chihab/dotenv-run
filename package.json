@@ -15,9 +15,15 @@
   "devDependencies": {
     "lerna": "^4.0.0"
   },
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
-  "dependencies": {}
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "apps/*"
+    ],
+    "nohoist": [
+      "**/@angular-devkit/**",
+      "**/@angular/**",
+      "**/@nguniversal/**"
+    ]
+  }
 }

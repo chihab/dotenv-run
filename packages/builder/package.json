@@ -30,12 +30,13 @@
     "postbuild": "node dist/schema-copy.js"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "^14.0.0",
     "dotenv": "9.0.2",
     "dotenv-expand": "5.1.0"
   },
   "devDependencies": {
-    "@angular-devkit/schematics-cli": "^14.0.0",
+    "@angular-devkit/schematics": "^15.0.0",
+    "@angular-devkit/build-angular": "^15.0.0",
+    "@angular-devkit/schematics-cli": "^15.0.0",
     "cpy": "^8.1.2",
     "ts-node": "^10.8.0"
   },

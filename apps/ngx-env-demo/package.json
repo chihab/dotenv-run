@@ -5,7 +5,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "pretest": "yarn ng config projects.ngx-env-demo.architect.test.options.ngxEnv.prefix 'NGX_'",
     "test": "cross-env NODE_ENV=test NGX_BRANCH_NAME=main ng test --watch=false",
     "dev:ssr": "ng run ngx-env-demo:serve-ssr",
     "serve:ssr": "node dist/ngx-env-demo/server/main.js",
