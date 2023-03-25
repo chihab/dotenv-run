@@ -18,4 +18,8 @@ jobs:
       - run: yarn build:cli
       - run: yarn ng-add
       - run: yarn build
+      - run: yarn workspace @ngx-env/demo ngx-env:server
+      - run: yarn workspace @ngx-env/demo build:ssr
+      - run: yarn workspace @ngx-env/demo prerender
+      - run: yarn workspace @ngx-env/demo ngx-env:test
       - run: yarn test

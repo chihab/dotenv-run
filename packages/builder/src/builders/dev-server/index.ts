@@ -25,7 +25,7 @@ export const buildWithPlugin = (
   }
   return from(setup()).pipe(
     switchMap((_options) => {
-      const ngxEnvOptions  = {...options.ngxEnv, ..._options.ngxEnv};
+      const ngxEnvOptions = { ...options.ngxEnv, ..._options.ngxEnv };
       return executeDevServerBuilder(options, context, plugin(ngxEnvOptions));
     })
   );

@@ -7,11 +7,11 @@ function copyDistSchemas() {
     async (target) => {
       await cpy(
         [
-          `../../node_modules/@angular-devkit/build-angular/src/builders/${target}/schema.json`,
+          `./node_modules/@angular-devkit/build-angular/src/builders/${target}/schema.json`,
         ],
         `src/builders/${target}`
       );
-      console.log(`../../node_modules/@angular-devkit/build-angular/src/builders/${target}/schema.json ==> src/builders/${target} ✅`);
+      console.log(`./node_modules/@angular-devkit/build-angular/src/builders/${target}/schema.json ==> src/builders/${target} ✅`);
       fs.renameSync(
         `src/builders/${target}/schema.json`,
         `src/builders/${target}/${target}.json`
