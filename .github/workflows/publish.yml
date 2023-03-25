@@ -12,16 +12,18 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org
-      - run: yarn
-      - run: yarn build:cli
-      - run: yarn ng-add
-      - run: yarn build
-      - run: cp README.md packages/builder/README.md
-      - run: cp logo.png packages/builder/
-      - run: cp logo.png packages/core/
-      - run: cd packages/builder && npm publish --access public
+      - name: Prepare Packages
+        run: |
+          yarn
+          yarn build
+          cp README.md packages/builder/README.md
+          cp logo.png packages/builder/
+          cp logo.png packages/core/
+      - name: Publish Packages
+        run: |
+          cd packages/builder && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - run: cd packages/core/dist && npm publish --access public
+        run: cd packages/core/dist && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
