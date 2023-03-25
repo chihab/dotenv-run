@@ -34,6 +34,8 @@
     "dotenv-expand": "5.1.0"
   },
   "devDependencies": {
+    "@angular/compiler": "~15.0.0",
+    "@angular/compiler-cli": "^15.0.0",
     "@angular-devkit/schematics": "^15.0.0",
     "@angular-devkit/build-angular": "^15.0.0",
     "@angular-devkit/schematics-cli": "^15.0.0",
