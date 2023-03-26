@@ -14,8 +14,18 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: yarn
-      - run: yarn build:cli
-      - run: yarn ng-add
-      - run: yarn build
-      - run: yarn test
+      - name: Build Packages
+        run: |
+          yarn
+          yarn build
+      - name: Build App
+        run: |
+          cd apps/ngx-env-demo
+          yarn
+          yarn ng add @ngx-env/builder
+          yarn ngx-env:build
+          yarn ngx-env:server
+          yarn build:ssr
+          yarn prerender
+          yarn ngx-env:test
+          yarn test

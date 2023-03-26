@@ -46,24 +46,27 @@ function getClientEnvironment(prefix: RegExp) {
     .filter((key) => prefix.test(key) || key === NG_APP_ENV)
     .reduce(
       (env, key) => {
+        const value = JSON.stringify(processEnv[key]);
         env.raw[key] = processEnv[key];
-        env.stringified[key] = JSON.stringify(processEnv[key]);
+        env.stringified[key] = value;
+        env.full[`process.env.${key}`] = value;
         return env;
       },
       {
         raw: {},
         stringified: {},
+        full: {},
       }
     );
 }
 
-export function plugin(options: NgxEnvOptions) {
+export function plugin(options: NgxEnvOptions, ssr = false) {
   console.log('@ngx-env/builder using prefix', options.prefix)
-  const { raw, stringified } = getClientEnvironment(new RegExp(`^${options.prefix}`, 'i'));
+  const { raw, stringified, full } = getClientEnvironment(new RegExp(`^${options.prefix}`, 'i'));
   return {
     webpackConfiguration: async (webpackConfig: Configuration) => {
       webpackConfig.plugins.push(
-        new webpack.DefinePlugin({
+        new webpack.DefinePlugin(ssr ? { ...full } : {
           "process.env": stringified,
         })
       );

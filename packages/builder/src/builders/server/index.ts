@@ -10,6 +10,6 @@ export const buildWithPlugin = (
   options: ServerBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): ReturnType<typeof executeServerBuilder> =>
-  executeServerBuilder(options, context, plugin(options.ngxEnv));
+  executeServerBuilder(options, context, plugin(options.ngxEnv, true))
 
 export default createBuilder<ServerBuilderOptions>(buildWithPlugin);

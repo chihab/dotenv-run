@@ -2,22 +2,17 @@
   "name": "ng-env-demo",
   "version": "0.0.0",
   "scripts": {
-    "start:demo": "lerna exec --scope=@ngx-env/demo -- yarn start",
+    "start:demo": "cd apps/ngx-env-demo && yarn start",
     "start:cli": "lerna run start --scope=@ngx-env/builder",
-    "build": "lerna run build",
-    "build:demo": "lerna run build --scope=@ngx-env/demo",
-    "build:cli": "lerna run build --scope=@ngx-env/builder",
-    "build:lib": "lerna run build --scope=@ngx-env/core",
-    "ng-add": "lerna exec --scope=@ngx-env/demo -- yarn ng add @ngx-env/builder",
-    "test": "lerna run test"
+    "build": "lerna run build"
   },
   "private": true,
   "devDependencies": {
     "lerna": "^4.0.0"
   },
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
-  "dependencies": {}
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  }
 }

@@ -1,6 +1,6 @@
 {
   "name": "@ngx-env/builder",
-  "version": "15.1.0",
+  "version": "15.2.0",
   "description": "Easily inject environment variables into your Angular applications",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env",
@@ -30,14 +30,18 @@
     "postbuild": "node dist/schema-copy.js"
   },
   "dependencies": {
-    "@angular-devkit/schematics": "^14.0.0",
     "dotenv": "9.0.2",
     "dotenv-expand": "5.1.0"
   },
   "devDependencies": {
-    "@angular-devkit/schematics-cli": "^14.0.0",
+    "@angular/compiler": "^15.0.0",
+    "@angular/compiler-cli": "^15.0.0",
+    "@angular-devkit/schematics": "^15.0.0",
+    "@angular-devkit/build-angular": "^15.0.0",
+    "@angular-devkit/schematics-cli": "^15.0.0",
     "cpy": "^8.1.2",
-    "ts-node": "^10.8.0"
+    "ts-node": "^10.8.0",
+    "typescript": "~4.8.4"
   },
   "peerDpendencies": {
     "@angular-devkit/schematics-cli": ">=12.0.0"

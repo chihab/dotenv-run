@@ -102,7 +102,7 @@ or using `ng config`
 ng config projects.YOUR_APP_NAME.architect.build.options.ngxEnv.prefix 'ORG_'
 ```
 
-Any other variables not starting with `NG_APP_` or your custom prefix will be ignored to avoid accidentally exposing a private key on the machine that could have the same name. 
+Any other variables not starting with `NG_APP_` or your custom prefix will be ignored to avoid accidentally exposing a private key on the machine that could have the same name.
 
 See how to [use system environment variables](#expanding-env).
 
@@ -242,7 +242,6 @@ NG_APP_FOO=$DOMAIN/foo
 NG_APP_BAR=$DOMAIN/bar
 ```
 
-
 # How It Works
 
 I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how it works.
@@ -297,7 +296,9 @@ export class SomeService {
 }
 ```
 
-# Issues with the `process` variable
+# Known Issues
+
+## `process` variable
 
 If you have issues with the `process`, you probably don't have the `.env.d.ts` file in your source folder.
 
@@ -322,6 +323,15 @@ declare var process: {
     [key: string]: any;
   };
 };
+```
+
+## Property comes from an index signature
+
+If you prefer using process.env.NGX_SOME_VARIABLE instead of process.env['NGX_SOME_VARIABLE'], you can update the following line in your `tsconfig.json` file:
+
+```diff
+-"noPropertyAccessFromIndexSignature": true,
++"noPropertyAccessFromIndexSignature": false,
 ```
 
 # Credits
