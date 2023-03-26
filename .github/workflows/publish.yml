@@ -19,11 +19,11 @@ jobs:
           cp README.md packages/builder/README.md
           cp logo.png packages/builder/
           cp logo.png packages/core/
-      - name: Publish Packages
-        run: |
-          cd packages/builder && npm publish --access public
+      - name: Publish @angular/builder
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd packages/builder && npm publish --access public
+      - name: Publish @angular/core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: cd packages/core/dist && npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
