@@ -75,7 +75,7 @@ The environment variables will be defined for you on `process.env`. For example,
 >
 > Environment variables are embedded into the build, meaning anyone can view them by inspecting your app's files.
 
-## `NG_APP_*`
+## `NG_APP_*` or Custom Prefix
 
 You must create custom environment variables beginning with `NG_APP_` or using your custom prefix.
 
@@ -314,7 +314,7 @@ declare namespace NodeJS {
 }
 ```
 
-or this way (legacy version):
+or this way:
 
 ```ts
 declare var process: {
