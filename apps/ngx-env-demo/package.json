@@ -29,7 +29,7 @@
     "@nguniversal/express-engine": "^15.2.0",
     "@ngx-env/core": "file:../../packages/core/dist",
     "express": "^4.15.2",
-    "rxjs": "~7.5.1",
+    "rxjs": "~7.6.0",
     "tslib": "^2.4.0",
     "zone.js": "~0.11.4"
   },

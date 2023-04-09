@@ -23,6 +23,7 @@ jobs:
           cd apps/ngx-env-demo
           yarn
           yarn ng add @ngx-env/builder
+          npx tsc --noEmit --project tsconfig.app.json
           yarn ngx-env:build
           yarn ngx-env:server
           yarn build:ssr

@@ -11,5 +11,8 @@
   "files": [
     "src/main.server.ts",
     "server.ts"
+  ],
+  "exclude": [
+    "src/env.d.ts"
   ]
 }
