@@ -307,22 +307,22 @@ This file is created by running `ng add @ngx-env/builder`.
 Depending on your Angular version and your TS config, the file should either be defined this way:
 
 ```ts
-declare namespace NodeJS {
-  export interface ProcessEnv {
-    readonly NG_APP_ENV: string;
-  }
-}
-```
-
-or this way:
-
-```ts
 declare var process: {
   env: {
     NG_APP_ENV: string;
     [key: string]: any;
   };
 };
+```
+
+or this way (if your project references `@types/node`):
+
+```ts
+declare namespace NodeJS {
+  export interface ProcessEnv {
+    readonly NG_APP_ENV: string;
+  }
+}
 ```
 
 ## Property comes from an index signature
