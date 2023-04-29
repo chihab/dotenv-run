@@ -319,7 +319,7 @@ export class SomeService {
 
 @ngx-env/builder can be used with Docker to provide environment-specific configuration during the build and deployment of an Angular application.
 
-The Dockerfile below will build an Angular application with the `NGX_VERSION` environment variable set to the value of the `NGX_VERSION` build argument.
+The Dockerfile below will build an Angular application with the `NGX_API_URL` environment variable set to the value of the `NGX_API_URL` build argument.
 
 ```dockerfile
 FROM node:18
