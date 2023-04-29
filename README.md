@@ -21,10 +21,10 @@
     - [Linux, macOS (Bash)](#linux-macos-bash)
   - [In `.env`](#in-env)
 - [Good Practices](#good-practices)
-  - [Property comes from an index signature](#property-comes-from-an-index-signature)
 - [Usage with Docker](#usage-with-docker)
 - [Known Issues](#known-issues)
   - [`process` variable](#process-variable)
+  - [Property comes from an index signature](#property-comes-from-an-index-signature)
 - [How It Works?](#how-it-works)
 - [Credits](#credits)
 - [License](#license)
@@ -315,15 +315,6 @@ export class SomeService {
 }
 ```
 
-## Property comes from an index signature
-
-If you prefer using process.env.NGX_SOME_VARIABLE instead of process.env['NGX_SOME_VARIABLE'], you can update the following line in your `tsconfig.json` file:
-
-```diff
--"noPropertyAccessFromIndexSignature": true,
-+"noPropertyAccessFromIndexSignature": false,
-```
-
 # Usage with Docker
 
 @ngx-env/builder can be used with Docker to provide environment-specific configuration during the build and deployment of an Angular application.
@@ -391,6 +382,15 @@ declare namespace NodeJS {
     readonly NG_APP_ENV: string;
   }
 }
+```
+
+## Property comes from an index signature
+
+If you prefer using process.env.NGX_SOME_VARIABLE instead of process.env['NGX_SOME_VARIABLE'], you can update the following line in your `tsconfig.json` file:
+
+```diff
+-"noPropertyAccessFromIndexSignature": true,
++"noPropertyAccessFromIndexSignature": false,
 ```
 # How It Works?
 
