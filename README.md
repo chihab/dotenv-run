@@ -1,4 +1,4 @@
-# @ngx-env/builder
+<h1>@ngx-env/builder</h1>
 
 <img src="https://raw.githubusercontent.com/chihab/ngx-env/main/logo.png" alt="dotenv" width="90px" align="right" />
 
@@ -6,6 +6,28 @@
 [![monthly downloads](https://img.shields.io/npm/dm/@ngx-env/builder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 
 **Easily inject environment variables into your Angular applications**
+
+
+- [Quick start](#quick-start)
+- [Using Environment Variables](#using-environment-variables)
+  - [`NG_APP_*` or Custom Prefix](#ng_app_-or-custom-prefix)
+  - [`NG_APP_ENV`](#ng_app_env)
+  - [Usage In Templates](#usage-in-templates)
+  - [Usage in Index.html](#usage-in-indexhtml)
+- [Defining Environment Variables](#defining-environment-variables)
+  - [Command Line](#command-line)
+    - [Windows (cmd.exe)](#windows-cmdexe)
+    - [Windows (Powershell)](#windows-powershell)
+    - [Linux, macOS (Bash)](#linux-macos-bash)
+  - [In `.env`](#in-env)
+- [Good Practices](#good-practices)
+  - [Property comes from an index signature](#property-comes-from-an-index-signature)
+- [Usage with Docker](#usage-with-docker)
+- [Known Issues](#known-issues)
+  - [`process` variable](#process-variable)
+- [How It Works?](#how-it-works)
+- [Credits](#credits)
+- [License](#license)
 
 # Quick start
 
@@ -69,7 +91,7 @@ The environment variables will be defined for you on `process.env`. For example,
 
 **The environment variables are embedded during the build time**.
 
-## ⚠ Important
+**⚠ Important**
 
 > Do not store any secrets (such as private API keys) in your Angular app!
 >
@@ -223,7 +245,8 @@ NG_APP_NOT_SECRET_CODE=abcdef npm start
 | `.env.${NG_APP_ENV}`       | ✔️             | ✔️                |
 | `.env.${NG_APP_ENV}.local` | ✔️             | ✔️                |
 
-### Expanding `.env`
+
+**Expanding `.env`**
 
 You can expand variables already available on your machine for use in your `.env`
 
@@ -241,10 +264,6 @@ DOMAIN=www.example.com
 NG_APP_FOO=$DOMAIN/foo
 NG_APP_BAR=$DOMAIN/bar
 ```
-
-# How It Works
-
-I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how it works.
 
 # Good Practices
 
@@ -296,6 +315,55 @@ export class SomeService {
 }
 ```
 
+## Property comes from an index signature
+
+If you prefer using process.env.NGX_SOME_VARIABLE instead of process.env['NGX_SOME_VARIABLE'], you can update the following line in your `tsconfig.json` file:
+
+```diff
+-"noPropertyAccessFromIndexSignature": true,
++"noPropertyAccessFromIndexSignature": false,
+```
+
+# Usage with Docker
+
+@ngx-env/builder can be used with Docker to provide environment-specific configuration during the build and deployment of an Angular application.
+
+The Dockerfile below will build an Angular application with the `NGX_VERSION` environment variable set to the value of the `NGX_VERSION` build argument.
+
+```dockerfile
+FROM node:18
+
+# Get the arguments from the command line
+ARG NGX_API_URL
+
+# Set the environment variables
+ENV NGX_API_URL=$NGX_API_URL
+
+################### Build ans Serve the application ######################
+# You can replace this part with your own build process
+WORKDIR /app
+RUN npx -y @angular/cli@15 new ng-app --defaults
+WORKDIR /app/ng-app
+# In your own project, you would rather have the dependencies in the package.json file
+RUN npx ng add @ngx-env/builder --skip-confirmation
+RUN npm add @ngx-env/core
+# In your own project, you would rather have the configuration in the angular.json file
+RUN npx ng config projects.ng-app.architect.build.options.ngxEnv.prefix 'NGX_'
+# Some sample code to show that the environment variable is available
+RUN echo 'console.log("NGX_API_URL", process.env["NGX_API_URL"])' >>src/main.ts
+RUN npm run build
+EXPOSE 8080
+CMD ["npx", "http-server", "dist/ng-app", "-p", "8080"]
+################################################################
+```
+
+Build and run the Docker image:
+
+```shell
+docker build --build-arg NGX_API_URL=http://staging.api.com -t ngx-env-demo .
+docker run -p 8080:8080 ngx-env-demo
+```
+
 # Known Issues
 
 ## `process` variable
@@ -324,15 +392,9 @@ declare namespace NodeJS {
   }
 }
 ```
+# How It Works?
 
-## Property comes from an index signature
-
-If you prefer using process.env.NGX_SOME_VARIABLE instead of process.env['NGX_SOME_VARIABLE'], you can update the following line in your `tsconfig.json` file:
-
-```diff
--"noPropertyAccessFromIndexSignature": true,
-+"noPropertyAccessFromIndexSignature": false,
-```
+I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how it works.
 
 # Credits
 
