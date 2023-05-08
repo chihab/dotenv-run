@@ -2,7 +2,7 @@
   "name": "ng-env-demo",
   "version": "0.0.0",
   "scripts": {
-    "start:demo": "cd apps/ngx-env-demo && yarn start",
+    "start:demo": "cd apps/ngx-env-demo && npm run start",
     "start:cli": "lerna run start --scope=@ngx-env/builder",
     "build": "lerna run build"
   },
