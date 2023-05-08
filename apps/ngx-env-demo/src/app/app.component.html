@@ -13,23 +13,19 @@
     <tr>
       <td>VERSION</td>
       <td>
-        <span id="VERSION">{{ "process.env.NGX_VERSION" | env }}</span>
+        <span id="VERSION"> {{ version }} </span>
       </td>
     </tr>
     <tr>
       <td>BRANCH_NAME</td>
       <td>
-        <span id="BRANCH_NAME">{{
-          "process.env.NGX_BRANCH_NAME" | env
-        }}</span>
+        <span id="BRANCH_NAME">{{ "process.env.NGX_BRANCH_NAME" | env }}</span>
       </td>
     </tr>
     <tr>
       <td>USER_HOME</td>
       <td>
-        <span id="USER_HOME">{{
-          "process.env.NGX_USER_HOME" | env
-        }}</span>
+        <span id="USER_HOME">{{ "process.env.NGX_USER_HOME" | env }}</span>
       </td>
     </tr>
   </tbody>

@@ -4,7 +4,7 @@
   "useWorkspaces": true,
   "command": {
     "run": {
-      "npmClient": "yarn",
+      "npmClient": "npm",
       "stream": true,
       "prefix": false
     }

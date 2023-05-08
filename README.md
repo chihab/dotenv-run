@@ -236,7 +236,9 @@ NG_APP_NOT_SECRET_CODE=abcdef npm start
 
 `.env` files are to be stored alongside the `package.json`.
 
-`@ngx-env/builder` loads `.env` files with these specific names for the following `NG_APP_ENV` values, files on the bottom have less priority than files on the top.
+`@ngx-env/builder` loads `.env` files with these specific names for the following `NG_APP_ENV` values, files on the top have less priority than files on the bottom.
+
+An env file for a specific mode (e.g. .env.production) will take higher priority than a generic one (e.g. .env).
 
 | valid `.env` filenames     | `NG_APP_ENV=*` | `NG_APP_ENV=test` |
 | -------------------------- | -------------- | ----------------- |
@@ -245,6 +247,7 @@ NG_APP_NOT_SECRET_CODE=abcdef npm start
 | `.env.${NG_APP_ENV}`       | ✔️             | ✔️                |
 | `.env.${NG_APP_ENV}.local` | ✔️             | ✔️                |
 
+In addition, environment variables that already exist when the CLI is executed have the highest priority and will not be overwritten by .env files. For example, when running `NG_APP_SOME_KEY=123 ng serve`.
 
 **Expanding `.env`**
 

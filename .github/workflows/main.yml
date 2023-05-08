@@ -13,20 +13,21 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: 18
       - name: Build Packages
         run: |
-          yarn
-          yarn build
+          npm i
+          npm run build
       - name: Build App
         run: |
           cd apps/ngx-env-demo
-          yarn
-          yarn ng add @ngx-env/builder
+          npm i
+          npx ng add @ngx-env/builder
           npx tsc --noEmit --project tsconfig.app.json
-          yarn ngx-env:build
-          yarn ngx-env:server
-          yarn build:ssr
-          yarn prerender
-          yarn ngx-env:test
-          yarn test
+          npm run ngx-env:build
+          npm run ngx-env:server
+          npm run build:ssr
+          npm run prerender
+          npm run ngx-env:test
+          cd node_modules/@ngx-env && mv builder builder-link && mkdir builder && cp -r builder-link/* builder/ && cd ../../
+          npm run test
