@@ -13,6 +13,10 @@ interface ImportMetaEnv {
   [key: string]: any;
 }
 
+/*
+ * Remove all the deprecated code below if you're using import.meta.env (recommended) 
+ */
+
 /****************************** DEPREACTED **************************/
 /**
  * @deprecated process.env usage 
@@ -33,9 +37,8 @@ declare var process: {
 //     // Add your environment variables below
 //   }
 // }
-/*********************************************************************/
 
-// If you're using Angular Universal, you'll need to add the following to your tsconfig.server.json:
+// If you're using Angular Universal and process.env notation, you'll need to add the following to your tsconfig.server.json:
 /* In your tsconfig.server.json */
 // {
 //   "extends": "./tsconfig.app.json",
@@ -44,3 +47,5 @@ declare var process: {
 //     "src/env.d.ts"
 //   ]
 // }
+
+/*********************************************************************/
