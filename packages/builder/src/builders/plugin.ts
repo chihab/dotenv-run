@@ -50,6 +50,7 @@ function getClientEnvironment(prefix: RegExp) {
   console.log(`- Injected keys:`);
   const values = Object.keys(processEnv)
     .filter((key) => prefix.test(key) || key === NG_APP_ENV)
+    .sort()
     .reduce(
       (env, key) => {
         const value = JSON.stringify(processEnv[key]);
