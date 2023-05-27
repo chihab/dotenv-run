@@ -13,9 +13,9 @@ function escapeStringRegexp(str: string) {
   return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
-function getClientEnvironment(prefix: RegExp) {
+function getClientEnvironment(prefix: RegExp, envPath: string = ".env") {
   const env = process.env[NG_APP_ENV] || process.env.NODE_ENV;
-  const dotenvBase = path.resolve(process.cwd(), ".env");
+  const dotenvBase = path.resolve(process.cwd(), envPath);
   const dotenvFiles = [
     env && `${dotenvBase}.${env}.local`,
     // Don't include `.env.local` for `test` environment
@@ -73,7 +73,7 @@ function getClientEnvironment(prefix: RegExp) {
 export function plugin(options: NgxEnvOptions, ssr = false) {
   console.log(`------- ${chalk.bold('@ngx-env/builder')} -------`)
   console.log(`${chalk.green('-')} Prefix: `, options.prefix);
-  const { raw, stringified, full } = getClientEnvironment(new RegExp(`^${options.prefix}`, 'i'));
+  const { raw, stringified, full } = getClientEnvironment(new RegExp(`^${options.prefix}`, 'i'), options.path);
   console.log('---------------------------------\n');
   return {
     webpackConfiguration: async (webpackConfig: Configuration) => {
