@@ -13,7 +13,7 @@ function escapeStringRegexp(str: string) {
   return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
-function getClientEnvironment(prefix: RegExp, envPath: string = ".env") {
+function getClientEnvironment(prefix: RegExp, envPath: string) {
   const env = process.env[NG_APP_ENV] || process.env.NODE_ENV;
   const dotenvBase = path.resolve(process.cwd(), envPath);
   const dotenvFiles = [

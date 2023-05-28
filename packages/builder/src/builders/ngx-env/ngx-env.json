@@ -6,6 +6,11 @@
                 "type": "string",
                 "description": "@ngx-env/builder prefix",
                 "default": "NG_APP"
+            },
+            "path": {
+                "type": "string",
+                "description": "@ngx-env/builder path to .env file",
+                "default": ".env"
             }
         }
     }
