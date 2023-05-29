@@ -6,7 +6,21 @@
 [![monthly downloads](https://img.shields.io/npm/dm/@ngx-env/builder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 
 **Easily inject environment variables into your Angular applications**
+* ✅ Easy to use, no configuration required
+* ✅ Up to date with latest Angular versions
+* ✅ Loading priorities of environment variables
+* ✅ Hierarchical cascading configuration in monorepo projects (Nx, turbo, etc.)
+* ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
+* ✅ Filters sensitive variables using a Regular Expression
+* ✅ Supports all Angular CLI commands
+* ✅ Used by popular repositories
+  *  [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate)
+  *  [Official Quarkus Workshop](https://github.com/quarkusio/quarkus-workshops)
+  *  [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart)
+* ✅ Active development and support
 
+
+<h2> Table of contents</h2>
 
 - [Quick start](#quick-start)
 - [Using Environment Variables](#using-environment-variables)
@@ -20,6 +34,7 @@
     - [Windows (Powershell)](#windows-powershell)
     - [Linux, macOS (Bash)](#linux-macos-bash)
   - [In `.env`](#in-env)
+- [Cascading Environment Variables](#cascading-environment-variables)
 - [Good Practices](#good-practices)
 - [Usage with Docker](#usage-with-docker)
 - [Known Issues](#known-issues)
@@ -37,7 +52,7 @@
 ng add @ngx-env/builder
 ```
 
-2. **Define Environment Variables in `.env`**
+2. **Define Environment Variables in `.env`** 
 
 ```sh
 NG_APP_VERSION=$npm_package_version
@@ -52,7 +67,8 @@ NG_APP_ENABLE_SENTRY=false
   selector: "app-main",
 })
 export class MainComponent {
-  branch = process.env.NG_APP_BRANCH_NAME;
+  branch = import.meta.env.NG_APP_BRANCH_NAME; // Recommended
+  branch = process.env.NG_APP_BRANCH_NAME; //
 }
 ```
 
@@ -70,7 +86,7 @@ export class MainComponent {
 </head>
 ```
 
-4. **Run your CLI commands**
+1. **Run your CLI commands**
 
 ```sh
 npm start
@@ -99,9 +115,54 @@ The environment variables will be defined for you on `process.env`. For example,
 
 ## `NG_APP_*` or Custom Prefix
 
-You must create custom environment variables beginning with `NG_APP_` or using your custom prefix.
+You must create custom environment variables beginning with `NG_APP_` or using any custom prefix.
 
-If you want to have a shorter prefix like `NG_` or if you want to access some domain specific variables directly, you can set the prefix in the `angular.json` configuration
+If you want to have a shorter prefix like `NG_` or if you want to access some domain specific variables directly, you can set the prefix in the `angular.json` configuration. You can use any valid regular expression to filter the variables.
+
+```ts
+  "architect": {
+    "build": {
+      "builder": "@ngx-env/builder:browser",
+      "options": {
+          ...
+          "scripts": []
+          "ngxEnv": {
+            "prefix": "(ORG|GITHUB|)_"
+          }
+      }
+    }
+  }
+```
+
+```ts
+  "architect": {
+    "build": {
+      "builder": "@ngx-env/builder:browser",
+      "options": {
+          ...
+          "scripts": []
+          "ngxEnv": {
+            "prefix": "ORG_"
+          }
+      }
+    }
+  }
+```
+
+```ts
+  "architect": {
+    "build": {
+      "builder": "@ngx-env/builder:browser",
+      "options": {
+          ...
+          "scripts": []
+          "ngxEnv": {
+            "prefix": "ORG_"
+          }
+      }
+    }
+  }
+```
 
 ```ts
   "architect": {
@@ -267,6 +328,69 @@ DOMAIN=www.example.com
 NG_APP_FOO=$DOMAIN/foo
 NG_APP_BAR=$DOMAIN/bar
 ```
+
+
+# Cascading Environment Variables
+
+**@ngx-env/builder** supports monorepo projects with multiple applications.
+
+When you have multiple applications in your monorepo, you can define a common `.env.*` file in the root of your monorepo and override it in each application or any other subdirectory below the root.
+
+This is useful when you have a common configuration for all applications and want to override it for a specific application.
+
+In order to do that, you need to define the `root` property in the `ngxEnv` section of your `angular.json` file.
+
+```
+"ngxEnv": {
+  "prefix": "NGX_",
+  "root": "../../"
+},
+```
+
+For example, you have the following directory structure:
+
+```
+/home/user/monorepo
+ apps
+    frontend1
+       .env
+    frontend2
+       .env.dev
+       .env
+.env
+.env.dev
+```
+and the configuration below in frontends' angular.json:
+
+```
+"ngxEnv": {
+  "prefix": "NGX_",
+  "root": "../../"
+},
+```
+Consumed dot env files will be ordered by hierarchy as follows:
+
+* **frontend1**
+```
+/home/user/monorepo/apps/frontend1/.env
+/home/user/monorepo/.env.dev
+/home/user/monorepo/.env
+```
+
+* **frontend2**
+```
+/home/user/monorepo/apps/frontend2/.env.dev
+/home/user/monorepo/apps/frontend2/.env
+/home/user/monorepo/.env.dev
+/home/user/monorepo/.env
+```
+
+
+These root configurations are equivalent:
+* ` "root": "../../"`
+* ` "root": "../../.env"`
+* ` "root": "/home/user/monorepo"`
+* ` "root": "/home/user/monorepo/.env"`
 
 # Good Practices
 

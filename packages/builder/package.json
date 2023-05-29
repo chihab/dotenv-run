@@ -30,8 +30,7 @@
     "postbuild": "node dist/schema-copy.js"
   },
   "dependencies": {
-    "dotenv": "9.0.2",
-    "dotenv-expand": "5.1.0"
+    "@dotenv-run/core": "^0.1.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15.0.0",

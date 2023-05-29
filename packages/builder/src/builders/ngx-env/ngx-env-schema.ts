@@ -1,7 +1,8 @@
 export interface NgxEnvOptions {
-    prefix?: string;
-    path?: string;
+  prefix?: string;
+  root?: string;
+  verbose?: boolean;
 }
 export interface NgxEnvSchema {
-    ngxEnv?: NgxEnvOptions 
+  ngxEnv?: NgxEnvOptions;
 }
