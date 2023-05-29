@@ -13,22 +13,24 @@ function escapeStringRegexp(str: string) {
   return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
-function getClientEnvironment(prefix: RegExp, envPath: string) {
-  const env = process.env[NG_APP_ENV] || process.env.NODE_ENV;
-  const dotenvBase = path.resolve(process.cwd(), envPath);
+function getEnvFilePath(envPath: string) {
+  const _envPath = path.isAbsolute(envPath) ? envPath : path.resolve(process.cwd(), envPath);
+  return fs.lstatSync(_envPath).isDirectory() ? path.join(_envPath, '.env') : _envPath;
+}
+
+function getClientEnvironment(envPrefix: RegExp, envPath: string) {
+  const appEnv = process.env[NG_APP_ENV] || process.env.NODE_ENV;
+  const dotenvBase = getEnvFilePath(envPath);
   const dotenvFiles = [
-    env && `${dotenvBase}.${env}.local`,
+    appEnv !== "test" && `${dotenvBase}.${appEnv}.local`, // .env.development.local, .env.test.local, .env.production.local
     // Don't include `.env.local` for `test` environment
     // since normally you expect tests to produce the same
     // results for everyone
-    env !== "test" && `${dotenvBase}.local`,
-    env && `${dotenvBase}.${env}`,
-    dotenvBase,
+    appEnv && `${dotenvBase}.${appEnv}`, // .env.development, .env.test, .env.production
+    appEnv !== "test" && `${dotenvBase}.local`, // .env.local
+    dotenvBase, // .env
   ].filter(Boolean);
   console.log(`${chalk.green('-')} Environment files: `);
-  dotenvFiles.forEach((dotenvFile) => {
-    console.log(`${chalk.green(' ✔')} ${dotenvFile}`);
-  });
   // Load environment variables from .env* files. Suppress warnings using silent
   // if this file is missing. dotenv will never modify any environment variables
   // that have already been set.  Variable expansion is supported in .env files.
@@ -36,6 +38,7 @@ function getClientEnvironment(prefix: RegExp, envPath: string) {
   // https://github.com/motdotla/dotenv-expand
   dotenvFiles.forEach((dotenvFile) => {
     if (fs.existsSync(dotenvFile)) {
+      console.log(`${chalk.green(' ✔')} ${dotenvFile}`);
       dotenv_expand(
         config({
           path: dotenvFile,
@@ -45,11 +48,11 @@ function getClientEnvironment(prefix: RegExp, envPath: string) {
   });
   const processEnv = {
     ...process.env,
-    [NG_APP_ENV]: env,
+    [NG_APP_ENV]: appEnv,
   };
   console.log(`- Injected keys:`);
   const values = Object.keys(processEnv)
-    .filter((key) => prefix.test(key) || key === NG_APP_ENV)
+    .filter((key) => envPrefix.test(key) || key === NG_APP_ENV)
     .sort()
     .reduce(
       (env, key) => {
