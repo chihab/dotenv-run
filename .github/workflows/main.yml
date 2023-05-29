@@ -24,10 +24,10 @@ jobs:
           npm i
           npx ng add @ngx-env/builder
           npx tsc --noEmit --project tsconfig.app.json
-          npm run ngx-env:build
-          npm run ngx-env:server
+          npm run prepare:build
+          npm run prepare:server
           npm run build:ssr
           npm run prerender
-          npm run ngx-env:test
+          npm run prepare:test
           cd node_modules/@ngx-env && mv builder builder-link && mkdir builder && cp -r builder-link/* builder/ && cd ../../
           npm run test
