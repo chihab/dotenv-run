@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "cross-env NODE_ENV=development ng serve",
     "prepare:build": "npx ng config projects.ngx-env-demo.architect.build.options.ngxEnv.prefix 'NGX_'",
     "build": "ng build",
     "prepare:test": "npx ng config projects.ngx-env-demo.architect.test.options.ngxEnv.prefix 'NGX_'",

@@ -13,14 +13,15 @@ function escapeStringRegexp(str: string) {
 type Dict = Record<string, string>;
 
 function prepareEnv(processEnv: any, appEnv: string) {
-  const values = Object.keys({ ...processEnv, [NG_APP_ENV]: appEnv }).reduce<{
+  const _processEnv = { ...processEnv, [NG_APP_ENV]: appEnv };
+  const values = Object.keys(_processEnv).reduce<{
     raw: Dict;
     stringified: Dict;
     full: Dict;
   }>(
     (env, key) => {
-      const value = JSON.stringify(processEnv[key]);
-      env.raw[key] = processEnv[key];
+      const value = JSON.stringify(_processEnv[key]);
+      env.raw[key] = _processEnv[key];
       env.stringified[key] = value;
       env.full[`process.env.${key}`] = value;
       env.full[`import.meta.env.${key}`] = value;
@@ -36,28 +37,28 @@ function prepareEnv(processEnv: any, appEnv: string) {
 }
 
 export function plugin(options: NgxEnvOptions, cwd: string, ssr = false) {
-  const appEnv = process.env[NG_APP_ENV] || process.env.NODE_ENV;
+  const appEnv = process.env[NG_APP_ENV] ?? process.env.NODE_ENV;
   const envPaths = paths(appEnv, options.root, cwd);
-
+  expand(envPaths);
+  const values = filter(process.env, new RegExp(options.prefix, "i"));
   if (options.verbose) {
     console.log(`------- ${chalk.bold("@ngx-env/builder")} -------`);
-    expand(envPaths);
+    console.log(`${chalk.green("-")} Verbose: `, options.verbose);
     console.log(`${chalk.green("-")} Prefix: `, options.prefix);
-    console.log(`${chalk.green("-")} Verbose mode`);
+    console.log(`${chalk.green("-")} Working directory: `, cwd);
     console.log(`${chalk.green("-")} Environment files: `);
     envPaths.forEach((envPath) => {
       console.log(`${chalk.green(" ✔")} ${envPath}`);
     });
     console.log(`- Injected keys:`);
-    const values = filter(process.env, new RegExp(options.prefix, "i"));
     console.log(`${chalk.green(" ✔")} ${NG_APP_ENV} => ${appEnv}`);
     for (const key in values) {
       console.log(`${chalk.green(" ✔")} ${key}`);
     }
     console.log("---------------------------------\n");
   }
-
-  const { raw, stringified, full } = prepareEnv(process.env, appEnv);
+  const { raw, stringified, full } = prepareEnv(values, appEnv);
+  console.log({ appEnv, stringified });
   return {
     webpackConfiguration: async (webpackConfig: Configuration) => {
       webpackConfig.plugins.push(

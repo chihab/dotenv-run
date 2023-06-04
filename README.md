@@ -8,11 +8,11 @@
 **Easily inject environment variables into your Angular applications**
 * ✅ Easy to use, no configuration required
 * ✅ Up to date with latest Angular versions
+* ✅ Supports all Angular CLI commands
+* ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
 * ✅ Loading priorities of environment variables
 * ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.)
-* ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
 * ✅ Filters sensitive variables using a Regular Expression
-* ✅ Supports all Angular CLI commands
 * ✅ Used by popular repositories
   *  [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate)
   *  [Official Quarkus Workshop](https://github.com/quarkusio/quarkus-workshops)
@@ -408,7 +408,7 @@ npm add -D @ngx-env/builder
 
 Replace every occurence of `@angular-devkit/build-angular` with `@ngx-env/builder` in `project.json` file.
 
-When you have multiple applications in your Nx workspace, you can define a common `.env.*` file in the root of your workspace and override it in each application or any other subdirectory below the root.
+When you have multiple applications in your Nx workspace, you can define a common `.env.*` files in the root of your workspace and override it in each application or any other subdirectory below the root. See [Cascading Environment Variables](#cascading-environment-variables) for more details.
 
 Explore  @ngx-env/builder usage in a [sample Nx workspace here](https://github.com/chihab/ngx-env/tree/main/apps/nx-demo).
 

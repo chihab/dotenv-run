@@ -18,7 +18,7 @@ jobs:
         run: |
           npm i
           npm run build
-      - name: Build App
+      - name: Build Cli App
         run: |
           cd apps/ngx-env-demo
           npm i
