@@ -35,8 +35,7 @@
     - [Linux, macOS (Bash)](#linux-macos-bash)
   - [In `.env`](#in-env)
 - [Cascading Environment Variables](#cascading-environment-variables)
-- [Usage in Monorepos](#usage-in-monorepos)
-  - [Nx](#nx)
+- [Usage in Nx Monorepos](#usage-in-nx-monorepos)
 - [Good Practices](#good-practices)
 - [Usage with Docker](#usage-with-docker)
 - [Known Issues](#known-issues)
@@ -136,55 +135,10 @@ If you want to have a shorter prefix like `NG_` or if you want to access some do
   }
 ```
 
-```ts
-  "architect": {
-    "build": {
-      "builder": "@ngx-env/builder:browser",
-      "options": {
-          ...
-          "scripts": []
-          "ngxEnv": {
-            "prefix": "ORG_"
-          }
-      }
-    }
-  }
-```
-
-```ts
-  "architect": {
-    "build": {
-      "builder": "@ngx-env/builder:browser",
-      "options": {
-          ...
-          "scripts": []
-          "ngxEnv": {
-            "prefix": "ORG_"
-          }
-      }
-    }
-  }
-```
-
-```ts
-  "architect": {
-    "build": {
-      "builder": "@ngx-env/builder:browser",
-      "options": {
-          ...
-          "scripts": []
-          "ngxEnv": {
-            "prefix": "ORG_"
-          }
-      }
-    }
-  }
-```
-
 or using `ng config`
 
 ```sh
-ng config projects.YOUR_APP_NAME.architect.build.options.ngxEnv.prefix 'ORG_'
+ng config projects.YOUR_APP_NAME.architect.build.options.ngxEnv.prefix '(ORG|GITHUB|)_'
 ```
 
 Any other variables not starting with `NG_APP_` or your custom prefix will be ignored to avoid accidentally exposing a private key on the machine that could have the same name.
@@ -394,24 +348,35 @@ These root configurations are equivalent:
 * ` "root": "/home/user/monorepo"`
 * ` "root": "/home/user/monorepo/.env"`
 
-# Usage in Monorepos
-
-## Nx
+# Usage in Nx Monorepos
 
 **@ngx-env/builder** supports [Nx](https://nx.dev) projects with multiple applications.
 
-Currently the schematics only supports Angular CLI projects, so you need to install the package and uppdate `project.json`.
+Currently the schematics only supports Angular CLI projects, so you need to install the package and uppdate `project.json` manually.
 
+1. **Install the package**
 ```
 npm add -D @ngx-env/builder
 ```
 
+2. **Replace Angular builders in project.json**
+
 Replace every occurence of `@angular-devkit/build-angular` with `@ngx-env/builder` in `project.json` file.
 
-When you have multiple applications in your Nx workspace, you can define a common `.env.*` files in the root of your workspace and override it in each application or any other subdirectory below the root. See [Cascading Environment Variables](#cascading-environment-variables) for more details.
+3. **Create .env.d.ts inside src/**
 
-Explore  @ngx-env/builder usage in a [sample Nx workspace here](https://github.com/chihab/ngx-env/tree/main/apps/nx-demo).
+```ts
+declare var process: {
+  env: {
+    NG_APP_ENV: string;
+    [key: string]: any;
+  };
+};
+```
 
+When you have multiple applications in your Nx workspace, you can define common `.env.*` files in the root of your workspace and override them in each application or any other subdirectory below the root. See [Cascading Environment Variables](#cascading-environment-variables) for more details.
+
+You can also checkout the sample Nx workspace [ here](https://github.com/chihab/ngx-env/tree/main/apps/nx-demo).
 
 # Good Practices
 

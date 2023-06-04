@@ -1,6 +1,6 @@
 {
   "name": "@ngx-env/core",
-  "version": "16.1.0",
+  "version": "16.1.1",
   "description": "Easily inject environment variables into your Angular applications",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env",
