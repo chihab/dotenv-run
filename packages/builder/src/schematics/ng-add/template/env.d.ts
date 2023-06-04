@@ -14,13 +14,13 @@ interface ImportMetaEnv {
 }
 
 /*
- * Remove all the deprecated code below if you're using import.meta.env (recommended) 
+ * Remove all the deprecated code below if you're using import.meta.env (recommended)
  */
 
 /****************************** DEPREACTED **************************/
 /**
- * @deprecated process.env usage 
- * prefer using meta.env
+ * @deprecated process.env usage
+ * prefer using import.meta.env
  * */
 declare var process: {
   env: {
@@ -29,7 +29,7 @@ declare var process: {
   };
 };
 
-// If your project references @types/node directly (in you) or indirectly (as in RxJS < 7.6.0), 
+// If your project references @types/node directly (in you) or indirectly (as in RxJS < 7.6.0),
 // you might need to use the following declaration merging.
 // declare namespace NodeJS {
 //   export interface ProcessEnv {

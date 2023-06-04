@@ -16,18 +16,16 @@
     "build": "ng-packagr"
   },
   "peerDependencies": {
-    "@angular/common": ">=13.0.0",
-    "@angular/core": ">=13.0.0"
+    "@angular/common": "^16.0.0",
+    "@angular/core": "^16.0.0"
   },
   "devDependencies": {
-    "@angular/common": "13.0.0",
-    "@angular/compiler": "13.0.0",
-    "@angular/compiler-cli": "13.0.0",
-    "@angular/core": "13.0.0",
-    "ng-packagr": "13.0.0",
-    "typescript": "4.4.4"
+    "@angular/cli": "^16.0.0",
+    "@angular/compiler-cli": "^16.0.0",
+    "ng-packagr": "^16.0.0",
+    "typescript": "~5.0.2"
   },
   "dependencies": {
-    "tslib": "^2.2.0"
+    "tslib": "^2.3.0"
   }
 }
