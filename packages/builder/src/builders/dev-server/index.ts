@@ -6,12 +6,13 @@ import {
 import {
   DevServerBuilderOptions,
   executeDevServerBuilder,
+  DevServerBuilderOutput,
 } from "@angular-devkit/build-angular";
-import { DevServerBuilderOutput } from "@angular-devkit/build-angular";
-import { Observable, from } from "rxjs";
+import { Observable, combineLatest } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { plugin } from "../plugin";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
+import { getProjectCwd } from "../../utils/project";
 
 export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
@@ -23,10 +24,14 @@ export const buildWithPlugin = (
       browserTarget
     ) as unknown as DevServerBuilderOptions & NgxEnvSchema;
   }
-  return from(setup()).pipe(
-    switchMap((_options) => {
-      const ngxEnvOptions = { ...options.ngxEnv, ..._options.ngxEnv };
-      return executeDevServerBuilder(options, context, plugin(ngxEnvOptions));
+  return combineLatest([setup(), getProjectCwd(context)]).pipe(
+    switchMap(([_options, cwd]) => {
+      const ngxEnvOptions = { context, ...options.ngxEnv, ..._options.ngxEnv };
+      return executeDevServerBuilder(
+        options,
+        context,
+        plugin(ngxEnvOptions, cwd)
+      );
     })
   );
 };

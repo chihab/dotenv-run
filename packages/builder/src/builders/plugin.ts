@@ -10,8 +10,14 @@ function escapeStringRegexp(str: string) {
   return str.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&").replace(/-/g, "\\x2d");
 }
 
+type Dict = Record<string, string>;
+
 function prepareEnv(processEnv: any, appEnv: string) {
-  const values = Object.keys({ ...processEnv, [NG_APP_ENV]: appEnv }).reduce(
+  const values = Object.keys({ ...processEnv, [NG_APP_ENV]: appEnv }).reduce<{
+    raw: Dict;
+    stringified: Dict;
+    full: Dict;
+  }>(
     (env, key) => {
       const value = JSON.stringify(processEnv[key]);
       env.raw[key] = processEnv[key];
@@ -29,9 +35,9 @@ function prepareEnv(processEnv: any, appEnv: string) {
   return values;
 }
 
-export function plugin(options: NgxEnvOptions, ssr = false) {
+export function plugin(options: NgxEnvOptions, cwd: string, ssr = false) {
   const appEnv = process.env[NG_APP_ENV] || process.env.NODE_ENV;
-  const envPaths = paths(appEnv, options.root);
+  const envPaths = paths(appEnv, options.root, cwd);
 
   if (options.verbose) {
     console.log(`------- ${chalk.bold("@ngx-env/builder")} -------`);
@@ -67,7 +73,7 @@ export function plugin(options: NgxEnvOptions, ssr = false) {
       return webpackConfig;
     },
     indexHtml: async (content: string) => {
-      const rawWithEnv = {
+      const rawWithEnv: Dict = {
         ...raw,
         [NG_APP_ENV]: raw[NG_APP_ENV],
       };

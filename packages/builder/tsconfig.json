@@ -15,7 +15,6 @@
     ],
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "suppressImplicitAnyIndexErrors": true,
     "forceConsistentCasingInFileNames": true,
     "strictPropertyInitialization": false,
     "strictNullChecks": false,

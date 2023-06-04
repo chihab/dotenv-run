@@ -15,7 +15,7 @@
             "verbose": {
                 "type": "boolean",
                 "description": "Verbose mode, print .env files and variables",
-                "default": "true"
+                "default": true
             }
         },
         "additionalProperties": false
