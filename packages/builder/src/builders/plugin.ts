@@ -58,7 +58,6 @@ export function plugin(options: NgxEnvOptions, cwd: string, ssr = false) {
     console.log("---------------------------------\n");
   }
   const { raw, stringified, full } = prepareEnv(values, appEnv);
-  console.log({ appEnv, stringified });
   return {
     webpackConfiguration: async (webpackConfig: Configuration) => {
       webpackConfig.plugins.push(
