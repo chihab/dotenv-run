@@ -19,7 +19,6 @@
   *  [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart)
 * ✅ Active development and support
 
-
 <h2> Table of contents</h2>
 
 - [Quick start](#quick-start)
@@ -33,15 +32,18 @@
     - [Windows (cmd.exe)](#windows-cmdexe)
     - [Windows (Powershell)](#windows-powershell)
     - [Linux, macOS (Bash)](#linux-macos-bash)
-  - [In `.env`](#in-env)
+  - [In `.env` with loading priorities](#in-env-with-loading-priorities)
 - [Cascading Environment Variables](#cascading-environment-variables)
-- [Usage in Nx Monorepos](#usage-in-nx-monorepos)
+- [Usage in Nx Monorepo](#usage-in-nx-monorepo)
 - [Good Practices](#good-practices)
+  - [Use `import.meta.env` notation](#use-importmetaenv-notation)
+  - [Declare your environment variables in the generated `.env.d.ts` file](#declare-your-environment-variables-in-the-generated-envdts-file)
+  - [Use `process.env` or `import.meta.env` inside `environment.ts` files](#use-processenv-or-importmetaenv-inside-environmentts-files)
 - [Usage with Docker](#usage-with-docker)
 - [Known Issues](#known-issues)
   - [`process` variable](#process-variable)
   - [Property comes from an index signature](#property-comes-from-an-index-signature)
-- [How It Works?](#how-it-works)
+- [How It Works](#how-it-works)
 - [Credits](#credits)
 - [License](#license)
 
@@ -53,7 +55,7 @@
 ng add @ngx-env/builder
 ```
 
-2. **Define Environment Variables in `.env`** 
+2. **Define Environment Variables in `.env`** (optional)
 
 ```sh
 NG_APP_VERSION=$npm_package_version
@@ -61,23 +63,17 @@ NG_APP_COMMIT=$GITHUB_SHA
 NG_APP_ENABLE_SENTRY=false
 ```
 
-3. **Use in TS and HTML**
+3. **Usage in TS**
 
 ```ts
 @Component({
-  selector: "app-main",
+  selector: "app-footer",
+  template: `{{branch}} - {{commit}}`
 })
 export class MainComponent {
-  branch = import.meta.env.NG_APP_BRANCH_NAME; // Recommended
-  branch = process.env.NG_APP_BRANCH_NAME; //
+  branch = import.meta.env.NG_APP_BRANCH_NAME; // Recommended (Inspired by Vite)
+  commit = process.env.NG_APP_COMMIT; // Popular
 }
-```
-
-```html
-<span> {{ branch }} </span>
-<!-- Using env pipe from @ngx-env/core -->
-<span> {{ 'process.env.NG_APP_VERSION' | env }} </span>
-<span> {{ 'NG_APP_COMMIT' | env }} </span>
 ```
 
 ```html
@@ -87,10 +83,11 @@ export class MainComponent {
 </head>
 ```
 
-1. **Run your CLI commands**
+4. **Run your CLI commands**
 
 ```sh
 npm start
+# Command-line environment variables
 NG_APP_BRANCH_NAME=$GITHUB_HEAD_REF ng test
 NG_APP_ENABLE_SENTRY=true npm run build
 ```
@@ -176,7 +173,7 @@ You have two options to consume an environment variable in your component's temp
   selector: "app-footer",
 })
 export class FooterComponent {
-  public version = process.env.NG_APP_VERSION;
+  version = process.env.NG_APP_VERSION;
 }
 ```
 
@@ -247,7 +244,7 @@ set "NG_APP_NOT_SECRET_CODE=abcdef" && npm start
 NG_APP_NOT_SECRET_CODE=abcdef npm start
 ```
 
-## In `.env`
+## In `.env` with loading priorities
 
 `@ngx-env/builder` uses [dotenv](https://github.com/motdotla/dotenv) to support loading environment variables from `.env` files.
 
@@ -296,7 +293,7 @@ This is useful when you have a common configuration for all applications and wan
 
 In order to do that, you need to define the `root` property in the `ngxEnv` section of your `angular.json` file.
 
-```
+```json
 "ngxEnv": {
   "prefix": "NGX_",
   "root": "../../"
@@ -318,7 +315,7 @@ For example, you have the following directory structure:
 ```
 and the configuration below in frontends' angular.json:
 
-```
+```json
 "ngxEnv": {
   "prefix": "NGX_",
   "root": "../../"
@@ -348,7 +345,7 @@ These root configurations are equivalent:
 * ` "root": "/home/user/monorepo"`
 * ` "root": "/home/user/monorepo/.env"`
 
-# Usage in Nx Monorepos
+# Usage in Nx Monorepo
 
 **@ngx-env/builder** supports [Nx](https://nx.dev) projects with multiple applications.
 
@@ -380,29 +377,47 @@ You can also checkout the sample Nx workspace [ here](https://github.com/chihab/
 
 # Good Practices
 
-**Declare your environment variables in the generated `.env.d.ts` file**
+## Use `import.meta.env` notation
+
+@ngx-env/builder support both widely used process.env and newly adopted import.meta.env notations.
+
+The [`import.meta`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta) notation is a part of the ECMAScript standard, specifically the ECMAScript modules, which is widely adopted and supported by modern browsers and JavaScript environments. On the other hand, `process.env` is specific to Node.js and not available in the browser by default.
+
+Usage `process.env` might introduce typing issues depending on whether your workspace references `@types/node` or not, `process.env` requires different TS configurations between the webapp and the server.
+
+
+## Declare your environment variables in the generated `.env.d.ts` file
 
 ```ts
-declare namespace NodeJS {
-  export interface ProcessEnv {
-    NG_APP_ENV: string;
-    NG_APP_BASE_URL: string;
-    NG_APP_VERSION: string;
-  }
+interface ImportMeta {
+  readonly env: ImportMetaEnv;
+}
+
+interface ImportMetaEnv {
+  /**
+   * Built-in environment variable.
+   * @see Docs https://github.com/chihab/ngx-env#ng_app_env.
+   */
+  readonly NG_APP_ENV: string;
+  // Add your environment variables below
+  // readonly NG_APP_API_URL: string;
+  [key: string]: any;
 }
 ```
 
-**Use `process.env` inside `environment.ts` files**
+## Use `process.env` or `import.meta.env` inside `environment.ts` files
 
 We recommend to consume environment variables in Angular environment files, for two reasons:
 
-- To avoid using `process.env` in your business code.
+- To avoid using `process.env` / `import.meta.env` in your business code.
 
   If one day you decide that a variable is no longer linked to the environment but rather to an Angular configuration, you would only have to modify the environment files.
 
 - To be ready for the day when Angular would implement the consumption of environment variables directly in the CLI.
 
   If the syntax proposed by Angular CLI to access the environment variables turns out to be different, you would only have to modify the environment files.
+
+Note that `@ngx-env/builder` might eventually remove support of `process.env` in future releases.
 
 Example:
 
@@ -411,8 +426,8 @@ Example:
 ```ts
 export const environment = {
   production: false,
-  baseUrl: process.env.NG_APP.BASE_URL,
-  version: process.env.NG_APP_VERSION,
+  baseUrl: import.meta.env.NG_APP.BASE_URL,
+  version: import.meta.env.NG_APP_VERSION,
 };
 ```
 
@@ -497,6 +512,8 @@ declare namespace NodeJS {
 }
 ```
 
+In general prefer using `import.meta.env` notation.
+
 ## Property comes from an index signature
 
 If you prefer using process.env.NGX_SOME_VARIABLE instead of process.env['NGX_SOME_VARIABLE'], you can update the following line in your `tsconfig.json` file:
@@ -505,13 +522,12 @@ If you prefer using process.env.NGX_SOME_VARIABLE instead of process.env['NGX_SO
 -"noPropertyAccessFromIndexSignature": true,
 +"noPropertyAccessFromIndexSignature": false,
 ```
-# How It Works?
+# How It Works
 
 I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how it works.
 
 # Credits
 
-- [create-react-app](https://github.com/facebook/create-react-app)
 - [dotenv](https://github.com/motdotla/dotenv)
 
 # License
