@@ -9,7 +9,7 @@
 * ✅ Easy to use, no configuration required
 * ✅ Up to date with latest Angular versions
 * ✅ Loading priorities of environment variables
-* ✅ Hierarchical cascading configuration in monorepo projects (Nx, turbo, etc.)
+* ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.)
 * ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
 * ✅ Filters sensitive variables using a Regular Expression
 * ✅ Supports all Angular CLI commands
@@ -35,6 +35,8 @@
     - [Linux, macOS (Bash)](#linux-macos-bash)
   - [In `.env`](#in-env)
 - [Cascading Environment Variables](#cascading-environment-variables)
+- [Usage in Monorepos](#usage-in-monorepos)
+  - [Nx](#nx)
 - [Good Practices](#good-practices)
 - [Usage with Docker](#usage-with-docker)
 - [Known Issues](#known-issues)
@@ -391,6 +393,25 @@ These root configurations are equivalent:
 * ` "root": "../../.env"`
 * ` "root": "/home/user/monorepo"`
 * ` "root": "/home/user/monorepo/.env"`
+
+# Usage in Monorepos
+
+## Nx
+
+**@ngx-env/builder** supports [Nx](https://nx.dev) projects with multiple applications.
+
+Currently the schematics only supports Angular CLI projects, so you need to install the package and uppdate `project.json`.
+
+```
+npm add -D @ngx-env/builder
+```
+
+Replace every occurence of `@angular-devkit/build-angular` with `@ngx-env/builder` in `project.json` file.
+
+When you have multiple applications in your Nx workspace, you can define a common `.env.*` file in the root of your workspace and override it in each application or any other subdirectory below the root.
+
+Explore  @ngx-env/builder usage in a [sample Nx workspace here](https://github.com/chihab/ngx-env/tree/main/apps/nx-demo).
+
 
 # Good Practices
 

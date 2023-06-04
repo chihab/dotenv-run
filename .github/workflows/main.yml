@@ -31,3 +31,9 @@ jobs:
           npm run prepare:test
           cd node_modules/@ngx-env && mv builder builder-link && mkdir builder && cp -r builder-link/* builder/ && cd ../../
           npm run test
+      - name: Build Nx App
+        run: |
+          cd apps/nx-demo
+          npm i
+          npx nx build ng-app-1
+          npx nx test ng-app-1
