@@ -20,11 +20,7 @@ jobs:
           pnpm build
           cp README.md packages/cli/README.md
           cp README.md packages/core/README.md
-      - name: Publish @dotenv-run/core
+      - name: Publish @dotenv-run packages
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: cd packages/core && npm publish --access public
-      - name: Publish @dotenv-run/cli
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: cd packages/cli && npm publish --access public
+        run: npx changeset publish
