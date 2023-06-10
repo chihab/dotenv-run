@@ -10,7 +10,7 @@
     "strictNullChecks": false,
     "pretty": true,
     "sourceMap": false,
-    "declaration": true,
+    "declaration": false,
     "stripInternal": true,
     "skipLibCheck": true
   },

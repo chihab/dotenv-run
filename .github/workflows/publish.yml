@@ -19,14 +19,12 @@ jobs:
           pnpm i
           pnpm build
           cp README.md packages/cli/README.md
-          # cp logo.png packages/cli/
           cp README.md packages/core/README.md
-          # cp logo.png packages/core/
-      - name: Publish @dotenv-run/cli
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: cd packages/cli && npm publish --access public
       - name: Publish @dotenv-run/core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: cd packages/core && npm publish --access public
+      - name: Publish @dotenv-run/cli
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: cd packages/cli && npm publish --access public

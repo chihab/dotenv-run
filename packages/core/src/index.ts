@@ -60,7 +60,7 @@ export function expand(envPaths: string[]) {
   envPaths.forEach((dotenvFile) => {
     dotenvExpand(
       config({
-        path: dotenvFile,
+        path: dotenvFile
       })
     );
   });
