@@ -18,12 +18,6 @@ importers:
         specifier: ^5.1.3
         version: 5.1.3
 
-  examples/workspace:
-    devDependencies:
-      '@dotenv-run/cli':
-        specifier: '*'
-        version: link:../../packages/cli
-
   packages/cli:
     dependencies:
       '@dotenv-run/core':
