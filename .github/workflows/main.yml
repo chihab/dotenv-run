@@ -1,13 +1,12 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -20,4 +19,4 @@ jobs:
       - name: Build Packages
         run: |
           pnpm i
-          pnpm build
+          pnpm build    
