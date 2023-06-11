@@ -42,16 +42,16 @@ In a monorepo configuration, `.env.*` files can be defined in the root workspace
 
 **Root workspace**
 
-`@dotenv-run/cli` will search for `.env.*` files in the closest parent directory containing `package.json`. 
+`dotenv-run` will search and load `.env.*` files located in the root workspace down to the current working directory. 
 
-`@dotenv-run/cli` will load all `.env.*` from the root workspace to the current working directory.
+If no root workspace is found, `dotenv-run` will load environment files within the current working directory.
 
-If no `package.json` is found, it will load environment files within the current working directory.
+You can specify a root workspace with the `-r` option.
 
 **Example**
 
 ```sh
-/workspace
+/platform
  apps
     frontend1
        .env.local # API_USERS=http://localhost:3001/users
@@ -65,27 +65,27 @@ package.json
 ```
 
 ```sh
-$> cd /workspace
+$> cd /platform
 $> NODE_ENV=prod dotenv-run -- bash -c 'echo "✨ $API_USERS"'
-✔ /workspace/.env.prod
-✔ /workspace/.env
+✔ /platform/.env.prod
+✔ /platform/.env
 ✨ https://dotenv-run.app/api/v1/users
 ```
 
 ```sh
-$> cd /workspace/apps/frontend1
+$> cd /platform/apps/frontend1
 $> NODE_ENV=dev dotenv-run -- bash -c 'printf "✨ API_USERS $API_USERS\n✨ API_AUTH $API_AUTH"'
-✔ /workspace/apps/frontend1/.env.local
-✔ /workspace/.env.dev
-✔ /workspace/.env
+✔ /platform/apps/frontend1/.env.local
+✔ /platform/.env.dev
+✔ /platform/.env
 ✨ API_USERS http://localhost:3001/users
 ✨ API_AUTH https://dotenv-run.dev/api/v1/auth
 ```
 
 ```sh
-$> cd /workspace/apps/frontend2
+$> cd /platform/apps/frontend2
 $> API_BASE=$CI_CONTAINER_API dotenv-run -- bash -c 'echo "✨ $API_USERS"'
-✔ /workspace/.env
+✔ /platform/.env
 ✨ https://XAE221D1DE-ci-provider.cloud/api/v1/users
 
 # CI_CONTAINER_API could be an environment variable provided by some CI provider 
@@ -94,9 +94,9 @@ $> API_BASE=$CI_CONTAINER_API dotenv-run -- bash -c 'echo "✨ $API_USERS"'
 **-r option**
 
 ```sh
-$> cd /workspace/apps/frontend1
+$> cd /platform/apps/frontend1
 $> dotenv-run -r . -- bash -c 'echo "✨ $API_USERS"'
-✔ /workspace/apps/frontend1/.env.local
+✔ /platform/apps/frontend1/.env.local
 ✨ http://localhost:3001/users
 ```
 
@@ -104,8 +104,8 @@ $> dotenv-run -r . -- bash -c 'echo "✨ $API_USERS"'
 Paths to the root workspace can be relative or absolute, the following are all valid :
 * ` -r ../..`
 * ` -r ../...env`
-* ` -r /workspace`
-* ` -r /workspace/.env`
+* ` -r /platform`
+* ` -r /platform/.env`
 
 
 ## Loading Priorities

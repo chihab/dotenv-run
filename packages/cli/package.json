@@ -1,6 +1,6 @@
 {
   "name": "@dotenv-run/cli",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Run your scripts with dotenv variables",
   "homepage": "https://github.com/chihab/dotenv-run",
   "main": "dist/index.js",
@@ -23,7 +23,7 @@
   "author": "Chihab Otmani <chihab@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@dotenv-run/core": "^0.3.0",
+    "@dotenv-run/core": "^0.4.0",
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
     "find-up": "^5.0.0",

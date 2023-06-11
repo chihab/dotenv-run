@@ -39,10 +39,7 @@ if (argv.h) {
     process.exit(1);
   }
   if (!argv.r) {
-    const p = findUp.sync('package.json');
-    if (!p) {
-      console.error(chalk.yellow("✖") + " No package.json found, reading from current working directory");
-    }
+    const p = findUp.sync(['turbo.json', 'nx.json', 'lerna.json', 'package.json', 'pnpm-workspace.yaml']);
     argv.r = p ? path.dirname(p) : process.cwd();
   }
   const envPaths = paths(process.env.NODE_ENV, argv.r);
