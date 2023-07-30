@@ -14,7 +14,11 @@ export const buildWithPlugin = (
 ): ReturnType<typeof executeBrowserBuilder> => {
   return from(getProjectCwd(context)).pipe(
     switchMap((cwd: string) =>
-      executeBrowserBuilder(options, context, plugin(options.ngxEnv, cwd))
+      executeBrowserBuilder(
+        options,
+        context,
+        plugin({ ...options.ngxEnv, cwd })
+      )
     )
   );
 };

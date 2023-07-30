@@ -14,7 +14,11 @@ export const buildWithPlugin = (
 ): ReturnType<typeof executeServerBuilder> =>
   from(getProjectCwd(context)).pipe(
     switchMap((cwd: string) =>
-      executeServerBuilder(options, context, plugin(options.ngxEnv, cwd, true))
+      executeServerBuilder(
+        options,
+        context,
+        plugin({ ...options.ngxEnv, cwd }, true)
+      )
     )
   );
 

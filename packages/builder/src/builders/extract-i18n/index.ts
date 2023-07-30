@@ -12,7 +12,11 @@ export const buildWithPlugin = (
   context: BuilderContext
 ): ReturnType<typeof executeExtractI18nBuilder> => {
   return getProjectCwd(context).then((cwd: string) =>
-    executeExtractI18nBuilder(options, context, plugin(options.ngxEnv, cwd))
+    executeExtractI18nBuilder(
+      options,
+      context,
+      plugin({ ...options.ngxEnv, cwd })
+    )
   );
 };
 

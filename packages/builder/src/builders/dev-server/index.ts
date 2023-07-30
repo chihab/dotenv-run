@@ -26,12 +26,13 @@ export const buildWithPlugin = (
   }
   return combineLatest([setup(), getProjectCwd(context)]).pipe(
     switchMap(([_options, cwd]) => {
-      const ngxEnvOptions = { context, ...options.ngxEnv, ..._options.ngxEnv };
-      return executeDevServerBuilder(
-        options,
+      const ngxEnvOptions = {
         context,
-        plugin(ngxEnvOptions, cwd)
-      );
+        ...options.ngxEnv,
+        ..._options.ngxEnv,
+        cwd,
+      };
+      return executeDevServerBuilder(options, context, plugin(ngxEnvOptions));
     })
   );
 };
