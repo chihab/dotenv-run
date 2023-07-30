@@ -30,7 +30,7 @@
     "postbuild": "node dist/schema-copy.js"
   },
   "dependencies": {
-    "@dotenv-run/core": "^0.1.1"
+    "@dotenv-run/webpack": "^1.0.1"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.0",

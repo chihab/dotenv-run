@@ -14,7 +14,7 @@ export const buildWithPlugin = (
 ): ReturnType<typeof executeKarmaBuilder> => {
   return from(getProjectCwd(context)).pipe(
     switchMap((cwd: string) =>
-      executeKarmaBuilder(options, context, plugin(options.ngxEnv, cwd))
+      executeKarmaBuilder(options, context, plugin({ ...options.ngxEnv, cwd }))
     )
   );
 };
