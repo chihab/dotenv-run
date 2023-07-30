@@ -16,6 +16,7 @@
 * ✅ Used by popular repositories
   *  [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate)
   *  [Official Quarkus Workshop](https://github.com/quarkusio/quarkus-workshops)
+  *  [Scholarsome by Redhat](https://github.com/hwgilbert16/scholarsome)
   *  [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart)
 * ✅ Active development and support
 
