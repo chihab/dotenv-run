@@ -14,10 +14,10 @@
 * ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.)
 * ✅ Filters sensitive variables using a Regular Expression
 * ✅ Used by popular repositories
-  *  [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate)
-  *  [Official Quarkus Workshop](https://github.com/quarkusio/quarkus-workshops)
-  *  [Scholarsome by Redhat](https://github.com/hwgilbert16/scholarsome)
-  *  [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart)
+  *  [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate) ![GitHub Repo stars](https://img.shields.io/github/stars/Azure-Samples/contoso-real-estate)
+  *  [Official Quarkus Workshop](https://github.com/quarkusio/quarkus-workshops) ![GitHub Repo stars](https://img.shields.io/github/stars/quarkusio/quarkus-workshops)
+  *  [Scholarsome by Redhat](https://github.com/hwgilbert16/scholarsome) ![GitHub Repo stars](https://img.shields.io/github/stars/hwgilbert16/scholarsome)
+  *  [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
 * ✅ Active development and support
 
 <h2> Table of contents</h2>
