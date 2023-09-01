@@ -5,13 +5,14 @@
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 [![monthly downloads](https://img.shields.io/npm/dm/@ngx-env/builder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 
-**Easily inject environment variables into your Angular applications**
+**Easily inject environment variables into your Angular applications** 
+* ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥🔥🔥
 * ✅ Easy to use, no configuration required
 * ✅ Up to date with latest Angular versions
 * ✅ Supports all Angular CLI commands
 * ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
 * ✅ Loading priorities of environment variables
-* ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.)
+* ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) 🚀🚀🚀
 * ✅ Filters sensitive variables using a Regular Expression
 * ✅ Used by popular repositories
   *  [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate) ![GitHub Repo stars](https://img.shields.io/github/stars/Azure-Samples/contoso-real-estate)
