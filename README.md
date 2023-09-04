@@ -5,21 +5,22 @@
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 [![monthly downloads](https://img.shields.io/npm/dm/@ngx-env/builder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 
-**Easily inject environment variables into your Angular applications** 
-* ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥🔥🔥
-* ✅ Easy to use, no configuration required
-* ✅ Up to date with latest Angular versions
-* ✅ Supports all Angular CLI commands
-* ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
-* ✅ Loading priorities of environment variables
-* ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) 🚀🚀🚀
-* ✅ Filters sensitive variables using a Regular Expression
-* ✅ Used by popular repositories
-  *  [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate) ![GitHub Repo stars](https://img.shields.io/github/stars/Azure-Samples/contoso-real-estate)
-  *  [Official Quarkus Workshop](https://github.com/quarkusio/quarkus-workshops) ![GitHub Repo stars](https://img.shields.io/github/stars/quarkusio/quarkus-workshops)
-  *  [Scholarsome by Redhat](https://github.com/hwgilbert16/scholarsome) ![GitHub Repo stars](https://img.shields.io/github/stars/hwgilbert16/scholarsome)
-  *  [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
-* ✅ Active development and support
+**Easily inject environment variables into your Angular applications**
+
+- ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥🔥🔥
+- ✅ Easy to use, no configuration required
+- ✅ Up to date with latest Angular versions
+- ✅ Supports all Angular CLI commands
+- ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
+- ✅ Loading priorities of environment variables
+- ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) 🚀🚀🚀
+- ✅ Filters sensitive variables using a Regular Expression
+- ✅ Used by popular repositories
+  - [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate) ![GitHub Repo stars](https://img.shields.io/github/stars/Azure-Samples/contoso-real-estate)
+  - [Official Quarkus Workshop](https://github.com/quarkusio/quarkus-workshops) ![GitHub Repo stars](https://img.shields.io/github/stars/quarkusio/quarkus-workshops)
+  - [Scholarsome by Redhat](https://github.com/hwgilbert16/scholarsome) ![GitHub Repo stars](https://img.shields.io/github/stars/hwgilbert16/scholarsome)
+  - [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
+- ✅ Active development and support
 
 <h2> Table of contents</h2>
 
@@ -37,11 +38,12 @@
   - [In `.env` with loading priorities](#in-env-with-loading-priorities)
 - [Cascading Environment Variables](#cascading-environment-variables)
 - [Usage in Nx Monorepo](#usage-in-nx-monorepo)
+- [Usage with Docker](#usage-with-docker)
+- [Usage with custom builders 💡](#usage-with-custom-builders-)
 - [Good Practices](#good-practices)
   - [Use `import.meta.env` notation](#use-importmetaenv-notation)
   - [Declare your environment variables in the generated `.env.d.ts` file](#declare-your-environment-variables-in-the-generated-envdts-file)
   - [Use `process.env` or `import.meta.env` inside `environment.ts` files](#use-processenv-or-importmetaenv-inside-environmentts-files)
-- [Usage with Docker](#usage-with-docker)
 - [Known Issues](#known-issues)
   - [`process` variable](#process-variable)
   - [Property comes from an index signature](#property-comes-from-an-index-signature)
@@ -70,7 +72,7 @@ NG_APP_ENABLE_SENTRY=false
 ```ts
 @Component({
   selector: "app-footer",
-  template: `{{branch}} - {{commit}}`
+  template: `{{ branch }} - {{ commit }}`,
 })
 export class MainComponent {
   branch = import.meta.env.NG_APP_BRANCH_NAME; // Recommended (Inspired by Vite)
@@ -103,7 +105,7 @@ These environment variables can be useful for:
 - displaying information conditionally based on where the project is deployed
 - consuming sensitive data that lives outside of version control.
 
-The environment variables will be defined for you on `process.env`. For example, having an environment variable named `NG_APP_NOT_SECRET_CODE` will be exposed in your JS as `process.env.NG_APP_NOT_SECRET_CODE`.
+The environment variables will be defined for you on `process.env` and è`import.meta.env`. For example, having an environment variable named `NG_APP_NOT_SECRET_CODE` will be exposed in your JS as `process.env.NG_APP_NOT_SECRET_CODE` and `import.meta.env.NG_APP_NOT_SECRET_CODE`.
 
 **The environment variables are embedded during the build time**.
 
@@ -284,7 +286,6 @@ NG_APP_FOO=$DOMAIN/foo
 NG_APP_BAR=$DOMAIN/bar
 ```
 
-
 # Cascading Environment Variables
 
 **@ngx-env/builder** supports monorepo projects with multiple applications.
@@ -315,6 +316,7 @@ For example, you have the following directory structure:
 .env
 .env.dev
 ```
+
 and the configuration below in frontends' angular.json:
 
 ```json
@@ -323,16 +325,19 @@ and the configuration below in frontends' angular.json:
   "root": "../../"
 },
 ```
+
 Consumed dot env files will be ordered by hierarchy as follows:
 
-* **frontend1**
+- **frontend1**
+
 ```
 /home/user/monorepo/apps/frontend1/.env
 /home/user/monorepo/.env.dev
 /home/user/monorepo/.env
 ```
 
-* **frontend2**
+- **frontend2**
+
 ```
 /home/user/monorepo/apps/frontend2/.env.dev
 /home/user/monorepo/apps/frontend2/.env
@@ -340,12 +345,12 @@ Consumed dot env files will be ordered by hierarchy as follows:
 /home/user/monorepo/.env
 ```
 
-
 These root configurations are equivalent:
-* ` "root": "../../"`
-* ` "root": "../../.env"`
-* ` "root": "/home/user/monorepo"`
-* ` "root": "/home/user/monorepo/.env"`
+
+- ` "root": "../../"`
+- ` "root": "../../.env"`
+- ` "root": "/home/user/monorepo"`
+- ` "root": "/home/user/monorepo/.env"`
 
 # Usage in Nx Monorepo
 
@@ -354,6 +359,7 @@ These root configurations are equivalent:
 Currently the schematics only supports Angular CLI projects, so you need to install the package and uppdate `project.json` manually.
 
 1. **Install the package**
+
 ```
 npm add -D @ngx-env/builder
 ```
@@ -377,6 +383,78 @@ When you have multiple applications in your Nx workspace, you can define common 
 
 You can also checkout the sample Nx workspace [ here](https://github.com/chihab/ngx-env/tree/main/apps/nx-demo).
 
+# Usage with Docker
+
+@ngx-env/builder can be used with Docker to provide environment-specific configuration during the build and deployment of an Angular application.
+
+The Dockerfile below will build an Angular application with the `NGX_API_URL` environment variable set to the value of the `NGX_API_URL` build argument.
+
+```dockerfile
+FROM node:18
+
+# Get the arguments from the command line
+ARG NGX_API_URL
+
+# Set the environment variables
+ENV NGX_API_URL=$NGX_API_URL
+
+################### Build ans Serve the application ######################
+# You can replace this part with your own build process
+WORKDIR /app
+RUN npx -y @angular/cli@15 new ng-app --defaults
+WORKDIR /app/ng-app
+# In your own project, you would rather have the dependencies in the package.json file
+RUN npx ng add @ngx-env/builder --skip-confirmation
+RUN npm add @ngx-env/core
+# In your own project, you would rather have the configuration in the angular.json file
+RUN npx ng config projects.ng-app.architect.build.options.ngxEnv.prefix 'NGX_'
+# Some sample code to show that the environment variable is available
+RUN echo 'console.log("NGX_API_URL", process.env["NGX_API_URL"])' >>src/main.ts
+RUN npm run build
+EXPOSE 8080
+CMD ["npx", "http-server", "dist/ng-app", "-p", "8080"]
+################################################################
+```
+
+Build and run the Docker image:
+
+```shell
+docker build --build-arg NGX_API_URL=http://staging.api.com -t ngx-env-demo .
+docker run -p 8080:8080 ngx-env-demo
+```
+
+# Usage with custom builders 💡
+
+If you are already using a custom builder like `@angular-builders/custom-webpack` or `ngx-build-plus` and you cannot replace them with `@ngx-env/builder` you can still use `@dotenv-run/webpack`.
+
+1. **Install the package**
+
+```
+npm add -D @dotenv-run/webpack
+```
+
+2. **Update your webpack config**
+
+```js
+import { DotenvRunPlugin } from "@dotenv-run/webpack";
+import type { Configuration } from "webpack";
+
+export default (config: Configuration) => {
+  config.plugins?.push(
+    new DotenvRunPlugin({ prefix: "NGX", verbose: true, root: "../../" })
+  );
+  return config;
+};
+```
+
+The webpack configuration might be different depending on your custom builder but the important part is to add the `DotenvRunPlugin` plugin.
+
+[@dotenv-run/webpack](https://github.com/chihab/dotenv-run) is created by the same author of `@ngx-env/builder` and is used by `@ngx-env/builder` under the hood.
+
+You can find a sample project using `@dotenv-run/webpack` [here](https://github.com/chihab/dotenv-run/tree/main/examples/apps/ng-app).
+
+Please give it a star if you find it useful. ❤️
+
 # Good Practices
 
 ## Use `import.meta.env` notation
@@ -386,7 +464,6 @@ You can also checkout the sample Nx workspace [ here](https://github.com/chihab/
 The [`import.meta`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta) notation is a part of the ECMAScript standard, specifically the ECMAScript modules, which is widely adopted and supported by modern browsers and JavaScript environments. On the other hand, `process.env` is specific to Node.js and not available in the browser by default.
 
 Usage `process.env` might introduce typing issues depending on whether your workspace references `@types/node` or not, `process.env` requires different TS configurations between the webapp and the server.
-
 
 ## Declare your environment variables in the generated `.env.d.ts` file
 
@@ -445,46 +522,6 @@ export class SomeService {
 }
 ```
 
-# Usage with Docker
-
-@ngx-env/builder can be used with Docker to provide environment-specific configuration during the build and deployment of an Angular application.
-
-The Dockerfile below will build an Angular application with the `NGX_API_URL` environment variable set to the value of the `NGX_API_URL` build argument.
-
-```dockerfile
-FROM node:18
-
-# Get the arguments from the command line
-ARG NGX_API_URL
-
-# Set the environment variables
-ENV NGX_API_URL=$NGX_API_URL
-
-################### Build ans Serve the application ######################
-# You can replace this part with your own build process
-WORKDIR /app
-RUN npx -y @angular/cli@15 new ng-app --defaults
-WORKDIR /app/ng-app
-# In your own project, you would rather have the dependencies in the package.json file
-RUN npx ng add @ngx-env/builder --skip-confirmation
-RUN npm add @ngx-env/core
-# In your own project, you would rather have the configuration in the angular.json file
-RUN npx ng config projects.ng-app.architect.build.options.ngxEnv.prefix 'NGX_'
-# Some sample code to show that the environment variable is available
-RUN echo 'console.log("NGX_API_URL", process.env["NGX_API_URL"])' >>src/main.ts
-RUN npm run build
-EXPOSE 8080
-CMD ["npx", "http-server", "dist/ng-app", "-p", "8080"]
-################################################################
-```
-
-Build and run the Docker image:
-
-```shell
-docker build --build-arg NGX_API_URL=http://staging.api.com -t ngx-env-demo .
-docker run -p 8080:8080 ngx-env-demo
-```
-
 # Known Issues
 
 ## `process` variable
@@ -524,6 +561,7 @@ If you prefer using process.env.NGX_SOME_VARIABLE instead of process.env['NGX_SO
 -"noPropertyAccessFromIndexSignature": true,
 +"noPropertyAccessFromIndexSignature": false,
 ```
+
 # How It Works
 
 I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how it works.
