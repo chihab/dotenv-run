@@ -25,6 +25,11 @@
       "implementation": "./dist/builders/server",
       "schema": "./dist/builders/schemas/server.json",
       "description": "Build server app extended with ngx-env config"
+    },
+    "application": {
+      "implementation": "./dist/builders/application",
+      "schema": "./dist/builders/schemas/application.json",
+      "description": "Build application extended with ngx-env config"
     }
   }
 }

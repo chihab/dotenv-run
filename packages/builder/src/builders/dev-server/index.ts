@@ -11,6 +11,7 @@ import {
 import { Observable, combineLatest } from "rxjs";
 import { switchMap } from "rxjs/operators";
 import { plugin } from "../plugin";
+import { plugin as esbuildPlugin } from "../esbuild-plugin";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { getProjectCwd } from "../../utils/project";
 
@@ -18,21 +19,33 @@ export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): Observable<DevServerBuilderOutput> => {
-  const browserTarget = targetFromTargetString(options.browserTarget);
+  const buildTarget = targetFromTargetString(
+    options.buildTarget ?? options.browserTarget
+  );
   async function setup() {
     return context.getTargetOptions(
-      browserTarget
+      buildTarget
     ) as unknown as DevServerBuilderOptions & NgxEnvSchema;
   }
-  return combineLatest([setup(), getProjectCwd(context)]).pipe(
-    switchMap(([_options, cwd]) => {
+  async function builderName() {
+    return context.getBuilderNameForTarget(buildTarget);
+  }
+  return combineLatest([setup(), builderName(), getProjectCwd(context)]).pipe(
+    switchMap(([_options, builderName, cwd]) => {
       const ngxEnvOptions = {
         context,
         ...options.ngxEnv,
         ..._options.ngxEnv,
         cwd,
       };
-      return executeDevServerBuilder(options, context, plugin(ngxEnvOptions));
+      if (builderName === "@ngx-env/builder:application") {
+        options.forceEsbuild = true;
+        return executeDevServerBuilder(options, context, null, {
+          buildPlugins: esbuildPlugin(ngxEnvOptions),
+        });
+      } else {
+        return executeDevServerBuilder(options, context, plugin(ngxEnvOptions));
+      }
     })
   );
 };

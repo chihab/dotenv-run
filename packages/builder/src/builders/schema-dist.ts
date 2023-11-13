@@ -3,7 +3,7 @@ import * as fs from "fs";
 
 function copyDistSchemas() {
   console.log("Copying Angular CLI target schemas");
-  ["dev-server", "browser", "extract-i18n", "karma", "server"].forEach(
+  ["dev-server", "browser", "extract-i18n", "karma", "server", "application"].forEach(
     async (target) => {
       await cpy(
         [
