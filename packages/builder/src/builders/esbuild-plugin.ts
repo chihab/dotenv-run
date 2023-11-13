@@ -62,14 +62,14 @@ export function indexHtml(
   writeFileSync(
     browserPath,
     replacer(browserIndex, {
-      ...options,
+      ...dotEnvOptions,
       appEnv: "NG_APP_ENV",
     })
   );
   writeFileSync(
     serverPath,
     replacer(serverIndex, {
-      ...options,
+      ...dotEnvOptions,
       appEnv: "NG_APP_ENV",
     })
   );
