@@ -1,21 +1,32 @@
-import { BuilderContext, createBuilder } from "@angular-devkit/architect";
 import {
-    ApplicationBuilderOptions,
-    buildApplication,
+  BuilderContext,
+  createBuilder,
+  fromAsyncIterable,
+} from "@angular-devkit/architect";
+import {
+  ApplicationBuilderOptions,
+  buildApplication,
 } from "@angular-devkit/build-angular";
-import { from, switchMap } from "rxjs";
+import { from, switchMap, tap } from "rxjs";
 import { getProjectCwd } from "../../utils/project";
-import { plugin } from "../esbuild-plugin";
+import { plugin, indexHtml } from "../esbuild-plugin";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 
 export const buildWithPlugin = (
   options: ApplicationBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ) => {
+  let cwd: string;
   return from(getProjectCwd(context)).pipe(
-    switchMap((cwd) =>
-      buildApplication(options, context, plugin({ ...options.ngxEnv, cwd }))
-    )
+    switchMap((_cwd) => {
+      cwd = _cwd;
+      return fromAsyncIterable(
+        buildApplication(options, context, plugin({ ...options.ngxEnv, cwd }))
+      );
+    }),
+    tap(() => {
+      indexHtml(options, { ...options.ngxEnv, cwd });
+    })
   );
 };
 
