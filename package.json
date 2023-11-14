@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "scripts": {
     "start:demo": "cd apps/ngx-env-demo && npm run start",
-    "start:demo-v17": "cd apps/ngx-env-v17-demo && npm run start",
     "start:cli": "lerna run start --scope=@ngx-env/builder",
     "build": "lerna run build"
   },
