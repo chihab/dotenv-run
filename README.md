@@ -22,6 +22,10 @@
   - [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
 - ✅ Active development and support
 
+
+⚠️ Regarding Angular 17 support, https://github.com/chihab/ngx-env/issues/61#issuecomment-1807050922 ⚠️
+
+
 <h2> Table of contents</h2>
 
 - [Quick start](#quick-start)
