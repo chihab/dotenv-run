@@ -1,15 +1,19 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { RouterOutlet } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  standalone: true,
+  imports: [CommonModule, RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  env = process.env['NG_APP_ENV'];
-  version = environment.env.NGX_VERSION;
-  branch = process.env['NGX_BRANCH_NAME'];
-  appHome = process.env['NGX_USER_HOME'];
-  home = process.env['USER_HOME'];
-  notInTest = process.env['NGX_NOT_IN_TEST'];
+  title = 'ngx-env-demo';
+  env = import.meta.env['NG_APP_ENV'];
+  version = environment.env.NG_APP_VERSION;
+  appHome = import.meta.env['NG_APP_USER_HOME'];
+  home = import.meta.env['NG_APP_USER_HOME'];
 }
