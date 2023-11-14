@@ -94,6 +94,7 @@
             "styles": [
               "src/styles.css"
             ],
+            "sourceMap": false,
             "scripts": []
           }
         }
