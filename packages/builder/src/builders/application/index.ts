@@ -9,11 +9,10 @@ import {
 } from "@angular-devkit/build-angular";
 import { dotenvRun } from "@dotenv-run/esbuild";
 import { DotenvRunOptions } from "@dotenv-run/webpack";
-import { from, switchMap, tap } from "rxjs";
+import { from, switchMap, mergeMap, map } from "rxjs";
 import { indexHtml } from "../../utils/esbuild-index-html";
 import { getProjectCwd } from "../../utils/project";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-
 
 export const buildWithPlugin = (
   options: ApplicationBuilderOptions & NgxEnvSchema,
@@ -30,9 +29,9 @@ export const buildWithPlugin = (
         buildApplication(options, context, [dotenvRun(dotEnvOptions)])
       );
     }),
-    tap(() => {
-      indexHtml(options, dotEnvOptions);
-    })
+    mergeMap((result) =>
+      from(indexHtml(options, dotEnvOptions)).pipe(map(() => result))
+    )
   );
 };
 

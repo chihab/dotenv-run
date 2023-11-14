@@ -1,12 +1,13 @@
 import { ApplicationBuilderOptions } from "@angular-devkit/build-angular";
+import { Spinner } from "@angular/cli/src/utilities/spinner";
 import { env } from "@dotenv-run/core";
 import { DotenvRunOptions } from "@dotenv-run/webpack";
-import { readFileSync, writeFileSync } from "fs";
+import { readFile, writeFile } from "fs/promises";
 import { resolve } from "path";
 import { NgxEnvSchema } from "../builders/ngx-env/ngx-env-schema";
 import { variablesReducer } from "./variables-reducer";
 
-export function indexHtml(
+export async function indexHtml(
   options: ApplicationBuilderOptions & NgxEnvSchema,
   dotEnvOptions: DotenvRunOptions
 ) {
@@ -20,11 +21,34 @@ export function indexHtml(
     options.outputPath,
     "server/index.server.html"
   );
-  const browserIndex = readFileSync(browserPath, "utf-8");
-  const serverIndex = readFileSync(serverPath, "utf-8");
   const raw = env(dotEnvOptions).raw;
-  writeFileSync(browserPath, variablesReducer(browserIndex, raw));
-  writeFileSync(serverPath, variablesReducer(serverIndex, raw));
+  const spinner = new Spinner();
+  try {
+    spinner.start("NGX_ENV: Starting variables replace on index.html...");
+    const [browserIndex, serverIndex] = await Promise.all([
+      readFile(browserPath, "utf-8"),
+      readFile(serverPath, "utf-8"),
+    ]);
+    try {
+      await Promise.all([
+        writeFile(browserPath, variablesReducer(browserIndex, raw)),
+        writeFile(serverPath, variablesReducer(serverIndex, raw)),
+      ]);
+      spinner.stop();
+      spinner.succeed("NGX_ENV: Variables replacement succesfully ended");
+      process.exit(0);
+    } catch (error) {
+      spinner.stop();
+      spinner.fail("NGX_ENV: Variables replacement ended with errors");
+      spinner.fail(error as any);
+      process.exit(1);
+    }
+  } catch (error) {
+    spinner.stop();
+    spinner.fail("NGX_ENV: Cannot read index.html in dist folder");
+    spinner.fail(error as any);
+    process.exit(1);
+  }
 }
 
 export function devServerIndexHtml(
