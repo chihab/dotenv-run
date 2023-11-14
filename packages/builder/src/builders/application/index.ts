@@ -7,25 +7,31 @@ import {
   ApplicationBuilderOptions,
   buildApplication,
 } from "@angular-devkit/build-angular";
+import { dotenvRun } from "@dotenv-run/esbuild";
+import { DotenvRunOptions } from "@dotenv-run/webpack";
 import { from, switchMap, tap } from "rxjs";
+import { indexHtml } from "../../utils/esbuild-index-html";
 import { getProjectCwd } from "../../utils/project";
-import { plugin, indexHtml } from "../esbuild-plugin";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
+
 
 export const buildWithPlugin = (
   options: ApplicationBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ) => {
-  let cwd: string;
+  const dotEnvOptions: DotenvRunOptions = {
+    ...options.ngxEnv,
+    appEnv: "NG_APP_ENV",
+  };
   return from(getProjectCwd(context)).pipe(
-    switchMap((_cwd) => {
-      cwd = _cwd;
+    switchMap((cwd) => {
+      dotEnvOptions.cwd = cwd;
       return fromAsyncIterable(
-        buildApplication(options, context, plugin({ ...options.ngxEnv, cwd }))
+        buildApplication(options, context, [dotenvRun(dotEnvOptions)])
       );
     }),
     tap(() => {
-      indexHtml(options, { ...options.ngxEnv, cwd });
+      indexHtml(options, dotEnvOptions);
     })
   );
 };
