@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "NODE_ENV=development ng serve",
-    "build": "NODE_ENV=development ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "start": "NODE_ENV=development ng serve",
+    "prepare:build": "npx ng config projects.ngx-env-demo.architect.build.options.ngxEnv.prefix 'NG_APP_'",
+    "build": "NODE_ENV=development ng build",
+    "prepare:test": "npx ng config projects.ngx-env-demo.architect.test.options.ngxEnv.prefix 'NG_APP_'",
+    "test": "NODE_ENV=test NG_APP__BRANCH_NAME=main ng test --watch=false"
   },
   "private": true,
   "dependencies": {

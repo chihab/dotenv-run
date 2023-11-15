@@ -2,6 +2,7 @@ import { normalize } from "@angular-devkit/core";
 import {
   apply,
   chain,
+  MergeStrategy,
   mergeWith,
   move,
   Rule,
@@ -32,6 +33,14 @@ function writeBuilder(
   };
 }
 
+function hasTargetBuilder(
+  project: WorkspaceProject,
+  target: string,
+  builderType: string
+) {
+  return project.architect[target]?.builder.endsWith(`:${builderType}`);
+}
+
 export function builder(options: any): Rule {
   return (tree: Tree, _context: SchematicContext) => {
     const { path: workspacePath, workspace } = getWorkspace(tree);
@@ -54,12 +63,23 @@ export function builder(options: any): Rule {
         `@ngx-env/builder requires an Angular project type of "application" in angular.json`
       );
     }
-
-    writeBuilder(project, "build", "@ngx-env/builder:browser", true);
+    if (
+      !hasTargetBuilder(project, "build", "application") &&
+      !hasTargetBuilder(project, "build", "browser")
+    ) {
+      throw new SchematicsException(
+        `@ngx-env/builder requires one of "application" or "browser" builder`
+      );
+    }
+    if (hasTargetBuilder(project, "build", "application")) {
+      writeBuilder(project, "build", "@ngx-env/builder:application", true);
+    } else {
+      writeBuilder(project, "build", "@ngx-env/builder:browser", true);
+      writeBuilder(project, "server", "@ngx-env/builder:server");
+    }
     writeBuilder(project, "serve", "@ngx-env/builder:dev-server", true);
     writeBuilder(project, "test", "@ngx-env/builder:karma");
     writeBuilder(project, "extract-i18n", "@ngx-env/builder:extract-i18n");
-    writeBuilder(project, "server", "@ngx-env/builder:server");
 
     tree.overwrite(workspacePath, JSON.stringify(workspace, null, 2));
     return tree;
@@ -68,7 +88,7 @@ export function builder(options: any): Rule {
 
 export default function (options: any): Rule {
   return chain([
-    mergeWith(apply(url("./template"), [move(normalize("./src"))])),
+    mergeWith(apply(url("./template"), [move(normalize("./src"))]), MergeStrategy.AllowOverwriteConflict),
     builder(options),
   ]);
 }
