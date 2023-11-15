@@ -22,6 +22,7 @@ interface ImportMetaEnv {
  * @deprecated process.env usage
  * prefer using import.meta.env
  * */
+// @ts-ignore
 declare var process: {
   env: {
     NG_APP_ENV: string;
