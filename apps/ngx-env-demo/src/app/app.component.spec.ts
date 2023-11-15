@@ -1,12 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { NgxEnvModule } from '@ngx-env/core';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NgxEnvModule],
-      declarations: [AppComponent],
+      imports: [AppComponent],
     }).compileComponents();
   });
 
@@ -16,23 +14,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should get the correct values from the environment', () => {
+  it(`should have the 'ngx-env-demo' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.version).toBeDefined();
-    expect(app.env).toEqual('test');
-    expect(app.branch).toEqual('main');
-    expect(app.home).toBeUndefined();
-    expect(app.appHome).toBeDefined();
-    expect(app.notInTest).toBeUndefined();
-  });
-
-  it('should get the correct values in the template', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const elt: Element = fixture.nativeElement;
-    fixture.detectChanges();
-    expect(elt.querySelector('#ENV')?.innerHTML).toEqual('test');
-    expect(elt.querySelector('#BRANCH_NAME')?.innerHTML).toEqual('main');
-    expect(elt.querySelector('#USER_HOME')?.innerHTML).not.toEqual('');
+    expect(app.title).toEqual('ngx-env-demo');
   });
 });

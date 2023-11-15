@@ -1,13 +1,15 @@
 <table>
   <thead>
-    <th>NAME</th>
-    <th>VALUE</th>
+    <tr>
+      <th>NAME</th>
+      <th>VALUE</th>
+    </tr>
   </thead>
   <tbody>
     <tr>
       <td>ENV</td>
       <td>
-        <span id="ENV">{{ "process.env.NG_APP_ENV" | env }}</span>
+        <span id="ENV">{{ env }}</span>
       </td>
     </tr>
     <tr>
@@ -17,15 +19,9 @@
       </td>
     </tr>
     <tr>
-      <td>BRANCH_NAME</td>
-      <td>
-        <span id="BRANCH_NAME">{{ "process.env.NGX_BRANCH_NAME" | env }}</span>
-      </td>
-    </tr>
-    <tr>
       <td>USER_HOME</td>
       <td>
-        <span id="USER_HOME">{{ "process.env.NGX_USER_HOME" | env }}</span>
+        <span id="USER_HOME">{{ home }}</span>
       </td>
     </tr>
   </tbody>

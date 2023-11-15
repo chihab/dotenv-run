@@ -5,34 +5,60 @@ import {
 } from "@angular-devkit/architect";
 import {
   DevServerBuilderOptions,
-  executeDevServerBuilder,
   DevServerBuilderOutput,
+  executeDevServerBuilder,
 } from "@angular-devkit/build-angular";
-import { Observable, combineLatest } from "rxjs";
-import { switchMap } from "rxjs/operators";
-import { plugin } from "../plugin";
-import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
+import { dotenvRun } from "@dotenv-run/esbuild";
+import { Observable, combineLatest, switchMap } from "rxjs";
+import { devServerIndexHtml } from "../../utils/esbuild-index-html";
 import { getProjectCwd } from "../../utils/project";
+import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
+import { plugin } from "../plugin";
 
 export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): Observable<DevServerBuilderOutput> => {
-  const browserTarget = targetFromTargetString(options.browserTarget);
+  const buildTarget = targetFromTargetString(
+    options.buildTarget ?? options.browserTarget
+  );
   async function setup() {
     return context.getTargetOptions(
-      browserTarget
+      buildTarget
     ) as unknown as DevServerBuilderOptions & NgxEnvSchema;
   }
-  return combineLatest([setup(), getProjectCwd(context)]).pipe(
-    switchMap(([_options, cwd]) => {
+  async function builderName() {
+    return context.getBuilderNameForTarget(buildTarget);
+  }
+  return combineLatest([setup(), builderName(), getProjectCwd(context)]).pipe(
+    switchMap(([_options, builderName, cwd]) => {
       const ngxEnvOptions = {
         context,
         ...options.ngxEnv,
         ..._options.ngxEnv,
         cwd,
       };
-      return executeDevServerBuilder(options, context, plugin(ngxEnvOptions));
+      if (builderName === "@ngx-env/builder:application") {
+        options.forceEsbuild = true;
+        return executeDevServerBuilder(
+          options,
+          context,
+          {
+            indexHtml: async (content) =>
+              devServerIndexHtml(content, {
+                ...ngxEnvOptions,
+                appEnv: "NG_APP_ENV",
+              }),
+          },
+          {
+            buildPlugins: [
+              dotenvRun({ ...ngxEnvOptions, appEnv: "NG_APP_ENV" }),
+            ],
+          }
+        );
+      } else {
+        return executeDevServerBuilder(options, context, plugin(ngxEnvOptions));
+      }
     })
   );
 };
