@@ -16,12 +16,12 @@ jobs:
           node-version: 18
       - name: Build Packages
         run: |
-          npm i --include=dev
+          npm i
           npm run build
       - name: Build Cli App
         run: |
           cd apps/ngx-env-demo
-          npm i --include=dev
+          npm i
           npx ng add @ngx-env/builder
           npx tsc --noEmit --project tsconfig.app.json
           npm run prepare:build
