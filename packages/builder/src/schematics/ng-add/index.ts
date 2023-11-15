@@ -88,7 +88,7 @@ export function builder(options: any): Rule {
 
 export default function (options: any): Rule {
   return chain([
-    mergeWith(apply(url("./template"), [move(normalize("./src"))]), MergeStrategy.AllowOverwriteConflict),
+    mergeWith(apply(url("./template"), [move(normalize("./src"))]), MergeStrategy.Overwrite),
     builder(options),
   ]);
 }
