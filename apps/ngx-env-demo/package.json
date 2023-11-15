@@ -5,10 +5,10 @@
     "ng": "ng",
     "watch": "ng build --watch --configuration development",
     "start": "NODE_ENV=development ng serve",
-    "prepare:build": "npx ng config projects.ngx-env-demo.architect.build.options.ngxEnv.prefix 'NG_APP_'",
+    "prepare:build": "npx ng config projects.ngx-env-demo.architect.build.options.ngxEnv.prefix 'NGX_'",
     "build": "NODE_ENV=development ng build",
-    "prepare:test": "npx ng config projects.ngx-env-demo.architect.test.options.ngxEnv.prefix 'NG_APP_'",
-    "test": "NODE_ENV=test NG_APP__BRANCH_NAME=main ng test --watch=false"
+    "prepare:test": "npx ng config projects.ngx-env-demo.architect.test.options.ngxEnv.prefix 'NGX_'",
+    "test": "NODE_ENV=test NGX__BRANCH_NAME=main ng test --watch=false"
   },
   "private": true,
   "dependencies": {

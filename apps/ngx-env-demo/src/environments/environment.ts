@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   env: {
-    NG_APP_VERSION: import.meta.env['NG_APP_VERSION'],
+    NGX_VERSION: import.meta.env['NGX_VERSION'],
   },
 };
 

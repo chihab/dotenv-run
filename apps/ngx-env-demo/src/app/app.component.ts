@@ -13,7 +13,7 @@ import { environment } from '../environments/environment';
 export class AppComponent {
   title = 'ngx-env-demo';
   env = import.meta.env['NG_APP_ENV'];
-  version = environment.env.NG_APP_VERSION;
-  appHome = import.meta.env['NG_APP_USER_HOME'];
-  home = import.meta.env['NG_APP_USER_HOME'];
+  version = environment.env.NGX_VERSION;
+  appHome = import.meta.env['NGX_USER_HOME'];
+  home = import.meta.env['NGX_USER_HOME'];
 }
