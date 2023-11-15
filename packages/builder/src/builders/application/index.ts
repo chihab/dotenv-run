@@ -8,7 +8,7 @@ import {
   buildApplication,
 } from "@angular-devkit/build-angular";
 import { dotenvRun } from "@dotenv-run/esbuild";
-import { DotenvRunOptions } from "@dotenv-run/webpack";
+import type { DotenvRunOptions } from "@dotenv-run/core";
 import { from, switchMap, mergeMap, map } from "rxjs";
 import { indexHtml } from "../../utils/esbuild-index-html";
 import { getProjectCwd } from "../../utils/project";

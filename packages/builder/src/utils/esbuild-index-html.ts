@@ -1,7 +1,7 @@
 import { ApplicationBuilderOptions } from "@angular-devkit/build-angular";
 import { Spinner } from "@angular/cli/src/utilities/spinner";
 import { env } from "@dotenv-run/core";
-import { DotenvRunOptions } from "@dotenv-run/webpack";
+import type { DotenvRunOptions } from "@dotenv-run/core";
 import { readFile, writeFile } from "fs/promises";
 import { resolve } from "path";
 import { NgxEnvSchema } from "../builders/ngx-env/ngx-env-schema";

@@ -1,4 +1,4 @@
-import { DotenvRunOptions } from "@dotenv-run/core";
+import type { DotenvRunOptions } from "@dotenv-run/core";
 import { DotenvRunPlugin } from "@dotenv-run/webpack";
 import type { Configuration } from "webpack";
 import { variablesReducer } from "../utils/variables-reducer";
