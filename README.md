@@ -23,9 +23,6 @@
 - ✅ Active development and support
 
 
-⚠️ Regarding Angular 17 support, https://github.com/chihab/ngx-env/issues/61#issuecomment-1807050922 ⚠️
-
-
 <h2> Table of contents</h2>
 
 - [Quick start](#quick-start)
@@ -79,8 +76,8 @@ NG_APP_ENABLE_SENTRY=false
   template: `{{ branch }} - {{ commit }}`,
 })
 export class MainComponent {
-  branch = import.meta.env.NG_APP_BRANCH_NAME; // Recommended (Inspired by Vite)
-  commit = process.env.NG_APP_COMMIT; // Popular
+  branch = import.meta.env.NG_APP_BRANCH_NAME; // Recommended
+  commit = process.env.NG_APP_COMMIT; // Deprecated
 }
 ```
 
@@ -109,7 +106,7 @@ These environment variables can be useful for:
 - displaying information conditionally based on where the project is deployed
 - consuming sensitive data that lives outside of version control.
 
-The environment variables will be defined for you on `process.env` and è`import.meta.env`. For example, having an environment variable named `NG_APP_NOT_SECRET_CODE` will be exposed in your JS as `process.env.NG_APP_NOT_SECRET_CODE` and `import.meta.env.NG_APP_NOT_SECRET_CODE`.
+The environment variables will be defined for you on `process.env` (deprecated) and `import.meta.env`. For example, having an environment variable named `NG_APP_NOT_SECRET_CODE` will be exposed in your JS as `process.env.NG_APP_NOT_SECRET_CODE` and `import.meta.env.NG_APP_NOT_SECRET_CODE`.
 
 **The environment variables are embedded during the build time**.
 
@@ -154,7 +151,7 @@ See how to [use system environment variables](#expanding-env).
 
 ## `NG_APP_ENV`
 
-There is also a built-in environment variable called `NG_APP_ENV`. You can read it from `process.env.NG_APP_ENV`.
+There is also a built-in environment variable called `NG_APP_ENV`. You can read it from `import.meta.env.NG_APP_ENV`.
 
 By default `NG_APP_ENV` is set to `NODE_ENV` but you are free to override it.
 
@@ -163,7 +160,7 @@ Note that `NG_APP_ENV` remains available even if you define a custom prefix not 
 Having access to the `NG_APP_ENV` is also useful for performing actions conditionally:
 
 ```js
-if (process.env.NG_APP_ENV !== "production") {
+if (import.meta.env.NG_APP_ENV !== "production") {
   analytics.disable();
 }
 ```
@@ -181,7 +178,7 @@ You have two options to consume an environment variable in your component's temp
   selector: "app-footer",
 })
 export class FooterComponent {
-  version = process.env.NG_APP_VERSION;
+  version = import.meta.env.NG_APP_VERSION;
 }
 ```
 
@@ -206,7 +203,7 @@ export class FooterModule {}
 ```
 
 ```
-{{ 'process.env.NG_APP_ENV' | env }}
+{{ 'import.meta.env.NG_APP_ENV' | env }}
 {{ 'NG_APP_ENV' | env }}
 ```
 
@@ -413,7 +410,7 @@ RUN npm add @ngx-env/core
 # In your own project, you would rather have the configuration in the angular.json file
 RUN npx ng config projects.ng-app.architect.build.options.ngxEnv.prefix 'NGX_'
 # Some sample code to show that the environment variable is available
-RUN echo 'console.log("NGX_API_URL", process.env["NGX_API_URL"])' >>src/main.ts
+RUN echo 'console.log("NGX_API_URL", import.meta.env["NGX_API_URL"])' >>src/main.ts
 RUN npm run build
 EXPOSE 8080
 CMD ["npx", "http-server", "dist/ng-app", "-p", "8080"]
@@ -463,7 +460,7 @@ Please give it a star if you find it useful. ❤️
 
 ## Use `import.meta.env` notation
 
-@ngx-env/builder support both widely used process.env and newly adopted import.meta.env notations.
+@ngx-env/builder supports both widely used but deprecated process.env and the newly adopted import.meta.env notations.
 
 The [`import.meta`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import.meta) notation is a part of the ECMAScript standard, specifically the ECMAScript modules, which is widely adopted and supported by modern browsers and JavaScript environments. On the other hand, `process.env` is specific to Node.js and not available in the browser by default.
 
@@ -559,7 +556,7 @@ In general prefer using `import.meta.env` notation.
 
 ## Property comes from an index signature
 
-If you prefer using process.env.NGX_SOME_VARIABLE instead of process.env['NGX_SOME_VARIABLE'], you can update the following line in your `tsconfig.json` file:
+If you prefer using import.meta.env.NGX_SOME_VARIABLE instead of import.meta.env['NGX_SOME_VARIABLE'], you can update the following line in your `tsconfig.json` file:
 
 ```diff
 -"noPropertyAccessFromIndexSignature": true,
