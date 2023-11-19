@@ -8,12 +8,12 @@
 **Easily inject environment variables into your Angular applications**
 
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥🔥🔥
+- ✅ Angular v17 and ESBuild support (experimental in 17.0.0-alpha.0) 🚀
+- ✅ Loading priorities of environment variables with Monorepo Support ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) 🚀🚀
 - ✅ Easy to use, no configuration required
 - ✅ Up to date with latest Angular versions
 - ✅ Supports all Angular CLI commands
 - ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
-- ✅ Loading priorities of environment variables
-- ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) 🚀🚀🚀
 - ✅ Filters sensitive variables using a Regular Expression
 - ✅ Used by popular repositories
   - [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate) ![GitHub Repo stars](https://img.shields.io/github/stars/Azure-Samples/contoso-real-estate)
