@@ -8,12 +8,12 @@ import {
   DevServerBuilderOutput,
   executeDevServerBuilder,
 } from "@angular-devkit/build-angular";
-import { dotenvRun } from "@dotenv-run/esbuild";
+import { dotenvRun as esbuildPlugin } from "@dotenv-run/esbuild";
 import { Observable, combineLatest, switchMap } from "rxjs";
 import { devServerIndexHtml } from "../../utils/esbuild-index-html";
 import { getProjectCwd } from "../../utils/project";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { plugin } from "../plugin";
+import { plugin as webpackPlugin } from "../plugin";
 
 export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
@@ -33,7 +33,6 @@ export const buildWithPlugin = (
   return combineLatest([setup(), builderName(), getProjectCwd(context)]).pipe(
     switchMap(([_options, builderName, cwd]) => {
       const ngxEnvOptions = {
-        context,
         ...options.ngxEnv,
         ..._options.ngxEnv,
         cwd,
@@ -52,12 +51,16 @@ export const buildWithPlugin = (
           },
           {
             buildPlugins: [
-              dotenvRun({ ...ngxEnvOptions, appEnv: "NG_APP_ENV" }),
+              esbuildPlugin({ ...ngxEnvOptions, appEnv: "NG_APP_ENV" }),
             ],
           }
         );
       } else {
-        return executeDevServerBuilder(options, context, plugin(ngxEnvOptions));
+        return executeDevServerBuilder(
+          options,
+          context,
+          webpackPlugin(ngxEnvOptions)
+        );
       }
     })
   );
