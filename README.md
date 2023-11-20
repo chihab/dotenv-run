@@ -8,7 +8,7 @@
 **Easily inject environment variables into your Angular applications**
 
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥
-- ✅ Angular v17 and ESBuild support (experimental in 17.0.0-alpha.0) 🚀
+- ✅ Angular v17, ESBuild/Vite support (experimental in 17.0.0-alpha.0) 🚀
 - ✅ Loading priorities of environment variables with Monorepo Support ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) ✨
 - ✅ Easy to use, no configuration required
 - ✅ Up to date with latest Angular versions
@@ -21,6 +21,12 @@
   - [Scholarsome by Redhat](https://github.com/hwgilbert16/scholarsome) ![GitHub Repo stars](https://img.shields.io/github/stars/hwgilbert16/scholarsome)
   - [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
 - ✅ Active development and support
+
+
+## Quick Demo
+
+* [v17 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
+* [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
 
 
 <h2> Table of contents</h2>
