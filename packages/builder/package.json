@@ -31,7 +31,8 @@
   },
   "dependencies": {
     "@dotenv-run/esbuild": "^1.2.1",
-    "@dotenv-run/webpack": "^1.2.1"
+    "@dotenv-run/webpack": "^1.2.1",
+    "glob": "^10.3.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.0",
