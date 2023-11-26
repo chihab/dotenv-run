@@ -1,6 +1,6 @@
 {
   "name": "@ngx-env/builder",
-  "version": "17.0.1-alpha.0",
+  "version": "17.0.2-alpha.0",
   "description": "Easily inject environment variables into your Angular applications",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env",
