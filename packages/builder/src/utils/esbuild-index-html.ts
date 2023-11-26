@@ -2,15 +2,15 @@ import { env, type Dict, type DotenvRunOptions } from "@dotenv-run/core";
 import { readFileSync, writeFileSync } from "fs";
 import { resolve } from "path";
 import { variablesReducer } from "./variables-reducer";
+import * as glob from "glob";
 
-function replaceInFile(outputDir: string, outputPath: string, raw: Dict) {
+function replaceInFile(filePath: string, raw: Dict) {
   try {
-    const filePath = resolve(outputDir, outputPath);
     const content = readFileSync(filePath, "utf-8");
     writeFileSync(filePath, variablesReducer(content, raw));
   } catch (e) {
     console.log(
-      `❌ Failed to replace variables in ${outputDir}/${outputPath} ❌`
+      `❌ Failed to replace variables in ${filePath} ❌`
     );
     throw e;
   }
@@ -23,9 +23,11 @@ export function indexHtml(
 ) {
   try {
     const raw = env(dotEnvOptions).raw;
-    replaceInFile(outputDir, "browser/index.html", raw);
+    glob.sync(`${outputDir}/browser/**/*.html`).forEach((filePath) => {
+      replaceInFile(filePath, raw);
+    });
     if (ssr) {
-      replaceInFile(outputDir, "server/index.server.html", raw);
+      replaceInFile(resolve(outputDir, "server/index.server.html"), raw);
     }
   } catch (e) {
     console.error(e);
