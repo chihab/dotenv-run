@@ -12,9 +12,17 @@ export const buildWithPlugin = (
   options: KarmaBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): ReturnType<typeof executeKarmaBuilder> => {
+  const environment =
+    process.env.NG_APP_ENV || // @deprecated
+    process.env.NODE_ENV || // default in @dotenv-run/core
+    context.target.configuration;
   return from(getProjectCwd(context)).pipe(
     switchMap((cwd: string) =>
-      executeKarmaBuilder(options, context, plugin({ ...options.ngxEnv, cwd }))
+      executeKarmaBuilder(
+        options,
+        context,
+        plugin({ ...options.ngxEnv, cwd, environment })
+      )
     )
   );
 };

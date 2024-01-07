@@ -12,12 +12,16 @@ export const buildWithPlugin = (
   options: BrowserBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): ReturnType<typeof executeBrowserBuilder> => {
+  const environment =
+    process.env.NG_APP_ENV || // @deprecated
+    process.env.NODE_ENV || // default in @dotenv-run/core
+    context.target.configuration;
   return from(getProjectCwd(context)).pipe(
     switchMap((cwd: string) =>
       executeBrowserBuilder(
         options,
         context,
-        plugin({ ...options.ngxEnv, cwd })
+        plugin({ ...options.ngxEnv, cwd, environment })
       )
     )
   );

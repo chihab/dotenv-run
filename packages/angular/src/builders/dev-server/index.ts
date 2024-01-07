@@ -26,6 +26,10 @@ export const buildWithPlugin = (
   const buildTarget = targetFromTargetString(
     options.buildTarget ?? options.browserTarget
   );
+  const environment =
+    process.env.NG_APP_ENV || // @deprecated
+    process.env.NODE_ENV || // default in @dotenv-run/core
+    buildTarget.configuration;
   async function setup() {
     return context.getTargetOptions(
       buildTarget
@@ -43,7 +47,7 @@ export const buildWithPlugin = (
       };
       if (builderName === "@ngx-env/builder:application") {
         options.forceEsbuild = true;
-        const { full, raw } = env(ngxEnvOptions);
+        const { full, raw } = env({ ...ngxEnvOptions, environment });
         return executeDevServerBuilder(
           options,
           context,

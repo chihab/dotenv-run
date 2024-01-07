@@ -2,6 +2,7 @@ import {
   BuilderContext,
   createBuilder,
   fromAsyncIterable,
+  targetFromTargetString,
 } from "@angular-devkit/architect";
 import {
   ApplicationBuilderOptions,
@@ -20,9 +21,13 @@ export const buildWithPlugin = (
   context: BuilderContext
 ) => {
   const dotEnvOptions: DotenvRunOptions = options.ngxEnv;
+  const environment =
+    process.env.NG_APP_ENV || // @deprecated
+    process.env.NODE_ENV || // default in @dotenv-run/core
+    context.target.configuration;
   return from(getProjectCwd(context)).pipe(
     switchMap((cwd) => {
-      const { full, raw } = env({ ...dotEnvOptions, cwd });
+      const { full, raw } = env({ ...dotEnvOptions, cwd, environment });
       return fromAsyncIterable(
         buildApplication(options, context, [dotenvRunDefine(full)])
       ).pipe(
