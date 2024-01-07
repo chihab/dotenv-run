@@ -1,37 +1,39 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 18
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7.27.1
+      - name: Install Packages
+        run: |
+          pnpm i
       - name: Build Packages
         run: |
-          npm i
-          npm run build
-      - name: Build Cli App
+          pnpm build
+          pnpm i # create bin scripts
+      - name: Test Packages
         run: |
-          cd apps/ngx-env-demo
-          npm i
-          npx ng add @ngx-env/builder
+          pnpm test
+      - name: Build and Test Examples
+        run: |
+          cd examples
+          npx playwright install --with-deps
+          cd apps/ng-app-cli
+          npx ng add ../../../packages/angular --skip-confirmation
           npx tsc --noEmit --project tsconfig.app.json
-          npm run prepare:build
-          npm run build
-          npm run prepare:test
-          cd node_modules/@ngx-env && mv builder builder-link && mkdir builder && cp -r builder-link/* builder/ && cd ../../
-          npm run test
-      - name: Build Nx App
-        run: |
-          cd apps/nx-demo
-          npm i
-          npx nx build ng-app-1
-          npx nx test ng-app-1
+          cd -
+          pnpm build:all
+          pnpm test:all
+          pnpm e2e:all

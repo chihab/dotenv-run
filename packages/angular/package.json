@@ -1,0 +1,57 @@
+{
+  "name": "@ngx-env/builder",
+  "version": "17.0.2",
+  "description": "Easily inject environment variables into your Angular applications",
+  "author": "chihab <chihab@gmail.com>",
+  "homepage": "https://github.com/chihab/dotenv-run/tree/main/packages/builder",
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "dotenv",
+    "environment",
+    "builder",
+    "schematics"
+  ],
+  "files": [
+    "dist",
+    "builders.json",
+    "collection.json",
+    "README.md"
+  ],
+  "builders": "builders.json",
+  "schematics": "./collection.json",
+  "ng-add": {
+    "save": "devDependencies"
+  },
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc && ts-node tools/schema-copy-run.ts",
+    "copy-dist": "ts-node tools/schema-dist.ts"
+  },
+  "dependencies": {
+    "@dotenv-run/esbuild": "1.2.3",
+    "@dotenv-run/webpack": "1.2.3",
+    "glob": "^10.3.10"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.0.0",
+    "@angular-devkit/schematics": "^17.0.0",
+    "@angular-devkit/schematics-cli": "^17.0.0",
+    "@angular-devkit/architect": "^0.1700.8",
+    "@angular-devkit/core": "^17.0.0",
+    "@angular/compiler": "^17.0.2",
+    "@dotenv-run/core": "^1.2.3",
+    "cpy": "^8.1.2",
+    "karma": "^6.4.2",
+    "ts-node": "^10.8.0",
+    "typescript": "~5.2.2",
+    "rxjs": "^7.0.0",
+    "webpack": "^5.0.0"
+  },
+  "peerDpendencies": {
+    "@angular-devkit/architect": "^17.0.0",
+    "@angular-devkit/schematics-cli": ">=12.0.0",
+    "rxjs": "^7.0.0",
+    "webpack": "^5.0.0"
+  }
+}

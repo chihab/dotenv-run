@@ -1,0 +1,37 @@
+{
+  "name": "@dotenv-run/webpack",
+  "version": "1.2.3",
+  "description": "Run your scripts with dotenv variables",
+  "homepage": "https://github.com/chihab/dotenv-run",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "concurrently npm:build:*",
+    "build:esm": "tsc --module esnext --outDir dist/esm",
+    "build:cjs": "tsc --module commonjs  --outDir dist/cjs",
+    "build:types": "tsc --emitDeclarationOnly --declaration --declarationMap --module esnext --outDir dist"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "dotenv",
+    "run",
+    "cli"
+  ],
+  "author": "Chihab Otmani <chihab@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@dotenv-run/core": "^1.2.3"
+  },
+  "peerDependencies": {
+    "webpack": "^5.0.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.0.0",
+    "@types/node": "^16.0.0"
+  }
+}

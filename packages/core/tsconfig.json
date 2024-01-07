@@ -1,5 +1,23 @@
 {
+  "include": [
+    "src"
+  ],
   "compilerOptions": {
-    "experimentalDecorators": true
-  }
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "target": "ES2022",
+    "module": "ES2022",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "pretty": true,
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false
 }

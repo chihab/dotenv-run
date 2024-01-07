@@ -1,0 +1,13 @@
+{
+  "name": "webpack-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "concurrently npm:build:*",
+    "build:prod": "NODE_ENV=prod webpack build --mode production --output-path dist/prod",
+    "build:dev": "NODE_ENV=dev webpack build --mode development --output-path dist/dev",
+    "test": "concurrently npm:test:*",
+    "test:dev": "vitest ./webpack-dev.test.ts",
+    "test:prod": "vitest ./webpack-prod.test.ts"
+  }
+}

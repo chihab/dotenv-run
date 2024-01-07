@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dotenv-run should give the expected output > dev 1`] = `
+"Hello World https://dotenv-run.dev/api/v1/users
+"
+`;
+
+exports[`dotenv-run should give the expected output > empty 1`] = `
+"Hello World /api/v1/users
+"
+`;
+
+exports[`dotenv-run should give the expected output > multi 1`] = `
+"Hello World https://dotenv-secret-subapp-prod-local-run.app/api/v1/users
+"
+`;
+
+exports[`dotenv-run should give the expected output > prod 1`] = `
+"Hello World https://dotenv-run.app/api/v1/users
+"
+`;
