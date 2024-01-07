@@ -1,5 +1,11 @@
 # @dotenv-run/core
 
+## 1.3.0
+
+### Minor Changes
+
+- refactor and docs initialization
+
 ## 1.2.3
 
 ### Patch Changes

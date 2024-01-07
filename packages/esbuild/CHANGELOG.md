@@ -1,5 +1,16 @@
 # @dotenv-run/esbuild
 
+## 1.3.0
+
+### Minor Changes
+
+- refactor and docs initialization
+
+### Patch Changes
+
+- Updated dependencies
+  - @dotenv-run/core@1.3.0
+
 ## 1.2.3
 
 ### Patch Changes
