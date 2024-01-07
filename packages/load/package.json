@@ -1,0 +1,30 @@
+{
+  "name": "@dotenv-run/load",
+  "version": "1.2.3",
+  "description": "Perload your scripts with dotenv variables",
+  "homepage": "https://github.com/chihab/dotenv-run",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsc -w",
+    "test": "vitest",
+    "build": "tsc"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "dotenv",
+    "run",
+    "cli"
+  ],
+  "author": "Chihab Otmani <chihab@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@dotenv-run/core": "^1.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.0"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@dotenv-run/rollup",
+  "version": "1.2.3",
+  "description": "Run your scripts with dotenv variables",
+  "homepage": "https://github.com/chihab/dotenv-run",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "dotenv",
+    "run",
+    "cli"
+  ],
+  "author": "Chihab Otmani <chihab@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "@dotenv-run/core": "^1.2.3",
+    "@rollup/plugin-replace": "^5.0.2"
+  },
+  "peerDependencies": {
+    "rollup": "^3.0.0"
+  },
+  "devDependencies": {
+    "rollup": "^3.0.0",
+    "@types/node": "^16.0.0"
+  }
+}

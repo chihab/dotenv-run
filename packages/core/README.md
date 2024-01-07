@@ -1,51 +1,50 @@
-# @ngx-env/core
 
-[![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
+# @dotenv-run/core
 
-**Easily inject environment variables into your Angular applications**
+* ✅ Load environment variables from the command line `API_BASE=/v1/ core`
+* ✅ Load environment variables from `.env` files
+* ✅ Expand environment variables `API_URL=$API_BASE/users`
+* ✅ Define environment variables for a specific environment (e.g. `.env.production`)
+* ✅ Load priorities of `.env.*` files (e.g. `.env.production` > `.env`)
+* ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) 
+ `apps/next-app/.env` > `apps/.env` > `.env`
 
-# Quick start
 
-1. Add @ngx-env to your CLI project
+# Install
 
-```sh
-ng add @ngx-env/builder
+```console
+npm add @dotenv-run/core
 ```
 
-2. Define Environment Variables in `.env`
+# Usage
 
-```sh
-NG_APP_ENABLE_ANALYTICS=false
-NG_APP_VERSION=$npm_package_version
+```js
+// index.js
+import { expand, paths } from "@dotenv-run/core";
+expand(paths(process.env.NODE_ENV, '../../'));
+console.log(process.env.API_USERS);
 ```
 
-3. Run CLI commands
+given the following files:
 
-```sh
-npm start
-NG_APP_BRANCH_NAME=`git branch --show-current` npm run build
+```shell
+.env
+    API_USERS=$API_BASE/v1/users
+    API_AUTH=$API_BASE/v1/auth
+.env.dev
+    API_BASE=https://localhost:3000
+.env.prod 
+    API_BASE=https://dotenv-run.app
 ```
 
-4. Use the `env` pipe
+then:
 
-```
-npm install @ngx-env/core
-```
+```shell
+NODE_ENV=dev node index.js
+https://localhost:3000/v1/users
 
-```ts
-import { NgxEnvModule } from "@ngx-env/core";
-
-@NgModule({
-  declarations: [FoooterComponent],
-  imports: [CommonModule, NgxEnvModule],
-})
-export class FooterModule {}
-```
-
-```
-{{ 'process.env.NG_APP_ENV' | env }}
-{{ 'NG_APP_ENV' | env }}
-{{ 'NG_APP_BRANCH_NAME' | env }}
+NODE_ENV=prod node index.js
+https://dotenv-run.app/v1/users
 ```
 
 # License

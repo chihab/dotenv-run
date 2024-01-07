@@ -1,0 +1,22 @@
+{
+  "name": "platform",
+  "private": true,
+  "version": "2.0.0",
+  "scripts": {
+    "build:all": "nx run-many --target=build --all --parallel",
+    "test:all": "nx run-many --target=test --all --parallel",
+    "e2e:all": "nx run-many --target=e2e --all --parallel"
+  },
+  "devDependencies": {
+    "@dotenv-run/cli": "^1.2.3",
+    "@dotenv-run/load": "^1.2.3",
+    "@dotenv-run/webpack": "^1.2.3",
+    "@dotenv-run/rollup": "^1.2.3",
+    "webpack": "^5.0.0",
+    "serve": "^14.2.1",
+    "@playwright/test": "^1.37.1",
+    "webpack-cli": "^5.0.0",
+    "rollup": "^3.0.0",
+    "nx": "^16.5.5"
+  }
+}

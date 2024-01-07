@@ -1,0 +1,10 @@
+{
+  "name": "cli-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "vitest",
+    "test:dev": "NODE_ENV=dev dotenv-run -r ../../ -f .env,.secrets -- bash -c 'echo \"Hello World $API_USERS\"'",
+    "build": "echo $API_USERS"
+  }
+}

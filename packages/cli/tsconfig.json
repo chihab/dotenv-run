@@ -1,0 +1,24 @@
+{
+  "include": [
+    "src"
+  ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "module": "ES2020",
+    "strict": true,
+    "strictNullChecks": false,
+    "pretty": true,
+    "sourceMap": false,
+    "declaration": false,
+    "stripInternal": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false,
+  "buildOnSave": false
+}
