@@ -2,6 +2,7 @@ import {
   BuilderContext,
   createBuilder,
   fromAsyncIterable,
+  targetFromTargetString,
 } from "@angular-devkit/architect";
 import {
   ApplicationBuilderOptions,
@@ -14,6 +15,7 @@ import { indexHtml } from "../utils/esbuild-index-html";
 import { getProjectCwd } from "../utils/project";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { join } from "path";
+import { getEnvironment } from "../utils/get-environment";
 
 export const buildWithPlugin = (
   options: ApplicationBuilderOptions & NgxEnvSchema,
@@ -22,7 +24,11 @@ export const buildWithPlugin = (
   const dotEnvOptions: DotenvRunOptions = options.ngxEnv;
   return from(getProjectCwd(context)).pipe(
     switchMap((cwd) => {
-      const { full, raw } = env({ ...dotEnvOptions, cwd });
+      const { full, raw } = env({
+        ...dotEnvOptions,
+        cwd,
+        environment: getEnvironment(context.target.configuration),
+      });
       return fromAsyncIterable(
         buildApplication(options, context, [dotenvRunDefine(full)])
       ).pipe(

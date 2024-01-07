@@ -6,6 +6,7 @@ import {
 import { getProjectCwd } from "../utils/project";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { plugin } from "../utils/webpack-plugin";
+import { getEnvironment } from "../utils/get-environment";
 
 export const buildWithPlugin = (
   options: ExtractI18nBuilderOptions & NgxEnvSchema,
@@ -15,7 +16,11 @@ export const buildWithPlugin = (
     executeExtractI18nBuilder(
       options,
       context,
-      plugin({ ...options.ngxEnv, cwd })
+      plugin({
+        ...options.ngxEnv,
+        cwd,
+        environment: getEnvironment(context.target.configuration),
+      })
     )
   );
 };

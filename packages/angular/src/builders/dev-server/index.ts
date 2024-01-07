@@ -8,16 +8,17 @@ import {
   DevServerBuilderOutput,
   executeDevServerBuilder,
 } from "@angular-devkit/build-angular";
+import { env } from "@dotenv-run/core";
 import {
   DotenvRunOptions,
   dotenvRunDefine as esbuildPlugin,
 } from "@dotenv-run/esbuild";
 import { Observable, combineLatest, switchMap } from "rxjs";
-import { devServerIndexHtml } from "../utils/esbuild-index-html";
-import { getProjectCwd } from "../utils/project";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
+import { devServerIndexHtml } from "../utils/esbuild-index-html";
+import { getEnvironment } from "../utils/get-environment";
+import { getProjectCwd } from "../utils/project";
 import { plugin as webpackPlugin } from "../utils/webpack-plugin";
-import { env } from "@dotenv-run/core";
 
 export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
@@ -43,7 +44,10 @@ export const buildWithPlugin = (
       };
       if (builderName === "@ngx-env/builder:application") {
         options.forceEsbuild = true;
-        const { full, raw } = env(ngxEnvOptions);
+        const { full, raw } = env({
+          ...ngxEnvOptions,
+          environment: getEnvironment(buildTarget.configuration),
+        });
         return executeDevServerBuilder(
           options,
           context,

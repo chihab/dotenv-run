@@ -1,5 +1,11 @@
 # @dotenv-run/cli
 
+## 1.3.1
+
+### Patch Changes
+
+- docs: add README.md
+
 ## 1.3.0
 
 ### Minor Changes

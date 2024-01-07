@@ -3,10 +3,11 @@ import {
   BrowserBuilderOptions,
   executeBrowserBuilder,
 } from "@angular-devkit/build-angular";
-import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { plugin } from "../utils/webpack-plugin";
 import { from, switchMap } from "rxjs";
+import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
+import { getEnvironment } from "../utils/get-environment";
 import { getProjectCwd } from "../utils/project";
+import { plugin } from "../utils/webpack-plugin";
 
 export const buildWithPlugin = (
   options: BrowserBuilderOptions & NgxEnvSchema,
@@ -17,7 +18,11 @@ export const buildWithPlugin = (
       executeBrowserBuilder(
         options,
         context,
-        plugin({ ...options.ngxEnv, cwd })
+        plugin({
+          ...options.ngxEnv,
+          cwd,
+          environment: getEnvironment(context.target.configuration),
+        })
       )
     )
   );

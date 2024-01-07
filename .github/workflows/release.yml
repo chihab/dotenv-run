@@ -21,7 +21,6 @@ jobs:
           pnpm i
           pnpm build
           pnpm build:docs
-          cp README.md packages/cli/README.md
       - name: Publish @dotenv-run packages
         id: changesets
         uses: changesets/action@v1
