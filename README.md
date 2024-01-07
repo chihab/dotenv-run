@@ -1,6 +1,6 @@
 <h1>@ngx-env/builder</h1>
 
-<img src="https://raw.githubusercontent.com/chihab/ngx-env/main/logo.png" alt="dotenv" width="90px" align="right" />
+<img src="https://raw.githubusercontent.com/chihab/dotenv-run-dev/main/packages/angular/logo.png" alt="@ngx-env/builder" width="90px" align="right" />
 
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 [![monthly downloads](https://img.shields.io/npm/dm/@ngx-env/builder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
@@ -8,7 +8,7 @@
 **Easily inject environment variables into your Angular applications**
 
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥
-- ✅ Angular v17, ESBuild/Vite support (experimental in 17.0.0-alpha.0) 🚀
+- ✅ Webpack and ESBuild support 🚀
 - ✅ Loading priorities of environment variables with Monorepo Support ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) ✨
 - ✅ Easy to use, no configuration required
 - ✅ Up to date with latest Angular versions
@@ -388,7 +388,7 @@ declare var process: {
 
 When you have multiple applications in your Nx workspace, you can define common `.env.*` files in the root of your workspace and override them in each application or any other subdirectory below the root. See [Cascading Environment Variables](#cascading-environment-variables) for more details.
 
-You can also checkout the sample Nx workspace [ here](https://github.com/chihab/ngx-env/tree/main/apps/nx-demo).
+You can also checkout the sample Nx workspace [ here](https://github.com/chihab/dotenv-run/packages/angular/tree/main/apps/nx-demo).
 
 # Usage with Docker
 
@@ -482,7 +482,7 @@ interface ImportMeta {
 interface ImportMetaEnv {
   /**
    * Built-in environment variable.
-   * @see Docs https://github.com/chihab/ngx-env#ng_app_env.
+   * @see Docs https://github.com/chihab/dotenv-run/packages/angular#ng_app_env.
    */
   readonly NG_APP_ENV: string;
   // Add your environment variables below

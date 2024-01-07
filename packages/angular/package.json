@@ -1,9 +1,9 @@
 {
   "name": "@ngx-env/builder",
-  "version": "17.0.2",
+  "version": "17.0.3",
   "description": "Easily inject environment variables into your Angular applications",
   "author": "chihab <chihab@gmail.com>",
-  "homepage": "https://github.com/chihab/dotenv-run/tree/main/packages/builder",
+  "homepage": "https://github.com/chihab/dotenv-run/tree/main/packages/angular",
   "license": "MIT",
   "keywords": [
     "angular",
