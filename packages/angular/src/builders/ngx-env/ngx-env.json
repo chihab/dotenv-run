@@ -12,9 +12,14 @@
                 "description": "Root directory of the project to find .env files",
                 "default": "."
             },
+            "unsecure": {
+                "type": "boolean",
+                "description": "Display environment variables values in the console",
+                "default": false
+            },
             "verbose": {
                 "type": "boolean",
-                "description": "Verbose mode, print .env files and variables",
+                "description": "Display environment files and variables in the console",
                 "default": true
             }
         },

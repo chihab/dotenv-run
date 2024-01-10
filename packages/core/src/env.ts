@@ -18,7 +18,7 @@ function print(options: DotenvRunOptions, envPaths: string[], values: Env) {
     console.log(`${chalk.green("-")} Working directory: `, options.cwd);
   }
   if (options.files) {
-    console.log(`${chalk.green("-")} Files :`, options.files.join(", "));
+    console.log(`${chalk.green("-")} Files:`, options.files.join(", "));
   }
   if (envPaths.length === 0) {
     console.log(
