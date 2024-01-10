@@ -1,5 +1,13 @@
 # @dotenv-run/rollup
 
+## 1.3.2
+
+### Patch Changes
+
+- feat(angular): add unsecure mode option
+- Updated dependencies
+  - @dotenv-run/core@1.3.2
+
 ## 1.3.1
 
 ### Patch Changes

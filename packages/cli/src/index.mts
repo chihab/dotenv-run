@@ -29,7 +29,7 @@ function help() {
   Usage: dotenv-run [options] -- <command>
   
   Options:
-    -d, --debug [regexp]                    print debug information, filter environment variables by regexp (default: .*)
+    -d, --debug [regexp]                    print debug information, display environment variables filtered by regexp if provided
     -e, --env  [environment]                environment to load (default: NODE_ENV)
     -f, --file [.env,.secrets,.env.api]     specific .env files to load (default: .env, incompatible with root and prefix options)
     -r, --root                              root directory to search for .env files, defaults to current working directory

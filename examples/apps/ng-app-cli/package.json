@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "watch": "ng build --watch --configuration development",
-    "start": "NODE_ENV=development ng serve",
+    "start": "ng serve",
     "prebuild": "npx ng config projects.ng-app-cli.architect.build.options.ngxEnv.prefix 'NGX_'",
     "build": "NODE_ENV=production ng build",
     "pretest": "npx ng config projects.ng-app-cli.architect.test.options.ngxEnv.prefix 'NGX_'",
