@@ -1,5 +1,13 @@
 # @dotenv-run/esbuild
 
+## 1.3.1
+
+### Patch Changes
+
+- feat: add secure mode to debug info
+- Updated dependencies
+  - @dotenv-run/core@1.3.1
+
 ## 1.3.0
 
 ### Minor Changes

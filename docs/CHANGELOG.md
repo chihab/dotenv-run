@@ -1,5 +1,11 @@
 # @dotenv-run/docs
 
+## 0.1.1
+
+### Patch Changes
+
+- feat: add secure mode to debug info
+
 ## 0.1.0
 
 ### Minor Changes

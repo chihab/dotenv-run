@@ -1,5 +1,11 @@
 # @dotenv-run/core
 
+## 1.3.1
+
+### Patch Changes
+
+- feat: add secure mode to debug info
+
 ## 1.3.0
 
 ### Minor Changes
