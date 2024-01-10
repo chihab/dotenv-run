@@ -1,5 +1,11 @@
 # @dotenv-run/core
 
+## 1.3.2
+
+### Patch Changes
+
+- feat(angular): add unsecure mode option
+
 ## 1.3.1
 
 ### Patch Changes
