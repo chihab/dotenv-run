@@ -1,10 +1,10 @@
 import chalk from "chalk";
 import * as fs from "fs";
 import * as path from "path";
+import { build } from "./build.js";
 import { expand } from "./expand.js";
 import type { DotenvRunOptions } from "./options.js";
 import { getAbsoluteEnvPath, getPathsDownTo, isSubfolder } from "./utils.js";
-import { build } from "./build.js";
 
 export type Env = Record<string, string>;
 
@@ -89,6 +89,7 @@ export function env({
   prefix,
   verbose,
   nodeEnv = true,
+  builtIn = {},
   ...rest
 }: DotenvRunOptions = {}) {
   const options: DotenvRunOptions = {
@@ -111,10 +112,11 @@ export function env({
         nodeEnv
       )
     : processEnv;
+  const allValues = { ...values, ...builtIn };
   if (verbose) {
-    print({ ...options, root }, envPaths, values);
+    print({ ...options, root }, envPaths, allValues);
   }
-  return build(values);
+  return build(allValues);
 }
 
 export const plugin = env;

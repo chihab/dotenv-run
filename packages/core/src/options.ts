@@ -1,4 +1,5 @@
 import type { DotenvConfigOptions } from "dotenv";
+import { Dict } from "./build";
 
 export interface DotenvRunOptions {
   cwd?: string; // Path to current working directory
@@ -9,4 +10,5 @@ export interface DotenvRunOptions {
   root?: string; // Path to root workspace
   nodeEnv?: boolean; // Node environment
   verbose?: boolean; // Print verbose output
+  builtIn?: Dict; // Built-in environment variables
 }
