@@ -29,7 +29,7 @@ You can use it to build your own integration.
 
 # @dotenv-run/cli
 
-`@dotenv-run/cli `is a standalone CLI that can be used to run a script with environment variables defined in a .env file.
+`@dotenv-run/cli `is a standalone CLI that can be used to run a script.
 
 ```sh
 ❯ npx dotenv-run
@@ -37,13 +37,13 @@ You can use it to build your own integration.
   Usage: dotenv-run [options] -- <command>
   
   Options:
-    -d, --debug [regexp]                    print debug information, display environment variables filtered by regexp if provided
-    -u, --unsecure                          display environment variables in debug information (default: false)
+    -d, --debug [regexp]                    print debug information
+    -u, --unsecure                          display environment variables values
     -e, --env [environment]                 environment to load (default: NODE_ENV)
-    -r, --root                              root directory to search for .env files, defaults to current working directory
+    -r, --root                              root directory to search for .env files
     -p, --prefix [.env,.secrets,.env.api]   .env file prefixes to load (default: .env)
-    -f, --file [.env,.secrets,.env.api]     specific .env files to load (default: .env, incompatible with root and prefix options)
-    -o, --override                          override existing environment variables (default: false)
+    -f, --file [.env,.secrets,.env.api]     specific .env files to load (default: .env)
+    -o, --override                          override existing environment variables
     -h, --help                              output usage information
     
   Examples:
@@ -54,10 +54,10 @@ You can use it to build your own integration.
 ```
 
 ```sh
-❯ npx dotenv-run -d 'NGX' -u -e prod -- next build # -d 'NGX' -u are debug options
+❯ npx dotenv-run -e prod -r ../.. -d 'NGX' -u  --  next build # -d 'NGX' -u are debug options
 ---------------------------------
 - Root directory: /home/chihab/Platform
-- Working directory:  /Users/chihab/Work/projects/ngx-env/examples/apps/next-app
+- Working directory:  /Users/chihab/Platform/apps/next-app
 - Files: .env
 - Environment:  prod
 - Environment files:
