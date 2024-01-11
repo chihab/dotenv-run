@@ -1,5 +1,13 @@
 # @dotenv-run/webpack
 
+## 1.3.3
+
+### Patch Changes
+
+- fix(cli): fix unsecure mode alias
+- Updated dependencies
+  - @dotenv-run/core@1.3.3
+
 ## 1.3.2
 
 ### Patch Changes
