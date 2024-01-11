@@ -16,6 +16,7 @@ const argv = minimist(process.argv.slice(2), {
     prefix: "p",
     help: "h",
     override: "o",
+    unsecure: "u",
   },
   default: {
     unsecure: false,
@@ -60,7 +61,6 @@ if (argv.h) {
     process.exit(1);
   }
   if (argv.f && (argv.r || argv.p)) {
-    console.log(argv);
     console.log(chalk.red("option -f cannot be used with -r or -p"));
     console.log("use -f to specify specific .env files");
     console.log("\tdotenv-run -f ./.env,../../secrets");

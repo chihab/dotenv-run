@@ -10,7 +10,6 @@ export type Env = Record<string, string>;
 
 function print(options: DotenvRunOptions, envPaths: string[], values: Env) {
   console.log("---------------------------------");
-  console.log(`${chalk.green("-")} Environment: `, options.environment);
   if (options.root) {
     console.log(`${chalk.green("-")} Root directory: `, options.root);
   }
@@ -20,9 +19,13 @@ function print(options: DotenvRunOptions, envPaths: string[], values: Env) {
   if (options.files) {
     console.log(`${chalk.green("-")} Files:`, options.files.join(", "));
   }
+  console.log(
+    `${chalk.green("-")} Environment: `,
+    options.environment ? options.environment : chalk.red("none")
+  );
   if (envPaths.length === 0) {
     console.log(
-      `${chalk.green("-")} Environment files: ${chalk.yellow("none")}`
+      `${chalk.green("-")} Environment files: ${chalk.red("none")}`
     );
   } else {
     console.log(`${chalk.green("-")} Environment files: `);
@@ -30,14 +33,11 @@ function print(options: DotenvRunOptions, envPaths: string[], values: Env) {
       console.log(`${chalk.green(" ✔")} ${envPath}`);
     });
   }
-  if (options.prefix) {
-    console.log(`${chalk.green("-")} Prefix: `, options.prefix);
-  }
   if (Object.keys(values).length > 0 && options.prefix) {
     console.log(
-      `${chalk.green("-")} Environment variables: ${chalk.yellow(options.prefix) ?? ""} ${
-        options.unsecure ? chalk.red("(Unsecure Mode)") : ""
-      }`
+      `${chalk.green("-")} Environment variables: ${
+        chalk.yellow(options.prefix) ?? ""
+      } ${options.unsecure ? chalk.red("(Unsecure Mode)") : ""}`
     );
     for (const key in values) {
       if (options.unsecure) {
