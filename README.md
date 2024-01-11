@@ -4,18 +4,17 @@
 
 Here are some of the benefits of using @dotenv-run:
 
-- **Simple**: seamelessly integrates with your existing workflow.
-- **Flexible**: supports multiple `.env` files and loading priorities.
-- **Expand**: supports expanding variables already available on your machine for use in your `.env` files.
-- **Secure**: supports filtering environment variables by prefix.
-- **Monorepo ✨**: supports monorepo projects with multiple applications. .env files can be defined in the root workspace and overriden by each application.
-- **TypeScript**: supports TypeScript projects with type definitions for `process.env` and `import.meta.env`.
-- **ESM**: supports `process.env` and `import.meta.env` in ESM modules.
-- **Universal**: supports multiple intergrations including CLI, Node.js preload, Webpack, Rollup, Vite, and esbuild.
+- ✅ **Simple**: seamelessly integrates with your existing workflow.
+- ✅ **Flexible**: supports multiple `.env` files and loading priorities.
+- ✅ **Expand**: supports expanding variables already available on your machine for use in your `.env` files.
+- ✅ **Monorepo ✨**: supports monorepo projects with multiple applications. 
+- ✅ **Secure**: supports filtering environment variables by prefix.
+- ✅ **TypeScript**: supports TypeScript projects with type definitions for `process.env` and `import.meta.env`.
+- ✅ **ESM**: supports `process.env` and `import.meta.env` in ESM modules.
+- ✅ **Universal**: supports multiple intergrations including CLI, Node.js preload, Webpack, Rollup, Vite, and esbuild.
 
 `@dotenv-run` can be installed as a standalone CLI or as a plugin for your favorite bundler.
 
-- [dotenv-run](#dotenv-run)
 - [@dotenv-run/cli](#dotenv-runcli)
 - [@dotenv-run/esbuild](#dotenv-runesbuild)
 - [@ngx-env/builder](#ngx-envbuilder)
