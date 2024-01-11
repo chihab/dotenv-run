@@ -7,7 +7,7 @@ export default defineConfig({
 	base: '/',
 	integrations: [
 		starlight({
-			title: 'dotenv-run',
+			title: 'dotenv.run',
 			social: {
 				github: 'https://github.com/chihab/dotenv-run',
 			},
@@ -15,7 +15,7 @@ export default defineConfig({
 				{
 					label: 'Getting Started',
 					items: [
-						{ label: 'Introduction', link: '/getting-started/introduction/' },
+						{ label: 'Introduction', link: '/' },
 						{ label: 'Quick Start', link: '/getting-started/quick-start/' },
 						{ label: 'Variables', items: [{ label: '.env files', link: '/getting-started/env-files/' }, { label: 'expand', link: '/getting-started/expand/' }, { label: 'command line', link: '/getting-started/command-line/' }] },
 						{ label: 'Loading Priorities', link: '/getting-started/loading-priorities/' },

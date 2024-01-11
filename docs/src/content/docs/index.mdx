@@ -1,36 +1,21 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
-template: splash
-hero:
-  tagline: Congrats on setting up a new Starlight project!
-  image:
-    file: ../../assets/houston.webp
-  actions:
-    - text: Example Guide
-      link: /getting-started/introduction/
-      icon: right-arrow
-      variant: primary
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+title: Introduction
 ---
 
-import { Card, CardGrid } from "@astrojs/starlight/components";
+Defining configuration as environment variables is one of the tenets of a [twelve-factor app](https://12factor.net/config), it separates the config from your codebase and keeps it under your control.
 
-## Next steps
+`@dotenv-run` is a collection of packages that use **dotenv** to support loading environment variables from `.env` files with multiple integrations.
 
-<CardGrid stagger>
-  <Card title="Update content" icon="pencil">
-    Edit `src/content/docs/index.mdx` to see this page change.
-  </Card>
-  <Card title="Add new content" icon="add-document">
-    Add Markdown or MDX files to `src/content/docs` to create new pages.
-  </Card>
-  <Card title="Configure your site" icon="setting">
-    Edit your `sidebar` and other config in `astro.config.mjs`.
-  </Card>
-  <Card title="Read the docs" icon="open-book">
-    Learn more in [the Starlight Docs](https://starlight.astro.build/).
-  </Card>
-</CardGrid>
+Here are some of the benefits of using @dotenv-run:
+
+- **Simple**: seamelessly integrates with your existing workflow.
+- **Flexible**: supports multiple `.env` files and loading priorities.
+- **Expand**: supports expanding variables already available on your machine for use in your `.env` files.
+- **Secure**: supports filtering environment variables by prefix.
+- **Monorepo ✨**: supports monorepo projects with multiple applications. .env files can be defined in the root workspace and overriden by each application.
+- **TypeScript**: supports TypeScript projects with type definitions for `process.env` and `import.meta.env`.
+- **ESM**: supports `process.env` and `import.meta.env` in ESM modules.
+- **Universal**: supports multiple intergrations including CLI, Node.js preload, Webpack, Rollup, Vite, and esbuild.
+
+
+
