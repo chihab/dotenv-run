@@ -8,10 +8,10 @@
     "e2e:all": "nx run-many --target=e2e --all --parallel"
   },
   "devDependencies": {
-    "@dotenv-run/cli": "^1.3.3",
-    "@dotenv-run/load": "^1.3.2",
-    "@dotenv-run/webpack": "^1.3.2",
-    "@dotenv-run/rollup": "^1.3.2",
+    "@dotenv-run/cli": "^1.3.4",
+    "@dotenv-run/load": "^1.3.3",
+    "@dotenv-run/webpack": "^1.3.3",
+    "@dotenv-run/rollup": "^1.3.3",
     "webpack": "^5.0.0",
     "serve": "^14.2.1",
     "@playwright/test": "^1.37.1",

@@ -1,5 +1,11 @@
 # @dotenv-run/core
 
+## 1.3.3
+
+### Patch Changes
+
+- fix(cli): fix unsecure mode alias
+
 ## 1.3.2
 
 ### Patch Changes

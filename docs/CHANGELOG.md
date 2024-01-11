@@ -1,5 +1,11 @@
 # @dotenv-run/docs
 
+## 0.1.3
+
+### Patch Changes
+
+- fix(cli): fix unsecure mode alias
+
 ## 0.1.2
 
 ### Patch Changes
