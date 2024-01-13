@@ -1,14 +1,12 @@
-
 # @dotenv-run/core
 
-* ✅ Load environment variables from the command line `API_BASE=/v1/ core`
-* ✅ Load environment variables from `.env` files
-* ✅ Expand environment variables `API_URL=$API_BASE/users`
-* ✅ Define environment variables for a specific environment (e.g. `.env.production`)
-* ✅ Load priorities of `.env.*` files (e.g. `.env.production` > `.env`)
-* ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) 
- `apps/next-app/.env` > `apps/.env` > `.env`
-
+- ✅ Load environment variables from the command line `API_BASE=/v1/ core`
+- ✅ Load environment variables from `.env` files
+- ✅ Expand environment variables `API_URL=$API_BASE/users`
+- ✅ Define environment variables for a specific environment (e.g. `.env.production`)
+- ✅ Load priorities of `.env.*` files (e.g. `.env.production` > `.env`)
+- ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.)
+  `apps/next-app/.env` > `apps/.env` > `.env`
 
 # Install
 
@@ -20,8 +18,13 @@ npm add @dotenv-run/core
 
 ```js
 // index.js
-import { expand, paths } from "@dotenv-run/core";
-expand(paths(process.env.NODE_ENV, '../../'));
+import { env } from "@dotenv-run/core";
+env({
+  root: "../..",
+  verbose: true,
+  prefix: "^API_",
+  files: [".env"],
+});
 console.log(process.env.API_USERS);
 ```
 
@@ -33,7 +36,7 @@ given the following files:
     API_AUTH=$API_BASE/v1/auth
 .env.dev
     API_BASE=https://localhost:3000
-.env.prod 
+.env.prod
     API_BASE=https://dotenv-run.app
 ```
 

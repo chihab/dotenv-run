@@ -88,7 +88,7 @@ and the following `dotenv.run` options:
 
 ### @dotenv-run/cli
 
-`@dotenv-run/cli` is a standalone CLI that can be used to run a script.
+[`@dotenv-run/cli`](https://www.npmjs.com/package/@dotenv-run/cli) is a standalone CLI that can be used to run a script.
 
 ```sh
 ❯ npx dotenv-run
@@ -112,7 +112,7 @@ and the following `dotenv.run` options:
 
 ### @dotenv-run/esbuild
 
-`@dotenv-run/esbuild` is a plugin for esbuild that can be used to inject environment variables into your applications.
+[`@dotenv-run/esbuild`](https://www.npmjs.com/package/@dotenv-run/esbuild) is a plugin for esbuild that can be used to inject environment variables into your applications.
 
 ```ts
 import { dotenvRun } from "@dotenv-run/esbuild";
@@ -133,7 +133,7 @@ await build({
 
 ### @ngx-env/builder
 
-`@ngx-env/builder` is a plugin for Angular CLI and a wrapper around `@dotenv-run/esbuild` or `@dotenv-run/webpack` that can be used to inject environment variables into your Angular applications.
+[`@ngx-env/builder`](https://www.npmjs.com/package/@ngx-env/builder) is a plugin for Angular CLI and a wrapper around `@dotenv-run/esbuild` or `@dotenv-run/webpack` that can be used to inject environment variables into your Angular applications.
 
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥
 - ✅ Webpack and ESBuild support 🚀
@@ -204,7 +204,7 @@ You can find the full `@ngx-env/builder` documentation [here](https://github.com
 
 ### @dotenv-run/webpack
 
-`@dotenv-run/webpack` is a plugin for webpack that can be used to inject environment variables into your applications.
+[`@dotenv-run/webpack`](https://www.npmjs.com/package/@dotenv-run/webpack) is a plugin for webpack that can be used to inject environment variables into your applications.
 
 ```ts
 import { DotenvRunPlugin } from "@dotenv-run/webpack";
@@ -229,7 +229,7 @@ export default {
 
 ### @dotenv-run/rollup
 
-`@dotenv-run/rollup` is a plugin for rollup that can be used to inject environment variables into your applications.
+[`@dotenv-run/rollup`](https://www.npmjs.com/package/@dotenv-run/rollup) is a plugin for rollup that can be used to inject environment variables into your applications.
 
 ```js
 import env from "@dotenv-run/rollup";
@@ -245,7 +245,7 @@ export default {
 
 ### @dotenv-run/core
 
-`@dotenv-run/core` is the core package that can be used to load environment variables from `.env` files.
+[`@dotenv-run/core`](https://www.npmjs.com/package/@dotenv-run/core) is the core package that can be used to load environment variables from `.env` files.
 
 ```ts
 env({

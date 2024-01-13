@@ -24,10 +24,11 @@ import { env } from "@dotenv-run/esbuild";
 
 const { full } = env({
   prefix: "MY_",
-  verbose: true,
+  verbose: false,
+  files: [".env"],
 });
 
-await build({
+const results = await build({
   bundle: true,
   write: false,
   entryPoints: [`test/app.js`],
@@ -39,17 +40,18 @@ await build({
 
 ```js
 import { build } from "esbuild";
-import { env } from "@dotenv-run/esbuild";
-
-const { full } = env({
-  prefix: "MY_",
-  verbose: true,
-});
+import { dotenvRun } from "@dotenv-run/esbuild";
 
 await build({
-  bundle: true,
   write: false,
+  bundle: true,
   entryPoints: [`test/app.js`],
-  define: full,
+  plugins: [
+    dotenvRun({
+      verbose: true,
+      root: "../../",
+      prefix: "^API",
+    }),
+  ],
 });
 ```

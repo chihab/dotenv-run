@@ -22,22 +22,23 @@ npm add -D @dotenv-run/cli
 ## Prompt
 
 ```sh
-$> dotenv-run -h
+❯ npx dotenv-run
 
-Usage: dotenv-run [options] -- <command>
+  Usage: dotenv-run [options] -- <command>
 
-Options:
+  Options:
+    -v, --verbose [regexp]         display debug information
+    -u, --unsecure                 display environment variables values
+    -e, --env [environment]        environment to load (default: NODE_ENV)
+    -r, --root                     root directory to search for .env files
+    -f, --file [.env,.secrets]     .env files to load (default: .env)
+    -h, --help                     output usage information
 
-    -h, --help     output usage information
-    -e, --env      environment name (e.g. dev, prod)
-    -s, --silent   do not print .env file paths
-    -r, --root     root directory to search for .env files
-
-Examples:
-
+  Examples:
+    dotenv-run -d
     dotenv-run -- npm start
-    dotenv-run -r ../.. -- npm start
-    dotenv-run -e prod -- npm start
+    dotenv-run -r ../.. -p .env,.secrets -- npm start
+    dotenv-run -f ../.env,../.env.api -- npm start
 ```
 
 ## Usage

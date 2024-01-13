@@ -1,5 +1,11 @@
 # @dotenv-run/core
 
+## 1.3.4
+
+### Patch Changes
+
+- docs: updates packages' README files
+
 ## 1.3.3
 
 ### Patch Changes

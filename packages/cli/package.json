@@ -1,6 +1,6 @@
 {
   "name": "@dotenv-run/cli",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "cli to load environment variables with monorepo support",
   "homepage": "https://github.com/chihab/dotenv-run",
   "type": "module",
@@ -25,7 +25,7 @@
   "author": "Chihab Otmani <chihab@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@dotenv-run/core": "^1.3.3",
+    "@dotenv-run/core": "^1.3.4",
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
     "minimist": "^1.2.8"
