@@ -1,50 +1,115 @@
-# dotenv-run
+<h1>dotenv-run</h1>
 
-`@dotenv-run` is a collection of packages that use **dotenv** to support loading environment variables from `.env` files with multiple integrations.
+`dotenv-run` is a collection of packages that use **dotenv** to support loading environment variables from `.env` files with multiple integrations.
 
-Here are some of the benefits of using @dotenv-run:
+Here are some of the benefits of using `dotenv-run`:
 
-- ✅ **Simple**: seamelessly integrates with your existing workflow.
-- ✅ **Flexible**: supports multiple `.env` files and loading priorities.
-- ✅ **Expand**: supports expanding variables already available on your machine for use in your `.env` files.
-- ✅ **Monorepo ✨**: supports monorepo projects with multiple applications. 
-- ✅ **Secure**: supports filtering environment variables by prefix.
-- ✅ **TypeScript**: supports TypeScript projects with type definitions for `process.env` and `import.meta.env`.
+- ✅ **Monorepo ✨**: supports monorepo projects with multiple applications.
+- ✅ **Universal**: supports multiple integrations including CLI, Webpack, Rollup, Vite, ESbuild and Angular.
+- ✅ **TypeScript**: supports TS projects with type definitions for `process.env` and `import.meta.env`.
 - ✅ **ESM**: supports `process.env` and `import.meta.env` in ESM modules.
-- ✅ **Universal**: supports multiple intergrations including CLI, Node.js preload, Webpack, Rollup, Vite, and esbuild.
+- ✅ **Secure**: supports filtering environment variables by prefix.
 
-`@dotenv-run` can be installed as a standalone CLI or as a plugin for your favorite bundler.
+`dotenv-run` can be installed as a standalone CLI or as a plugin for your favorite bundler.
 
-- [@dotenv-run/cli](#dotenv-runcli)
-- [@dotenv-run/esbuild](#dotenv-runesbuild)
-- [@ngx-env/builder](#ngx-envbuilder)
-  - [Quick Demo](#quick-demo)
-  - [Quick start](#quick-start)
-- [@dotenv-run/core](#dotenv-runcore)
+<h2>Integrations</h2>
+
+`dotenv.run` supports multiple integrations including CLI, Node.js preload, Webpack, Rollup, Vite, esbuild and Angular.
+
+| Integration     | Package                                   | Status |
+| --------------- | ----------------------------------------- | ------ |
+| CLI             | [@dotenv-run/cli](#dotenv-runcli)         | ✅     |
+| ESBuild         | [@dotenv-run/esbuild](#dotenv-runesbuild) | ✅     |
+| Rollup          | [@dotenv-run/rollup](#dotenv-runrollup)   | ✅     |
+| Vite            | [@dotenv-run/rollup](#dotenv-runrollup)  | ✅     |
+| Node.js preload | @dotenv-run/load       | ✅     |
+| Angular         | [@ngx-env/builder](#ngx-envbuilder)       | ✅     |
+
+For more information about each integration, please refer to the documentation.
+You can use it to build your own integration.
+
+## Quick start
+
+- [Quick start](#quick-start)
+  - [@dotenv-run/cli](#dotenv-runcli)
+  - [@dotenv-run/esbuild](#dotenv-runesbuild)
+  - [@ngx-env/builder](#ngx-envbuilder)
+    - [Demos](#demos)
+    - [Quick start](#quick-start-1)
+  - [@dotenv-run/webpack](#dotenv-runwebpack)
+  - [@dotenv-run/rollup](#dotenv-runrollup)
+  - [@dotenv-run/core](#dotenv-runcore)
 - [Credits](#credits)
 - [License](#license)
 
-You can use it to build your own integration.
+Assuming you have the following monorepo structure:
 
-# @dotenv-run/cli
+```shell
+platform
+├── apps
+│   ├── vite-app
+│   ├── ng-app
+│   └── esbuild-app
+│   │   ├── .env.local # API_BASE=http://localhost:3001
+│   │   ├── package.json
+│   │   └── webapp.config.mjs
+├── libs
+│   └── rollup-lib
+│       ├── package.json
+│       └── rollup.config.mjs
+├── .env.dev # API_BASE=https://dev.dotenv.run
+├── .env.prod # API_BASE=https://prod.dotenv.run
+├── .env # API_USERS=$API_BASE/api/v1/users;API_AUTH=https://$API_BASE/auth
+├── nx.json
+└── package.json
+```
 
-`@dotenv-run/cli `is a standalone CLI that can be used to run a script.
+and the following `dotenv.run` options:
+
+```json
+{
+  "debug": true, // print debug information
+  "unsecure": true, // display environment variables values
+  "root": "../..", // root directory to search for .env files
+  "environment": "dev", // environment to load (default: NODE_ENV)
+  "files": [".env"], // .env files to load (default: .env)
+  "prefix": "^API_" // prefix to filter environment variables (used with bundlers)
+}
+```
+
+`dotenv-run` will search and load `.env.*` files located in the root workspace `/home/code/platform` down to the current working directory of the application.
+
+```sh
+- Root directory: /home/code/platform
+- Working directory:  /codes/code/platform/apps/esbuild-app
+- Files: .env
+- Environment: dev
+- Environment files:
+ ✔ /home/code/platform/apps/esbuild-app/.env.local
+ ✔ /home/code/platform/.env.dev
+ ✔ /home/code/platform/.env
+- Environment variables: API (Unsecure Mode)
+ ✔ API_USERS http://localhost:3001/api/v1/users
+ ✔ API_AUTH https://localhost:3001/auth
+```
+
+### @dotenv-run/cli
+
+`@dotenv-run/cli` is a standalone CLI that can be used to run a script.
 
 ```sh
 ❯ npx dotenv-run
 
   Usage: dotenv-run [options] -- <command>
-  
+
   Options:
-    -d, --debug [regexp]                    print debug information
-    -u, --unsecure                          display environment variables values
-    -e, --env [environment]                 environment to load (default: NODE_ENV)
-    -r, --root                              root directory to search for .env files
-    -p, --prefix [.env,.secrets,.env.api]   .env file prefixes to load (default: .env)
-    -f, --file [.env,.secrets,.env.api]     specific .env files to load (default: .env)
-    -o, --override                          override existing environment variables
-    -h, --help                              output usage information
-    
+    -d, --debug [regexp]           print debug information
+    -u, --unsecure                 display environment variables values
+    -e, --env [environment]        environment to load (default: NODE_ENV)
+    -r, --root                     root directory to search for .env files
+    -f, --file [.env,.secrets]     .env files to load (default: .env)
+    -h, --help                     output usage information
+
   Examples:
     dotenv-run -d
     dotenv-run -- npm start
@@ -52,25 +117,9 @@ You can use it to build your own integration.
     dotenv-run -f ../.env,../.env.api -- npm start
 ```
 
-```sh
-❯ npx dotenv-run -e prod -r ../.. -d 'NGX' -u  --  next build # -d 'NGX' -u are debug options
----------------------------------
-- Root directory: /home/chihab/Platform
-- Working directory:  /Users/chihab/Platform/apps/next-app
-- Files: .env
-- Environment:  prod
-- Environment files:
- ✔ /home/chihab/Platform/apps/next-app/.env.prod
- ✔ /home/chihab/Platform/apps/next-app/.env.local
- ✔ /home/chihab/Platform/.env.prod
- ✔ /home/chihab/Platform/.env
-- Environment variables: NGX (Unsecure Mode)
- ✔ NGX_USER_HOME /home/chihab
- ✔ NGX_VERSION 0.0.0
----------------------------------
-```
+### @dotenv-run/esbuild
 
-# @dotenv-run/esbuild
+`@dotenv-run/esbuild` is a plugin for esbuild that can be used to inject environment variables into your applications.
 
 ```ts
 import { dotenvRun } from "@dotenv-run/esbuild";
@@ -81,21 +130,17 @@ await build({
   entryPoints: [`test/app.js`],
   plugins: [
     dotenvRun({
-      verbose: true,
-      root: '../../',
-      prefix: "NGX_",
+      debug: true,
+      root: "../../",
+      prefix: "^API",
     }),
   ],
 });
 ```
 
-# @ngx-env/builder
+### @ngx-env/builder
 
-`@ngx-env/builder` is a plugin for Angular CLI that can be used to inject environment variables into your Angular applications.
-
-<img src="https://raw.githubusercontent.com/chihab/dotenv-run/main/packages/angular/logo.png" alt="@ngx-env/builder" width="90px" align="right" />
-
-**Easily inject environment variables into your Angular applications**
+`@ngx-env/builder` is a plugin for Angular CLI and a wrapper around `@dotenv-run/esbuild` or `@dotenv-run/webpack` that can be used to inject environment variables into your Angular applications.
 
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥
 - ✅ Webpack and ESBuild support 🚀
@@ -109,20 +154,18 @@ await build({
   - [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
 - ✅ Active development and support
 
-## Quick Demo
+#### Demos
 
 - [v17 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
 - [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
 
-## Quick start
-
-1. **Add @ngx-env to your CLI project**
+#### Quick start
 
 ```sh
 ng add @ngx-env/builder
 ```
 
-2. **Define Environment Variables in `.env`** (optional)
+Environment variables should start with `NG_APP_` prefix, you can define a custom prefix.
 
 ```sh
 NG_APP_VERSION=$npm_package_version
@@ -130,12 +173,11 @@ NG_APP_COMMIT=$GITHUB_SHA
 NG_APP_ENABLE_SENTRY=false
 ```
 
-3. **Usage in TS**
-
 ```ts
 @Component({
   selector: "app-footer",
   template: `{{ branch }} - {{ commit }}`,
+  standalone: true,
 })
 export class MainComponent {
   branch = import.meta.env.NG_APP_BRANCH_NAME; // Recommended
@@ -150,32 +192,81 @@ export class MainComponent {
 </head>
 ```
 
-4. **Run your CLI commands**
+Configuration options can be passed to `@ngx-env/builder` using `ngxEnv` section in `angular.json` file.
 
-```sh
-npm start
-# Command-line environment variables
-NG_APP_BRANCH_NAME=$GITHUB_HEAD_REF ng test
-NG_APP_ENABLE_SENTRY=true npm run build
+```json
+{
+  "builder": "@ngx-env/builder:application",
+  "options": {
+    "ngxEnv": {
+      "debug": true,
+      "root": "../..",
+      "prefix": "^NG_APP_"
+    }
+  }
+}
 ```
 
-# @dotenv-run/core
+You can find the full `@ngx-env/builder` documentation [here](https://github.com/chihab/dotenv-run/tree/main/packages/angular).
+
+### @dotenv-run/webpack
+
+`@dotenv-run/webpack` is a plugin for webpack that can be used to inject environment variables into your applications.
+
+```ts
+import { DotenvRunPlugin } from "@dotenv-run/webpack";
+import path from "path";
+
+const __dirname = path.resolve();
+
+export default {
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+  plugins: [
+    new DotenvRunPlugin(
+      { prefix: "^API", debug: true, root: "../.." },
+      __dirname
+    ),
+  ],
+};
+```
+
+### @dotenv-run/rollup
+
+`@dotenv-run/rollup` is a plugin for rollup that can be used to inject environment variables into your applications.
+
+```js
+import env from "@dotenv-run/rollup";
+
+export default {
+  input: "src/index.js",
+  output: {
+    file: "dist/index.js",
+  },
+  plugins: [env({ prefix: "API", debug: true, root: "../../.." })],
+};
+```
+
+### @dotenv-run/core
 
 `@dotenv-run/core` is the core package that can be used to load environment variables from `.env` files.
 
 ```ts
-const { full, stringified, raw } = env({
-  root: "..",
-  verbose: true,
+env({
+  root: "../..",
+  debug: true,
   prefix: "^API_",
   files: [".env"],
 });
 ```
 
-# Credits
+## Credits
 
 - [dotenv](https://github.com/motdotla/dotenv)
 
-# License
+## License
 
 MIT © [Chihab Otmani](https://twitter.com/chihabotmani)
