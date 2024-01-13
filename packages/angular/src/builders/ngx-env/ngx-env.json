@@ -1,28 +1,36 @@
 {
-    "ngxEnv": {
-        "type": "object",
-        "properties": {
-            "prefix": {
-                "type": "string",
-                "description": "Regexp prefix of the environment variables to be replaced",
-                "default": "NG_APP"
-            },
-            "root": {
-                "type": "string",
-                "description": "Root directory of the project to find .env files",
-                "default": "."
-            },
-            "unsecure": {
-                "type": "boolean",
-                "description": "Display environment variables values in the console",
-                "default": false
-            },
-            "verbose": {
-                "type": "boolean",
-                "description": "Display environment files and variables in the console",
-                "default": true
-            }
-        },
-        "additionalProperties": false
-    }
+  "ngxEnv": {
+    "type": "object",
+    "properties": {
+      "prefix": {
+        "type": "string",
+        "description": "Regexp prefix of the environment variables to be replaced",
+        "default": "NG_APP"
+      },
+      "verbose": {
+        "type": "boolean",
+        "description": "Display environment files and variables in the console",
+        "default": true
+      },
+      "unsecure": {
+        "type": "boolean",
+        "description": "Display environment variables values in the console",
+        "default": false
+      },
+      "root": {
+        "type": "string",
+        "description": "Root directory of the project to find .env files",
+        "default": "."
+      },
+      "files": {
+        "type": "array",
+        "description": "List of .env files to be loaded",
+        "default": [".env"],
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "additionalProperties": false
+  }
 }

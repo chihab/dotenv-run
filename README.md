@@ -10,11 +10,7 @@ Here are some of the benefits of using `dotenv-run`:
 - ✅ **ESM**: supports `process.env` and `import.meta.env` in ESM modules.
 - ✅ **Secure**: supports filtering environment variables by prefix.
 
-`dotenv-run` can be installed as a standalone CLI or as a plugin for your favorite bundler.
-
 <h2>Integrations</h2>
-
-`dotenv.run` supports multiple integrations including CLI, Node.js preload, Webpack, Rollup, Vite, esbuild and Angular.
 
 | Integration     | Package                                   | Status |
 | --------------- | ----------------------------------------- | ------ |
@@ -24,9 +20,6 @@ Here are some of the benefits of using `dotenv-run`:
 | Vite            | [@dotenv-run/rollup](#dotenv-runrollup)  | ✅     |
 | Node.js preload | @dotenv-run/load       | ✅     |
 | Angular         | [@ngx-env/builder](#ngx-envbuilder)       | ✅     |
-
-For more information about each integration, please refer to the documentation.
-You can use it to build your own integration.
 
 ## Quick start
 
@@ -68,7 +61,7 @@ and the following `dotenv.run` options:
 
 ```json
 {
-  "debug": true, // print debug information
+  "verbose": true, // print debug information
   "unsecure": true, // display environment variables values
   "root": "../..", // root directory to search for .env files
   "environment": "dev", // environment to load (default: NODE_ENV)
@@ -103,7 +96,7 @@ and the following `dotenv.run` options:
   Usage: dotenv-run [options] -- <command>
 
   Options:
-    -d, --debug [regexp]           print debug information
+    -v, --verbose [regexp]         display debug information
     -u, --unsecure                 display environment variables values
     -e, --env [environment]        environment to load (default: NODE_ENV)
     -r, --root                     root directory to search for .env files
@@ -130,7 +123,7 @@ await build({
   entryPoints: [`test/app.js`],
   plugins: [
     dotenvRun({
-      debug: true,
+      verbose: true,
       root: "../../",
       prefix: "^API",
     }),
@@ -199,7 +192,7 @@ Configuration options can be passed to `@ngx-env/builder` using `ngxEnv` section
   "builder": "@ngx-env/builder:application",
   "options": {
     "ngxEnv": {
-      "debug": true,
+      "verbose": true,
       "root": "../..",
       "prefix": "^NG_APP_"
     }
@@ -227,7 +220,7 @@ export default {
   },
   plugins: [
     new DotenvRunPlugin(
-      { prefix: "^API", debug: true, root: "../.." },
+      { prefix: "^API", verbose: true, root: "../.." },
       __dirname
     ),
   ],
@@ -246,7 +239,7 @@ export default {
   output: {
     file: "dist/index.js",
   },
-  plugins: [env({ prefix: "API", debug: true, root: "../../.." })],
+  plugins: [env({ prefix: "API", verbose: true, root: "../../.." })],
 };
 ```
 
@@ -257,7 +250,7 @@ export default {
 ```ts
 env({
   root: "../..",
-  debug: true,
+  verbose: true,
   prefix: "^API_",
   files: [".env"],
 });

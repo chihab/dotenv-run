@@ -2,7 +2,7 @@
 title: Quick Start
 ---
 
-`@dotenv-run` can be installed as a **standalone CLI** or as a **plugin** for your favorite bundler.
+`dotenv-run` can be installed as a **standalone CLI** or as a **plugin** for your favorite bundler.
 
 You can also use `@dotenv-run/core` to build your own integration.
 

@@ -6,10 +6,10 @@ import minimist from "minimist";
 import { run } from "./run.js";
 
 const argv = minimist(process.argv.slice(2), {
-  string: ["debug", "env", "file", "root", "prefix"],
+  string: ["verbose", "env", "file", "root", "prefix"],
   boolean: ["help", "unsecure", "override"],
   alias: {
-    debug: "d",
+    verbose: "v",
     env: "e",
     file: "f",
     root: "r",
@@ -30,14 +30,13 @@ function help() {
   Usage: dotenv-run [options] -- <command>
   
   Options:
-    -d, --debug [regexp]                    print debug information, display environment variables filtered by regexp if provided
-    -e, --env  [environment]                environment to load (default: NODE_ENV)
-    -f, --file [.env,.secrets,.env.api]     specific .env files to load (default: .env, incompatible with root and prefix options)
-    -r, --root                              root directory to search for .env files, defaults to current working directory
-    -p, --prefix [.env,.secrets,.env.api]   .env file prefixes to load (default: .env)
-    -h, --help                              output usage information
-    -o, --override                          override existing environment variables (default: false)
+    -v, --verbose [regexp]                  print debug information, display environment variables filtered by regexp if provided
     -u, --unsecure                          display environment variables in debug output (default: false)
+    -e, --env  [environment]                environment to load (default: NODE_ENV)
+    -r, --root                              root directory to start searching for .env files (default: root workspace directory)
+    -f, --file [.env,.secrets,.env.api]     specific .env files to load (default: .env, incompatible with root and prefix options)
+    -o, --override                          override existing environment variables (default: false)
+    -h, --help                              output usage information
     
   Examples:
     dotenv-run -d
@@ -55,30 +54,20 @@ if (argv.h) {
   help();
 } else {
   const cmd = argv._[0];
-  const verbose = argv.hasOwnProperty("d");
+  const verbose = argv.hasOwnProperty("v");
   if (!verbose && !cmd) {
     help();
     process.exit(1);
   }
-  if (argv.f && (argv.r || argv.p)) {
-    console.log(chalk.red("option -f cannot be used with -r or -p"));
-    console.log("use -f to specify specific .env files");
-    console.log("\tdotenv-run -f ./.env,../../secrets");
-    console.log(
-      "use -r to specify the directory from which to search for files prefixed with -p down to cwd"
-    );
-    console.log("\tdotenv-run -r ../.. -p .env,.env.api");
-    process.exit(1);
-  }
-  const root = argv.f ? undefined : argv.r ?? findRootPath();
-  const files = argv.f ? parseList(argv.f) : parseList(argv.p);
-  const cwd = argv.f ? undefined : process.cwd();
+  const root = argv.r ?? findRootPath();
+  const files = parseList(argv.f ?? ".env");
+  const cwd = process.cwd();
   env({
     environment: argv.e ?? process.env.NODE_ENV,
     cwd,
     root,
     files,
-    prefix: argv.d,
+    prefix: argv.v,
     verbose,
     unsecure: argv.u,
     dotenv: { override: argv.o },

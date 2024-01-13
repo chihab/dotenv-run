@@ -21,8 +21,13 @@
             ],
             "tsConfig": "tsconfig.app.json",
             "ngxEnv": {
-              "prefix": "NGX_",
-              "unsecure": true
+              "prefix": "NGX_|API",
+              "root": "../..",
+              "unsecure": true,
+              "files": [
+                ".env.app",
+                ".env"
+              ]
             },
             "assets": [
               "src/favicon.ico",
