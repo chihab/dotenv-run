@@ -22,7 +22,6 @@
             "tsConfig": "tsconfig.app.json",
             "ngxEnv": {
               "prefix": "NGX_|API",
-              "root": "../..",
               "unsecure": true,
               "files": [
                 ".env.app",

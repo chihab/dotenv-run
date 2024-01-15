@@ -19,8 +19,7 @@
       },
       "root": {
         "type": "string",
-        "description": "Root directory of the project to find .env files",
-        "default": "."
+        "description": "Root directory of the project to find .env files"
       },
       "files": {
         "type": "array",

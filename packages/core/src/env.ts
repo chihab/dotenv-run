@@ -5,6 +5,7 @@ import { build } from "./build.js";
 import { expand } from "./expand.js";
 import type { DotenvRunOptions } from "./options.js";
 import { getAbsoluteEnvPath, getPathsDownTo, isSubfolder } from "./utils.js";
+import { findRootPath } from "./root.js";
 
 export type Env = Record<string, string>;
 
@@ -111,7 +112,7 @@ export function env({
   verbose,
   nodeEnv = true,
   builtIn = {},
-  ...rest
+  root
 }: DotenvRunOptions = {}) {
   const options: DotenvRunOptions = {
     cwd,
@@ -121,9 +122,9 @@ export function env({
     prefix,
     verbose,
     nodeEnv,
-    ...rest,
+    root: root ?? findRootPath(),
   };
-  const { root, files: envPaths } = paths(options);
+  const { root: _root, files: envPaths } = paths(options);
   expand(envPaths, dotenv);
   const processEnv = process.env;
   const values = prefix
@@ -135,7 +136,7 @@ export function env({
     : processEnv;
   const allValues = { ...values, ...builtIn };
   if (verbose) {
-    print({ ...options, root }, envPaths, allValues);
+    print({ ...options, root: _root }, envPaths, allValues);
   }
   return build(allValues);
 }
