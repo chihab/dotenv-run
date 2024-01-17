@@ -18,8 +18,8 @@ Here are some of the benefits of using `dotenv-run`:
 | ESBuild         | [@dotenv-run/esbuild](#dotenv-runesbuild) | ✅     |
 | Rollup          | [@dotenv-run/rollup](#dotenv-runrollup)   | ✅     |
 | Vite            | [@dotenv-run/rollup](#dotenv-runrollup)  | ✅     |
+| Core            | [@dotenv-run/core](#dotenv-runcore)  | ✅     |
 | Node.js preload | @dotenv-run/load       | ✅     |
-| Core | @dotenv-run/core       | ✅     |
 | Angular         | [@ngx-env/builder](#ngx-envbuilder)       | ✅     |
 
 ## Quick start
