@@ -15,10 +15,10 @@ Here are some of the benefits of using `dotenv-run`:
 | Integration     | Package                                   | Status |
 | --------------- | ----------------------------------------- | ------ |
 | CLI             | [@dotenv-run/cli](#dotenv-runcli)         | ✅     |
+| Core            | [@dotenv-run/core](#dotenv-runcore)  | ✅     |
 | ESBuild         | [@dotenv-run/esbuild](#dotenv-runesbuild) | ✅     |
 | Rollup          | [@dotenv-run/rollup](#dotenv-runrollup)   | ✅     |
 | Vite            | [@dotenv-run/rollup](#dotenv-runrollup)  | ✅     |
-| Core            | [@dotenv-run/core](#dotenv-runcore)  | ✅     |
 | Node.js preload | @dotenv-run/load       | ✅     |
 | Angular         | [@ngx-env/builder](#ngx-envbuilder)       | ✅     |
 
@@ -26,13 +26,13 @@ Here are some of the benefits of using `dotenv-run`:
 
 - [Quick start](#quick-start)
   - [@dotenv-run/cli](#dotenv-runcli)
+  - [@dotenv-run/core](#dotenv-runcore)
   - [@dotenv-run/esbuild](#dotenv-runesbuild)
   - [@ngx-env/builder](#ngx-envbuilder)
     - [Demos](#demos)
     - [Quick start](#quick-start-1)
   - [@dotenv-run/webpack](#dotenv-runwebpack)
   - [@dotenv-run/rollup](#dotenv-runrollup)
-  - [@dotenv-run/core](#dotenv-runcore)
 - [Credits](#credits)
 - [License](#license)
 
@@ -109,6 +109,19 @@ and the following `dotenv.run` options:
     dotenv-run -- npm start
     dotenv-run -r ../.. -p .env,.secrets -- npm start
     dotenv-run -f ../.env,../.env.api -- npm start
+```
+
+### @dotenv-run/core
+
+[`@dotenv-run/core`](https://www.npmjs.com/package/@dotenv-run/core) is the core package that can be used to load environment variables from `.env` files.
+
+```ts
+env({
+  root: "../..",
+  verbose: true,
+  prefix: "^API_",
+  files: [".env"],
+});
 ```
 
 ### @dotenv-run/esbuild
@@ -242,19 +255,6 @@ export default {
   },
   plugins: [env({ prefix: "API", verbose: true, root: "../../.." })],
 };
-```
-
-### @dotenv-run/core
-
-[`@dotenv-run/core`](https://www.npmjs.com/package/@dotenv-run/core) is the core package that can be used to load environment variables from `.env` files.
-
-```ts
-env({
-  root: "../..",
-  verbose: true,
-  prefix: "^API_",
-  files: [".env"],
-});
 ```
 
 ## Credits
