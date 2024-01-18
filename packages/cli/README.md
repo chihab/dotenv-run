@@ -37,7 +37,7 @@ npm add -D @dotenv-run/cli
   Examples:
     dotenv-run -d
     dotenv-run -- npm start
-    dotenv-run -r ../.. -p .env,.secrets -- npm start
+    dotenv-run -r ../.. -f .env,.secrets -- npm start
     dotenv-run -f ../.env,../.env.api -- npm start
 ```
 

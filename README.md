@@ -1,5 +1,7 @@
 <h1>dotenv-run</h1>
 
+[![monthly downloads](https://img.shields.io/npm/dm/@dotenv-run/core.svg)](https://www.npmjs.com/package/@dotenv-run/core)
+
 `dotenv-run` is a collection of packages that use **dotenv** to support loading environment variables from `.env` files with multiple integrations.
 
 Here are some of the benefits of using `dotenv-run`:
@@ -58,7 +60,7 @@ platform
 └── package.json
 ```
 
-and the following `dotenv.run` options:
+and the following `dotenv-run` options:
 
 ```json
 {
@@ -107,7 +109,7 @@ and the following `dotenv.run` options:
   Examples:
     dotenv-run -d
     dotenv-run -- npm start
-    dotenv-run -r ../.. -p .env,.secrets -- npm start
+    dotenv-run -r ../.. -f .env,.secrets -- npm start
     dotenv-run -f ../.env,../.env.api -- npm start
 ```
 

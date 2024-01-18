@@ -2,20 +2,19 @@ import {
   BuilderContext,
   createBuilder,
   fromAsyncIterable,
-  targetFromTargetString,
 } from "@angular-devkit/architect";
 import {
   ApplicationBuilderOptions,
   buildApplication,
 } from "@angular-devkit/build-angular";
-import { dotenvRunDefine } from "@dotenv-run/esbuild";
 import { env, type DotenvRunOptions } from "@dotenv-run/core";
-import { from, switchMap, tap } from "rxjs";
-import { indexHtml } from "../utils/esbuild-index-html";
-import { getProjectCwd } from "../utils/project";
-import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
+import { dotenvRunDefine } from "@dotenv-run/esbuild";
 import { join } from "path";
+import { from, switchMap, tap } from "rxjs";
+import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
+import { indexHtml } from "../utils/esbuild-index-html";
 import { getEnvironment } from "../utils/get-environment";
+import { getProjectCwd } from "../utils/project";
 
 export const buildWithPlugin = (
   options: ApplicationBuilderOptions & NgxEnvSchema,
@@ -33,7 +32,11 @@ export const buildWithPlugin = (
         buildApplication(options, context, [dotenvRunDefine(full)])
       ).pipe(
         tap(() => {
-          indexHtml(join(cwd, options.outputPath), raw, !!options.ssr);
+          indexHtml(
+            join(cwd, options.outputPath.toString()),
+            raw,
+            !!options.ssr
+          );
         })
       );
     })

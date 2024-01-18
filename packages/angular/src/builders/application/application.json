@@ -162,6 +162,11 @@
                       "type": "boolean",
                       "description": "Extract and inline critical CSS definitions to improve first paint time.",
                       "default": true
+                    },
+                    "removeSpecialComments": {
+                      "type": "boolean",
+                      "description": "Remove comments in global CSS that contains '@license' or '@preserve' or that starts with '//!' or '/*!'.",
+                      "default": true
                     }
                   },
                   "additionalProperties": false
@@ -199,6 +204,13 @@
         }
       ]
     },
+    "loader": {
+      "description": "Defines the type of loader to use with a specified file extension when used with a JavaScript `import`. `text` inlines the content as a string; `binary` inlines the content as a Uint8Array; `file` emits the file and provides the runtime location of the file; `empty` considers the content to be empty and not include it in bundles.",
+      "type": "object",
+      "patternProperties": {
+        "^\\.\\S+$": { "enum": ["text", "binary", "file", "empty"] }
+      }
+    },
     "fileReplacements": {
       "description": "Replace compilation source files with other compilation source files in the build.",
       "type": "array",
@@ -208,8 +220,41 @@
       "default": []
     },
     "outputPath": {
-      "type": "string",
-      "description": "The full path for the new output directory, relative to the current workspace."
+      "description": "Specify the output path relative to workspace root.",
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "base": {
+              "type": "string",
+              "description": "Specify the output path relative to workspace root."
+            },
+            "browser": {
+              "type": "string",
+              "pattern": "^[-\\w\\.]*$",
+              "default": "browser",
+              "description": "The output directory name of your browser build within the output path base. Defaults to 'browser'."
+            },
+            "server": {
+              "type": "string",
+              "pattern": "^[-\\w\\.]*$",
+              "default": "server",
+              "description": "The output directory name of your server build within the output path base. Defaults to 'server'."
+            },
+            "media": {
+              "type": "string",
+              "pattern": "^[-\\w\\.]+$",
+              "default": "media",
+              "description": "The output directory name of your media files within the output browser directory. Defaults to 'media'."
+            }
+          },
+          "required": ["base"],
+          "additionalProperties": false
+        },
+        {
+          "type": "string"
+        }
+      ]
     },
     "aot": {
       "type": "boolean",
@@ -371,6 +416,11 @@
               "minLength": 1,
               "default": "index.html",
               "description": "The output path of the application's generated HTML index file. The full provided path will be used and will be considered relative to the application's configured output path."
+            },
+            "preloadInitial": {
+              "type": "boolean",
+              "default": true,
+              "description": "Generates 'preload', 'modulepreload', and 'preconnect' link elements for initial application files and resources."
             }
           },
           "required": ["input"]
@@ -406,7 +456,7 @@
       "enum": ["none", "anonymous", "use-credentials"]
     },
     "allowedCommonJsDependencies": {
-      "description": "A list of CommonJS packages that are allowed to be used without a build time warning.",
+      "description": "A list of CommonJS or AMD packages that are allowed to be used without a build time warning. Use `'*'` to allow all.",
       "type": "array",
       "items": {
         "type": "string"
