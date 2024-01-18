@@ -29,10 +29,10 @@
     "@dotenv-run/core": "^1.3.4"
   },
   "peerDependencies": {
-    "esbuild": "0.19.5"
+    "esbuild": "0.19.11"
   },
   "devDependencies": {
-    "esbuild": "0.19.5",
+    "esbuild": "0.19.11",
     "@types/node": "^16.0.0"
   }
 }
