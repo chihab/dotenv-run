@@ -19,6 +19,7 @@ import { devServerIndexHtml } from "../utils/esbuild-index-html";
 import { getEnvironment } from "../utils/get-environment";
 import { getProjectCwd } from "../utils/project";
 import { plugin as webpackPlugin } from "../utils/webpack-plugin";
+import { JsonObject } from "@angular-devkit/core";
 
 export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
@@ -27,13 +28,21 @@ export const buildWithPlugin = (
   const buildTarget = targetFromTargetString(
     options.buildTarget ?? options.browserTarget
   );
-  async function setup() {
-    return context.getTargetOptions(
-      buildTarget
-    ) as unknown as DevServerBuilderOptions & NgxEnvSchema;
-  }
   async function builderName() {
     return context.getBuilderNameForTarget(buildTarget);
+  }
+  async function setup() {
+    const targetOptions = (await context.getTargetOptions(
+      buildTarget
+    )) as unknown as DevServerBuilderOptions & NgxEnvSchema;
+    if ((await builderName()) === "@ngx-env/builder:application") {
+      // Because of validateOptions being ignored, we need to validate options manually
+      await context.validateOptions(
+        targetOptions as JsonObject,
+        "@ngx-env/builder:application"
+      );
+    }
+    return targetOptions;
   }
   return combineLatest([setup(), builderName(), getProjectCwd(context)]).pipe(
     switchMap(([_options, builderName, cwd]) => {
@@ -50,12 +59,16 @@ export const buildWithPlugin = (
         });
         return executeDevServerBuilder(
           options,
-          context,
+          {
+            ...context,
+            validateOptions: async (options) => options as any, // Because of builderSelector, CLI will validation options against @angular-devkit/build-angular:application schema which will fail
+          },
           {
             indexHtml: async (content) => devServerIndexHtml(content, raw),
           },
           {
             buildPlugins: [esbuildPlugin(full)],
+            builderSelector: () => "@angular-devkit/build-angular:application", // CLI requires it to recognize the builder as an esbuild builder otherwise plugins are not supported
           }
         );
       } else {
