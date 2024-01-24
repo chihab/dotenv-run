@@ -33,7 +33,7 @@ export const buildWithPlugin = (
       ).pipe(
         tap(() => {
           indexHtml(
-            join(cwd, options.outputPath.toString()),
+            join(context.workspaceRoot, options.outputPath.toString()),
             raw,
             !!options.ssr
           );
