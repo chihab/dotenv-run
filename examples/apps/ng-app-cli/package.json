@@ -1,6 +1,6 @@
 {
   "name": "ng-app-cli",
-  "version": "0.0.0",
+  "version": "10",
   "scripts": {
     "ng": "ng",
     "watch": "ng build --watch --configuration development",
@@ -11,7 +11,8 @@
     "build:esbuild-browser": "NODE_ENV=production ng run ng-app-cli:build-be",
     "build:browser": "NODE_ENV=production ng run ng-app-cli:build-browser",
     "pretest": "npx ng config projects.ng-app-cli.architect.test.options.ngxEnv.prefix 'NGX_'",
-    "test": "NODE_ENV=test NGX_BRANCH_NAME=main ng test --watch=false",
+    "test": "NODE_ENV=test NGX_BRANCH=test ng test --watch=false",
+    "test:jest": "NODE_OPTIONS=--experimental-vm-modules NODE_ENV=test npx jest",
     "e2e": "playwright test",
     "static": "serve dist/ng-app-cli/browser/fr -p 8081"
   },
@@ -47,6 +48,13 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.2.2"
+    "typescript": "~5.2.2",
+    "ts-jest": "^29.1.2",
+    "@jest/transform": "^29.7.0",
+    "esbuild": "0.20.0",
+    "jest": "^29.7.0",
+    "jest-preset-angular": "14.0.0",
+    "@dotenv-run/core": "*",
+    "@dotenv-run/jest-angular": "*"
   }
 }

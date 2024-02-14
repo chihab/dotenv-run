@@ -1,0 +1,30 @@
+{
+  "name": "@dotenv-run/jest-angular",
+  "version": "0.1.0",
+  "description": "Run Jest with Angular CLI environment variables",
+  "homepage": "https://github.com/chihab/dotenv-run",
+  "sideEffects": true,
+  "files": [
+    "index.mjs",
+    "README.md"
+  ],
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.mjs"
+    }
+  },
+  "keywords": [
+    "dotenv",
+    "run",
+    "cli"
+  ],
+  "peerDependencies": {
+    "jest-preset-angular": "^14.0.0"
+  },
+  "devDependencies": {
+    "jest-preset-angular": "14.0.0"
+  },
+  "author": "Chihab Otmani <chihab@gmail.com>",
+  "license": "ISC"
+}

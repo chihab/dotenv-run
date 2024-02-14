@@ -36,7 +36,6 @@
             },
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
-            "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -190,7 +189,8 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "ngxEnv": {
-              "prefix": "NGX_"
+              "prefix": "NGX_",
+              "unsecure": true
             },
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],

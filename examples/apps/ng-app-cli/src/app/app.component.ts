@@ -14,6 +14,5 @@ export class AppComponent {
   title = $localize`Hello world`;
   env = import.meta.env['NODE_ENV'];
   version = environment.env.NGX_VERSION;
-  appHome = import.meta.env['NGX_USER_HOME'];
-  home = import.meta.env['NGX_USER_HOME'];
+  branch = import.meta.env['NGX_BRANCH'];
 }
