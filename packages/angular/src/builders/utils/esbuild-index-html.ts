@@ -1,7 +1,6 @@
 import { type Dict } from "@dotenv-run/core";
 import { readFileSync, writeFileSync } from "fs";
 import * as glob from "glob";
-import { resolve } from "path";
 import { variablesReducer } from "./variables-reducer";
 
 function replaceInFile(filePath: string, raw: Dict) {
@@ -26,7 +25,9 @@ export function indexHtml(
       replaceInFile(filePath, raw);
     });
     if (ssr) {
-      replaceInFile(resolve(outputDir, "server/index.server.html"), raw);
+      glob.sync(`${outputDir}/server/**/index.server.html`).forEach((filePath) => {
+        replaceInFile(filePath, raw);
+      });
     }
   } catch (e) {
     console.error(e);
