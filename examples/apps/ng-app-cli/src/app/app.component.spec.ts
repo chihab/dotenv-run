@@ -14,9 +14,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'ng-app-cli' title`, () => {
+  it(`should have the 'Hello world' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ng-app-cli');
+    expect(app.title).toEqual('Hello world');
   });
 });

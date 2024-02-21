@@ -11,7 +11,7 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'ng-app-cli';
+  title = $localize`Hello world`;
   env = import.meta.env['NODE_ENV'];
   version = environment.env.NGX_VERSION;
   appHome = import.meta.env['NGX_USER_HOME'];

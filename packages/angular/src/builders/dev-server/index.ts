@@ -61,7 +61,7 @@ export const buildWithPlugin = (
           options,
           {
             ...context,
-            validateOptions: async (options) => options as any, // Because of builderSelector, CLI will validation options against @angular-devkit/build-angular:application schema which will fail
+            validateOptions: async (options) => options as any,
           },
           {
             indexHtml: async (content) => devServerIndexHtml(content, raw),

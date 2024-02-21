@@ -9,6 +9,15 @@
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "fr": {
+            "translation": "src/locale/messages.fr.xlf",
+            "baseHref": ""
+          }
+        }
+      },
       "architect": {
         "build": {
           "builder": "@ngx-env/builder:application",
@@ -16,25 +25,17 @@
             "outputPath": "dist/ng-app-cli",
             "index": "src/index.html",
             "browser": "src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "localize": ["fr"],
+            "i18nMissingTranslation": "error",
+            "polyfills": ["zone.js", "src/polyfills.ts"],
             "tsConfig": "tsconfig.app.json",
             "ngxEnv": {
-              "prefix": "NGX_|API",
+              "prefix": "NGX_",
               "unsecure": true,
-              "files": [
-                ".env.app",
-                ".env"
-              ]
+              "files": [".env.app", ".env"]
             },
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
@@ -87,22 +88,14 @@
         "test": {
           "builder": "@ngx-env/builder:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": ["zone.js", "zone.js/testing", "src/polyfills.ts"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "ngxEnv": {
               "prefix": "NGX_"
             },
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "sourceMap": false,
             "scripts": []
           }
