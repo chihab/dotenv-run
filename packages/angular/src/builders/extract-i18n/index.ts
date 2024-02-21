@@ -1,27 +1,50 @@
-import { BuilderContext, createBuilder } from "@angular-devkit/architect";
+import {
+  BuilderContext,
+  createBuilder,
+  targetFromTargetString,
+} from "@angular-devkit/architect";
 import {
   ExtractI18nBuilderOptions,
   executeExtractI18nBuilder,
 } from "@angular-devkit/build-angular";
-import { getProjectCwd } from "../utils/project";
+import { combineLatest, switchMap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { plugin } from "../utils/webpack-plugin";
-import { getEnvironment } from "../utils/get-environment";
 
 export const buildWithPlugin = (
   options: ExtractI18nBuilderOptions & NgxEnvSchema,
   context: BuilderContext
-): ReturnType<typeof executeExtractI18nBuilder> => {
-  return getProjectCwd(context).then((cwd: string) =>
-    executeExtractI18nBuilder(
-      options,
-      context,
-      plugin({
-        ...options.ngxEnv,
-        cwd,
-        environment: getEnvironment(context.target.configuration),
-      })
-    )
+) => {
+  const buildTarget = targetFromTargetString(
+    options.buildTarget ?? options.browserTarget
+  );
+  // options.buildTarget = "@angular-devkit/build-angular:application";
+  async function setup() {
+    const targetOptions = await context.getTargetOptions(buildTarget);
+    if ((await builderName()) === "@ngx-env/builder:application") {
+      // Because of validateOptions being ignored, we need to validate options manually
+      await context.validateOptions(
+        targetOptions,
+        "@ngx-env/builder:application"
+      );
+    }
+    return targetOptions;
+  }
+  async function builderName() {
+    return context.getBuilderNameForTarget(buildTarget);
+  }
+  return combineLatest([setup(), builderName()]).pipe(
+    switchMap(([_options, builderName]) => {
+      if (builderName === "@ngx-env/builder:browser") {
+        return executeExtractI18nBuilder(options, context);
+      } else {
+        return executeExtractI18nBuilder(options, {
+          ...context,
+          getBuilderNameForTarget: async () =>
+            "@angular-devkit/build-angular" + builderName.split(":")[1],
+          validateOptions: async (options) => options as any,
+        });
+      }
+    })
   );
 };
 

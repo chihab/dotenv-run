@@ -10,7 +10,7 @@
     "pretest": "npx ng config projects.ng-app-cli.architect.test.options.ngxEnv.prefix 'NGX_'",
     "test": "NODE_ENV=test NGX_BRANCH_NAME=main ng test --watch=false",
     "e2e": "playwright test",
-    "static": "serve dist/ng-app-cli/browser -p 8081"
+    "static": "serve dist/ng-app-cli/browser/fr -p 8081"
   },
   "private": true,
   "dependencies": {
@@ -33,6 +33,7 @@
     "@angular-devkit/build-angular": "^17.1.0",
     "@angular/cli": "^17.1.0",
     "@angular/compiler-cli": "^17.1.0",
+    "@angular/localize": "^17.1.0",
     "@types/express": "^4.17.17",
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
