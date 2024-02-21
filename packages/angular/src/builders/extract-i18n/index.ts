@@ -40,7 +40,7 @@ export const buildWithPlugin = (
         return executeExtractI18nBuilder(options, {
           ...context,
           getBuilderNameForTarget: async () =>
-            "@angular-devkit/build-angular" + builderName.split(":")[1],
+            "@angular-devkit/build-angular:" + builderName.split(":")[1],
           validateOptions: async (options) => options as any,
         });
       }
