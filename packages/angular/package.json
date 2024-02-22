@@ -34,24 +34,24 @@
     "glob": "^10.3.10"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^17.1.0",
-    "@angular-devkit/schematics": "^17.1.0",
-    "@angular-devkit/schematics-cli": "^17.1.0",
-    "@angular-devkit/architect": "^0.1701.0",
-    "@angular-devkit/core": "^17.1.0",
-    "@angular/compiler": "^17.1.0",
+    "@angular-devkit/build-angular": "^17.2.0",
+    "@angular-devkit/schematics": "^17.2.0",
+    "@angular-devkit/schematics-cli": "^17.2.0",
+    "@angular-devkit/architect": "^0.1702.0",
+    "@angular-devkit/core": "^17.2.0",
+    "@angular/compiler": "^17.2.0",
     "@dotenv-run/core": "^1.3.4",
     "cpy": "^8.1.2",
     "karma": "^6.4.2",
     "ts-node": "^10.8.0",
     "typescript": "~5.2.2",
     "rxjs": "^7.0.0",
-    "webpack": "^5.0.0"
+    "webpack": "5.90.1"
   },
   "peerDpendencies": {
-    "@angular-devkit/architect": "^17.1.0",
+    "@angular-devkit/architect": "^17.2.0",
     "@angular-devkit/schematics-cli": ">=12.0.0",
     "rxjs": "^7.0.0",
-    "webpack": "^5.0.0"
+    "webpack": "5.90.1"
   }
 }

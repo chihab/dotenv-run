@@ -10,10 +10,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@changesets/cli": "^2.26.2",
+    "@changesets/cli": "^2.27.1",
     "concurrently": "^8.2.2",
-    "turbo": "^1.10.16",
-    "typescript": "^5.2.2",
+    "turbo": "^1.12.4",
+    "typescript": "^5.3.3",
     "vitest": "^0.33.0"
   }
 }

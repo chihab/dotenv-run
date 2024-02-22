@@ -67,6 +67,104 @@
           },
           "defaultConfiguration": "production"
         },
+        "build-browser": {
+          "builder": "@ngx-env/builder:browser",
+          "options": {
+            "outputPath": "dist/ng-app-cli",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "localize": ["fr"],
+            "i18nMissingTranslation": "error",
+            "polyfills": ["zone.js", "src/polyfills.ts"],
+            "tsConfig": "tsconfig.app.json",
+            "ngxEnv": {
+              "prefix": "NGX_",
+              "unsecure": true,
+              "files": [".env.app", ".env"]
+            },
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "build-be": {
+          "builder": "@ngx-env/builder:browser-esbuild",
+          "options": {
+            "outputPath": "dist/ng-app-cli",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "localize": ["fr"],
+            "i18nMissingTranslation": "error",
+            "polyfills": ["zone.js", "src/polyfills.ts"],
+            "tsConfig": "tsconfig.app.json",
+            "ngxEnv": {
+              "prefix": "NGX_",
+              "unsecure": true,
+              "files": [".env.app", ".env"]
+            },
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-be": {
+          "builder": "@ngx-env/builder:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ng-app-cli:build-be:production"
+            },
+            "development": {
+              "buildTarget": "ng-app-cli:build-be:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
         "serve": {
           "builder": "@ngx-env/builder:dev-server",
           "configurations": {

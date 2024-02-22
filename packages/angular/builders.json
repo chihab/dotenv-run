@@ -1,5 +1,5 @@
 {
-  "$schema": "../../node_modules/@angular-devkit/architect/src/builders-schema.json",
+  "$schema": "./node_modules/@angular-devkit/architect/src/builders-schema.json",
   "builders": {
     "browser": {
       "implementation": "./dist/builders/browser",
@@ -30,6 +30,11 @@
       "implementation": "./dist/builders/application",
       "schema": "./dist/builders/schemas/application.json",
       "description": "Build application extended with ngx-env config"
+    },
+    "browser-esbuild": {
+      "implementation": "./dist/builders/browser-esbuild",
+      "schema": "./dist/builders/schemas/browser-esbuild.json",
+      "description": "Build browser app extended with ngx-env config using esbuild"
     }
   }
 }
