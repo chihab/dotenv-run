@@ -36,7 +36,7 @@ export const buildWithPlugin = (
       buildTarget
     )) as unknown as DevServerBuilderOptions & NgxEnvSchema;
     if ((await builderName()) === "@ngx-env/builder:application") {
-      // Because of validateOptions being ignored, we need to validate options manually
+      // Because of ngxEnv being removed from the options, we need to validate it here
       await context.validateOptions(
         targetOptions as JsonObject,
         "@ngx-env/builder:application"
@@ -57,12 +57,11 @@ export const buildWithPlugin = (
           ...ngxEnvOptions,
           environment: getEnvironment(buildTarget.configuration),
         });
+        delete _options.ngxEnv;
+        context.getTargetOptions = async () => _options as JsonObject;
         return executeDevServerBuilder(
           options,
-          {
-            ...context,
-            validateOptions: async (options) => options as any,
-          },
+          context,
           {
             indexHtml: async (content) => devServerIndexHtml(content, raw),
           },
