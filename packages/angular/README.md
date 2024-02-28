@@ -22,12 +22,10 @@
   - [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
 - ✅ Active development and support
 
-
 ## Quick Demo
 
-* [v17 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
-* [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
-
+- [v17 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
+- [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
 
 <h2> Table of contents</h2>
 
@@ -387,8 +385,6 @@ declare var process: {
 ```
 
 When you have multiple applications in your Nx workspace, you can define common `.env.*` files in the root of your workspace and override them in each application or any other subdirectory below the root. See [Cascading Environment Variables](#cascading-environment-variables) for more details.
-
-You can also checkout the sample Nx workspace [ here](https://github.com/chihab/dotenv-run/packages/angular/tree/main/apps/nx-demo).
 
 # Usage with Docker
 
