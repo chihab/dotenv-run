@@ -15,7 +15,7 @@ jobs:
           node-version: 18
       - uses: pnpm/action-setup@v2
         with:
-          version: 7.27.1
+          version: 8.8.0
       - name: Install Packages
         run: |
           pnpm i
@@ -31,7 +31,7 @@ jobs:
           cd examples
           npx playwright install --with-deps
           cd apps/ng-app-cli
-          npx ng add ../../../packages/angular --skip-confirmation
+          # npx ng add ../../../packages/angular --skip-confirmation
           npx tsc --noEmit --project tsconfig.app.json
           cd -
           pnpm build:all

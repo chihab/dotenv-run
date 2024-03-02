@@ -1,9 +1,15 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/spec",
-    "types": ["jasmine", "@angular/localize"]
+    "types": ["jasmine", "@angular/localize"],
+    "esModuleInterop": true,
+    "module": "es2022"
   },
-  "include": ["src/**/*.spec.ts", "src/polyfills.ts", "src/**/*.d.ts"]
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.jest.ts",
+    "src/polyfills.ts",
+    "src/**/*.d.ts"
+  ]
 }

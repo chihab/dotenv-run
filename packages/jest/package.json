@@ -1,0 +1,18 @@
+{
+  "name": "@dotenv-run/jest",
+  "version": "0.1.0",
+  "description": "Run Jest with import.meta.env",
+  "homepage": "https://github.com/chihab/dotenv-run",
+  "main": "src/jest-env.mjs",
+  "module": "src/jest-env.mjs",
+  "files": [
+    "src",
+    "README.md"
+  ],
+  "keywords": [
+    "dotenv",
+    "run"
+  ],
+  "author": "Chihab Otmani <chihab@gmail.com>",
+  "license": "ISC"
+}
