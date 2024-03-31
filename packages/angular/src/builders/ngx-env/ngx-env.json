@@ -12,6 +12,16 @@
         "description": "Display environment files and variables in the console",
         "default": true
       },
+      "runtime": {
+        "type": "boolean",
+        "description": "Load environment variables at runtime",
+        "default": false
+      },
+      "define": {
+        "type": "string",
+        "description": "Global identifier to access environment variables",
+        "default": "_NGX_ENV_"
+      },
       "unsecure": {
         "type": "boolean",
         "description": "Display environment variables values in the console",

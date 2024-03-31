@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import * as fs from "fs";
 import * as path from "path";
-import { build } from "./build.js";
+import { DotenvRun, build } from "./build.js";
 import { expand } from "./expand.js";
 import type { DotenvRunOptions } from "./options.js";
 import { getAbsoluteEnvPath, getPathsDownTo, isSubfolder } from "./utils.js";
@@ -14,6 +14,9 @@ function print(options: DotenvRunOptions, envPaths: string[], values: Env) {
   if (options.root) {
     console.log(`${chalk.green("-")} Root directory: `, options.root);
   }
+  if (options.runtime) {
+    console.log(`${chalk.green("-")} Runtime: ✅`);
+  }
   if (options.cwd) {
     console.log(`${chalk.green("-")} Working directory: `, options.cwd);
   }
@@ -25,9 +28,7 @@ function print(options: DotenvRunOptions, envPaths: string[], values: Env) {
     options.environment ? options.environment : chalk.red("none")
   );
   if (envPaths.length === 0) {
-    console.log(
-      `${chalk.green("-")} Environment files: ${chalk.red("none")}`
-    );
+    console.log(`${chalk.green("-")} Environment files: ${chalk.red("none")}`);
   } else {
     console.log(`${chalk.green("-")} Environment files: `);
     envPaths.forEach((envPath) => {
@@ -112,8 +113,12 @@ export function env({
   verbose,
   nodeEnv = true,
   builtIn = {},
-  root
-}: DotenvRunOptions = {}) {
+  runtime = false,
+  define,
+  global = "__env__",
+  unsecure,
+  root,
+}: DotenvRunOptions = {}): DotenvRun {
   const options: DotenvRunOptions = {
     cwd,
     environment,
@@ -122,6 +127,7 @@ export function env({
     prefix,
     verbose,
     nodeEnv,
+    unsecure,
     root: root ?? findRootPath(),
   };
   const { root: _root, files: envPaths } = paths(options);
@@ -138,7 +144,7 @@ export function env({
   if (verbose) {
     print({ ...options, root: _root }, envPaths, allValues);
   }
-  return build(allValues);
+  return build(allValues, runtime, global, define);
 }
 
 export const plugin = env;

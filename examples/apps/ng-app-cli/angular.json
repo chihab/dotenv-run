@@ -27,11 +27,13 @@
             "browser": "src/main.ts",
             "localize": ["fr"],
             "i18nMissingTranslation": "error",
-            "polyfills": ["zone.js", "src/polyfills.ts"],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "ngxEnv": {
               "prefix": "NGX_",
+              "verbose": true,
               "unsecure": true,
+              "runtime": true,
               "files": [".env.app", ".env"]
             },
             "assets": ["src/favicon.ico", "src/assets"],
@@ -74,7 +76,7 @@
             "main": "src/main.ts",
             "localize": ["fr"],
             "i18nMissingTranslation": "error",
-            "polyfills": ["zone.js", "src/polyfills.ts"],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "ngxEnv": {
               "prefix": "NGX_",
@@ -117,7 +119,7 @@
             "main": "src/main.ts",
             "localize": ["fr"],
             "i18nMissingTranslation": "error",
-            "polyfills": ["zone.js", "src/polyfills.ts"],
+            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "ngxEnv": {
               "prefix": "NGX_",
@@ -185,7 +187,7 @@
         "test": {
           "builder": "@ngx-env/builder:karma",
           "options": {
-            "polyfills": ["zone.js", "zone.js/testing", "src/polyfills.ts"],
+            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "ngxEnv": {

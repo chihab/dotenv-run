@@ -6,10 +6,5 @@
     "esModuleInterop": true,
     "module": "es2022"
   },
-  "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.jest.ts",
-    "src/polyfills.ts",
-    "src/**/*.d.ts"
-  ]
+  "include": ["src/**/*.spec.ts", "src/**/*.jest.ts", "src/**/*.d.ts"]
 }
