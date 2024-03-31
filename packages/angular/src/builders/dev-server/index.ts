@@ -46,15 +46,17 @@ export const buildWithPlugin = (
   }
   return combineLatest([setup(), builderName(), getProjectCwd(context)]).pipe(
     switchMap(([_options, builderName, cwd]) => {
-      const ngxEnvOptions: DotenvRunOptions = {
+      const dotenvRunOptions: DotenvRunOptions = {
         ...options.ngxEnv,
         ..._options.ngxEnv,
+        global: "_NGX_ENV_",
         cwd,
       };
       if (builderName === "@ngx-env/builder:application") {
         options.forceEsbuild = true;
         const { full, raw } = env({
-          ...ngxEnvOptions,
+          ...dotenvRunOptions,
+          global: "_NGX_ENV_",
           environment: getEnvironment(buildTarget.configuration),
         });
         delete _options.ngxEnv;
@@ -63,7 +65,8 @@ export const buildWithPlugin = (
           options,
           context,
           {
-            indexHtml: async (content) => devServerIndexHtml(content, raw),
+            indexHtml: async (content) =>
+              devServerIndexHtml(content, raw, dotenvRunOptions.runtime),
           },
           {
             buildPlugins: [esbuildPlugin(full)],
@@ -74,7 +77,7 @@ export const buildWithPlugin = (
         return executeDevServerBuilder(
           options,
           context,
-          webpackPlugin(ngxEnvOptions)
+          webpackPlugin(dotenvRunOptions)
         );
       }
     })

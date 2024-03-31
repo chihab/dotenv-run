@@ -6,10 +6,17 @@ export type DotenvRun = {
   full: Dict;
 };
 
-export function build(processEnv: Dict) {
+export function build(
+  processEnv: Dict,
+  runtime: boolean,
+  globalVar: string,
+  define?: string
+) {
   const values = Object.keys(processEnv).reduce<DotenvRun>(
     (env, key) => {
-      const value = JSON.stringify(processEnv[key]);
+      const value = runtime
+        ? `globalThis.${globalVar}.${key}`
+        : JSON.stringify(processEnv[key]);
       env.raw[key] = processEnv[key];
       env.stringified[key] = value;
       env.full[`process.env.${key}`] = value;
@@ -18,8 +25,20 @@ export function build(processEnv: Dict) {
     },
     {
       raw: {},
-      stringified: {},
-      full: {},
+      stringified: define
+        ? {
+            [define]: runtime
+              ? `globalThis.${globalVar}`
+              : JSON.stringify(processEnv),
+          }
+        : {},
+      full: define
+        ? {
+            [define]: runtime
+              ? `globalThis.${globalVar}`
+              : JSON.stringify(processEnv),
+          }
+        : {},
     }
   );
   return values;

@@ -24,6 +24,7 @@ export const buildWithPlugin = (
       const { full, raw } = env({
         ...dotEnvOptions,
         cwd,
+        global: "_NGX_ENV_",
         environment: getEnvironment(context.target.configuration),
       });
       return fromAsyncIterable(
@@ -34,8 +35,10 @@ export const buildWithPlugin = (
         tap(() => {
           indexHtml(
             join(context.workspaceRoot, options.outputPath.toString()),
+            Array.isArray(options.localize) ? options.localize : [],
             raw,
-            false // no ssr support with browser-esbuild
+            false, // no ssr support with browser-esbuild,
+            dotEnvOptions.runtime
           );
         })
       );

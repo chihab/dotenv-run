@@ -1,51 +1,27 @@
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
-}
-
-interface ImportMetaEnv {
-  /**
-   * Built-in environment variable.
-   * @see Docs https://github.com/chihab/dotenv-run/packages/angular#node_env.
-   */
+// Define the type of the environment variables.
+declare interface Env {
   readonly NODE_ENV: string;
-  // Add your environment variables below
-  // readonly NG_APP_API_URL: string;
+  // Replace the following with your own environment variables.
+  // Example: NGX_VERSION: string;
   [key: string]: any;
 }
 
-/*
- * Remove all the deprecated code below if you're using import.meta.env (recommended)
- */
+// Choose how to access the environment variables.
+// Remove the unused options.
 
-/****************************** DEPREACTED **************************/
-/**
- * @deprecated process.env usage
- * prefer using import.meta.env
- * */
-// declare var process: {
-//   env: {
-//     NODE_ENV: string;
-//     [key: string]: any;
-//   };
-// };
+// 1. Use import.meta.env.YOUR_ENV_VAR in your code. (conventional)
+declare interface ImportMeta {
+  readonly env: Env;
+}
 
-// If your project references @types/node directly (in you) or indirectly (as in RxJS < 7.6.0),
-// you might need to use the following declaration merging.
-// declare namespace NodeJS {
-//   export interface ProcessEnv {
-//     readonly NODE_ENV: string;
-//     // Add your environment variables below
-//   }
+// 2. Use _NGX_ENV_.YOUR_ENV_VAR in your code. (customizable)
+// You can modify the name of the variable in angular.json.
+// ngxEnv: {
+//  define: '_NGX_ENV_',
 // }
+declare const _NGX_ENV_: Env;
 
-// If you're using Angular Universal and process.env notation, you'll need to add the following to your tsconfig.server.json:
-/* In your tsconfig.server.json */
-// {
-//   "extends": "./tsconfig.app.json",
-//   ...
-//   "exclude": [
-//     "src/env.d.ts"
-//   ]
-// }
-
-/*********************************************************************/
+// 3. Use process.env.YOUR_ENV_VAR in your code. (deprecated)
+declare namespace NodeJS {
+  export interface ProcessEnv extends Env {}
+}

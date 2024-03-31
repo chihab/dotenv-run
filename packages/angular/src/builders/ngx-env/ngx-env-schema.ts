@@ -1,10 +1,5 @@
-export interface NgxEnvOptions {
-  prefix?: string;
-  root?: string;
-  verbose?: boolean;
-  unsecure?: boolean;
-  files?: string[];
-}
+import { DotenvRunOptions } from "@dotenv-run/core";
+
 export interface NgxEnvSchema {
-  ngxEnv?: NgxEnvOptions;
+  ngxEnv?: DotenvRunOptions;
 }

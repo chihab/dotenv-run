@@ -26,16 +26,23 @@ export const buildWithPlugin = (
       const { full, raw } = env({
         ...dotEnvOptions,
         cwd,
+        global: "_NGX_ENV_",
         environment: getEnvironment(context.target.configuration),
       });
       return fromAsyncIterable(
         buildApplication(options, context, [dotenvRunDefine(full)])
       ).pipe(
         tap(() => {
+          const outputDir = join(
+            context.workspaceRoot,
+            options.outputPath.toString()
+          );
           indexHtml(
-            join(context.workspaceRoot, options.outputPath.toString()),
+            outputDir,
+            Array.isArray(options.localize) ? options.localize : [],
             raw,
-            !!options.ssr
+            !!options.ssr,
+            dotEnvOptions.runtime
           );
         })
       );

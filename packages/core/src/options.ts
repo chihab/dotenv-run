@@ -12,4 +12,7 @@ export interface DotenvRunOptions {
   nodeEnv?: boolean; // Node environment
   verbose?: boolean; // Print verbose output
   builtIn?: Dict; // Built-in environment variables
+  runtime?: boolean; // Whether to use runtime variables
+  define?: string; // Define key to replace in code
+  global?: string; // Global variable name
 }
