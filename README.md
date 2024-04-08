@@ -17,11 +17,11 @@ Here are some of the benefits of using `dotenv-run`:
 | Integration     | Package                                   | Status |
 | --------------- | ----------------------------------------- | ------ |
 | CLI             | [@dotenv-run/cli](#dotenv-runcli)         | ✅     |
-| Core            | [@dotenv-run/core](#dotenv-runcore)  | ✅     |
+| Core            | [@dotenv-run/core](#dotenv-runcore)       | ✅     |
 | ESBuild         | [@dotenv-run/esbuild](#dotenv-runesbuild) | ✅     |
 | Rollup          | [@dotenv-run/rollup](#dotenv-runrollup)   | ✅     |
-| Vite            | [@dotenv-run/rollup](#dotenv-runrollup)  | ✅     |
-| Node.js preload | @dotenv-run/load       | ✅     |
+| Vite            | [@dotenv-run/rollup](#dotenv-runrollup)   | ✅     |
+| Node.js preload | @dotenv-run/load                          | ✅     |
 | Angular         | [@ngx-env/builder](#ngx-envbuilder)       | ✅     |
 
 ## Quick start
@@ -152,6 +152,7 @@ await build({
 [`@ngx-env/builder`](https://www.npmjs.com/package/@ngx-env/builder) is a plugin for Angular CLI and a wrapper around `@dotenv-run/esbuild` or `@dotenv-run/webpack` that can be used to inject environment variables into your Angular applications.
 
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥
+- ✅ Runtime environment variables (Experimental) 🎉
 - ✅ Webpack and ESBuild support 🚀
 - ✅ Easy to use, no configuration required
 - ✅ Up to date with latest Angular versions
@@ -215,6 +216,8 @@ Configuration options can be passed to `@ngx-env/builder` using `ngxEnv` section
   }
 }
 ```
+
+If you want to update the environment variables at runtime, you can use the `runtime` option.
 
 You can find the full `@ngx-env/builder` documentation [here](https://github.com/chihab/dotenv-run/tree/main/packages/angular).
 

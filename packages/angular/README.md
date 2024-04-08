@@ -9,6 +9,7 @@
 
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥
 - ✅ Webpack and ESBuild support 🚀
+- ✅ Runtime environment variables (Experimental) 🎉
 - ✅ Loading priorities of environment variables with Monorepo Support ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) ✨
 - ✅ Easy to use, no configuration required
 - ✅ Up to date with latest Angular versions
@@ -225,6 +226,27 @@ You can also access the environment variables starting with `NG_APP_` in the `in
     <app-root></app-root>
   </body>
 </html>
+```
+
+## Runtime Environment Variables (Experimental)
+
+By default, environment variables are embedded during the build time which means they are static and cannot be changed at runtime.
+
+If you want to change the environment variables at runtime, you can use the `runtime` option in the `angular.json` configuration.
+
+```json
+"ngxEnv": {
+  "prefix": "NG_APP_",
+  "runtime": true
+}
+```
+
+When you set the `runtime` option to `true`, a new environment file will be created during the build with the name `ngx-env.js` in the build output directory containing the environment variables that match the prefix. You can change the environment variables at runtime by modifying this file.
+
+```ts
+globalThis._NGX_ENV_ = {
+  NG_APP_VERSION: "10.0.0",
+};
 ```
 
 # Defining Environment Variables
@@ -471,19 +493,15 @@ Usage `process.env` might introduce typing issues depending on whether your work
 ## Declare your environment variables in the generated `.env.d.ts` file
 
 ```ts
-interface ImportMeta {
-  readonly env: ImportMetaEnv;
+declare interface Env {
+  readonly NODE_ENV: string;
+  // Replace the following with your own environment variables, for example:
+  // readonly NG_APP_VERSION: string;
+  [key: string]: any;
 }
 
-interface ImportMetaEnv {
-  /**
-   * Built-in environment variable.
-   * @see Docs https://github.com/chihab/dotenv-run/packages/angular#ng_app_env.
-   */
-  readonly NG_APP_ENV: string;
-  // Add your environment variables below
-  // readonly NG_APP_API_URL: string;
-  [key: string]: any;
+declare interface ImportMeta {
+  readonly env: Env;
 }
 ```
 
