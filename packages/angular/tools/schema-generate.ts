@@ -1,5 +1,5 @@
-import * as fs from "fs";
 import * as cpy from "cpy";
+import * as fs from "fs";
 import { cliTargets } from "./cli-targets";
 
 export default async function () {
@@ -16,6 +16,9 @@ export default async function () {
     await fs.writeFileSync(
       `dist/builders/schemas/${target}.json`,
       JSON.stringify(builderConf, null, 4)
+    );
+    console.log(
+      `src/builders/${target}/${target}.json ==> dist/builders/schemas/${target}.json ✅`
     );
   });
 }

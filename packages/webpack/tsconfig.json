@@ -1,7 +1,5 @@
 {
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "compilerOptions": {
     "outDir": "dist",
     "moduleResolution": "node",
@@ -12,11 +10,10 @@
     "strictNullChecks": false,
     "pretty": true,
     "sourceMap": true,
-    "declaration": true
+    "declaration": true,
+    "skipLibCheck": true
   },
-  "exclude": [
-    "node_modules"
-  ],
+  "exclude": ["node_modules"],
   "compileOnSave": false,
   "buildOnSave": false
 }
