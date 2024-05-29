@@ -1,13 +1,13 @@
-import { BuilderContext, createBuilder } from "@angular-devkit/architect";
+import { createBuilder, type BuilderContext } from "@angular-devkit/architect";
 import {
-  executeServerBuilder,
   ServerBuilderOptions,
+  executeServerBuilder,
 } from "@angular-devkit/build-angular";
-import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { plugin } from "../utils/webpack-plugin";
 import { from, switchMap } from "rxjs";
-import { getProjectCwd } from "../utils/project";
+import { type NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { getEnvironment } from "../utils/get-environment";
+import { getProjectCwd } from "../utils/project";
+import { plugin } from "../utils/webpack-plugin";
 
 export const buildWithPlugin = (
   options: ServerBuilderOptions & NgxEnvSchema,
