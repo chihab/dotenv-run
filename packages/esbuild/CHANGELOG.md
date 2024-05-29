@@ -1,5 +1,11 @@
 # @dotenv-run/esbuild
 
+## 1.4.0
+
+### Minor Changes
+
+- bump up webpack and esbuild versions
+
 ## 1.3.4
 
 ### Patch Changes
