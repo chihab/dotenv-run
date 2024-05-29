@@ -4,7 +4,7 @@ import type { Configuration } from 'webpack';
 export default (config: Configuration) => {
   config.plugins?.push(
     new DotenvRunPlugin({
-      root: "../..",
+      root: '../..',
       cwd: process.cwd(),
       prefix: /^API|NGX/,
       verbose: true,

@@ -47,10 +47,10 @@
     "ts-node": "^10.8.0",
     "typescript": "^5.4.0",
     "rxjs": "^7.0.0",
-    "webpack": "5.90.1"
+    "webpack": "5.91.0"
   },
   "peerDpendencies": {
     "rxjs": "^7.0.0",
-    "webpack": "5.90.1"
+    "webpack": "5.91.0"
   }
 }

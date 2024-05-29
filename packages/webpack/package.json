@@ -31,7 +31,7 @@
     "webpack": "^5.0.0"
   },
   "devDependencies": {
-    "webpack": "^5.0.0",
+    "webpack": "5.91.0",
     "@types/node": "^16.0.0"
   }
 }
