@@ -29,6 +29,7 @@ jobs:
       - name: Build and Test Examples
         run: |
           cd examples
+          pnpm playwright install --with-deps
           cd apps/ng-app-cli
           # npx ng add ../../../packages/angular --skip-confirmation
           npx tsc --noEmit --project tsconfig.app.json
