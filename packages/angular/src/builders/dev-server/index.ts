@@ -3,11 +3,13 @@ import {
   createBuilder,
   targetFromTargetString,
 } from "@angular-devkit/architect";
+import { Schema } from "@angular-devkit/architect/src/input-schema";
 import {
   DevServerBuilderOptions,
   DevServerBuilderOutput,
   executeDevServerBuilder,
 } from "@angular-devkit/build-angular";
+import { JsonObject } from "@angular-devkit/core";
 import { env } from "@dotenv-run/core";
 import {
   DotenvRunOptions,
@@ -19,8 +21,6 @@ import { devServerIndexHtml } from "../utils/esbuild-index-html";
 import { getEnvironment } from "../utils/get-environment";
 import { getProjectCwd } from "../utils/project";
 import { plugin as webpackPlugin } from "../utils/webpack-plugin";
-import { JsonObject } from "@angular-devkit/core";
-import { Schema } from "@angular-devkit/architect/src/input-schema";
 
 export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
@@ -46,7 +46,7 @@ export const buildWithPlugin = (
     return targetOptions;
   }
   return combineLatest([setup(), builderName(), getProjectCwd(context)]).pipe(
-    switchMap(async ([_options, builderName, cwd]) => {
+    switchMap(([_options, builderName, cwd]) => {
       const dotenvRunOptions: DotenvRunOptions = {
         ...options.ngxEnv,
         ..._options.ngxEnv,
@@ -62,7 +62,7 @@ export const buildWithPlugin = (
         });
         context.getTargetOptions = async () => _options;
         context.validateOptions = async <T>() => _options as T;
-        const result = executeDevServerBuilder(
+        return executeDevServerBuilder(
           options,
           context,
           {
@@ -74,7 +74,6 @@ export const buildWithPlugin = (
             builderSelector: () => "@angular-devkit/build-angular:application", // CLI requires it to recognize the builder as an esbuild builder otherwise plugins are not supported
           }
         );
-        return result.pipe(tap((res) => {}));
       } else {
         return executeDevServerBuilder(
           options,
