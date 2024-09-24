@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dotenv-run should give the expected output > dev 1`] = `
+"https://dotenv-run.dev/api/v1/users
+development
+"
+`;
