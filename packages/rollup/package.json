@@ -1,6 +1,6 @@
 {
   "name": "@dotenv-run/rollup",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "Run your scripts with dotenv variables",
   "homepage": "https://github.com/chihab/dotenv-run",
   "main": "dist/index.js",
@@ -22,7 +22,7 @@
   "author": "Chihab Otmani <chihab@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@dotenv-run/core": "workspace:^1.3.5",
+    "@dotenv-run/core": "workspace:^1.3.6",
     "@rollup/plugin-replace": "^5.0.7"
   },
   "peerDependencies": {

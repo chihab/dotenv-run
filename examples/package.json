@@ -8,10 +8,10 @@
     "e2e:all": "nx run-many --target=e2e --all --parallel"
   },
   "devDependencies": {
-    "@dotenv-run/cli": "workspace:^1.3.5",
-    "@dotenv-run/load": "workspace:^1.3.4",
-    "@dotenv-run/rollup": "workspace:^1.3.4",
-    "@dotenv-run/webpack": "workspace:^1.4.0",
+    "@dotenv-run/cli": "workspace:^1.3.6",
+    "@dotenv-run/load": "workspace:^1.3.6",
+    "@dotenv-run/rollup": "workspace:^1.3.6",
+    "@dotenv-run/webpack": "workspace:^1.4.1",
     "@nx/js": "^18.3.5",
     "@playwright/test": "^1.47.2",
     "@types/node": "^20.16.10",

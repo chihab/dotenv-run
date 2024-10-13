@@ -1,5 +1,13 @@
 # @dotenv-run/webpack
 
+## 1.4.1
+
+### Patch Changes
+
+- chore: use pnpm workspace protocol for dependencies
+- Updated dependencies
+  - @dotenv-run/core@1.3.6
+
 ## 1.4.0
 
 ### Minor Changes

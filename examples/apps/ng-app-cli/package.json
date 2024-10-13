@@ -38,7 +38,7 @@
     "@angular-devkit/build-angular": "^18.2.7",
     "@angular/cli": "^18.2.7",
     "@angular/compiler-cli": "^18.2.7",
-    "@dotenv-run/core": "workspace:^1.3.5",
+    "@dotenv-run/core": "workspace:^1.3.6",
     "@dotenv-run/jest-angular": "workspace:^0.1.1",
     "@jest/transform": "^29.7.0",
     "@ngx-env/builder": "^18.0.1",

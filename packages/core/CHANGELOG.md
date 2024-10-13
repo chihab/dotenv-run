@@ -1,5 +1,11 @@
 # @dotenv-run/core
 
+## 1.3.6
+
+### Patch Changes
+
+- chore: use pnpm workspace protocol for dependencies
+
 ## 1.3.4
 
 ### Patch Changes
