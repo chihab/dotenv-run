@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "dev": "tsc -w",
-    "test": "vitest",
+    "test": "vitest --run",
     "build": "tsc"
   },
   "files": [
