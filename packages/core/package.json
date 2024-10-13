@@ -1,6 +1,6 @@
 {
   "name": "@dotenv-run/core",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "description": "core library to load environment variables with monorepo support",
   "homepage": "https://github.com/chihab/dotenv-run",
   "main": "dist/cjs/index.js",
@@ -26,12 +26,12 @@
   "author": "Chihab Otmani <chihab@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.1.4",
+    "chalk": "^4.1.2",
+    "dotenv": "^16.4.5",
     "dotenv-expand": "^10.0.0",
-    "find-up": "^5.0.0",
-    "chalk": "^4.1.0"
+    "find-up": "^5.0.0"
   },
   "devDependencies": {
-    "@types/node": "^16.0.0"
+    "@types/node": "^16.18.112"
   }
 }

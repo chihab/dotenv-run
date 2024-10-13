@@ -1,5 +1,11 @@
 # @dotenv-run/docs
 
+## 0.1.5
+
+### Patch Changes
+
+- chore: use pnpm workspace protocol for dependencies
+
 ## 0.1.4
 
 ### Patch Changes
