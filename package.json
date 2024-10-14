@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "turbo run dev --parallel --no-cache --filter=./packages/*",
-    "test": "turbo test --filter=./packages/*",
+    "test": "CI=1 turbo test --filter=./packages/*",
     "build": "turbo build  --filter=./packages/*",
     "build:docs": "turbo build  --filter=./docs",
     "prepare": "husky install"
