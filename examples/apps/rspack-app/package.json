@@ -1,0 +1,13 @@
+{
+  "name": "rspack-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "concurrently npm:build:*",
+    "build:prod": "NODE_ENV=prod rspack build --mode production --output-path dist/prod",
+    "build:dev": "NODE_ENV=dev rspack build --mode development --output-path dist/dev",
+    "test": "concurrently npm:test:*",
+    "test:dev": "vitest ./rspack-dev.test.ts",
+    "test:prod": "vitest ./rspack-prod.test.ts"
+  }
+}
