@@ -35,24 +35,26 @@
     "glob": "^10.4.5"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "^0.1802.7",
-    "@angular-devkit/build-angular": "^18.2.7",
-    "@angular-devkit/core": "^18.2.7",
-    "@angular-devkit/schematics": "^18.2.7",
-    "@angular/animations": "^18.2.7",
-    "@angular/common": "^18.2.7",
-    "@angular/platform-browser": "^18.2.7",
+    "@angular/build": "next",
+    "@angular-devkit/architect": "next",
+    "@angular-devkit/build-angular": "next",
+    "@angular-devkit/core": "next",
+    "@angular-devkit/schematics": "next",
+    "@angular/router": "next",
+    "@angular/animations": "next",
+    "@angular/common": "next",
+    "@angular/platform-browser": "next",
     "@dotenv-run/core": "workspace:^1.3.6",
     "cpy": "^8.1.2",
     "karma": "^6.4.4",
     "rxjs": "^7.8.1",
     "ts-node": "^10.9.2",
-    "typescript": "~5.4.5",
-    "webpack": "5.94.0",
-    "zone.js": "~0.14.10"
+    "typescript": "~5.6.2",
+    "webpack": "5.95.0",
+    "zone.js": "~0.15.0"
   },
   "peerDpendencies": {
     "rxjs": "^7.0.0",
-    "webpack": "5.94.0"
+    "webpack": "5.95.0"
   }
 }

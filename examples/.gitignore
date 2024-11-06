@@ -1,1 +1,5 @@
 .nx
+test-results
+tests
+playwright-report
+tests-examples

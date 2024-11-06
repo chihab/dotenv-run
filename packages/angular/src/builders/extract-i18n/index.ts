@@ -15,9 +15,7 @@ export const buildWithPlugin = (
   options: ExtractI18nBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ) => {
-  const buildTarget = targetFromTargetString(
-    options.buildTarget ?? options.browserTarget
-  );
+  const buildTarget = targetFromTargetString(options.buildTarget);
   // options.buildTarget = "@angular-devkit/build-angular:application";
   async function setup() {
     const targetOptions = await context.getTargetOptions(buildTarget);

@@ -26,9 +26,7 @@ export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): Observable<DevServerBuilderOutput> => {
-  const buildTarget = targetFromTargetString(
-    options.buildTarget ?? options.browserTarget
-  );
+  const buildTarget = targetFromTargetString(options.buildTarget);
   async function builderName() {
     return context.getBuilderNameForTarget(buildTarget);
   }

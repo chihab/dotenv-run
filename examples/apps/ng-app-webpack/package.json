@@ -11,23 +11,23 @@
     "static": "npx serve dist/ng-app-webpack/browser"
   },
   "dependencies": {
-    "@angular/common": "^18.2.7",
-    "@angular/compiler": "^18.2.7",
-    "@angular/core": "^18.2.7",
-    "@angular/platform-browser": "^18.2.7",
-    "@angular/platform-browser-dynamic": "^18.2.7",
+    "@angular/common": "next",
+    "@angular/compiler": "next",
+    "@angular/router": "next",
+    "@angular/core": "next",
+    "@angular/platform-browser": "next",
+    "@angular/platform-browser-dynamic": "next",
     "rxjs": "~7.6.0",
     "tslib": "^2.7.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.15.0"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "^18.0.0",
-    "@angular-devkit/build-angular": "^18.2.7",
-    "@angular/cli": "^18.2.7",
-    "@angular/compiler-cli": "^18.2.7",
+    "@angular-devkit/build-angular": "next",
+    "@angular/cli": "next",
+    "@angular/compiler-cli": "next",
     "@dotenv-run/webpack": "workspace:^1.4.1",
     "@types/node": "^18.19.54",
     "cross-env": "^7.0.3",
-    "typescript": "~5.4.5"
+    "typescript": "~5.6.2"
   }
 }
