@@ -39,9 +39,9 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
             "server": "src/main.server.ts",
-            "prerender": true,
+            "outputMode": "server",
             "ssr": {
-              "entry": "server.ts"
+              "entry": "src/server.ts"
             }
           },
           "configurations": {
@@ -196,10 +196,10 @@
             "buildTarget": "ng-app-cli:build"
           }
         },
-        "test:fails-with-19": {
+        "test": {
           "builder": "@ngx-env/builder:karma",
           "options": {
-            "builderMode": "application",
+            "builderMode": "detect",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
