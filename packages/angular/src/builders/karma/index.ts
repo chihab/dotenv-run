@@ -19,7 +19,7 @@ export const buildWithPlugin = (
       console.warn(
         "@ngx-env/builder: Karma builder is not supported yet due to a limitation in the Angular CLI, use jest instead"
       );
-      return of({ success: true });
+      return of({ success: false });
       // switch (options.builderMode) {
       //   case "application":
       //   case "detect":

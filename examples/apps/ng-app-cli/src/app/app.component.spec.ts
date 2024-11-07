@@ -18,7 +18,7 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit(`should have the 'Hello world' title`, () => {
+  it(`should have the 'Hello world' title`, () => {
     expect(component.title).toEqual('Hello world');
     expect(component.env).toEqual('test');
   });

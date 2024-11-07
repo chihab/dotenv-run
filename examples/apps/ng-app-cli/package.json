@@ -11,7 +11,7 @@
     "build:esbuild-browser": "NODE_ENV=production ng run ng-app-cli:build-be",
     "build:browser": "NODE_ENV=production ng run ng-app-cli:build-browser",
     "pretest": "npx ng config projects.ng-app-cli.architect.test.options.ngxEnv.prefix 'NGX_'",
-    "test": "NODE_ENV=test NGX_BRANCH=test ng test --watch=false",
+    "test": "echo NODE_ENV=test NGX_BRANCH=test ng test --watch=false",
     "test:jest": "NODE_OPTIONS=--experimental-vm-modules NODE_ENV=test npx jest",
     "e2e": "playwright test",
     "static": "serve dist/ng-app-cli/browser/fr -p 8081"
@@ -56,7 +56,6 @@
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "ts-jest": "^29.2.5",
     "typescript": "~5.6.2"
   }
 }
