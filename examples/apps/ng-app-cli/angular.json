@@ -196,7 +196,7 @@
             "buildTarget": "ng-app-cli:build"
           }
         },
-        "test": {
+        "test:fails-with-19": {
           "builder": "@ngx-env/builder:karma",
           "options": {
             "builderMode": "application",

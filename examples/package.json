@@ -21,7 +21,7 @@
     "rollup": "^3.29.5",
     "serve": "^14.2.3",
     "verdaccio": "^5.32.2",
-    "webpack": "5.95.0",
+    "webpack": "5.96.1",
     "webpack-cli": "^5.1.4",
     "@rspack/cli": "^1.0.10",
     "@rspack/core": "^1.0.10"
