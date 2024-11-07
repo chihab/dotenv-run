@@ -1,7 +1,7 @@
 import type { DotenvRunOptions } from "@dotenv-run/core";
 import { DotenvRunPlugin } from "@dotenv-run/webpack";
 import type { Configuration } from "webpack";
-import { variablesReducer } from "./variables-reducer";
+import { indexHtml } from "./index-html-serve";
 
 export function plugin(options: DotenvRunOptions, ssr = false) {
   const dotEnvPlugin = new DotenvRunPlugin(
@@ -10,10 +10,13 @@ export function plugin(options: DotenvRunOptions, ssr = false) {
   );
   const raw = dotEnvPlugin.raw;
   return {
+    raw,
     webpackConfiguration: (webpackConfig: Configuration) => {
       webpackConfig.plugins.push(dotEnvPlugin);
       return webpackConfig;
     },
-    indexHtml: async (content: string) => variablesReducer(content, raw),
+    indexHtml: async (content: string) => {
+      return indexHtml(content, raw, options.runtime);
+    },
   };
 }

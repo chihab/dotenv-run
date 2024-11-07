@@ -81,7 +81,8 @@
             "ngxEnv": {
               "prefix": "NGX_",
               "unsecure": true,
-              "files": [".env.app", ".env"]
+              "files": [".env.app", ".env"],
+              "runtime": true
             },
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],

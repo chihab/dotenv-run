@@ -9,7 +9,7 @@ import { env, type DotenvRunOptions } from "@dotenv-run/core";
 import { join } from "path";
 import { from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { indexHtml } from "../utils/esbuild-index-html";
+import { indexHtml } from "../utils/index-html-build";
 import { getEnvironment } from "../utils/get-environment";
 import { getProjectCwd } from "../utils/project";
 
@@ -32,10 +32,14 @@ export const buildWithPlugin = (
       ).pipe(
         tap(() => {
           indexHtml(
-            join(context.workspaceRoot, options.outputPath.toString()),
+            join(
+              context.workspaceRoot,
+              options.outputPath.toString(),
+              "browser"
+            ),
+            null, // no ssr support with browser-esbuild,
             Array.isArray(options.localize) ? options.localize : [],
             raw,
-            false, // no ssr support with browser-esbuild,
             dotEnvOptions.runtime
           );
         })

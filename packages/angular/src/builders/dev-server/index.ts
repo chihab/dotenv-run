@@ -14,10 +14,10 @@ import { env } from "@dotenv-run/core";
 import type { DotenvRunOptions } from "@dotenv-run/core";
 import { Observable, combineLatest, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { devServerIndexHtml } from "../utils/esbuild-index-html";
 import { getEnvironment } from "../utils/get-environment";
 import { getProjectCwd } from "../utils/project";
 import { plugin as webpackPlugin } from "../utils/webpack-plugin";
+import { indexHtml } from "../utils/index-html-serve";
 
 export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
@@ -63,7 +63,7 @@ export const buildWithPlugin = (
           context,
           {
             indexHtml: async (content: string) =>
-              devServerIndexHtml(content, raw, dotenvRunOptions.runtime),
+              indexHtml(content, raw, dotenvRunOptions.runtime),
           },
           {
             builderSelector: () => "@angular-devkit/build-angular:application", // CLI requires it to recognize the builder as an esbuild builder otherwise plugins are not supported

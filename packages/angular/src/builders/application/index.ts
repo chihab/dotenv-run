@@ -12,7 +12,7 @@ import { env, type DotenvRunOptions } from "@dotenv-run/core";
 import { join } from "path";
 import { Observable, from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { indexHtml } from "../utils/esbuild-index-html";
+import { indexHtml } from "../utils/index-html-build";
 import { getEnvironment } from "../utils/get-environment";
 import { getProjectCwd } from "../utils/project";
 
@@ -39,10 +39,10 @@ export const buildWithPlugin = (
             options.outputPath.toString()
           );
           indexHtml(
-            outputDir,
+            join(outputDir, "browser"),
+            options.ssr ? join(outputDir, "server") : null,
             Array.isArray(options.localize) ? options.localize : [],
             raw,
-            !!options.ssr,
             dotEnvOptions.runtime
           );
         })
