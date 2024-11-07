@@ -9,7 +9,6 @@ import {
   buildApplication,
 } from "@angular-devkit/build-angular";
 import { env, type DotenvRunOptions } from "@dotenv-run/core";
-import { dotenvRunDefine } from "@dotenv-run/esbuild";
 import { join } from "path";
 import { Observable, from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
@@ -30,8 +29,9 @@ export const buildWithPlugin = (
         global: "_NGX_ENV_",
         environment: getEnvironment(context.target.configuration),
       });
+      options.define = full;
       return fromAsyncIterable<BuilderOutput>(
-        buildApplication(options, context, [dotenvRunDefine(full)])
+        buildApplication(options, context)
       ).pipe(
         tap(() => {
           const outputDir = join(

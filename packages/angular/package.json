@@ -30,7 +30,6 @@
     "copy-dist": "ts-node tools/schema-dist.ts"
   },
   "dependencies": {
-    "@dotenv-run/esbuild": "workspace:^1.4.2",
     "@dotenv-run/webpack": "workspace:^1.4.1",
     "glob": "^10.4.5"
   },

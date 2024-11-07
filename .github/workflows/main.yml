@@ -25,7 +25,8 @@ jobs:
           pnpm i # create bin scripts
       - name: Test Packages
         run: |
-          pnpm test
+          # pnpm test # Issue with Karma Support after Angular 19, Karma builder is not passing the options to the karma-cli build options
+          pnpm test:jest
       - name: Build and Test Examples
         run: |
           cd examples

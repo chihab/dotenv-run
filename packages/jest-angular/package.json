@@ -19,6 +19,12 @@
     "run",
     "cli"
   ],
+  "devDependencies": {
+    "jest-preset-angular": "^14.0.0"
+  },
+  "peerDependencies": {
+    "jest-preset-angular": "^14.0.0"
+  },
   "author": "Chihab Otmani <chihab@gmail.com>",
   "license": "ISC"
 }

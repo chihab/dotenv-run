@@ -9,5 +9,5 @@ declare interface Env {
 }
 
 declare interface ImportMeta {
-  readonly env: Env;
+  env: Env;
 }

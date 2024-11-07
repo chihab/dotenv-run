@@ -51,12 +51,16 @@ export function indexHtml(
       )};`;
       if (locales.length > 0) {
         locales.forEach((locale) => {
+          console.log(
+            `📦 Writing ngx-env.js to ${outputDir}/browser/${locale}/ngx-env.js`
+          );
           writeFileSync(
             `${outputDir}/browser/${locale}/ngx-env.js`,
             runtimeStmt
           );
         });
       } else {
+        console.log(`📦 Writing ngx-env.js to ${outputDir}/browser/ngx-env.js`);
         writeFileSync(`${outputDir}/browser/ngx-env.js`, runtimeStmt);
       }
     }

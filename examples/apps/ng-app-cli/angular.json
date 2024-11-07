@@ -178,6 +178,18 @@
           },
           "defaultConfiguration": "development"
         },
+        "serve-browser": {
+          "builder": "@ngx-env/builder:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "ng-app-cli:build-browser:production"
+            },
+            "development": {
+              "buildTarget": "ng-app-cli:build-browser:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
         "extract-i18n": {
           "builder": "@ngx-env/builder:extract-i18n",
           "options": {
@@ -187,6 +199,7 @@
         "test": {
           "builder": "@ngx-env/builder:karma",
           "options": {
+            "builderMode": "application",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",

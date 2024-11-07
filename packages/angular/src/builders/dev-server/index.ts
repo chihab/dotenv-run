@@ -11,10 +11,7 @@ import {
 } from "@angular-devkit/build-angular";
 import { JsonObject } from "@angular-devkit/core";
 import { env } from "@dotenv-run/core";
-import {
-  DotenvRunOptions,
-  dotenvRunDefine as esbuildPlugin,
-} from "@dotenv-run/esbuild";
+import type { DotenvRunOptions } from "@dotenv-run/core";
 import { Observable, combineLatest, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { devServerIndexHtml } from "../utils/esbuild-index-html";
@@ -58,6 +55,7 @@ export const buildWithPlugin = (
           global: "_NGX_ENV_",
           environment: getEnvironment(buildTarget.configuration),
         });
+        _options.define = full;
         context.getTargetOptions = async () => _options;
         context.validateOptions = async <T>() => _options as T;
         return executeDevServerBuilder(
@@ -68,7 +66,6 @@ export const buildWithPlugin = (
               devServerIndexHtml(content, raw, dotenvRunOptions.runtime),
           },
           {
-            buildPlugins: [esbuildPlugin(full)],
             builderSelector: () => "@angular-devkit/build-angular:application", // CLI requires it to recognize the builder as an esbuild builder otherwise plugins are not supported
           }
         );

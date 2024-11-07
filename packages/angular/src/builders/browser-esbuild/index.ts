@@ -6,7 +6,6 @@ import {
 import { buildEsbuildBrowser } from "@angular-devkit/build-angular/src/builders/browser-esbuild";
 import { Schema as BrowserBuilderOptions } from "@angular-devkit/build-angular/src/builders/browser-esbuild/schema";
 import { env, type DotenvRunOptions } from "@dotenv-run/core";
-import { dotenvRunDefine } from "@dotenv-run/esbuild";
 import { join } from "path";
 import { from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
@@ -27,10 +26,9 @@ export const buildWithPlugin = (
         global: "_NGX_ENV_",
         environment: getEnvironment(context.target.configuration),
       });
+      (options as any).define = full;
       return fromAsyncIterable(
-        buildEsbuildBrowser(options, context, undefined, [
-          dotenvRunDefine(full),
-        ])
+        buildEsbuildBrowser(options, context, undefined)
       ).pipe(
         tap(() => {
           indexHtml(

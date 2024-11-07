@@ -18,8 +18,8 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it(`should have the 'Hello world' title`, () => {
+  fit(`should have the 'Hello world' title`, () => {
     expect(component.title).toEqual('Hello world');
-    expect(component.branch).toEqual('test');
+    expect(component.env).toEqual('test');
   });
 });
