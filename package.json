@@ -7,7 +7,8 @@
     "test": "CI=1 turbo test --filter=./packages/*",
     "build": "turbo build  --filter=./packages/*",
     "build:docs": "turbo build  --filter=./docs",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "docker:build": "docker build -t temp-build . && docker rmi --force temp-build"
   },
   "license": "MIT",
   "devDependencies": {
