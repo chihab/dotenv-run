@@ -28,7 +28,7 @@ jobs:
           pnpm test
       - name: Build and Test Examples
         run: |
-          cd examples
+          cd examples/nx-workspace-old
           pnpm playwright install --with-deps
           cd apps/ng-app-cli
           # npx ng add ../../../packages/angular --skip-confirmation

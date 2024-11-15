@@ -1,5 +1,5 @@
 packages:
-  - "examples"
-  - "examples/**/*"
+  - "examples/nx-workspace-old"
+  - "examples/nx-workspace-old/**/*"
   - "packages/*"
   - "docs"
