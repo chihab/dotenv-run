@@ -1,8 +1,3 @@
-// @ts-expect-error https://thymikee.github.io/jest-preset-angular/docs/getting-started/test-environment
-globalThis.ngJest = {
-  testEnvironmentOptions: {
-    errorOnUnknownElements: true,
-    errorOnUnknownProperties: true,
-  },
-};
-import 'jest-preset-angular/setup-jest';
+import 'jest-preset-angular/setup-jest.mjs';
+import { env } from '@dotenv-run/core';
+env({ root: '../../..', files: ['.env', '.env.app'] });

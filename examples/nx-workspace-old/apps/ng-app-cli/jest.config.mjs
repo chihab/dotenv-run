@@ -13,6 +13,7 @@ const jestConfig = {
       "@dotenv-run/jest-angular",
       {
         useESM: true,
+        stringifyContentPathRegex: "\\.(html|svg)$",
       },
     ],
   },

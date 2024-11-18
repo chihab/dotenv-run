@@ -1,21 +1,22 @@
-export default {
-  displayName: 'ng-app-cli',
-  preset: '../../jest.preset.js',
+const jestConfig = {
+  preset: 'jest-preset-angular/presets/defaults-esm',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/apps/ng-app-cli',
+  cache: false,
+  testMatch: ['<rootDir>/src/app/**/*.(spec|jest).ts'],
+  moduleNameMapper: {
+    '^rxjs(/operators$)?$':
+      '<rootDir>/../../node_modules/rxjs/dist/bundles/rxjs.umd.js',
+    tslib: '<rootDir>/../../node_modules/tslib/tslib.es6.mjs',
+  },
   transform: {
-    '^.+\\.(ts|mjs|js|html)$': [
-      'jest-preset-angular',
+    '^.+\\.(ts)$': [
+      '@dotenv-run/jest-angular',
       {
-        tsconfig: '<rootDir>/tsconfig.spec.json',
+        useESM: true,
         stringifyContentPathRegex: '\\.(html|svg)$',
       },
     ],
   },
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
-  snapshotSerializers: [
-    'jest-preset-angular/build/serializers/no-ng-attributes',
-    'jest-preset-angular/build/serializers/ng-snapshot',
-    'jest-preset-angular/build/serializers/html-comment',
-  ],
 };
+
+export default jestConfig;

@@ -7,7 +7,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:application",
+      "executor": "@ngx-env/builder:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/ng-app-cli",
@@ -27,6 +27,9 @@
         "prerender": true,
         "ssr": {
           "entry": "apps/ng-app-cli/server.ts"
+        },
+        "ngxEnv": {
+          "runtime": true
         }
       },
       "configurations": {
@@ -54,7 +57,7 @@
       "defaultConfiguration": "production"
     },
     "serve": {
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@ngx-env/builder:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "ng-app-cli:build:production"
@@ -66,7 +69,7 @@
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "@ngx-env/builder:extract-i18n",
       "options": {
         "buildTarget": "ng-app-cli:build"
       }
