@@ -170,15 +170,16 @@ await build({
 ## Testimonials
 
 [motdotla](https://github.com/motdotla) - dotenv author and maintainer @**dotenvx**
-![motdotla](packages/angular/motdotla.png)
+<img src="https://github.com/chihab/dotenv-run/raw/main/packages/angular/motdotla.png" alt="Description" width="600">
+
 NB: Angular not Angular.js :P
 
 [manekinekko](https://github.com/manekinekko) - SSE @**microsoft**
-![manekinekko](packages/angular/manekinekko.png)
+<img src="https://github.com/chihab/dotenv-run/raw/main/packages/angular/manekinekko.png" alt="Description" width="600">
 
 #### Demos
 
-- [v17 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
+- [v19 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
 - [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
 
 #### Quick start

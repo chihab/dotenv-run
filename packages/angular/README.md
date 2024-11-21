@@ -1,6 +1,6 @@
 <h1>@ngx-env/builder</h1>
 
-<img src="./logo.svg" alt="@ngx-env/builder" width="90px" align="right" />
+<img src="https://github.com/chihab/dotenv-run/raw/main/packages/angular/logo.svg" alt="@ngx-env/builder" width="90px" align="right" />
 
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 [![monthly downloads](https://img.shields.io/npm/dm/@ngx-env/builder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
@@ -26,15 +26,15 @@
 ## Testimonials
 
 [motdotla](https://github.com/motdotla) - dotenv author and maintainer @**dotenvx**
-![alt text](motdotla.png)
-NB: He meant Angular not Angular.js :)
+![alt text](https://github.com/chihab/dotenv-run/raw/main/packages/angular/motdotla.png)
+NB: Angular not Angular.js :)
 
 [manekinekko](https://github.com/manekinekko) - SSE @**microsoft**
-![Wassim Chegham](manekinekko.png)
+![Wassim Chegham](https://github.com/chihab/dotenv-run/raw/main/packages/angular/manekinekko.png)
 
 ## Quick Demo
 
-- [v18 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
+- [v19 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
 - [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
 
 <h2> Table of contents</h2>
@@ -237,7 +237,7 @@ You can also access the environment variables starting with `NG_APP_` in the `in
 </html>
 ```
 
-## Runtime Environment Variables (Experimental)
+## Runtime Environment Variables
 
 By default, environment variables are embedded during the build time which means they are static and cannot be changed at runtime.
 
@@ -257,6 +257,8 @@ globalThis._NGX_ENV_ = {
   NG_APP_VERSION: "10.0.0",
 };
 ```
+
+If you are using server-side rendering, you should add `import '@ngx-env/builder/runtime'` at the top of the `main.server.ts` file.
 
 # Defining Environment Variables
 
