@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  title = import.meta.env.NODE_ENV;
+  title = 'Title: ' + import.meta.env.NODE_ENV;
 }

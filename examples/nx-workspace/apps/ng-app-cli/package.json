@@ -1,0 +1,7 @@
+{
+  "name": "ng-app-cli",
+  "private": true,
+  "scripts": {
+    "test:esm": "node --experimental-vm-modules ../../node_modules/jest/bin/jest.js"
+  }
+}

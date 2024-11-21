@@ -24,7 +24,6 @@
         "styles": ["apps/ng-app-cli/src/styles.css"],
         "scripts": [],
         "server": "apps/ng-app-cli/src/main.server.ts",
-        "prerender": true,
         "ssr": {
           "entry": "apps/ng-app-cli/server.ts"
         },

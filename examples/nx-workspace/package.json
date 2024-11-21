@@ -2,7 +2,10 @@
   "name": "@nx-workspace/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "test": "NODE_ENV=test nx run-many -t test:esm",
+    "build": "NODE_ENV=dev nx run-many -t build"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.2.0",
