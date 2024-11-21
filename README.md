@@ -152,17 +152,29 @@ await build({
 [`@ngx-env/builder`](https://www.npmjs.com/package/@ngx-env/builder) is a plugin for Angular CLI and a wrapper around `@dotenv-run/esbuild` or `@dotenv-run/webpack` that can be used to inject environment variables into your Angular applications.
 
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥
-- ✅ Runtime environment variables (Experimental) 🎉
 - ✅ Webpack and ESBuild support 🚀
+- ✅ Runtime environment variables 🎉
+- ✅ Loading priorities of environment variables with Monorepo Support ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) ✨
 - ✅ Easy to use, no configuration required
 - ✅ Up to date with latest Angular versions
-- ✅ Supports all Angular CLI commands
+- ✅ Supports all Angular CLI commands (Karma is not supported on v19)
+- ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
+- ✅ Filters sensitive variables using a Regular Expression
 - ✅ Used by popular repositories
   - [Official Microsoft Azure Samples](https://github.com/Azure-Samples/contoso-real-estate) ![GitHub Repo stars](https://img.shields.io/github/stars/Azure-Samples/contoso-real-estate)
   - [Official Quarkus Workshop](https://github.com/quarkusio/quarkus-workshops) ![GitHub Repo stars](https://img.shields.io/github/stars/quarkusio/quarkus-workshops)
   - [Scholarsome by Redhat](https://github.com/hwgilbert16/scholarsome) ![GitHub Repo stars](https://img.shields.io/github/stars/hwgilbert16/scholarsome)
   - [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
 - ✅ Active development and support
+
+## Testimonials
+
+[motdotla](https://github.com/motdotla) - dotenv author and maintainer @**dotenvx**
+![motdotla](packages/angular/motdotla.png)
+NB: Angular not Angular.js :P
+
+[manekinekko](https://github.com/manekinekko) - SSE @**microsoft**
+![manekinekko](packages/angular/manekinekko.png)
 
 #### Demos
 

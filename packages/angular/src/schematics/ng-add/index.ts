@@ -78,7 +78,8 @@ export function builder(options: any): Rule {
       writeBuilder(project, "server", "@ngx-env/builder:server");
     }
     writeBuilder(project, "serve", "@ngx-env/builder:dev-server", true);
-    writeBuilder(project, "test", "@ngx-env/builder:karma");
+    // Karma is not supported yet due to a limitation in the Angular CLI
+    // writeBuilder(project, "test", "@ngx-env/builder:karma");
     writeBuilder(project, "extract-i18n", "@ngx-env/builder:extract-i18n");
 
     tree.overwrite(workspacePath, JSON.stringify(workspace, null, 2));
@@ -88,7 +89,10 @@ export function builder(options: any): Rule {
 
 export default function (options: any): Rule {
   return chain([
-    mergeWith(apply(url("./template"), [move(normalize("./src"))]), MergeStrategy.Overwrite),
+    mergeWith(
+      apply(url("./template"), [move(normalize("./src"))]),
+      MergeStrategy.Overwrite
+    ),
     builder(options),
   ]);
 }

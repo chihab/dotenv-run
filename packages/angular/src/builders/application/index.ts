@@ -9,11 +9,10 @@ import {
   buildApplication,
 } from "@angular-devkit/build-angular";
 import { env, type DotenvRunOptions } from "@dotenv-run/core";
-import { dotenvRunDefine } from "@dotenv-run/esbuild";
 import { join } from "path";
 import { Observable, from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { indexHtml } from "../utils/esbuild-index-html";
+import { indexHtml } from "../utils/index-html-build";
 import { getEnvironment } from "../utils/get-environment";
 import { getProjectCwd } from "../utils/project";
 
@@ -30,8 +29,9 @@ export const buildWithPlugin = (
         global: "_NGX_ENV_",
         environment: getEnvironment(context.target.configuration),
       });
+      options.define = full;
       return fromAsyncIterable<BuilderOutput>(
-        buildApplication(options, context, [dotenvRunDefine(full)])
+        buildApplication(options, context)
       ).pipe(
         tap(() => {
           const outputDir = join(
@@ -39,10 +39,10 @@ export const buildWithPlugin = (
             options.outputPath.toString()
           );
           indexHtml(
-            outputDir,
+            join(outputDir, "browser"),
+            options.ssr ? join(outputDir, "server") : null,
             Array.isArray(options.localize) ? options.localize : [],
             raw,
-            !!options.ssr,
             dotEnvOptions.runtime
           );
         })

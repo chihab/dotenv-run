@@ -11,24 +11,19 @@ import {
 } from "@angular-devkit/build-angular";
 import { JsonObject } from "@angular-devkit/core";
 import { env } from "@dotenv-run/core";
-import {
-  DotenvRunOptions,
-  dotenvRunDefine as esbuildPlugin,
-} from "@dotenv-run/esbuild";
+import type { DotenvRunOptions } from "@dotenv-run/core";
 import { Observable, combineLatest, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { devServerIndexHtml } from "../utils/esbuild-index-html";
 import { getEnvironment } from "../utils/get-environment";
 import { getProjectCwd } from "../utils/project";
 import { plugin as webpackPlugin } from "../utils/webpack-plugin";
+import { indexHtml } from "../utils/index-html-serve";
 
 export const buildWithPlugin = (
   options: DevServerBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): Observable<DevServerBuilderOutput> => {
-  const buildTarget = targetFromTargetString(
-    options.buildTarget ?? options.browserTarget
-  );
+  const buildTarget = targetFromTargetString(options.buildTarget);
   async function builderName() {
     return context.getBuilderNameForTarget(buildTarget);
   }
@@ -60,6 +55,7 @@ export const buildWithPlugin = (
           global: "_NGX_ENV_",
           environment: getEnvironment(buildTarget.configuration),
         });
+        _options.define = full;
         context.getTargetOptions = async () => _options;
         context.validateOptions = async <T>() => _options as T;
         return executeDevServerBuilder(
@@ -67,10 +63,9 @@ export const buildWithPlugin = (
           context,
           {
             indexHtml: async (content: string) =>
-              devServerIndexHtml(content, raw, dotenvRunOptions.runtime),
+              indexHtml(content, raw, dotenvRunOptions.runtime),
           },
           {
-            buildPlugins: [esbuildPlugin(full)],
             builderSelector: () => "@angular-devkit/build-angular:application", // CLI requires it to recognize the builder as an esbuild builder otherwise plugins are not supported
           }
         );

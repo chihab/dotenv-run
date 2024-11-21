@@ -14,8 +14,8 @@ export const buildWithPlugin = (
   context: BuilderContext
 ): ReturnType<typeof executeServerBuilder> => {
   return from(getProjectCwd(context)).pipe(
-    switchMap((cwd: string) =>
-      executeServerBuilder(
+    switchMap((cwd: string) => {
+      return executeServerBuilder(
         options,
         context,
         plugin(
@@ -26,8 +26,8 @@ export const buildWithPlugin = (
           },
           true
         )
-      )
-    )
+      );
+    })
   );
 };
 

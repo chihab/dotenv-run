@@ -1,0 +1,96 @@
+{
+  "name": "ng-app-cli",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/ng-app-cli/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@ngx-env/builder:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ng-app-cli",
+        "index": "apps/ng-app-cli/src/index.html",
+        "browser": "apps/ng-app-cli/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/ng-app-cli/tsconfig.app.json",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/ng-app-cli/public"
+          }
+        ],
+        "styles": ["apps/ng-app-cli/src/styles.css"],
+        "scripts": [],
+        "server": "apps/ng-app-cli/src/main.server.ts",
+        "ssr": {
+          "entry": "apps/ng-app-cli/server.ts"
+        },
+        "ngxEnv": {
+          "runtime": true
+        }
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@ngx-env/builder:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "ng-app-cli:build:production"
+        },
+        "development": {
+          "buildTarget": "ng-app-cli:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@ngx-env/builder:extract-i18n",
+      "options": {
+        "buildTarget": "ng-app-cli:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/ng-app-cli/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "ng-app-cli:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/ng-app-cli/browser",
+        "spa": true
+      }
+    }
+  }
+}

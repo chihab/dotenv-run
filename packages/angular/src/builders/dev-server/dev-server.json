@@ -4,12 +4,6 @@
   "description": "Dev Server target options for Build Facade.",
   "type": "object",
   "properties": {
-    "browserTarget": {
-      "type": "string",
-      "description": "A browser builder target to serve in the format of `project:target[:configuration]`. You can also pass in more than one configuration name as a comma-separated list. Example: `project:target:production,staging`.",
-      "pattern": "^[^:\\s]+:[^:\\s]+(:[^\\s]+)?$",
-      "x-deprecated": "Use 'buildTarget' instead."
-    },
     "buildTarget": {
       "type": "string",
       "description": "A build builder target to serve in the format of `project:target[:configuration]`. You can also pass in more than one configuration name as a comma-separated list. Example: `project:target:production,staging`.",
@@ -27,7 +21,7 @@
     },
     "proxyConfig": {
       "type": "string",
-      "description": "Proxy configuration file. For more information, see https://angular.io/guide/build#proxying-to-a-backend-server."
+      "description": "Proxy configuration file. For more information, see https://angular.dev/tools/cli/serve#proxying-to-a-backend-server."
     },
     "ssl": {
       "type": "boolean",
@@ -90,8 +84,7 @@
     },
     "hmr": {
       "type": "boolean",
-      "description": "Enable hot module replacement.",
-      "default": false
+      "description": "Enable hot module replacement."
     },
     "watch": {
       "type": "boolean",
@@ -101,6 +94,17 @@
     "poll": {
       "type": "number",
       "description": "Enable and define the file watching poll time period in milliseconds."
+    },
+    "inspect": {
+      "default": false,
+      "description": "Activate debugging inspector. This option only has an effect when 'SSR' or 'SSG' are enabled.",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "Activate the inspector on host and port in the format of `[[host:]port]`. See the security warning in https://nodejs.org/docs/latest-v22.x/api/cli.html#warning-binding-inspector-to-a-public-ipport-combination-is-insecure regarding the host parameter usage."
+        },
+        { "type": "boolean" }
+      ]
     },
     "forceEsbuild": {
       "type": "boolean",
@@ -127,5 +131,5 @@
     }
   },
   "additionalProperties": false,
-  "anyOf": [{ "required": ["buildTarget"] }, { "required": ["browserTarget"] }]
+  "required": ["buildTarget"]
 }

@@ -1,6 +1,6 @@
 <h1>@ngx-env/builder</h1>
 
-<img src="https://raw.githubusercontent.com/chihab/dotenv-run/main/packages/angular/logo.png" alt="@ngx-env/builder" width="90px" align="right" />
+<img src="./logo.svg" alt="@ngx-env/builder" width="90px" align="right" />
 
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 [![monthly downloads](https://img.shields.io/npm/dm/@ngx-env/builder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
@@ -9,11 +9,11 @@
 
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥
 - ✅ Webpack and ESBuild support 🚀
-- ✅ Runtime environment variables (Experimental) 🎉
+- ✅ Runtime environment variables 🎉
 - ✅ Loading priorities of environment variables with Monorepo Support ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) ✨
 - ✅ Easy to use, no configuration required
 - ✅ Up to date with latest Angular versions
-- ✅ Supports all Angular CLI commands
+- ✅ Supports all Angular CLI commands (Karma is not supported on v19)
 - ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
 - ✅ Filters sensitive variables using a Regular Expression
 - ✅ Used by popular repositories
@@ -23,9 +23,18 @@
   - [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
 - ✅ Active development and support
 
+## Testimonials
+
+[motdotla](https://github.com/motdotla) - dotenv author and maintainer @**dotenvx**
+![alt text](motdotla.png)
+NB: He meant Angular not Angular.js :)
+
+[manekinekko](https://github.com/manekinekko) - SSE @**microsoft**
+![Wassim Chegham](manekinekko.png)
+
 ## Quick Demo
 
-- [v17 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
+- [v18 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
 - [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
 
 <h2> Table of contents</h2>

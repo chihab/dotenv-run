@@ -30,6 +30,7 @@ const jestConfig = {
       "@dotenv-run/jest-angular",
       {
         useESM: true,
+        stringifyContentPathRegex: "\\.(html|svg)$",
       },
     ],
   },
@@ -53,4 +54,20 @@ Run your tests with `jest`. More information can be found in the [Jest documenta
 
 ```sh
 NODE_OPTIONS=--experimental-vm-modules npx jest
+```
+
+or
+
+```sh
+node --experimental-vm-modules /path/to/node_modules/jest/bin/jest.js
+```
+
+If you're using Nx
+
+```sh
+NODE_OPTIONS=--experimental-vm-modules nx test
+```
+
+```sh
+node --experimental-vm-modules /path/to/node_modules/nx/bin/nx.js test
 ```
