@@ -7,7 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": [
-    "!@dotenv-run/**"
-  ]
+  "ignore": ["!@dotenv-run/**", "!@ngx-env/**"]
 }
