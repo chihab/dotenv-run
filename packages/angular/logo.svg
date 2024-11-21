@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 27.5.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-    fill="#545454"
-    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-    width="960px" height="960px" viewBox="0 0 960 960" style="enable-background:new 0 0 960 960;"
-    xml:space="preserve">
+	fill="#545454"
+	xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	width="960px" height="960px" viewBox="0 0 960 960" style="enable-background:new 0 0 960 960;"
+	xml:space="preserve">
 <g>
 	<polygon points="562.6,109.8 804.1,629.5 829.2,233.1 	"/>
 	<polygon points="624.9,655.9 334.3,655.9 297.2,745.8 479.6,849.8 662,745.8 	"/>
-		<text x="321" y="539.3" font-size="130" font-family="sans-serif"
+		<text x="321" y="520" font-size="130" font-family="sans-serif"
 		font-weight="bold">.</text>
-	<text x="356" y="539.3" font-size="130" font-family="sans-serif" font-weight="bold">ENV</text>
-        <!-- <polygon points="384.1,539.3 575.2,539.3 479.6,307" fill="white" /> -->
+	<text x="356" y="520" font-size="130" font-family="sans-serif" font-weight="bold">ENV</text>
+		<!-- <polygon points="384.1,520 575.2,520 479.6,307" fill="white" /> -->
 	<polygon points="396.6,109.8 130,233.1 155.1,629.5 	"/>
 </g>
 </svg>
