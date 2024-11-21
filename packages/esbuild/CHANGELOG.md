@@ -1,5 +1,11 @@
 # @dotenv-run/esbuild
 
+## 1.5.0
+
+### Minor Changes
+
+- 8f83f0c: feat: add compatibility with Angular 19
+
 ## 1.4.2
 
 ### Patch Changes
