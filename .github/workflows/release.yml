@@ -15,7 +15,7 @@ jobs:
           node-version: 20
       - uses: pnpm/action-setup@v2
         with:
-          version: 7.27.1
+          version: 8.8.0
       - name: Prepare Packages
         run: |
           pnpm i
