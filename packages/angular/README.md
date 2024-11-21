@@ -1,6 +1,6 @@
 <h1>@ngx-env/builder</h1>
 
-<img src="https://github.com/chihab/dotenv-run/raw/main/packages/angular/logo.svg" alt="@ngx-env/builder" width="90px" align="right" />
+<img src="https://github.com/chihab/dotenv-run/raw/main/packages/angular/logo.svg" alt="@ngx-env/builder" width="180px" align="right" />
 
 [![npm version](https://badge.fury.io/js/%40ngx-env%2Fbuilder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
 [![monthly downloads](https://img.shields.io/npm/dm/@ngx-env/builder.svg)](https://www.npmjs.com/package/@ngx-env/builder)
