@@ -1,5 +1,11 @@
 # @ngx-env/builder
 
+## 19.0.2
+
+### Patch Changes
+
+- dfb69c0: fix: csr angular 19 support
+
 ## 19.0.0
 
 ### Major Changes
