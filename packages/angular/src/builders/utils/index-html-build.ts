@@ -11,7 +11,7 @@ export function indexHtml(
   runtime = false
 ) {
   try {
-    glob.sync(`${browserOutputDir}/**/index.html`).forEach((filePath) => {
+    glob.sync(`${browserOutputDir}/**/index{.html,.csr.html}`).forEach((filePath) => {
       const html = readFileSync(filePath, "utf-8");
       const content = variablesReducer(html, raw); // Replace %VARIABLE% with the actual value
       try {
