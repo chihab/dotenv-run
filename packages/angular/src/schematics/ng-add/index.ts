@@ -17,7 +17,8 @@ function writeBuilder(
   project: WorkspaceProject,
   target: string,
   builder: string,
-  mandatory = false
+  mandatory = false,
+  options?: Record<string, any>
 ) {
   if (!project?.architect?.[target]) {
     if (mandatory) {
@@ -29,6 +30,10 @@ function writeBuilder(
   }
   project.architect[target] = {
     ...project.architect[target],
+    options: {
+      ...project.architect[target].options,
+      ...options,
+    },
     builder,
   };
 }
@@ -78,8 +83,9 @@ export function builder(options: any): Rule {
       writeBuilder(project, "server", "@ngx-env/builder:server");
     }
     writeBuilder(project, "serve", "@ngx-env/builder:dev-server", true);
-    // Karma is not supported yet due to a limitation in the Angular CLI
-    // writeBuilder(project, "test", "@ngx-env/builder:karma");
+    writeBuilder(project, "test", "@ngx-env/builder:karma", false, {
+      builderMode: "browser", // Plugin not supported with application builder yet due to a limitation in the Angular CLI
+    });
     writeBuilder(project, "extract-i18n", "@ngx-env/builder:extract-i18n");
 
     tree.overwrite(workspacePath, JSON.stringify(workspace, null, 2));

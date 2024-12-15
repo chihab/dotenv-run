@@ -165,7 +165,7 @@ importers:
         specifier: ^29.7.0
         version: 29.7.0
       '@ngx-env/builder':
-        specifier: workspace:^19.0.2
+        specifier: workspace:^19.0.3
         version: link:../../../../packages/angular
       '@types/express':
         specifier: ^4.17.21

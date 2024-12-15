@@ -28,7 +28,8 @@ export const buildWithPlugin = (
         case "application":
         case "detect":
           console.warn(
-            "@ngx-env/builder: Karma builder is not supported yet with application due to a limitation in the Angular CLI, use browser builder instead"
+            "@ngx-env/builder: Karma builder is not supported yet with the new application/esbuild builder due to a limitation in the Angular CLI, use browser builder instead",
+            "add builderMode: 'browser' to your angular.json in the karma target options"
           );
           (options as any).define = full; // Does not work with application builder yet see: https://github.com/chihab/dotenv-run/issues/113 and https://github.com/angular/angular-cli/issues/29003
           return executeKarmaBuilder(options, context);
