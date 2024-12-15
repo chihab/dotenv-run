@@ -10,6 +10,7 @@ import { getProjectCwd } from "../utils/project";
 import { env } from "@dotenv-run/core";
 import { getEnvironment } from "../utils/get-environment";
 import { plugin } from "../utils/webpack-plugin";
+import { BuilderMode } from "@angular-devkit/build-angular/src/builders/karma/schema";
 // import { getEnvironment } from "../utils/get-environment";
 // import { env } from "@dotenv-run/core";
 
@@ -27,12 +28,21 @@ export const buildWithPlugin = (
       switch (options.builderMode) {
         case "application":
         case "detect":
+          console.warn("@ngx-env/builder:");
           console.warn(
-            "@ngx-env/builder: Karma builder is not supported yet with the new application/esbuild builder due to a limitation in the Angular CLI, use browser builder instead",
-            "add builderMode: 'browser' to your angular.json in the karma target options"
+            " Application builder is not supported yet due to a limitation in the Angular CLI. "
           );
-          (options as any).define = full; // Does not work with application builder yet see: https://github.com/chihab/dotenv-run/issues/113 and https://github.com/angular/angular-cli/issues/29003
-          return executeKarmaBuilder(options, context);
+          console.warn(" Falling back to the Browser builder.");
+          // (options as any).define = full;
+          // Does not work with application builder yet see: https://github.com/chihab/dotenv-run/issues/113 and https://github.com/angular/angular-cli/issues/29003
+          return executeKarmaBuilder(
+            {
+              ...options,
+              builderMode: BuilderMode.Browser,
+            },
+            context,
+            plugin(full)
+          );
         case "browser":
           return executeKarmaBuilder(options, context, plugin(full));
         default:
