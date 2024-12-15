@@ -1,5 +1,11 @@
 # @ngx-env/builder
 
+## 19.0.3
+
+### Patch Changes
+
+- add support to karma browser builder after cli fix
+
 ## 19.0.2
 
 ### Patch Changes

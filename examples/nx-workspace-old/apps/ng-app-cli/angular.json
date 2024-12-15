@@ -200,7 +200,7 @@
         "test": {
           "builder": "@ngx-env/builder:karma",
           "options": {
-            "builderMode": "detect",
+            "builderMode": "application",
             "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
