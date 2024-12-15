@@ -5,8 +5,11 @@ import {
 } from "@angular-devkit/build-angular";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 // import { plugin } from "../utils/webpack-plugin";
-import { from, of, switchMap } from "rxjs";
+import { from, of, switchMap, throwError } from "rxjs";
 import { getProjectCwd } from "../utils/project";
+import { env } from "@dotenv-run/core";
+import { getEnvironment } from "../utils/get-environment";
+import { plugin } from "../utils/webpack-plugin";
 // import { getEnvironment } from "../utils/get-environment";
 // import { env } from "@dotenv-run/core";
 
@@ -16,33 +19,24 @@ export const buildWithPlugin = (
 ): ReturnType<typeof executeKarmaBuilder> => {
   return from(getProjectCwd(context)).pipe(
     switchMap((cwd: string) => {
-      console.warn(
-        "@ngx-env/builder: Karma builder is not supported yet due to a limitation in the Angular CLI, use jest instead"
-      );
-      return of({ success: false });
-      // switch (options.builderMode) {
-      //   case "application":
-      //   case "detect":
-      //     const { full } = env({
-      //       ...options.ngxEnv,
-      //       cwd,
-      //       environment: getEnvironment(context.target.configuration),
-      //     });
-      //     (options as any).define = full;
-      //     return executeKarmaBuilder(options, context);
-      //   case "browser":
-      //     return executeKarmaBuilder(
-      //       options,
-      //       context,
-      //       plugin({
-      //         ...options.ngxEnv,
-      //         cwd,
-      //         environment: getEnvironment(context.target.configuration),
-      //       })
-      //     );
-      //   default:
-      //     return throwError(() => "@ngx-env/builder: Invalid builder mode");
-      // }
+      const { full } = env({
+        ...options.ngxEnv,
+        cwd,
+        environment: getEnvironment(context.target.configuration),
+      });
+      switch (options.builderMode) {
+        case "application":
+        case "detect":
+          console.warn(
+            "@ngx-env/builder: Karma builder is not supported yet with application due to a limitation in the Angular CLI, use browser builder instead"
+          );
+          (options as any).define = full; // Does not work with application builder yet see: https://github.com/chihab/dotenv-run/issues/113 and https://github.com/angular/angular-cli/issues/29003
+          return executeKarmaBuilder(options, context);
+        case "browser":
+          return executeKarmaBuilder(options, context, plugin(full));
+        default:
+          return throwError(() => "@ngx-env/builder: Invalid builder mode");
+      }
     })
   );
 };

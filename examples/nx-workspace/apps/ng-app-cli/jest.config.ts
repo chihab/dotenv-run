@@ -1,4 +1,4 @@
-const jestConfig = {
+export default {
   preset: 'jest-preset-angular/presets/defaults-esm',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   cache: false,
@@ -18,5 +18,3 @@ const jestConfig = {
     ],
   },
 };
-
-export default jestConfig;
