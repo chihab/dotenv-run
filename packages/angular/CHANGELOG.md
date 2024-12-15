@@ -1,5 +1,11 @@
 # @ngx-env/builder
 
+## 19.0.4
+
+### Patch Changes
+
+- doc: remove karma non support
+
 ## 19.0.3
 
 ### Patch Changes

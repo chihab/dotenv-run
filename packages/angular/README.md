@@ -13,7 +13,7 @@
 - ✅ Loading priorities of environment variables with Monorepo Support ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) ✨
 - ✅ Easy to use, no configuration required
 - ✅ Up to date with latest Angular versions
-- ✅ Supports all Angular CLI commands (Karma is not supported on v19)
+- ✅ Supports all Angular CLI commands
 - ✅ Supports `process.env` and `import.meta.env` usage in TypeScript
 - ✅ Filters sensitive variables using a Regular Expression
 - ✅ Used by popular repositories
