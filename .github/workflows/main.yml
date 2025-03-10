@@ -13,9 +13,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 20
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8.8.0
+      - uses: pnpm/action-setup@v4
       - name: Install Packages
         run: |
           pnpm i
