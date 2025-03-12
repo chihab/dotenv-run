@@ -20,7 +20,7 @@ Here are some of the benefits of using `dotenv-run`:
 | Core            | [@dotenv-run/core](#dotenv-runcore)       | ✅     |
 | ESBuild         | [@dotenv-run/esbuild](#dotenv-runesbuild) | ✅     |
 | Rollup          | [@dotenv-run/rollup](#dotenv-runrollup)   | ✅     |
-| Vite            | [@dotenv-run/rollup](#dotenv-runrollup)   | ✅     |
+| Vite            | [@dotenv-run/vite](#dotenv-runvite)       | ✅     |
 | Node.js preload | @dotenv-run/load                          | ✅     |
 | Angular         | [@ngx-env/builder](#ngx-envbuilder)       | ✅     |
 
@@ -31,6 +31,7 @@ Here are some of the benefits of using `dotenv-run`:
   - [@dotenv-run/core](#dotenv-runcore)
   - [@dotenv-run/esbuild](#dotenv-runesbuild)
   - [@ngx-env/builder](#ngx-envbuilder)
+- [Testimonials](#testimonials)
     - [Demos](#demos)
     - [Quick start](#quick-start-1)
   - [@dotenv-run/webpack](#dotenv-runwebpack)
@@ -272,6 +273,19 @@ export default {
     file: "dist/index.js",
   },
   plugins: [env({ prefix: "API", verbose: true, root: "../../.." })],
+};
+```
+
+
+[`@dotenv-run/vite`](https://www.npmjs.com/package/@dotenv-run/vite) is a plugin for vite that can be used to inject environment variables into your applications.
+
+```js
+import env from "@dotenv-run/vite";
+
+export default {
+  envPrefix: 'MY_PREFIX_',
+  envDir: './my-env-directory',
+  plugins: [env()],
 };
 ```
 

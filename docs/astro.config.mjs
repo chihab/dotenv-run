@@ -31,7 +31,7 @@ export default defineConfig({
 						{ label: 'Node.js', link: '/integrations/loader/' },
 						{ label: 'Rollup', link: '/integrations/rollup/' },
 						{ label: 'Webpack', link: '/integrations/webpack/' },
-						// { label: 'Vite', link: '/integrations/vite/' },
+						{ label: 'Vite', link: '/integrations/vite/' },
 						// { label: 'Babel', link: '/integrations/webpack/' },
 						// { label: 'Jest', link: '/integrations/jest/' },
 						// { label: 'SWC', link: '/integrations/swc/' },
