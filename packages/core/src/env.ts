@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 import { DotenvRun, build } from "./build.js";
 import { expand } from "./expand.js";
-import type { DotenvRunOptions } from "./options.js";
+import type { DotenvRunOptions, Prefix } from "./options.js";
 import { getAbsoluteEnvPath, getPathsDownTo, isSubfolder } from "./utils.js";
 import { findRootPath } from "./root.js";
 
@@ -52,12 +52,15 @@ function print(options: DotenvRunOptions, envPaths: string[], values: Env) {
   console.log("---------------------------------\n");
 }
 
-function filter(env: Env, prefix: RegExp, nodeEnv: boolean): Env {
+function filter(env: Env, prefixes: RegExp[], nodeEnv: boolean): Env {
+  const hasMatchingPrefix = (key: string) =>
+    prefixes.some((prefix) => prefix.test(key));
+
   return Object.keys(env)
     .filter(
       (key) =>
         env[key] !== undefined &&
-        ((nodeEnv && key === "NODE_ENV") || prefix.test(key))
+        ((nodeEnv && key === "NODE_ENV") || hasMatchingPrefix(key))
     )
     .sort() // sort keys to make output more deterministic
     .reduce<Env>((env, key) => {
@@ -104,6 +107,21 @@ function paths({ environment, root, cwd, files }: DotenvRunOptions): {
   };
 }
 
+function prefixes(prefix: Prefix | Prefix[] | undefined): RegExp[] {
+  if (prefix == null) {
+    return null;
+  }
+
+  if (!Array.isArray(prefix)) {
+    prefix = [prefix];
+  }
+
+  const coerceRegExp = (value: string | RegExp): RegExp =>
+    typeof value === "string" ? new RegExp(value, "i") : value;
+
+  return prefix.map(coerceRegExp);
+}
+
 export function env({
   cwd = process.cwd(),
   environment = process.env.NODE_ENV,
@@ -134,11 +152,7 @@ export function env({
   expand(envPaths, dotenv);
   const processEnv = process.env;
   const values = prefix
-    ? filter(
-        processEnv,
-        typeof prefix === "string" ? new RegExp(prefix, "i") : prefix,
-        nodeEnv
-      )
+    ? filter(processEnv, prefixes(prefix), nodeEnv)
     : processEnv;
   const allValues = { ...values, ...builtIn };
   if (verbose) {

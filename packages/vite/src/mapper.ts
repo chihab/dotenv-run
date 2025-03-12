@@ -1,18 +1,17 @@
 import {
   castArray,
-  escapeRegExp,
-  first,
   isEmpty,
   isNil,
   negate,
 } from "lodash-es";
 import { DEFAULT_PREFIX } from "./constants.js";
+import { Prefix } from "@dotenv-run/core";
 
 /**
  * Converts a Vite `envPrefix` configuration value into a usable prefix or RegExp for @dotenv-run/core.
  *
  * @param {string | string[] | undefined} prefixes - The prefix or list of prefixes to filter environment variables.
- * @returns {string | RegExp} - A single prefix as a string if only one is provided, or a RegExp if multiple prefixes are given.
+ * @returns {Prefix | Prefix[]} - A single prefix as a string if only one is provided, or a RegExp if multiple prefixes are given.
  *
  * @throws {Error} If an empty string (`''`) is included in the prefixes, as this could expose all environment variables.
  *
@@ -38,7 +37,7 @@ import { DEFAULT_PREFIX } from "./constants.js";
  */
 export const viteEnvPrefixToPrefix = (
   prefixes: string | string[] | undefined
-): string | RegExp => {
+): Prefix | Prefix[] => {
   prefixes = castArray(prefixes).filter(negate(isNil));
 
   if (isEmpty(prefixes)) {
@@ -51,9 +50,5 @@ export const viteEnvPrefixToPrefix = (
     );
   }
 
-  if (prefixes.length === 1) {
-    return first(prefixes);
-  }
-
-  return new RegExp(`^(${prefixes.map(escapeRegExp).join("|")})`);
+  return prefixes;
 };
