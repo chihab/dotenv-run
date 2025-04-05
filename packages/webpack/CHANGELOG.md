@@ -1,5 +1,11 @@
 # @dotenv-run/webpack
 
+## 1.5.1
+
+### Patch Changes
+
+- 2492b1e: upgrade to angular version
+
 ## 1.5.0
 
 ### Minor Changes
