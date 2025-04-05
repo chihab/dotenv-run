@@ -27,9 +27,7 @@ export const buildWithPlugin = (
         environment: getEnvironment(context.target.configuration),
       });
       (options as any).define = full;
-      return fromAsyncIterable(
-        buildEsbuildBrowser(options, context, undefined)
-      ).pipe(
+      return fromAsyncIterable(buildEsbuildBrowser(options, context)).pipe(
         tap(() => {
           indexHtml(
             join(
@@ -38,9 +36,9 @@ export const buildWithPlugin = (
               "browser"
             ),
             null, // no ssr support with browser-esbuild,
-            Array.isArray(options.localize) ? options.localize : [],
             raw,
-            dotEnvOptions.runtime
+            dotEnvOptions.runtime,
+            Array.isArray(options.localize) ? options.localize : []
           );
         })
       );

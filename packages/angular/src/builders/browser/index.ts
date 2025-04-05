@@ -29,9 +29,9 @@ export const buildWithPlugin = (
           indexHtml(
             join(context.workspaceRoot, options.outputPath.toString()),
             null, // no ssr support with browser,
-            Array.isArray(options.localize) ? options.localize : [],
             raw,
-            options.ngxEnv.runtime
+            options.ngxEnv.runtime,
+            Array.isArray(options.localize) ? options.localize : []
           );
         })
       );

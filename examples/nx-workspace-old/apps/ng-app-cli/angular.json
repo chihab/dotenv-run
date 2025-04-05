@@ -13,8 +13,7 @@
         "sourceLocale": "en-US",
         "locales": {
           "fr": {
-            "translation": "src/locale/messages.fr.xlf",
-            "baseHref": ""
+            "translation": "src/locale/messages.fr.xlf"
           }
         }
       },
@@ -38,8 +37,8 @@
             },
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
-            "server": "src/main.server.ts",
             "outputMode": "server",
+            "server": "src/main.server.ts",
             "ssr": {
               "entry": "src/server.ts"
             }

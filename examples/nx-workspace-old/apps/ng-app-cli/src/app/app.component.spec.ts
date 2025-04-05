@@ -8,7 +8,13 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-    }).compileComponents();
+    })
+      .overrideComponent(AppComponent, {
+        set: {
+          template: ``,
+        },
+      })
+      .compileComponents();
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -6,29 +6,46 @@ import { variablesReducer } from "./variables-reducer";
 export function indexHtml(
   browserOutputDir: string,
   serverOutputDir: string | null,
-  locales: string[] = [],
   raw: Dict,
-  runtime = false
+  runtime = false,
+  locales: string[] = []
 ) {
   try {
-    glob.sync(`${browserOutputDir}/**/index{.html,.csr.html}`).forEach((filePath) => {
-      const html = readFileSync(filePath, "utf-8");
-      const content = variablesReducer(html, raw); // Replace %VARIABLE% with the actual value
-      try {
-        writeFileSync(
-          filePath,
-          runtime
-            ? content.replace(
-                /<head>/,
-                `<head><script src="/ngx-env.js"></script>`
-              )
-            : content
-        );
-      } catch (e) {
-        console.log(`❌ Failed to replace variables in ${filePath} ❌`);
-        throw e;
-      }
-    });
+    if (locales.length > 0) {
+      locales.forEach((locale) => {
+        glob
+          .sync(`${browserOutputDir}/${locale}/index{.html,.csr.html}`)
+          .forEach((filePath) => {
+            const html = readFileSync(filePath, "utf-8");
+            const content = variablesReducer(html, raw); // Replace %VARIABLE% with the actual value
+            writeFileSync(
+              filePath,
+              runtime
+                ? content.replace(
+                    /<head>/,
+                    `<head><script src="/${locale}/ngx-env.js"></script>`
+                  )
+                : content
+            );
+          });
+      });
+    } else {
+      glob
+        .sync(`${browserOutputDir}/index{.html,.csr.html}`)
+        .forEach((filePath) => {
+          const html = readFileSync(filePath, "utf-8");
+          const content = variablesReducer(html, raw); // Replace %VARIABLE% with the actual value
+          writeFileSync(
+            filePath,
+            runtime
+              ? content.replace(
+                  /<head>/,
+                  `<head><script src="/ngx-env.js"></script>`
+                )
+              : content
+          );
+        });
+    }
     if (serverOutputDir) {
       glob
         .sync(`${serverOutputDir}/**/index.server.html`)

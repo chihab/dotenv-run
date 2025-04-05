@@ -32,6 +32,6 @@
   },
   "devDependencies": {
     "@types/node": "^16.18.112",
-    "webpack": "5.96.1"
+    "webpack": "5.98.0"
   }
 }
