@@ -7,7 +7,7 @@ A CLI tool to load command line and .env environment variables with monorepo sup
 - ✅ Expand environment variables `API_URL=$API_BASE/users`
 - ✅ Define environment variables for a specific (e.g. `.env.production`)
 - ✅ Load priorities of `.env.*` files (e.g. `.env.production` > `.env`)
-- ✅ Supports hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.)
+- ✅ Supports hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turborepo.com/), etc.)
   `apps/next-app/.env` > `apps/.env` > `.env`
 - ✅ Supports all platforms and languages (Node.js, Python...) `dotenv-run -- python main.py`
 

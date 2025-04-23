@@ -10,7 +10,7 @@
 - ✅ Official recommendation in [dotenv documentation](https://www.dotenv.org/docs/frameworks/angular/vercel) 🔥
 - ✅ Webpack and ESBuild support 🚀
 - ✅ Runtime environment variables 🎉
-- ✅ Loading priorities of environment variables with Monorepo Support ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.) ✨
+- ✅ Loading priorities of environment variables with Monorepo Support ([Nx](https://nx.dev), [Turbo](https://turborepo.com/), etc.) ✨
 - ✅ Easy to use, no configuration required
 - ✅ Up to date with latest Angular versions
 - ✅ Supports all Angular CLI commands

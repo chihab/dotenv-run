@@ -5,7 +5,7 @@
 - ✅ Expand environment variables `API_URL=$API_BASE/users`
 - ✅ Define environment variables for a specific environment (e.g. `.env.production`)
 - ✅ Load priorities of `.env.*` files (e.g. `.env.production` > `.env`)
-- ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turbo.build/), etc.)
+- ✅ Hierarchical cascading configuration in monorepo projects ([Nx](https://nx.dev), [Turbo](https://turborepo.com/), etc.)
   `apps/next-app/.env` > `apps/.env` > `.env`
 
 # Install
