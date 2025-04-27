@@ -1,5 +1,16 @@
 # @ngx-env/builder
 
+## 19.1.0
+
+### Minor Changes
+
+- 2492b1e: upgrade to angular version
+
+### Patch Changes
+
+- Updated dependencies [2492b1e]
+  - @dotenv-run/webpack@1.5.1
+
 ## 19.0.4
 
 ### Patch Changes

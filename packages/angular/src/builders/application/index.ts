@@ -30,6 +30,8 @@ export const buildWithPlugin = (
         environment: getEnvironment(context.target.configuration),
       });
       options.define = full;
+      if (options.ssr && dotEnvOptions.runtime)
+        delete options.define["process.env.NODE_ENV"];
       return fromAsyncIterable<BuilderOutput>(
         buildApplication(options, context)
       ).pipe(
@@ -41,9 +43,9 @@ export const buildWithPlugin = (
           indexHtml(
             join(outputDir, "browser"),
             options.ssr ? join(outputDir, "server") : null,
-            Array.isArray(options.localize) ? options.localize : [],
             raw,
-            dotEnvOptions.runtime
+            dotEnvOptions.runtime,
+            Array.isArray(options.localize) ? options.localize : []
           );
         })
       );
