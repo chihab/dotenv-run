@@ -36,6 +36,7 @@ Here are some of the benefits of using `dotenv-run`:
     - [Quick start](#quick-start-1)
   - [@dotenv-run/webpack](#dotenv-runwebpack)
   - [@dotenv-run/rollup](#dotenv-runrollup)
+  - [@dotenv-run/vite](#dotenv-runvite)
 - [Credits](#credits)
 - [License](#license)
 
@@ -276,6 +277,7 @@ export default {
 };
 ```
 
+### @dotenv-run/vite
 
 [`@dotenv-run/vite`](https://www.npmjs.com/package/@dotenv-run/vite) is a plugin for vite that can be used to inject environment variables into your applications.
 
