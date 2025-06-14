@@ -19,8 +19,10 @@ Here are some of the benefits of using `dotenv-run`:
 | CLI             | [@dotenv-run/cli](#dotenv-runcli)         | ✅     |
 | Core            | [@dotenv-run/core](#dotenv-runcore)       | ✅     |
 | ESBuild         | [@dotenv-run/esbuild](#dotenv-runesbuild) | ✅     |
+| webpack         | [@dotenv-run/webpack](#dotenv-webpack)    | ✅     |
 | Rollup          | [@dotenv-run/rollup](#dotenv-runrollup)   | ✅     |
 | Vite            | [@dotenv-run/vite](#dotenv-runvite)       | ✅     |
+| Rspack          | [@dotenv-run/rspack](#dotenv-rspack)      | ✅     |
 | Node.js preload | @dotenv-run/load                          | ✅     |
 | Angular         | [@ngx-env/builder](#ngx-envbuilder)       | ✅     |
 
@@ -37,6 +39,7 @@ Here are some of the benefits of using `dotenv-run`:
   - [@dotenv-run/webpack](#dotenv-runwebpack)
   - [@dotenv-run/rollup](#dotenv-runrollup)
   - [@dotenv-run/vite](#dotenv-runvite)
+  - [@dotenv-run/rspack](#dotenv-runrspack)
 - [Credits](#credits)
 - [License](#license)
 
@@ -263,7 +266,7 @@ export default {
 
 ### @dotenv-run/rollup
 
-[`@dotenv-run/rollup`](https://www.npmjs.com/package/@dotenv-run/rollup) is a plugin for rollup that can be used to inject environment variables into your applications.
+[`@dotenv-run/rollup`](https://www.npmjs.com/package/@dotenv-run/rollup) is a plugin for Rollup that can be used to inject environment variables into your applications.
 
 ```js
 import env from "@dotenv-run/rollup";
@@ -279,7 +282,7 @@ export default {
 
 ### @dotenv-run/vite
 
-[`@dotenv-run/vite`](https://www.npmjs.com/package/@dotenv-run/vite) is a plugin for vite that can be used to inject environment variables into your applications.
+[`@dotenv-run/vite`](https://www.npmjs.com/package/@dotenv-run/vite) is a plugin for Vite that can be used to inject environment variables into your applications.
 
 ```js
 import env from "@dotenv-run/vite";
@@ -288,6 +291,22 @@ export default {
   envPrefix: 'MY_PREFIX_',
   envDir: './my-env-directory',
   plugins: [env()],
+};
+```
+
+### @dotenv-run/rspack
+
+[`@dotenv-run/rspack`](https://www.npmjs.com/package/@dotenv-run/rspack) is a plugin for Rspack that can be used to inject environment variables into your applications.
+
+```js
+import {DotenvRunPlugin} from '@dotenv-run/rspack'
+
+export default {
+  plugins: [
+    new DotenvRunPlugin({
+      root: __dirname
+    })
+  ],
 };
 ```
 
