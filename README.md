@@ -19,10 +19,10 @@ Here are some of the benefits of using `dotenv-run`:
 | CLI             | [@dotenv-run/cli](#dotenv-runcli)         | ✅     |
 | Core            | [@dotenv-run/core](#dotenv-runcore)       | ✅     |
 | ESBuild         | [@dotenv-run/esbuild](#dotenv-runesbuild) | ✅     |
-| webpack         | [@dotenv-run/webpack](#dotenv-webpack)    | ✅     |
+| webpack         | [@dotenv-run/webpack](#dotenv-runwebpack) | ✅     |
 | Rollup          | [@dotenv-run/rollup](#dotenv-runrollup)   | ✅     |
 | Vite            | [@dotenv-run/vite](#dotenv-runvite)       | ✅     |
-| Rspack          | [@dotenv-run/rspack](#dotenv-rspack)      | ✅     |
+| Rspack          | [@dotenv-run/rspack](#dotenv-runrspack)   | ✅     |
 | Node.js preload | @dotenv-run/load                          | ✅     |
 | Angular         | [@ngx-env/builder](#ngx-envbuilder)       | ✅     |
 
