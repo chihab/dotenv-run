@@ -25,6 +25,7 @@ export function findRootPath() {
   }
   let p = findUp.sync([
     "turbo.json",
+    "turbo.jsonc",
     "nx.json", // Just in case NX_WORKSPACE_ROOT is not set
     "lerna.json",
     "pnpm-workspace.yaml",
