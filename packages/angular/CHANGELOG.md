@@ -1,5 +1,11 @@
 # @ngx-env/builder
 
+## 19.0.5
+
+### Patch Changes
+
+- feat(ngx-env): update builder schemas
+
 ## 19.0.4
 
 ### Patch Changes
