@@ -17,7 +17,6 @@
       "description": "The full path for the browser entry point to the application, relative to the current workspace."
     },
     "server": {
-      "type": "string",
       "description": "The full path for the server entry point to the application, relative to the current workspace.",
       "oneOf": [
         {
@@ -196,7 +195,7 @@
       "additionalProperties": false
     },
     "externalDependencies": {
-      "description": "Exclude the listed external dependencies from being bundled into the bundle. Instead, the created bundle relies on these dependencies to be available during runtime.",
+      "description": "Exclude the listed external dependencies from being bundled into the bundle. Instead, the created bundle relies on these dependencies to be available during runtime. Note: `@foo/bar` marks all paths within the `@foo/bar` package as external, including sub-paths like `@foo/bar/baz`.",
       "type": "array",
       "items": {
         "type": "string"
