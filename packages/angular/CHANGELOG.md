@@ -1,5 +1,16 @@
 # @ngx-env/builder
 
+## 19.1.0
+
+### Minor Changes
+
+- release: upgrade to ngx-version 19.2.0 to fix extract isue
+
+### Patch Changes
+
+- Updated dependencies
+  - @dotenv-run/webpack@1.5.1
+
 ## 19.0.5
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@dotenv-run/jest-angular",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Run Jest with Angular CLI environment variables",
   "homepage": "https://github.com/chihab/dotenv-run",
   "sideEffects": true,
@@ -20,7 +20,7 @@
     "cli"
   ],
   "devDependencies": {
-    "jest-preset-angular": "^14.0.0"
+    "jest-preset-angular": "^14.6.0"
   },
   "peerDependencies": {
     "jest-preset-angular": "^14.0.0"

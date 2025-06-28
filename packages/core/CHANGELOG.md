@@ -1,5 +1,11 @@
 # @dotenv-run/core
 
+## 1.3.7
+
+### Patch Changes
+
+- release: upgrade to ngx-version 19.2.0 to fix extract isue
+
 ## 1.3.6
 
 ### Patch Changes

@@ -11,24 +11,26 @@ export function indexHtml(
   runtime = false
 ) {
   try {
-    glob.sync(`${browserOutputDir}/**/index{.html,.csr.html}`).forEach((filePath) => {
-      const html = readFileSync(filePath, "utf-8");
-      const content = variablesReducer(html, raw); // Replace %VARIABLE% with the actual value
-      try {
-        writeFileSync(
-          filePath,
-          runtime
-            ? content.replace(
-                /<head>/,
-                `<head><script src="/ngx-env.js"></script>`
-              )
-            : content
-        );
-      } catch (e) {
-        console.log(`❌ Failed to replace variables in ${filePath} ❌`);
-        throw e;
-      }
-    });
+    glob
+      .sync(`${browserOutputDir}/**/index{.html,.csr.html}`)
+      .forEach((filePath) => {
+        const html = readFileSync(filePath, "utf-8");
+        const content = variablesReducer(html, raw); // Replace %VARIABLE% with the actual value
+        try {
+          writeFileSync(
+            filePath,
+            runtime
+              ? content.replace(
+                  /<head>/,
+                  `<head><script src="/ngx-env.js"></script>`
+                )
+              : content
+          );
+        } catch (e) {
+          console.log(`❌ Failed to replace variables in ${filePath} ❌`);
+          throw e;
+        }
+      });
     if (serverOutputDir) {
       glob
         .sync(`${serverOutputDir}/**/index.server.html`)
@@ -44,6 +46,8 @@ export function indexHtml(
         });
     }
     if (runtime) {
+      // NODE_ENV should not be controlled via runtime
+      delete raw.NODE_ENV;
       const runtimeStmt = `globalThis._NGX_ENV_ = ${JSON.stringify(
         raw,
         null,
@@ -54,14 +58,30 @@ export function indexHtml(
           console.log(
             `📦 Writing ngx-env.js to ${browserOutputDir}/${locale}/ngx-env.js`
           );
-          writeFileSync(
-            `${browserOutputDir}/${locale}/ngx-env.js`,
-            runtimeStmt
-          );
+          try {
+            writeFileSync(
+              `${browserOutputDir}/${locale}/ngx-env.js`,
+              runtimeStmt
+            );
+          } catch (e) {
+            console.log(
+              `❌ Failed to create ngx-env.js at ${browserOutputDir}/${locale}/ngx-env.js ❌`
+            );
+            throw e;
+          }
         });
       } else {
-        console.log(`📦 Writing ngx-env.js to ${browserOutputDir}/ngx-env.js`);
-        writeFileSync(`${browserOutputDir}/ngx-env.js`, runtimeStmt);
+        try {
+          console.log(
+            `📦 Writing ngx-env.js to ${browserOutputDir}/ngx-env.js`
+          );
+          writeFileSync(`${browserOutputDir}/ngx-env.js`, runtimeStmt);
+        } catch (e) {
+          console.log(
+            `❌ Failed to create ngx-env.js at ${browserOutputDir}/ngx-env.js ❌`
+          );
+          throw e;
+        }
       }
     }
   } catch (e) {

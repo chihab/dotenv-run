@@ -14,9 +14,10 @@ export function build(
 ) {
   const values = Object.keys(processEnv).reduce<DotenvRun>(
     (env, key) => {
-      const value = runtime
-        ? `globalThis.${globalVar}.${key}`
-        : JSON.stringify(processEnv[key]);
+      const value =
+        runtime && key !== "NODE_ENV"
+          ? `globalThis.${globalVar}.${key}`
+          : JSON.stringify(processEnv[key]);
       env.raw[key] = processEnv[key];
       env.stringified[key] = value;
       env.full[`process.env.${key}`] = value;

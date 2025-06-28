@@ -41,7 +41,7 @@ const dotenvRun = (options?: ViteDotenvRunOptions): Plugin => {
       const { full } = loadEnv({
         files,
         prefix,
-        root: config.envDir,
+        root: config.envDir as string,
         environment: configEnv.mode,
         ...options,
       });
