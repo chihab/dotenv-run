@@ -6,7 +6,7 @@ import {
 import {
   ExtractI18nBuilderOptions,
   executeExtractI18nBuilder,
-} from "@angular-devkit/build-angular";
+} from "@angular/build";
 import { combineLatest, switchMap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { JsonObject } from "@angular-devkit/core";

@@ -68,10 +68,7 @@
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@ngx-env/builder:extract-i18n",
-      "options": {
-        "buildTarget": "ng-app-cli:build"
-      }
+      "executor": "@ngx-env/builder:extract-i18n"
     },
     "lint": {
       "executor": "@nx/eslint:lint"

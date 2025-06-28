@@ -4,10 +4,7 @@ import {
   createBuilder,
   fromAsyncIterable,
 } from "@angular-devkit/architect";
-import {
-  ApplicationBuilderOptions,
-  buildApplication,
-} from "@angular-devkit/build-angular";
+import { ApplicationBuilderOptions, buildApplication } from "@angular/build";
 import { env, type DotenvRunOptions } from "@dotenv-run/core";
 import { join } from "path";
 import { Observable, from, switchMap, tap } from "rxjs";

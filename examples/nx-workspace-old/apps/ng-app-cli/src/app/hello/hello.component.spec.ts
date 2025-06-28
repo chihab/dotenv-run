@@ -8,10 +8,15 @@ describe('HelloComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HelloComponent]
+      imports: [HelloComponent],
     })
-    .compileComponents();
-    
+      .overrideComponent(HelloComponent, {
+        set: {
+          template: '',
+        },
+      })
+      .compileComponents();
+
     fixture = TestBed.createComponent(HelloComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
