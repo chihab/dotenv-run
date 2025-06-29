@@ -1,5 +1,16 @@
 # @ngx-env/builder
 
+## 20.0.0
+
+### Major Changes
+
+- feat(angular): support ng 20
+
+### Patch Changes
+
+- Updated dependencies
+  - @dotenv-run/webpack@1.5.2
+
 ## 19.1.0
 
 ### Minor Changes

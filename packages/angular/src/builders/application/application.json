@@ -292,6 +292,13 @@
         "type": "string"
       }
     },
+    "conditions": {
+      "description": "Custom package resolution conditions used to resolve conditional exports/imports. Defaults to ['module', 'development'/'production']. The following special conditions are always present if the requirements are satisfied: 'default', 'import', 'require', 'browser', 'node'.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "fileReplacements": {
       "description": "Replace compilation source files with other compilation source files in the build.",
       "type": "array",
@@ -369,6 +376,11 @@
               "type": "boolean",
               "description": "Resolve vendor packages source maps.",
               "default": false
+            },
+            "sourcesContent": {
+              "type": "boolean",
+              "description": "Output original source content for files within the source map.",
+              "default": true
             }
           },
           "additionalProperties": false
@@ -604,7 +616,7 @@
     }
   },
   "additionalProperties": false,
-  "required": ["outputPath", "index", "browser", "tsConfig"],
+  "required": ["tsConfig"],
   "definitions": {
     "assetPattern": {
       "oneOf": [
