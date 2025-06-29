@@ -1,10 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Component({
-  standalone: true,
   selector: 'app-root',
+  standalone: true,
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'Title: ' + import.meta.env.NODE_ENV;
+  title = $localize`Hello world`;
+  env = import.meta.env['NODE_ENV'];
+  version = environment.env.NGX_VERSION;
+  branch = import.meta.env['NGX_BRANCH'];
 }

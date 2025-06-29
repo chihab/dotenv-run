@@ -199,18 +199,13 @@
         "test": {
           "builder": "@ngx-env/builder:karma",
           "options": {
-            "builderMode": "application",
-            "polyfills": ["zone.js", "zone.js/testing"],
             "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
             "ngxEnv": {
               "prefix": "NGX_",
               "unsecure": true
             },
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"],
-            "sourceMap": false,
-            "scripts": []
+            "styles": ["src/styles.css"]
           }
         }
       }

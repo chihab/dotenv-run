@@ -8,7 +8,7 @@ import {
   DevServerBuilderOptions,
   DevServerBuilderOutput,
   executeDevServerBuilder,
-} from "@angular-devkit/build-angular";
+} from "@angular/build";
 import { JsonObject } from "@angular-devkit/core";
 import { env } from "@dotenv-run/core";
 import type { DotenvRunOptions } from "@dotenv-run/core";
@@ -49,7 +49,6 @@ export const buildWithPlugin = (
         cwd,
       };
       if (builderName === "@ngx-env/builder:application") {
-        options.forceEsbuild = true;
         const { full, raw } = env({
           ...dotenvRunOptions,
           global: "_NGX_ENV_",
@@ -58,23 +57,10 @@ export const buildWithPlugin = (
         _options.define = full;
         context.getTargetOptions = async () => _options;
         context.validateOptions = async <T>() => _options as T;
-        return executeDevServerBuilder(
-          options,
-          context,
-          {
-            indexHtml: async (content: string) =>
-              indexHtml(content, raw, dotenvRunOptions.runtime),
-          },
-          {
-            builderSelector: () => "@angular-devkit/build-angular:application", // CLI requires it to recognize the builder as an esbuild builder otherwise plugins are not supported
-          }
-        );
-      } else {
-        return executeDevServerBuilder(
-          options,
-          context,
-          webpackPlugin(dotenvRunOptions)
-        );
+        return executeDevServerBuilder(options, context, {
+          indexHtmlTransformer: async (content: string) =>
+            indexHtml(content, raw, dotenvRunOptions.runtime),
+        });
       }
     })
   );
