@@ -31,7 +31,7 @@ export function findRootPath() {
     "pnpm-workspace.yaml",
   ]);
 
-  if (p && p.endsWith("turbo.json")) {
+  if (p && (p.endsWith("turbo.json") || p.endsWith("turbo.jsonc")) ) {
     p = findTurboRootPath(p);
   }
 
