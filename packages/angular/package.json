@@ -30,11 +30,10 @@
     "copy-dist": "ts-node tools/schema-dist.ts"
   },
   "dependencies": {
-    "@dotenv-run/webpack": "workspace:^1.5.2",
     "glob": "^10.4.5"
   },
   "devDependencies": {
-    "@angular/build": "^20.0.4",
+    "@angular/build": "^20.0.5",
     "@angular-devkit/architect": "^0.2000.04",
     "@angular-devkit/build-angular": "^20.0.4",
     "@angular-devkit/core": "^20.0.4",
@@ -44,6 +43,7 @@
     "@angular/common": "^20.0.4",
     "@angular/platform-browser": "^20.0.4",
     "@dotenv-run/core": "workspace:^1.3.7",
+    "@dotenv-run/webpack": "workspace:^1.5.2",
     "cpy": "^8.1.2",
     "karma": "^6.4.4",
     "rxjs": "7.8.2",
@@ -52,8 +52,7 @@
     "webpack": "5.99.8",
     "zone.js": "~0.15.0"
   },
-  "peerDpendencies": {
-    "rxjs": "~7.8.0",
-    "webpack": "5.99.8"
+  "peerDependencies": {
+    "@angular/build": "^20.0.5"
   }
 }

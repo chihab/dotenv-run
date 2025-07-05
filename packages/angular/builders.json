@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@angular-devkit/architect/src/builders-schema.json",
+  "$schema": "../../node_modules/@angular-devkit/architect/src/builders-schema.json",
   "builders": {
     "browser": {
       "implementation": "./dist/builders/browser",
@@ -15,6 +15,11 @@
       "implementation": "./dist/builders/karma",
       "schema": "./dist/builders/schemas/karma.json",
       "description": "Karma server extended with ngx-env config"
+    },
+    "unit-test": {
+      "implementation": "./dist/builders/unit-test",
+      "schema": "./dist/builders/schemas/unit-test.json",
+      "description": "Unit Test server extended with ngx-env config"
     },
     "extract-i18n": {
       "implementation": "./dist/builders/extract-i18n",

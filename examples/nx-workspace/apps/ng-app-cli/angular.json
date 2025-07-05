@@ -21,22 +21,17 @@
         "build": {
           "builder": "@ngx-env/builder:application",
           "options": {
-            "outputPath": "dist/ng-app-cli",
-            "index": "src/index.html",
             "browser": "src/main.ts",
-            "localize": ["fr"],
-            "i18nMissingTranslation": "error",
-            "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles.css"],
             "ngxEnv": {
               "prefix": "NGX_",
               "verbose": true,
               "unsecure": true,
-              "runtime": true,
-              "files": [".env.app", ".env"]
+              "files": [".env.app", ".env"],
+              "runtime": true
             },
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"],
             "server": "src/main.server.ts",
             "outputMode": "server",
             "ssr": {
@@ -196,16 +191,29 @@
             "buildTarget": "ng-app-cli:build"
           }
         },
-        "test": {
+        "test-karma": {
           "builder": "@ngx-env/builder:karma",
           "options": {
             "tsConfig": "tsconfig.spec.json",
+            "polyfills": ["zone.js"],
             "ngxEnv": {
+              "root": "../..",
               "prefix": "NGX_",
-              "unsecure": true
+              "files": [".env.app", ".env"],
+              "unsecure": true,
+              "verbose": true
             },
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"]
+          }
+        },
+        "test": {
+          "builder": "@ngx-env/builder:unit-test",
+          "options": {
+            "browsers": ["chromium"],
+            "buildTarget": "::development",
+            "tsConfig": "tsconfig.spec.json",
+            "runner": "vitest"
           }
         }
       }

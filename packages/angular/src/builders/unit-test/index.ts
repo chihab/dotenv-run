@@ -1,18 +1,13 @@
 import { BuilderContext, createBuilder } from "@angular-devkit/architect";
-import {
-  DevServerBuilderOptions,
-  executeDevServerBuilder,
-} from "@angular/build";
-import type { DotenvRunOptions } from "@dotenv-run/core";
+import { executeUnitTestBuilder, UnitTestOptions } from "@angular/build";
 import { env } from "@dotenv-run/core";
 import { catchError, combineLatest, switchMap } from "rxjs";
 import { getEnvironment } from "../utils/get-environment";
-import { indexHtml } from "../utils/index-html-serve";
-import { getProjectCwd } from "../utils/project";
 import { validateAndPrepareBuildContext } from "../utils/validate-prepare-context";
+import { getProjectCwd } from "../utils/project";
 
 export const executeWithEnv = (
-  options: DevServerBuilderOptions,
+  options: UnitTestOptions,
   context: BuilderContext
 ) => {
   return combineLatest([
@@ -20,29 +15,29 @@ export const executeWithEnv = (
     getProjectCwd(context),
   ]).pipe(
     switchMap(([buildTarget, cwd]) => {
-      const dotenvRunOptions: DotenvRunOptions = {
+      const { full } = env({
         ...buildTarget.ngxEnv,
+        runtime: false, // Runtime is not supported in unit tests
         cwd,
-      };
-      const { full, raw } = env({
-        ...dotenvRunOptions,
-        global: "_NGX_ENV_",
         environment: getEnvironment(buildTarget.configuration),
       });
       context.getTargetOptions = async () => ({
         ...buildTarget.options,
         define: full,
       });
-      return executeDevServerBuilder(options, context, {
-        indexHtmlTransformer: async (content: string) =>
-          indexHtml(content, raw, dotenvRunOptions.runtime),
-      });
+      if (buildTarget.ngxEnv.runtime) {
+        console.warn(
+          "NOTE: @ngx-env/builder runtime option is not supported in unit tests"
+        );
+        console.log();
+      }
+      return executeUnitTestBuilder(options, context);
     }),
     catchError((e) => {
-      console.error(e.message);
-      return executeDevServerBuilder(options, context);
+      console.error(e);
+      return executeUnitTestBuilder(options, context);
     })
   );
 };
 
-export default createBuilder<DevServerBuilderOptions>(executeWithEnv);
+export default createBuilder<UnitTestOptions>(executeWithEnv);

@@ -26,5 +26,6 @@ describe('AppComponent', () => {
   it(`should have the 'Hello world' title`, () => {
     expect(component.title).toEqual('Hello world');
     expect(component.env).toEqual('test');
+    expect(component.apiUsers).toEqual('/api/v1/users');
   });
 });

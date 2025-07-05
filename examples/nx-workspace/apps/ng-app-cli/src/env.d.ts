@@ -10,4 +10,5 @@ declare interface Env {
 
 declare interface ImportMeta {
   env: Env;
+  dirname: string;
 }
