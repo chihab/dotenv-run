@@ -5,8 +5,8 @@ const jestConfig = {
   cache: false,
   moduleNameMapper: {
     "^rxjs(/operators$)?$":
-      "<rootDir>/../../../../node_modules/rxjs/dist/bundles/rxjs.umd.js",
-    tslib: "<rootDir>/../../../../node_modules/tslib/tslib.es6.mjs",
+      "<rootDir>/node_modules/rxjs/dist/bundles/rxjs.umd.js",
+    tslib: "<rootDir>/node_modules/tslib/tslib.es6.mjs",
   },
   transform: {
     "^.+\\.(ts)$": [
