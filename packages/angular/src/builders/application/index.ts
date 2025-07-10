@@ -7,16 +7,16 @@ import {
 import { ApplicationBuilderOptions, buildApplication } from "@angular/build";
 import { env, type DotenvRunOptions } from "@dotenv-run/core";
 import { join } from "path";
-import { Observable, from, switchMap, tap } from "rxjs";
+import { from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { indexHtml } from "../utils/index-html-build";
 import { getEnvironment } from "../utils/get-environment";
+import { indexHtml } from "../utils/index-html-build";
 import { getProjectCwd } from "../utils/project";
 
-export const buildWithPlugin = (
+export const executeWithEnv = (
   options: ApplicationBuilderOptions & NgxEnvSchema,
   context: BuilderContext
-): Observable<BuilderOutput> => {
+) => {
   const dotEnvOptions: DotenvRunOptions = options.ngxEnv;
   return from(getProjectCwd(context)).pipe(
     switchMap((cwd) => {
@@ -33,7 +33,7 @@ export const buildWithPlugin = (
         tap(() => {
           const outputDir = join(
             context.workspaceRoot,
-            options.outputPath.toString()
+            options.outputPath?.toString() ?? `dist/${context.target.project}`
           );
           indexHtml(
             join(outputDir, "browser"),
@@ -48,4 +48,4 @@ export const buildWithPlugin = (
   );
 };
 
-export default createBuilder<ApplicationBuilderOptions>(buildWithPlugin);
+export default createBuilder<ApplicationBuilderOptions>(executeWithEnv);

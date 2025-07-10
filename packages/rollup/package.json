@@ -29,7 +29,7 @@
     "rollup": "^3.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.16.10",
+    "@types/node": "^22.12.0",
     "rollup": "^3.29.5"
   }
 }

@@ -1,5 +1,11 @@
 # @ngx-env/builder
 
+## 20.0.1
+
+### Patch Changes
+
+- fix dev-server builder
+
 ## 20.0.0
 
 ### Major Changes

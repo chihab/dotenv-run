@@ -9,11 +9,11 @@ import { env, type DotenvRunOptions } from "@dotenv-run/core";
 import { join } from "path";
 import { from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { indexHtml } from "../utils/index-html-build";
 import { getEnvironment } from "../utils/get-environment";
+import { indexHtml } from "../utils/index-html-build";
 import { getProjectCwd } from "../utils/project";
 
-export const buildWithPlugin = (
+export const executeWithEnv = (
   options: BrowserBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ) => {
@@ -48,4 +48,4 @@ export const buildWithPlugin = (
   );
 };
 
-export default createBuilder<BrowserBuilderOptions>(buildWithPlugin);
+export default createBuilder<BrowserBuilderOptions>(executeWithEnv);
