@@ -36,6 +36,23 @@
       "type": "string",
       "description": "SSL certificate to use for serving HTTPS."
     },
+    "allowedHosts": {
+      "description": "The hosts that the development server will respond to. This option sets the Vite option of the same name. For further details: https://vite.dev/config/server-options.html#server-allowedhosts",
+      "default": [],
+      "oneOf": [
+        {
+          "type": "array",
+          "description": "A list of hosts that the development server will respond to.",
+          "items": {
+            "type": "string"
+          }
+        },
+        {
+          "type": "boolean",
+          "description": "Indicates that all hosts are allowed. This is not recommended and a security risk."
+        }
+      ]
+    },
     "headers": {
       "type": "object",
       "description": "Custom HTTP headers to be added to all responses.",
@@ -61,30 +78,13 @@
       "description": "Whether to reload the page on change, using live-reload.",
       "default": true
     },
-    "publicHost": {
-      "type": "string",
-      "description": "The URL that the browser client (or live-reload client, if enabled) should use to connect to the development server. Use for a complex dev server setup, such as one with reverse proxies. This option has no effect when using the 'application' or other esbuild-based builders."
-    },
-    "allowedHosts": {
-      "type": "array",
-      "description": "List of hosts that are allowed to access the dev server.",
-      "default": [],
-      "items": {
-        "type": "string"
-      }
-    },
     "servePath": {
       "type": "string",
       "description": "The pathname where the application will be served."
     },
-    "disableHostCheck": {
-      "type": "boolean",
-      "description": "Don't verify connected clients are part of allowed hosts.",
-      "default": false
-    },
     "hmr": {
       "type": "boolean",
-      "description": "Enable hot module replacement."
+      "description": "Enable hot module replacement. Defaults to the value of 'liveReload'. Currently, only global and component stylesheets are supported."
     },
     "watch": {
       "type": "boolean",
@@ -106,20 +106,16 @@
         { "type": "boolean" }
       ]
     },
-    "forceEsbuild": {
-      "type": "boolean",
-      "description": "Force the development server to use the 'browser-esbuild' builder when building.",
-      "default": false
-    },
     "prebundle": {
-      "description": "Enable and control the Vite-based development server's prebundling capabilities. To enable prebundling, the Angular CLI cache must also be enabled. This option has no effect when using the 'browser' or other Webpack-based builders.",
+      "description": "Enable and control the Vite-based development server's prebundling capabilities. To enable prebundling, the Angular CLI cache must also be enabled.",
+      "default": true,
       "oneOf": [
         { "type": "boolean" },
         {
           "type": "object",
           "properties": {
             "exclude": {
-              "description": "List of package imports that should not be prebundled by the development server. The packages will be bundled into the application code itself.",
+              "description": "List of package imports that should not be prebundled by the development server. The packages will be bundled into the application code itself. Note: specifying `@foo/bar` marks all paths within the `@foo/bar` package as excluded, including sub-paths like `@foo/bar/baz`.",
               "type": "array",
               "items": { "type": "string" }
             }
