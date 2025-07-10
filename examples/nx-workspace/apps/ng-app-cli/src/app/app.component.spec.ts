@@ -1,26 +1,31 @@
-import { TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
-
-const title = 'test';
 
 describe('AppComponent', () => {
+  let component: AppComponent;
+  let fixture: ComponentFixture<AppComponent>;
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent, RouterModule.forRoot([])],
-    }).compileComponents();
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
+      imports: [AppComponent],
+    })
+      .overrideComponent(AppComponent, {
+        remove: { imports: [] },
+        add: { imports: [] },
+      })
+      .compileComponents();
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain(title);
   });
 
-  it(`should have as title 'ng-app-cli'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual(title);
+  it('should create the app 2', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it(`should have the 'Hello world' title`, () => {
+    expect(component.title).toEqual('Hello world');
+    expect(component.env).toEqual('test');
+    expect(component.apiUsers).toEqual('/api/v1/users');
   });
 });

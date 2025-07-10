@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "node",
+    "target": "ES2022",
+    "module": "ES2022",
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "strictPropertyInitialization": false,
+    "strictNullChecks": false,
+    "pretty": true,
+    "sourceMap": true,
+    "skipLibCheck": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false
+}

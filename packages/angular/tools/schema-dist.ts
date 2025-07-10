@@ -1,40 +1,30 @@
 import * as cpy from "cpy";
 import * as fs from "fs";
-import { cliTargets } from "./cli-targets";
+import { cliTargets, devkitCliTargets } from "./cli-targets";
+
+async function copyBuildTargets(targets: string[], from: string) {
+  targets.forEach(async (target) => {
+    await cpy([`${from}/${target}/schema.json`], `src/builders/${target}`);
+    console.log(`${from}/${target}/schema.json ==> src/builders/${target} ✅`);
+    fs.renameSync(
+      `src/builders/${target}/schema.json`,
+      `src/builders/${target}/${target}.json`
+    );
+  });
+}
 
 async function copyDistSchemas() {
-  console.log("Copying Angular CLI target schemas");
-  // All but the application target
-  cliTargets
-    .filter((target) => target != "application")
-    .forEach(async (target) => {
-      await cpy(
-        [
-          `./node_modules/@angular-devkit/build-angular/src/builders/${target}/schema.json`,
-        ],
-        `src/builders/${target}`
-      );
-      console.log(
-        `./node_modules/@angular-devkit/build-angular/src/builders/${target}/schema.json ==> src/builders/${target} ✅`
-      );
-      fs.renameSync(
-        `src/builders/${target}/schema.json`,
-        `src/builders/${target}/${target}.json`
-      );
-    });
-  // Application target
-  await cpy(
-    [`./node_modules/@angular/build/src/builders/application/schema.json`],
-    `src/builders/application`
+  console.log("Copying Angular  target schemas");
+  copyBuildTargets(
+    cliTargets,
+    "../../node_modules/@angular/build/src/builders"
   );
-  console.log(
-    `./node_modules/@angular/build/src/builders/application/schema.json ==> src/builders/application ✅`
-  );
-  fs.renameSync(
-    `src/builders/application/schema.json`,
-    `src/builders/application/application.json`
+  copyBuildTargets(
+    devkitCliTargets,
+    "../../node_modules/@angular-devkit/build-angular/src/builders"
   );
 }
+
 (async () => {
   await copyDistSchemas();
 })();

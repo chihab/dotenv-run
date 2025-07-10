@@ -1,5 +1,7 @@
 packages:
-  - "examples/nx-workspace-old"
-  - "examples/nx-workspace-old/**/*"
-  - "packages/*"
-  - "docs"
+  - examples/nx-workspace
+  - examples/nx-workspace/**/*
+  - packages/*
+  - docs
+onlyBuiltDependencies:
+  - esbuild

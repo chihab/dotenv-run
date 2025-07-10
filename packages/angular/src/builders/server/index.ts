@@ -9,7 +9,7 @@ import { getEnvironment } from "../utils/get-environment";
 import { getProjectCwd } from "../utils/project";
 import { plugin } from "../utils/webpack-plugin";
 
-export const buildWithPlugin = (
+export const executeWithEnv = (
   options: ServerBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): ReturnType<typeof executeServerBuilder> => {
@@ -31,4 +31,4 @@ export const buildWithPlugin = (
   );
 };
 
-export default createBuilder<ServerBuilderOptions>(buildWithPlugin);
+export default createBuilder<ServerBuilderOptions>(executeWithEnv);

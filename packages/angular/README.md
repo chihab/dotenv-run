@@ -74,6 +74,12 @@ NB: Angular not Angular.js :)
 ng add @ngx-env/builder
 ```
 
+If you are still using webpack to build your project, you need to add the following to your `angular.json` file:
+
+```json
+"build": "@ngx-env/builder:application"
+```
+
 2. **Define Environment Variables in `.env`** (optional)
 
 ```sh
@@ -139,7 +145,7 @@ If you want to have a shorter prefix like `NG_` or if you want to access some do
 ```ts
   "architect": {
     "build": {
-      "builder": "@ngx-env/builder:browser",
+      "builder": "@ngx-env/builder:application",
       "options": {
           ...
           "scripts": []

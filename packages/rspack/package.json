@@ -31,7 +31,7 @@
     "@rspack/core": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.16.10",
+    "@types/node": "^22.12.0",
     "@rspack/core": "^1.0.4"
   }
 }
