@@ -198,6 +198,7 @@
         "test-karma": {
           "builder": "@ngx-env/builder:karma",
           "options": {
+            "watch": false,
             "tsConfig": "tsconfig.spec.json",
             "polyfills": ["zone.js"],
             "ngxEnv": {
