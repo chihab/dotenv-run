@@ -99,8 +99,12 @@ export function builder(options: any): Rule {
       }
     }
     writeBuilder(project, "serve", "@ngx-env/builder:dev-server", true);
-    writeBuilder(project, "test", "@ngx-env/builder:karma");
-    writeBuilder(project, "test", "@ngx-env/builder:unit-test");
+    // if (hasTargetBuilder(project, "test", "unit-test")) {
+    //   writeBuilder(project, "test", "@ngx-env/builder:unit-test");
+    // } else
+    if (hasTargetBuilder(project, "test", "karma")) {
+      writeBuilder(project, "test", "@ngx-env/builder:karma");
+    }
     writeBuilder(project, "extract-i18n", "@ngx-env/builder:extract-i18n");
 
     tree.overwrite(workspacePath, JSON.stringify(workspace, null, 2));
