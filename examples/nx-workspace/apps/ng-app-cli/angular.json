@@ -195,7 +195,7 @@
             "buildTarget": "ng-app-cli:build"
           }
         },
-        "test-karma": {
+        "test": {
           "builder": "@ngx-env/builder:karma",
           "options": {
             "watch": false,
@@ -209,10 +209,11 @@
               "verbose": true
             },
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"]
+            "styles": ["src/styles.css"],
+            "browsers": "ChromeHeadless"
           }
         },
-        "test": {
+        "test-unit": {
           "builder": "@ngx-env/builder:unit-test",
           "options": {
             "browsers": ["chromium"],
