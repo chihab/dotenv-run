@@ -1,44 +1,44 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Usage with esbuild > should replace environment variables using define option 1`] = `
-"\\"use strict\\";
+""use strict";
 (() => {
   // test/util.js
   function meta() {
-    return \\"https://dotenv-run.app\\";
+    return "https://dotenv-run.app";
   }
 
   // test/app.js
-  console.log(\\"https://dotenv-run.app\\");
+  console.log("https://dotenv-run.app");
   console.log(meta());
 })();"
 `;
 
 exports[`Usage with esbuild > should replace environment variables using esbuild plugin 1`] = `
-"\\"use strict\\";
+""use strict";
 (() => {
   // test/util.js
   function meta() {
-    return \\"https://dotenv-run.app\\";
+    return "https://dotenv-run.app";
   }
 
   // test/app.js
-  console.log(\\"https://dotenv-run.app\\");
+  console.log("https://dotenv-run.app");
   console.log(meta());
 })();
 "
 `;
 
 exports[`Usage with esbuild > should replace environment variables using esbuild plugin and a custom define 1`] = `
-"\\"use strict\\";
+""use strict";
 (() => {
   // test/util.js
   function meta() {
-    return \\"https://dotenv-run.define\\";
+    return "https://dotenv-run.define";
   }
 
   // test/app.js
-  console.log(\\"https://dotenv-run.define\\");
+  console.log("https://dotenv-run.define");
   console.log(meta());
 })();
 "

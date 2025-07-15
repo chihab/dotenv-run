@@ -1,5 +1,11 @@
 # @dotenv-run/core
 
+## 1.3.8
+
+### Patch Changes
+
+- feat(core): add turbo.jsonc to the root files
+
 ## 1.3.7
 
 ### Patch Changes
