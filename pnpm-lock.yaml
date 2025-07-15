@@ -131,7 +131,7 @@ importers:
         specifier: ^20.0.4
         version: 20.1.0(421cd2c6bae9f5c0844f2ed031408c06)
       '@ngx-env/builder':
-        specifier: workspace:20.0.1
+        specifier: workspace:20.1.0
         version: link:../../../../packages/angular
       express:
         specifier: ^5.1.0

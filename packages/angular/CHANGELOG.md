@@ -1,5 +1,11 @@
 # @ngx-env/builder
 
+## 20.1.0
+
+### Minor Changes
+
+- Use @angular/build in all builders
+
 ## 20.0.1
 
 ### Patch Changes
