@@ -1,6 +1,6 @@
 import * as cpy from "cpy";
 import * as fs from "fs";
-import { cliTargets } from "./cli-targets";
+import { buildCliTargets, cliTargets, devkitCliTargets } from "./cli-targets";
 
 export default async function () {
   console.log("Adding @ngx-env/builder schema");
@@ -8,7 +8,7 @@ export default async function () {
     fs.readFileSync(`src/builders/ngx-env/ngx-env.json`, "utf-8")
   );
   await cpy(["src/builders/**/*.json"], "dist/builders/schemas");
-  cliTargets.forEach(async (target) => {
+  buildCliTargets.forEach(async (target) => {
     const builderConf = JSON.parse(
       fs.readFileSync(`src/builders/${target}/${target}.json`, "utf-8")
     );
@@ -17,8 +17,6 @@ export default async function () {
       `dist/builders/schemas/${target}.json`,
       JSON.stringify(builderConf, null, 4)
     );
-    console.log(
-      `src/builders/${target}/${target}.json ==> dist/builders/schemas/${target}.json ✅`
-    );
+    console.log(`Populated ngx-env schema for ${target} builder`);
   });
 }

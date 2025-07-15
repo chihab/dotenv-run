@@ -3,15 +3,15 @@ import {
   BrowserBuilderOptions,
   executeBrowserBuilder,
 } from "@angular-devkit/build-angular";
+import { join } from "path";
 import { from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { getEnvironment } from "../utils/get-environment";
+import { indexHtml } from "../utils/index-html-build";
 import { getProjectCwd } from "../utils/project";
 import { plugin } from "../utils/webpack-plugin";
-import { indexHtml } from "../utils/index-html-build";
-import { join } from "path";
 
-export const buildWithPlugin = (
+export const executeWithEnv = (
   options: BrowserBuilderOptions & NgxEnvSchema,
   context: BuilderContext
 ): ReturnType<typeof executeBrowserBuilder> => {
@@ -39,4 +39,4 @@ export const buildWithPlugin = (
   );
 };
 
-export default createBuilder<BrowserBuilderOptions>(buildWithPlugin);
+export default createBuilder<BrowserBuilderOptions>(executeWithEnv);

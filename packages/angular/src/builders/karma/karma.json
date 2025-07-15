@@ -17,22 +17,13 @@
       "description": "The name of the Karma configuration file."
     },
     "polyfills": {
-      "description": "Polyfills to be included in the build.",
-      "oneOf": [
-        {
-          "type": "array",
-          "description": "A list of polyfills to include in the build. Can be a full path for a file, relative to the current workspace or module specifier. Example: 'zone.js'.",
-          "items": {
-            "type": "string",
-            "uniqueItems": true
-          },
-          "default": []
-        },
-        {
-          "type": "string",
-          "description": "The full path for the polyfills file, relative to the current workspace or a module specifier. Example: 'zone.js'."
-        }
-      ]
+      "description": "A list of polyfills to include in the build. Can be a full path for a file, relative to the current workspace or module specifier. Example: 'zone.js'.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "uniqueItems": true
+      },
+      "default": []
     },
     "assets": {
       "type": "array",
@@ -121,7 +112,7 @@
       "enum": ["css", "less", "sass", "scss"]
     },
     "stylePreprocessorOptions": {
-      "description": "Options to pass to style preprocessors",
+      "description": "Options to pass to style preprocessors.",
       "type": "object",
       "properties": {
         "includePaths": {
@@ -131,9 +122,59 @@
             "type": "string"
           },
           "default": []
+        },
+        "sass": {
+          "description": "Options to pass to the sass preprocessor.",
+          "type": "object",
+          "properties": {
+            "fatalDeprecations": {
+              "description": "A set of deprecations to treat as fatal. If a deprecation warning of any provided type is encountered during compilation, the compiler will error instead. If a Version is provided, then all deprecations that were active in that compiler version will be treated as fatal.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "silenceDeprecations": {
+              "description": " A set of active deprecations to ignore. If a deprecation warning of any provided type is encountered during compilation, the compiler will ignore it instead.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "futureDeprecations": {
+              "description": "A set of future deprecations to opt into early. Future deprecations passed here will be treated as active by the compiler, emitting warnings as necessary.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
         }
       },
       "additionalProperties": false
+    },
+    "externalDependencies": {
+      "description": "Exclude the listed external dependencies from being bundled into the bundle. Instead, the created bundle relies on these dependencies to be available during runtime.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": []
+    },
+    "loader": {
+      "description": "Defines the type of loader to use with a specified file extension when used with a JavaScript `import`. `text` inlines the content as a string; `binary` inlines the content as a Uint8Array; `file` emits the file and provides the runtime location of the file; `dataurl` inlines the content as a data URL with best guess of MIME type; `base64` inlines the content as a Base64-encoded string; `empty` considers the content to be empty and not include it in bundles.",
+      "type": "object",
+      "patternProperties": {
+        "^\\.\\S+$": { "enum": ["text", "binary", "file", "dataurl", "base64", "empty"] }
+      }
+    },
+    "define": {
+      "description": "Defines global identifiers that will be replaced with a specified constant value when found in any JavaScript or TypeScript code including libraries. The value will be used directly. String values must be put in quotes. Identifiers within Angular metadata such as Component Decorators will not be replaced.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
     },
     "include": {
       "type": "array",
@@ -188,7 +229,8 @@
     },
     "watch": {
       "type": "boolean",
-      "description": "Run build when files change."
+      "description": "Re-run tests when source files change.",
+      "default": true
     },
     "poll": {
       "type": "number",
@@ -229,34 +271,7 @@
       "description": "Replace compilation source files with other compilation source files in the build.",
       "type": "array",
       "items": {
-        "oneOf": [
-          {
-            "type": "object",
-            "properties": {
-              "src": {
-                "type": "string"
-              },
-              "replaceWith": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false,
-            "required": ["src", "replaceWith"]
-          },
-          {
-            "type": "object",
-            "properties": {
-              "replace": {
-                "type": "string"
-              },
-              "with": {
-                "type": "string"
-              }
-            },
-            "additionalProperties": false,
-            "required": ["replace", "with"]
-          }
-        ]
+        "$ref": "#/definitions/fileReplacement"
       },
       "default": []
     },
@@ -266,12 +281,6 @@
       "items": {
         "type": "string"
       }
-    },
-    "builderMode": {
-      "type": "string",
-      "description": "Determines how to build the code under test. If set to 'detect', attempts to follow the development builder.",
-      "enum": ["detect", "browser", "application"],
-      "default": "browser"
     },
     "webWorkerTsConfig": {
       "type": "string",
@@ -319,6 +328,21 @@
           "type": "string"
         }
       ]
+    },
+    "fileReplacement": {
+      "type": "object",
+      "properties": {
+        "replace": {
+          "type": "string",
+          "pattern": "\\.(([cm]?[jt])sx?|json)$"
+        },
+        "with": {
+          "type": "string",
+          "pattern": "\\.(([cm]?[jt])sx?|json)$"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["replace", "with"]
     }
   }
 }
