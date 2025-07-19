@@ -34,8 +34,8 @@ Here are some of the benefits of using `dotenv-run`:
   - [@dotenv-run/esbuild](#dotenv-runesbuild)
   - [@ngx-env/builder](#ngx-envbuilder)
 - [Testimonials](#testimonials)
-    - [Demos](#demos)
-    - [Quick start](#quick-start-1)
+  - [Demos](#demos)
+  - [Quick start](#quick-start-1)
   - [@dotenv-run/webpack](#dotenv-runwebpack)
   - [@dotenv-run/rollup](#dotenv-runrollup)
   - [@dotenv-run/vite](#dotenv-runvite)
@@ -184,7 +184,7 @@ NB: Angular not Angular.js :P
 
 #### Demos
 
-- [v19 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
+- [v20 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
 - [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
 
 #### Quick start
@@ -288,8 +288,8 @@ export default {
 import env from "@dotenv-run/vite";
 
 export default {
-  envPrefix: 'MY_PREFIX_',
-  envDir: './my-env-directory',
+  envPrefix: "MY_PREFIX_",
+  envDir: "./my-env-directory",
   plugins: [env()],
 };
 ```
@@ -299,13 +299,13 @@ export default {
 [`@dotenv-run/rspack`](https://www.npmjs.com/package/@dotenv-run/rspack) is a plugin for Rspack that can be used to inject environment variables into your applications.
 
 ```js
-import {DotenvRunPlugin} from '@dotenv-run/rspack'
+import { DotenvRunPlugin } from "@dotenv-run/rspack";
 
 export default {
   plugins: [
     new DotenvRunPlugin({
-      root: __dirname
-    })
+      root: __dirname,
+    }),
   ],
 };
 ```
