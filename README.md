@@ -172,6 +172,11 @@ await build({
   - [Dan Wahlin's Angular-JumpStart](https://github.com/DanWahlin/Angular-JumpStart) ![GitHub Repo stars](https://img.shields.io/github/stars/DanWahlin/Angular-JumpStart)
 - ✅ Active development and support
 
+#### Demos
+
+- [v20 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
+- [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
+
 ## Testimonials
 
 [motdotla](https://github.com/motdotla) - dotenv author and maintainer @**dotenvx**
@@ -181,11 +186,6 @@ NB: Angular not Angular.js :P
 
 [manekinekko](https://github.com/manekinekko) - SSE @**microsoft**
 <img src="https://github.com/chihab/dotenv-run/raw/main/packages/angular/manekinekko.png" alt="Description" width="600">
-
-#### Demos
-
-- [v20 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
-- [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
 
 #### Quick start
 
