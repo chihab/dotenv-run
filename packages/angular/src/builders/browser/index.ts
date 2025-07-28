@@ -7,7 +7,7 @@ import { join } from "path";
 import { from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { getEnvironment } from "../utils/get-environment";
-import { indexHtml } from "../utils/index-html-build";
+import { indexHtmlTransformerLegacy } from "../utils/index-html-transform-legacy";
 import { getProjectCwd } from "../utils/project";
 import { plugin } from "../utils/webpack-plugin";
 
@@ -26,7 +26,7 @@ export const executeWithEnv = (
         webpackConfiguration,
       }).pipe(
         tap(() => {
-          indexHtml(
+          indexHtmlTransformerLegacy(
             join(context.workspaceRoot, options.outputPath.toString()),
             null, // no ssr support with browser,
             Array.isArray(options.localize) ? options.localize : [],

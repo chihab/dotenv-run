@@ -7,7 +7,7 @@ import type { DotenvRunOptions } from "@dotenv-run/core";
 import { env } from "@dotenv-run/core";
 import { catchError, combineLatest, switchMap } from "rxjs";
 import { getEnvironment } from "../utils/get-environment";
-import { indexHtml } from "../utils/index-html-serve";
+import { indexHtmlTransformer } from "../utils/index-html-transform";
 import { getProjectCwd } from "../utils/project";
 import { validateAndPrepareBuildContext } from "../utils/validate-prepare-context";
 
@@ -35,7 +35,7 @@ export const executeWithEnv = (
       });
       return executeDevServerBuilder(options, context, {
         indexHtmlTransformer: async (content: string) =>
-          indexHtml(content, raw, dotenvRunOptions.runtime),
+          indexHtmlTransformer(content, raw, true, dotenvRunOptions.runtime),
       });
     }),
     catchError((e) => {

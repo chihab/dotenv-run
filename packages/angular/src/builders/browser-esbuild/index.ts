@@ -10,7 +10,7 @@ import { join } from "path";
 import { from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { getEnvironment } from "../utils/get-environment";
-import { indexHtml } from "../utils/index-html-build";
+import { indexHtmlTransformerLegacy } from "../utils/index-html-transform-legacy";
 import { getProjectCwd } from "../utils/project";
 
 export const executeWithEnv = (
@@ -31,7 +31,7 @@ export const executeWithEnv = (
         buildEsbuildBrowser(options, context, undefined)
       ).pipe(
         tap(() => {
-          indexHtml(
+          indexHtmlTransformerLegacy(
             join(
               context.workspaceRoot,
               options.outputPath.toString(),

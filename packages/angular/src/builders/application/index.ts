@@ -10,8 +10,10 @@ import { join } from "path";
 import { from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { getEnvironment } from "../utils/get-environment";
-import { indexHtml } from "../utils/index-html-build";
+import { writeRuntimeFile } from "../utils/write-ngx-env-runtime";
 import { getProjectCwd } from "../utils/project";
+import { replaceHtmlVars } from "../utils/replace-html-vars";
+import { indexHtmlTransformer } from "../utils/index-html-transform";
 
 export const executeWithEnv = (
   options: ApplicationBuilderOptions & NgxEnvSchema,
@@ -28,20 +30,30 @@ export const executeWithEnv = (
       });
       options.define = full;
       return fromAsyncIterable<BuilderOutput>(
-        buildApplication(options, context)
+        buildApplication(options, context, {
+          indexHtmlTransformer: async (html) => {
+            return indexHtmlTransformer(
+              html,
+              raw,
+              false,
+              dotEnvOptions.runtime
+            );
+          },
+        })
       ).pipe(
         tap(() => {
-          const outputDir = join(
-            context.workspaceRoot,
-            options.outputPath?.toString() ?? `dist/${context.target.project}`
-          );
-          indexHtml(
-            join(outputDir, "browser"),
-            options.ssr ? join(outputDir, "server") : null,
-            Array.isArray(options.localize) ? options.localize : [],
-            raw,
-            dotEnvOptions.runtime
-          );
+          if (dotEnvOptions.runtime) {
+            const outputDir = join(
+              context.workspaceRoot,
+              options.outputPath?.toString() ?? `dist/${context.target.project}`
+            );
+            writeRuntimeFile(
+              join(outputDir, "browser"),
+              options.ssr ? join(outputDir, "server") : null,
+              Array.isArray(options.localize) ? options.localize : [],
+              raw
+            );
+          }
         })
       );
     })

@@ -1,7 +1,7 @@
 import type { DotenvRunOptions } from "@dotenv-run/core";
 import { DotenvRunPlugin } from "@dotenv-run/webpack";
 import type { Configuration } from "webpack";
-import { indexHtml } from "./index-html-serve";
+import { indexHtmlTransformer } from "./index-html-transform";
 
 export function plugin(options: DotenvRunOptions, ssr = false) {
   const dotEnvPlugin = new DotenvRunPlugin(
@@ -16,7 +16,7 @@ export function plugin(options: DotenvRunOptions, ssr = false) {
       return webpackConfig;
     },
     indexHtml: async (content: string) => {
-      return indexHtml(content, raw, options.runtime);
+      return indexHtmlTransformer(content, raw, false, options.runtime);
     },
   };
 }
