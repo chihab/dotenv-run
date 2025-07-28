@@ -1,5 +1,11 @@
 # @ngx-env/builder
 
+## 20.1.1
+
+### Patch Changes
+
+- Fix SSR with runtime option
+
 ## 20.1.0
 
 ### Minor Changes
