@@ -192,4 +192,4 @@ Use [@ngx-env/builder](https://www.npmjs.com/package/@ngx-env/builder)
 
 # License
 
-MIT © [Chihab Otmani](https://twitter.com/chihabotmani)
+MIT © [Chihab Otmani](https://chihab.dev)

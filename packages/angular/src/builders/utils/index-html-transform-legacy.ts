@@ -53,6 +53,6 @@ export function indexHtmlTransformerLegacy(
     });
   }
   if (runtime) {
-    writeRuntimeFile(browserOutputDir, serverOutputDir, locales, raw);
+    writeRuntimeFile(browserOutputDir, locales, raw);
   }
 }

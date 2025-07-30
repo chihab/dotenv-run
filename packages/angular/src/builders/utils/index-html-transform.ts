@@ -4,14 +4,14 @@ import { replaceHtmlVars } from "./replace-html-vars";
 export function indexHtmlTransformer(
   content: string,
   raw: Dict,
-  serve: boolean,
+  devServer: boolean,
   runtime = false
 ) {
   const html = replaceHtmlVars(content, raw);
   return runtime
     ? html.replace(
         /<head>/,
-        serve
+        devServer
           ? `<head><script>globalThis._NGX_ENV_ = ${JSON.stringify(
               raw
             )}</script>`

@@ -600,14 +600,10 @@ If you prefer using import.meta.env.NGX_SOME_VARIABLE instead of import.meta.env
 +"noPropertyAccessFromIndexSignature": false,
 ```
 
-# How It Works
-
-I wrote an article on [InDepth.dev](https://indepth.dev/tutorials/angular/inject-environment-variables) explaining how it works.
-
 # Credits
 
 - [dotenv](https://github.com/motdotla/dotenv)
 
 # License
 
-MIT © [Chihab Otmani](https://twitter.com/chihabotmani)
+MIT © [Chihab Otmani](https://chihab.dev)
