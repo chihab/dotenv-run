@@ -3,7 +3,6 @@ import { writeFileSync } from "fs";
 
 export function writeRuntimeFile(
   browserOutputDir: string,
-  serverOutputDir: string | null,
   locales: string[] = [],
   raw: Dict
 ) {
@@ -17,22 +16,6 @@ export function writeRuntimeFile(
       );
       try {
         writeFileSync(`${browserOutputDir}/${locale}/ngx-env.js`, runtimeStmt);
-        if (serverOutputDir) {
-          try {
-            console.log(
-              `📦 Writing ngx-env.js to ${serverOutputDir}/${locale}/ngx-env.js`
-            );
-            writeFileSync(
-              `${serverOutputDir}/${locale}/ngx-env.js`,
-              runtimeStmt
-            );
-          } catch (e) {
-            console.log(
-              `❌ Failed to create ngx-env.js at ${serverOutputDir}/ngx-env.js ❌`
-            );
-            throw e;
-          }
-        }
       } catch (e) {
         console.log(
           `❌ Failed to create ngx-env.js at ${browserOutputDir}/${locale}/ngx-env.js ❌`
@@ -49,17 +32,6 @@ export function writeRuntimeFile(
         `❌ Failed to create ngx-env.js at ${browserOutputDir}/ngx-env.js ❌`
       );
       throw e;
-    }
-    if (serverOutputDir) {
-      try {
-        console.log(`📦 Writing ngx-env.js to ${serverOutputDir}/ngx-env.js`);
-        writeFileSync(`${serverOutputDir}/ngx-env.js`, runtimeStmt);
-      } catch (e) {
-        console.log(
-          `❌ Failed to create ngx-env.js at ${serverOutputDir}/ngx-env.js ❌`
-        );
-        throw e;
-      }
     }
   }
 }

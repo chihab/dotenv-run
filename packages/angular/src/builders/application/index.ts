@@ -12,7 +12,6 @@ import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { getEnvironment } from "../utils/get-environment";
 import { writeRuntimeFile } from "../utils/write-ngx-env-runtime";
 import { getProjectCwd } from "../utils/project";
-import { replaceHtmlVars } from "../utils/replace-html-vars";
 import { indexHtmlTransformer } from "../utils/index-html-transform";
 
 export const executeWithEnv = (
@@ -49,7 +48,6 @@ export const executeWithEnv = (
             );
             writeRuntimeFile(
               join(outputDir, "browser"),
-              options.ssr ? join(outputDir, "server") : null,
               Array.isArray(options.localize) ? options.localize : [],
               raw
             );

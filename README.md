@@ -316,4 +316,4 @@ export default {
 
 ## License
 
-MIT © [Chihab Otmani](https://twitter.com/chihabotmani)
+MIT © [Chihab Otmani](https://chihab.dev)
