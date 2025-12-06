@@ -196,7 +196,7 @@
             "buildTarget": "ng-app-cli:build"
           }
         },
-        "test": {
+        "test-karma": {
           "builder": "@ngx-env/builder:karma",
           "options": {
             "watch": false,
@@ -214,10 +214,10 @@
             "browsers": "ChromeHeadless"
           }
         },
-        "test-unit": {
+        "test": {
           "builder": "@ngx-env/builder:unit-test",
           "options": {
-            "browsers": ["chromium"],
+            "browsers": ["chromiumHeadless"],
             "buildTarget": "::development",
             "tsConfig": "tsconfig.spec.json",
             "runner": "vitest"

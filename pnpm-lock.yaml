@@ -142,10 +142,10 @@ importers:
     devDependencies:
       '@angular-devkit/build-angular':
         specifier: ^21.0.2
-        version: 21.0.2(2f6e73d0e5d2dc5381c1839861f13812)
+        version: 21.0.2(e9480430031ce25ff94d938c36341cea)
       '@angular/build':
         specifier: ^21.0.2
-        version: 21.0.2(f62e1a3478f45d94edda91a50afc62a1)
+        version: 21.0.2(334f8b09567df6af9066e180233a5b66)
       '@angular/cli':
         specifier: ^21.0.2
         version: 21.0.2(@types/node@22.19.1)(chokidar@4.0.3)
@@ -172,7 +172,10 @@ importers:
         version: 22.19.1
       '@vitest/browser':
         specifier: ^4.0.8
-        version: 4.0.15(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))(vitest@4.0.15(@types/node@22.19.1)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))
+        version: 4.0.15(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))(vitest@4.0.15)
+      '@vitest/browser-playwright':
+        specifier: ^4.0.15
+        version: 4.0.15(playwright@1.57.0)(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))(vitest@4.0.15)
       esbuild:
         specifier: 0.23.0
         version: 0.23.0
@@ -214,7 +217,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: ^4.0.8
-        version: 4.0.15(@types/node@22.19.1)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
+        version: 4.0.15(@types/node@22.19.1)(@vitest/browser-playwright@4.0.15)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
 
   examples/nx-workspace/apps/rspack-app: {}
 
@@ -233,7 +236,7 @@ importers:
         version: 0.2100.2(chokidar@4.0.3)
       '@angular-devkit/build-angular':
         specifier: ^21.0.2
-        version: 21.0.2(2f6e73d0e5d2dc5381c1839861f13812)
+        version: 21.0.2(e9480430031ce25ff94d938c36341cea)
       '@angular-devkit/core':
         specifier: ^21.0.0
         version: 21.0.2(chokidar@4.0.3)
@@ -242,7 +245,7 @@ importers:
         version: 21.0.2(chokidar@4.0.3)
       '@angular/build':
         specifier: ^21.0.2
-        version: 21.0.2(f62e1a3478f45d94edda91a50afc62a1)
+        version: 21.0.2(334f8b09567df6af9066e180233a5b66)
       '@dotenv-run/core':
         specifier: workspace:^1.3.7
         version: link:../core
@@ -3806,6 +3809,12 @@ packages:
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     peerDependencies:
       vite: ^6.0.0 || ^7.0.0
+
+  '@vitest/browser-playwright@4.0.15':
+    resolution: {integrity: sha512-94yVpDbb+ykiT7mK6ToonGnq2GIHEQGBTZTAzGxBGQXcVNCh54YKC2/WkfaDzxy0m6Kgw05kq3FYHKHu+wRdIA==}
+    peerDependencies:
+      playwright: '*'
+      vitest: 4.0.15
 
   '@vitest/browser@4.0.15':
     resolution: {integrity: sha512-zedtczX688KehaIaAv7m25CeDLb0gBtAOa2Oi1G1cqvSO5aLSVfH6lpZMJLW8BKYuWMxLQc9/5GYoM+jgvGIrw==}
@@ -9857,13 +9866,13 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular-devkit/build-angular@21.0.2(2f6e73d0e5d2dc5381c1839861f13812)':
+  '@angular-devkit/build-angular@21.0.2(e9480430031ce25ff94d938c36341cea)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2100.2(chokidar@4.0.3)
       '@angular-devkit/build-webpack': 0.2100.2(chokidar@4.0.3)(webpack-dev-server@5.2.2(webpack@5.102.1(esbuild@0.26.0)))(webpack@5.102.1(esbuild@0.26.0))
       '@angular-devkit/core': 21.0.2(chokidar@4.0.3)
-      '@angular/build': 21.0.2(94b6f7bc6e4924895e59eca62d7d1a49)
+      '@angular/build': 21.0.2(90062384f77b7ead94cf2dae1a9d638c)
       '@angular/compiler-cli': 21.0.3(@angular/compiler@21.0.3)(typescript@5.9.3)
       '@babel/core': 7.28.4
       '@babel/generator': 7.28.3
@@ -9977,64 +9986,7 @@ snapshots:
     transitivePeerDependencies:
       - chokidar
 
-  '@angular/build@21.0.2(94b6f7bc6e4924895e59eca62d7d1a49)':
-    dependencies:
-      '@ampproject/remapping': 2.3.0
-      '@angular-devkit/architect': 0.2100.2(chokidar@4.0.3)
-      '@angular/compiler': 21.0.3
-      '@angular/compiler-cli': 21.0.3(@angular/compiler@21.0.3)(typescript@5.9.3)
-      '@babel/core': 7.28.4
-      '@babel/helper-annotate-as-pure': 7.27.3
-      '@babel/helper-split-export-declaration': 7.24.7
-      '@inquirer/confirm': 5.1.19(@types/node@22.19.1)
-      '@vitejs/plugin-basic-ssl': 2.1.0(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))
-      beasties: 0.3.5
-      browserslist: 4.28.1
-      esbuild: 0.26.0
-      https-proxy-agent: 7.0.6
-      istanbul-lib-instrument: 6.0.3
-      jsonc-parser: 3.3.1
-      listr2: 9.0.5
-      magic-string: 0.30.19
-      mrmime: 2.0.1
-      parse5-html-rewriting-stream: 8.0.0
-      picomatch: 4.0.3
-      piscina: 5.1.3
-      rolldown: 1.0.0-beta.47
-      sass: 1.93.2
-      semver: 7.7.3
-      source-map-support: 0.5.21
-      tinyglobby: 0.2.15
-      tslib: 2.8.1
-      typescript: 5.9.3
-      undici: 7.16.0
-      vite: 7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.0)(yaml@2.8.2)
-      watchpack: 2.4.4
-    optionalDependencies:
-      '@angular/core': 21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1)
-      '@angular/localize': 21.0.3(@angular/compiler-cli@21.0.3(@angular/compiler@21.0.3)(typescript@5.9.3))(@angular/compiler@21.0.3)
-      '@angular/platform-browser': 21.0.3(@angular/common@21.0.3(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))
-      '@angular/platform-server': 21.0.3(@angular/common@21.0.3(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/compiler@21.0.3)(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@21.0.3(@angular/common@21.0.3(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2)
-      '@angular/ssr': 21.0.2(8453c1e2631ca5d3457daa981fbd562e)
-      karma: 6.4.4
-      less: 4.4.2
-      lmdb: 3.4.3
-      postcss: 8.5.6
-      vitest: 4.0.15(@types/node@22.19.1)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
-    transitivePeerDependencies:
-      - '@types/node'
-      - chokidar
-      - jiti
-      - lightningcss
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - yaml
-
-  '@angular/build@21.0.2(f62e1a3478f45d94edda91a50afc62a1)':
+  '@angular/build@21.0.2(334f8b09567df6af9066e180233a5b66)':
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@angular-devkit/architect': 0.2100.2(chokidar@4.0.3)
@@ -10077,7 +10029,64 @@ snapshots:
       less: 4.4.2
       lmdb: 3.4.3
       postcss: 8.5.6
-      vitest: 4.0.15(@types/node@22.19.1)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
+      vitest: 4.0.15(@types/node@22.19.1)(@vitest/browser-playwright@4.0.15)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - '@types/node'
+      - chokidar
+      - jiti
+      - lightningcss
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - yaml
+
+  '@angular/build@21.0.2(90062384f77b7ead94cf2dae1a9d638c)':
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@angular-devkit/architect': 0.2100.2(chokidar@4.0.3)
+      '@angular/compiler': 21.0.3
+      '@angular/compiler-cli': 21.0.3(@angular/compiler@21.0.3)(typescript@5.9.3)
+      '@babel/core': 7.28.4
+      '@babel/helper-annotate-as-pure': 7.27.3
+      '@babel/helper-split-export-declaration': 7.24.7
+      '@inquirer/confirm': 5.1.19(@types/node@22.19.1)
+      '@vitejs/plugin-basic-ssl': 2.1.0(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))
+      beasties: 0.3.5
+      browserslist: 4.28.1
+      esbuild: 0.26.0
+      https-proxy-agent: 7.0.6
+      istanbul-lib-instrument: 6.0.3
+      jsonc-parser: 3.3.1
+      listr2: 9.0.5
+      magic-string: 0.30.19
+      mrmime: 2.0.1
+      parse5-html-rewriting-stream: 8.0.0
+      picomatch: 4.0.3
+      piscina: 5.1.3
+      rolldown: 1.0.0-beta.47
+      sass: 1.93.2
+      semver: 7.7.3
+      source-map-support: 0.5.21
+      tinyglobby: 0.2.15
+      tslib: 2.8.1
+      typescript: 5.9.3
+      undici: 7.16.0
+      vite: 7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.0)(yaml@2.8.2)
+      watchpack: 2.4.4
+    optionalDependencies:
+      '@angular/core': 21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1)
+      '@angular/localize': 21.0.3(@angular/compiler-cli@21.0.3(@angular/compiler@21.0.3)(typescript@5.9.3))(@angular/compiler@21.0.3)
+      '@angular/platform-browser': 21.0.3(@angular/common@21.0.3(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))
+      '@angular/platform-server': 21.0.3(@angular/common@21.0.3(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/compiler@21.0.3)(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))(@angular/platform-browser@21.0.3(@angular/common@21.0.3(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1))(rxjs@7.8.2))(@angular/core@21.0.3(@angular/compiler@21.0.3)(rxjs@7.8.2)(zone.js@0.15.1)))(rxjs@7.8.2)
+      '@angular/ssr': 21.0.2(8453c1e2631ca5d3457daa981fbd562e)
+      karma: 6.4.4
+      less: 4.4.2
+      lmdb: 3.4.3
+      postcss: 8.5.6
+      vitest: 4.0.15(@types/node@22.19.1)(@vitest/browser-playwright@4.0.15)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
     transitivePeerDependencies:
       - '@types/node'
       - chokidar
@@ -14079,7 +14088,20 @@ snapshots:
     dependencies:
       vite: 7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
 
-  '@vitest/browser@4.0.15(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))(vitest@4.0.15(@types/node@22.19.1)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))':
+  '@vitest/browser-playwright@4.0.15(playwright@1.57.0)(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))(vitest@4.0.15)':
+    dependencies:
+      '@vitest/browser': 4.0.15(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))(vitest@4.0.15)
+      '@vitest/mocker': 4.0.15(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))
+      playwright: 1.57.0
+      tinyrainbow: 3.0.3
+      vitest: 4.0.15(@types/node@22.19.1)(@vitest/browser-playwright@4.0.15)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
+    transitivePeerDependencies:
+      - bufferutil
+      - msw
+      - utf-8-validate
+      - vite
+
+  '@vitest/browser@4.0.15(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))(vitest@4.0.15)':
     dependencies:
       '@vitest/mocker': 4.0.15(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))
       '@vitest/utils': 4.0.15
@@ -14088,7 +14110,7 @@ snapshots:
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.0.3
-      vitest: 4.0.15(@types/node@22.19.1)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
+      vitest: 4.0.15(@types/node@22.19.1)(@vitest/browser-playwright@4.0.15)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2)
       ws: 8.18.3
     transitivePeerDependencies:
       - bufferutil
@@ -21164,7 +21186,7 @@ snapshots:
       - tsx
       - yaml
 
-  vitest@4.0.15(@types/node@22.19.1)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2):
+  vitest@4.0.15(@types/node@22.19.1)(@vitest/browser-playwright@4.0.15)(jiti@2.6.1)(jsdom@27.2.0)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2):
     dependencies:
       '@vitest/expect': 4.0.15
       '@vitest/mocker': 4.0.15(vite@6.4.1(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))
@@ -21188,6 +21210,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.19.1
+      '@vitest/browser-playwright': 4.0.15(playwright@1.57.0)(vite@7.2.2(@types/node@22.19.1)(jiti@2.6.1)(less@4.4.2)(sass@1.93.2)(terser@5.44.1)(yaml@2.8.2))(vitest@4.0.15)
       jsdom: 27.2.0
     transitivePeerDependencies:
       - jiti
