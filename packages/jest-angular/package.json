@@ -20,10 +20,10 @@
     "cli"
   ],
   "devDependencies": {
-    "jest-preset-angular": "^14.6.0"
+    "jest-preset-angular": "^16.0.0"
   },
   "peerDependencies": {
-    "jest-preset-angular": "^14.0.0"
+    "jest-preset-angular": "^16.0.0"
   },
   "author": "Chihab Otmani <chihab@gmail.com>",
   "license": "ISC"

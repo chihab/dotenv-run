@@ -15,13 +15,10 @@ async function copyBuildTargets(targets: string[], from: string) {
 
 async function copyDistSchemas() {
   console.log("Copying Angular  target schemas");
-  copyBuildTargets(
-    cliTargets,
-    "../../node_modules/@angular/build/src/builders"
-  );
+  copyBuildTargets(cliTargets, "node_modules/@angular/build/src/builders");
   copyBuildTargets(
     devkitCliTargets,
-    "../../node_modules/@angular-devkit/build-angular/src/builders"
+    "node_modules/@angular-devkit/build-angular/src/builders"
   );
 }
 

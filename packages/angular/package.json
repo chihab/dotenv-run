@@ -1,6 +1,6 @@
 {
   "name": "@ngx-env/builder",
-  "version": "20.1.1",
+  "version": "21.0.0",
   "description": "Easily inject environment variables into your Angular applications",
   "author": "chihab <chihab@gmail.com>",
   "homepage": "https://github.com/chihab/ngx-env/tree/main/packages/angular",
@@ -33,21 +33,21 @@
     "glob": "^10.4.5"
   },
   "devDependencies": {
-    "@angular/build": "^20.1.0",
-    "@angular-devkit/architect": "^0.2001.00",
-    "@angular-devkit/build-angular": "^20.1.0",
-    "@angular-devkit/core": "^20.1.0",
-    "@angular-devkit/schematics": "^20.1.0",
+    "@angular/build": "^21.0.2",
+    "@angular-devkit/architect": "^0.2100.0",
+    "@angular-devkit/build-angular": "^21.0.2",
+    "@angular-devkit/core": "^21.0.0",
+    "@angular-devkit/schematics": "^21.0.0",
     "@dotenv-run/core": "workspace:^1.3.7",
     "@dotenv-run/webpack": "workspace:^1.5.2",
     "cpy": "^8.1.2",
-    "rxjs": "7.8.2",
+    "rxjs": "~7.8.0",
     "ts-node": "^10.9.2",
-    "typescript": "~5.8.0",
+    "typescript": "~5.9.2",
     "webpack": "5.99.8"
   },
   "peerDependencies": {
-    "@angular/build": "^20.1.0"
+    "@angular/build": "^21.0.2"
   },
   "optionalDependencies": {
     "@dotenv-run/webpack": "workspace:^1.5.2"
