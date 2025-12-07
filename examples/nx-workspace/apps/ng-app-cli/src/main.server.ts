@@ -1,8 +1,12 @@
 import '@ngx-env/builder/runtime';
-import { bootstrapApplication } from '@angular/platform-browser';
+import {
+  BootstrapContext,
+  bootstrapApplication,
+} from '@angular/platform-browser';
+import { AppComponent } from './app/app';
 import { config } from './app/app.config.server';
-import { AppComponent } from './app/app.component';
 
-const bootstrap = () => bootstrapApplication(AppComponent, config);
+const bootstrap = (context: BootstrapContext) =>
+  bootstrapApplication(AppComponent, config, context);
 
 export default bootstrap;

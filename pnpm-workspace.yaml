@@ -1,6 +1,7 @@
 packages:
   - examples/nx-workspace
-  - examples/nx-workspace/**/*
+  - examples/nx-workspace/apps/*
+  - examples/nx-workspace/libs/*
   - packages/*
   - docs
 onlyBuiltDependencies:

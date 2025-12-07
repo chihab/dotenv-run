@@ -26,7 +26,6 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "polyfills": ["zone.js"],
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.css"],
             "ngxEnv": {
@@ -196,7 +195,7 @@
             "buildTarget": "ng-app-cli:build"
           }
         },
-        "test": {
+        "test-karma": {
           "builder": "@ngx-env/builder:karma",
           "options": {
             "watch": false,
@@ -214,14 +213,8 @@
             "browsers": "ChromeHeadless"
           }
         },
-        "test-unit": {
-          "builder": "@ngx-env/builder:unit-test",
-          "options": {
-            "browsers": ["chromium"],
-            "buildTarget": "::development",
-            "tsConfig": "tsconfig.spec.json",
-            "runner": "vitest"
-          }
+        "test": {
+          "builder": "@ngx-env/builder:unit-test"
         }
       }
     }
