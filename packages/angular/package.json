@@ -47,7 +47,7 @@
     "webpack": "5.99.8"
   },
   "peerDependencies": {
-    "@angular/build": "^21.0.2"
+    "@angular/build": "^21.0.0"
   },
   "optionalDependencies": {
     "@dotenv-run/webpack": "workspace:^1.5.2"

@@ -15,7 +15,7 @@ export function indexHtmlTransformer(
           ? `<head><script>globalThis._NGX_ENV_ = ${JSON.stringify(
               raw
             )}</script>`
-          : `<head><script src="ngx-env.js"></script>`
+          : `<head><script src="/ngx-env.js"></script>`
       )
     : html;
 }
