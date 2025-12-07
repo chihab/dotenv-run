@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "scripts": {
     "build:all": "nx run-many --target=build  --parallel",
-    "test:all": "nx run-many --target=test,test:jest --all --parallel --verbose",
+    "test:all": "nx run-many --target=test,test:jest,test:karma --all --parallel --verbose",
     "e2e:all": "nx run-many --target=e2e --all --parallel"
   },
   "devDependencies": {
