@@ -1,5 +1,11 @@
 # @dotenv-run/esbuild
 
+## 1.5.2
+
+### Patch Changes
+
+- Relax the `esbuild` peer dependency range to `>=0.21.0`.
+
 ## 1.5.1
 
 ### Patch Changes
