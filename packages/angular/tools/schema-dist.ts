@@ -1,4 +1,4 @@
-import * as cpy from "cpy";
+import cpy from "cpy";
 import * as fs from "fs";
 import { cliTargets, devkitCliTargets } from "./cli-targets";
 

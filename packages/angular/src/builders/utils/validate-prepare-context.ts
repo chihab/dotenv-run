@@ -3,9 +3,11 @@ import {
   targetFromTargetString,
 } from "@angular-devkit/architect";
 import { Schema } from "@angular-devkit/architect/src/input-schema";
-import { Schema as ApplicationBuilderOptions } from "@angular/build/src/builders/application/schema";
+import {
+  ApplicationBuilderOptions,
+  UnitTestBuilderOptions,
+} from "@angular/build";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
-import { UnitTestBuilderOptions } from "@angular/build/src/builders/unit-test/builder";
 import { DotenvRunOptions } from "@dotenv-run/core";
 
 export async function validateAndPrepareBuildContext(

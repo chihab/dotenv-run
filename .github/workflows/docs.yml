@@ -23,7 +23,7 @@ jobs:
       - name: Install, build, and upload your site
         uses: withastro/action@v2
         with:
-          node-version: 20
+          node-version: 22.22.3
           path: ./docs # The root location of your Astro project inside the repository. (optional)
           package-manager: pnpm@10 # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
 
