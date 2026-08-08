@@ -19,7 +19,7 @@
     "nx": "21.2.2",
     "rollup": "^3.29.5",
     "verdaccio": "^6.0.5",
-    "webpack": "5.99.8",
+    "webpack": "5.109.2",
     "webpack-cli": "^5.1.4",
     "@rspack/cli": "^1.0.10",
     "@rspack/core": "^1.0.10"
