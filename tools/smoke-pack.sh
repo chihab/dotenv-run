@@ -45,6 +45,20 @@ cd "$APP_DIR"
 echo "==> Installing the packed builder into the fresh app"
 npm install "$TARBALL"
 
+echo "==> Asserting required runtime deps are declared (not only reachable via the optional webpack dep)"
+# @dotenv-run/core is imported as a value in every builder, so it must be a real
+# runtime `dependency` -- never only a devDependency or reachable transitively
+# through the OPTIONAL @dotenv-run/webpack (that path breaks under
+# `--omit=optional` or strict/isolated installs). We can't prove this with
+# `npm i --omit=optional` because esbuild legitimately uses optionalDependencies
+# for its platform binary, so assert the invariant on the installed metadata.
+CORE_DECLARED="$(node -p "(require('$APP_DIR/node_modules/@ngx-env/builder/package.json').dependencies||{})['@dotenv-run/core']||''")"
+if [ -z "$CORE_DECLARED" ]; then
+  echo "FAIL: @ngx-env/builder does not declare @dotenv-run/core in dependencies" >&2
+  exit 1
+fi
+echo "    ok: @ngx-env/builder depends on @dotenv-run/core@$CORE_DECLARED"
+
 echo "==> Wiring up the builder (ng add)"
 CI=true npx ng add @ngx-env/builder --skip-confirmation
 
