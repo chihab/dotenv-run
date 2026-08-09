@@ -1,4 +1,4 @@
-import * as cpy from "cpy";
+import cpy = require("cpy");
 
 async function copySchema(name: string) {
   await cpy([`src/schematics/${name}/schema.json`], `dist/schematics/${name}`);

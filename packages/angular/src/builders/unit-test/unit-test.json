@@ -21,7 +21,7 @@
     },
     "runnerConfig": {
       "type": ["string", "boolean"],
-      "description": "Specifies the configuration file for the selected test runner. If a string is provided, it will be used as the path to the configuration file. If `true`, the builder will search for a default configuration file (e.g., `vitest.config.ts` or `karma.conf.js`). If `false`, no external configuration file will be used.\\nFor Vitest, this enables advanced options and the use of custom plugins. Please note that while the file is loaded, the Angular team does not provide direct support for its specific contents or any third-party plugins used within it.",
+      "description": "Specifies the configuration file for the selected test runner. If a string is provided, it will be used as the path to the configuration file. If `true`, the builder will search for a default configuration file (e.g., `vitest-base.config.ts` or `karma.conf.js`). If `false`, no external configuration file will be used.\\nFor Vitest, this enables advanced options and the use of custom plugins. Please note that while the file is loaded, the Angular team does not provide direct support for its specific contents or any third-party plugins used within it.",
       "default": false
     },
     "browsers": {
@@ -60,6 +60,10 @@
       "type": "boolean",
       "description": "Enables watch mode, which re-runs tests when source files change. Defaults to `true` in TTY environments and `false` otherwise."
     },
+    "headless": {
+      "type": "boolean",
+      "description": "Forces all configured browsers to run in headless mode. When using the Vitest runner, this option is ignored if no browsers are configured. The Karma runner does not support this option."
+    },
     "debug": {
       "type": "boolean",
       "description": "Enables debugging mode for tests, allowing the use of the Node Inspector.",
@@ -67,13 +71,19 @@
     },
     "ui": {
       "type": "boolean",
-      "description": "Enables the Vitest UI for interactive test execution. This option is only available for the Vitest runner.",
-      "default": false
+      "description": "Enables the Vitest UI for interactive test execution. This option is only available for the Vitest runner."
+    },
+    "isolate": {
+      "type": "boolean",
+      "description": "Enables isolation for test execution. When true, Vitest runs tests in separate threads or processes. This option is only available for the Vitest runner. Defaults to false to align with the Karma/Jasmine experience."
+    },
+    "quiet": {
+      "type": "boolean",
+      "description": "Suppresses the verbose build summary and stats table on each rebuild. Defaults to `true` locally and `false` in CI environments."
     },
     "coverage": {
       "type": "boolean",
-      "description": "Enables coverage reporting for tests.",
-      "default": false
+      "description": "Enables coverage reporting for tests. If not specified, the coverage configuration from a runner configuration file will be used if present. Otherwise, coverage is disabled by default."
     },
     "coverageInclude": {
       "type": "array",

@@ -37,3 +37,24 @@ jobs:
           pnpm build:all
           pnpm test:all
           pnpm e2e:all
+
+  smoke-pack:
+    name: Smoke test packed builder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 22
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - name: Install Packages
+        run: |
+          pnpm i
+      - name: Build Packages
+        run: |
+          pnpm build
+      - name: Pack and smoke test against a fresh Angular app
+        run: |
+          ./tools/smoke-pack.sh
