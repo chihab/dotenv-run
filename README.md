@@ -258,7 +258,6 @@ export default {
   plugins: [
     new DotenvRunPlugin(
       { prefix: "^API", verbose: true, root: "../.." },
-      __dirname
     ),
   ],
 };
