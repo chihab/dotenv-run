@@ -25,7 +25,7 @@
 
 ## Quick Demo
 
-- [v21 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
+- [v22 with vite/esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
 - [v16 with webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
 
 ## Testimonials
@@ -493,7 +493,7 @@ The webpack configuration might be different depending on your custom builder bu
 
 [@dotenv-run/webpack](https://github.com/chihab/dotenv-run) is created by the same author of `@ngx-env/builder` and is used by `@ngx-env/builder` under the hood.
 
-You can find a sample project using `@dotenv-run/webpack` [here](https://github.com/chihab/dotenv-run/tree/main/examples/apps/ng-app).
+You can find a sample project using `@dotenv-run/webpack` [here](https://github.com/chihab/dotenv-run/tree/main/examples/nx-workspace/apps/ng-app-webpack).
 
 Please give it a star if you find it useful. ❤️
 
