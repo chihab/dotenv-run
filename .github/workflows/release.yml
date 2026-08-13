@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# Prevent overlapping release runs from racing on the "Version Packages" PR
+# or double-publishing.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write # push the version-bump commit, tags and GitHub Releases
+  pull-requests: write # open/update the "Version Packages" PR
+  id-token: write # npm provenance / OIDC (optional, harmless if unused)
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # changesets needs full history to build changelogs
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Create Release PR or publish to npm
+        uses: changesets/action@v1
+        with:
+          # Consumes .changeset/*.md, bumps versions + writes CHANGELOGs, and
+          # keeps the lockfile in sync (see the root "version" script).
+          version: pnpm run version
+          # Runs when no changesets remain (i.e. the Version Packages PR was
+          # merged): publishes to npm and pushes git tags + GitHub Releases.
+          publish: pnpm run release
+          commit: "chore(release): version packages"
+          title: "chore(release): version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Must be an npm *automation* (or granular) token so publishing works
+          # even when the account/packages enforce "auth-and-writes" 2FA.
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -8,11 +8,14 @@
     "build": "turbo build --filter=./packages/*",
     "build:docs": "turbo build  --filter=./docs",
     "prepare": "husky install",
-    "docker:build": "docker build -t temp-build . && docker rmi --force temp-build"
+    "docker:build": "docker build -t temp-build . && docker rmi --force temp-build",
+    "version": "changeset version && pnpm install --lockfile-only",
+    "release": "changeset publish"
   },
   "license": "MIT",
   "devDependencies": {
     "@types/minimatch": "5.1.2",
+    "@changesets/changelog-github": "^0.5.1",
     "@changesets/cli": "^2.27.9",
     "concurrently": "^8.2.2",
     "husky": "^8.0.3",
