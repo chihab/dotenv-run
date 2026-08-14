@@ -1,21 +1,88 @@
 ---
-title: Introduction
+title: dotenv-run
+description: Load .env environment variables in Angular, Node.js, Vite, Webpack, Rollup and esbuild — with first-class monorepo support for Nx and Turborepo.
+head:
+  - tag: title
+    content: dotenv-run · .env for Angular, Node.js & monorepos
+template: splash
+hero:
+  tagline: One way to load <code>.env</code> environment variables — across Angular, the CLI, Node.js and every major bundler. Built for monorepos.
+  image:
+    file: ../../../public/favicon.svg
+  actions:
+    - text: Quick Start
+      link: /getting-started/quick-start/
+      icon: right-arrow
+      variant: primary
+    - text: Angular (ngx-env)
+      link: /integrations/angular/
+      icon: rocket
+      variant: secondary
+    - text: View on GitHub
+      link: https://github.com/chihab/dotenv-run
+      icon: external
+      variant: minimal
 ---
 
-Defining configuration as environment variables is one of the tenets of a [twelve-factor app](https://12factor.net/config), it separates the config from your codebase and keeps it under your control.
+import { Card, CardGrid, LinkCard } from '@astrojs/starlight/components';
 
-`dotenv-run` is a collection of packages that use **dotenv** to support loading environment variables from `.env` files with multiple integrations.
+**dotenv-run** is a small family of packages that load environment variables from
+`.env` files the same way everywhere — in the terminal, in Node.js and inside your
+bundler. Configuration stays out of your codebase, exactly as the
+[twelve-factor app](https://12factor.net/config) recommends.
 
-Here are some of the benefits of using @dotenv-run:
+## Start here
 
-- **Simple**: seamelessly integrates with your existing workflow.
-- **Flexible**: supports multiple `.env` files and loading priorities.
-- **Expand**: supports expanding variables already available on your machine for use in your `.env` files.
-- **Secure**: supports filtering environment variables by prefix.
-- **Monorepo ✨**: supports monorepo projects with multiple applications. .env files can be defined in the root workspace and overriden by each application.
-- **TypeScript**: supports TypeScript projects with type definitions for `process.env` and `import.meta.env`.
-- **ESM**: supports `process.env` and `import.meta.env` in ESM modules.
-- **Universal**: supports multiple intergrations including CLI, Node.js preload, Webpack, Rollup, Vite, and esbuild.
+<CardGrid>
+	<LinkCard
+		title="Angular · @ngx-env/builder"
+		description="The most popular way to use .env in Angular. ng add and you're done."
+		href="/integrations/angular/"
+	/>
+	<LinkCard
+		title="CLI · @dotenv-run/cli"
+		description="Run any command with your .env variables loaded: dotenv-run -- npm start."
+		href="/integrations/cli/"
+	/>
+	<LinkCard
+		title="Core · @dotenv-run/core"
+		description="The programmatic API that powers every integration. Build your own."
+		href="/integrations/core/"
+	/>
+	<LinkCard
+		title="Monorepo Setup ✨"
+		description="Cascading .env files across Nx / Turborepo workspaces."
+		href="/getting-started/monorepo-setup/"
+	/>
+</CardGrid>
 
+## Why dotenv-run
 
-
+<CardGrid>
+	<Card title="Angular-first" icon="rocket">
+		[`@ngx-env/builder`](/integrations/angular/) injects `NG_APP_*` variables into
+		Angular apps with **zero config** — Webpack and esbuild builders, templates and
+		`index.html` included.
+	</Card>
+	<Card title="Monorepo ✨" icon="setting">
+		`.env` files cascade from the workspace root down to each app, so shared config
+		lives in one place. Works with [Nx](https://nx.dev) and
+		[Turborepo](https://turborepo.com/).
+	</Card>
+	<Card title="One API everywhere" icon="approve-check">
+		CLI, Node.js, Vite, Webpack, Rollup and esbuild all share the same options and
+		the same `.env` loading rules.
+	</Card>
+	<Card title="Expand & prioritize" icon="puzzle">
+		Reference variables inside variables (`API_URL=$API_BASE/users`) and layer
+		`.env.production` over `.env` with predictable
+		[loading priorities](/getting-started/loading-priorities/).
+	</Card>
+	<Card title="TypeScript & ESM" icon="seti:typescript">
+		Typed `process.env` and `import.meta.env`, with full ESM support.
+	</Card>
+	<Card title="Secure by default" icon="warning">
+		Filter which variables are exposed to the client with a prefix or regular
+		expression.
+	</Card>
+</CardGrid>

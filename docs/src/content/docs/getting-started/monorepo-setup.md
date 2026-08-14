@@ -1,5 +1,6 @@
 ---
-title: Monorepo Setup
+title: Monorepo .env setup (Nx & Turborepo)
+description: Cascade .env environment variables across a monorepo with dotenv-run. Shared variables live at the workspace root and each app overrides them — works with Nx and Turborepo.
 ---
 
 In a monorepo configuration, `.env.*` files can be defined in the root workspace and overriden by each application:

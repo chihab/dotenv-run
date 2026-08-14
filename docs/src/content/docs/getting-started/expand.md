@@ -1,5 +1,6 @@
 ---
 title: Expanding Variables
+description: Reference environment variables inside other variables (API_URL=$API_BASE/users) with dotenv-run variable expansion.
 ---
 
 

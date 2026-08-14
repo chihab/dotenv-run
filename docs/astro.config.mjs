@@ -1,59 +1,80 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
+// Production site URL. Used for canonical links, sitemap and social tags (SEO).
+// Update this if you serve the docs from a custom domain.
+const site = 'https://dotenv-run.pages.dev';
+
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://dotenv.run',
+	site,
 	base: '/',
 	integrations: [
 		starlight({
-			title: 'dotenv.run',
+			title: 'dotenv-run',
+			description:
+				'Load .env environment variables in Angular, Node.js, Vite, Webpack, Rollup and esbuild — with first-class monorepo support (Nx, Turborepo).',
+			logo: {
+				src: './public/favicon.svg',
+				alt: 'dotenv-run',
+			},
+			favicon: '/favicon.svg',
 			social: {
 				github: 'https://github.com/chihab/dotenv-run',
 			},
+			// Extra <head> tags for SEO / social previews. Starlight already emits
+			// the title, description, canonical URL and Open Graph title/description.
+			head: [
+				{
+					tag: 'meta',
+					attrs: {
+						name: 'keywords',
+						content:
+							'angular environment variables, ngx-env, dotenv angular, .env angular, dotenv monorepo, nx environment variables, turborepo env, import.meta.env, process.env, dotenv cli, dotenv vite, dotenv webpack',
+					},
+				},
+				{ tag: 'meta', attrs: { property: 'og:type', content: 'website' } },
+				{ tag: 'meta', attrs: { property: 'og:site_name', content: 'dotenv-run' } },
+				{ tag: 'meta', attrs: { name: 'twitter:card', content: 'summary_large_image' } },
+			],
 			sidebar: [
 				{
 					label: 'Getting Started',
 					items: [
 						{ label: 'Introduction', link: '/' },
 						{ label: 'Quick Start', link: '/getting-started/quick-start/' },
-						{ label: 'Variables', items: [{ label: '.env files', link: '/getting-started/env-files/' }, { label: 'expand', link: '/getting-started/expand/' }, { label: 'command line', link: '/getting-started/command-line/' }] },
-						{ label: 'Loading Priorities', link: '/getting-started/loading-priorities/' },
-						{ label: 'Monorepo Setup ✨', link: '/getting-started/monorepo-setup/' },
-						// { label: 'Comparison', link: '/getting-started/comparison/' },
-						// { label: 'About', link: '/getting-started/about/' },
 					],
 				},
 				{
-					label: 'Integrations',
+					label: 'Popular',
 					items: [
-						{ label: 'CLI', link: '/integrations/cli/' },
-						{ label: 'Node.js', link: '/integrations/loader/' },
-						{ label: 'Rollup', link: '/integrations/rollup/' },
-						{ label: 'Webpack', link: '/integrations/webpack/' },
-						{ label: 'Vite', link: '/integrations/vite/' },
-						// { label: 'Babel', link: '/integrations/webpack/' },
-						// { label: 'Jest', link: '/integrations/jest/' },
-						// { label: 'SWC', link: '/integrations/swc/' },
-						// { label: 'ESBuild', link: '/integrations/esbuild/' },
-						{ label: 'Core', link: '/integrations/core/' },
+						{ label: 'Angular · @ngx-env/builder', link: '/integrations/angular/' },
+						{ label: 'CLI · @dotenv-run/cli', link: '/integrations/cli/' },
+						{ label: 'Core · @dotenv-run/core', link: '/integrations/core/' },
+						{ label: 'Monorepo Setup ✨', link: '/getting-started/monorepo-setup/' },
 					],
 				},
-				// {
-				// 	label: 'Recipes',
-				// 	items: [
-				// 		{ label: 'Nx', link: '/recipes/nx/' },
-				// 		{ label: 'Turbo', link: '/recipes/turbo/' },
-				// 		{ label: 'Docker', link: '/recipes/docker/' },
-				// 		{ label: 'Next.js', link: '/recipes/next.js/' },
-				// 		{ label: 'Angular', link: '/integrations/angular/' },
-				// 	],
-				// },
+				{
+					label: 'Bundlers',
+					items: [
+						{ label: 'Vite', link: '/integrations/vite/' },
+						{ label: 'Webpack', link: '/integrations/webpack/' },
+						{ label: 'Rollup', link: '/integrations/rollup/' },
+						{ label: 'esbuild', link: '/integrations/esbuild/' },
+						{ label: 'Node.js', link: '/integrations/loader/' },
+					],
+				},
+				{
+					label: 'Guides',
+					items: [
+						{ label: '.env files', link: '/getting-started/env-files/' },
+						{ label: 'Command line', link: '/getting-started/command-line/' },
+						{ label: 'Expand variables', link: '/getting-started/expand/' },
+						{ label: 'Loading priorities', link: '/getting-started/loading-priorities/' },
+					],
+				},
 			],
-			customCss: [
-				// Relative path to your custom CSS file
-				'./src/styles/custom.css',
-			],
+			customCss: ['./src/styles/custom.css'],
 		}),
 	],
 	image: { service: { entrypoint: 'astro/assets/services/sharp' } },

@@ -1,6 +1,7 @@
 ---
 title: Vite
---- 
+description: Load .env environment variables in Vite with @dotenv-run/vite — shared .env.* files, expansion and monorepo cascading.
+---
 
 ## Install
 

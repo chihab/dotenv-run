@@ -1,5 +1,6 @@
 ---
-title: Loader
+title: Node.js · @dotenv-run/load
+description: Preload .env environment variables into any Node.js script with node -r @dotenv-run/load, including .env.* files and monorepo cascading.
 ---
 
 # install

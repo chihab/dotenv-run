@@ -1,5 +1,6 @@
 ---
 title: Rollup
+description: Load .env environment variables in Rollup with @dotenv-run/rollup — shared .env.* files, expansion and monorepo cascading.
 ---
 
 ## install

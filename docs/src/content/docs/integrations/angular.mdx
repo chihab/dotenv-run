@@ -1,0 +1,155 @@
+---
+title: Angular environment variables with @ngx-env/builder
+description: Inject .env environment variables into Angular apps with @ngx-env/builder — zero config, Webpack and esbuild builders, NG_APP_ prefix, import.meta.env, templates, index.html and Nx/Turborepo monorepo support.
+head:
+  - tag: title
+    content: Angular .env variables · @ngx-env/builder · dotenv-run
+---
+
+[`@ngx-env/builder`](https://www.npmjs.com/package/@ngx-env/builder) is the most
+popular way to use **environment variables in Angular**. It reads `.env` files and
+injects the variables into your app at build time — no `process` polyfill, no
+custom Webpack config.
+
+- ✅ The [official recommendation](https://www.dotenv.org/docs/frameworks/angular/vercel) in the dotenv docs
+- ✅ Works with the modern `application` / esbuild builder **and** Webpack
+- ✅ `NG_APP_*` variables in TypeScript, templates and `index.html`
+- ✅ `process.env` and `import.meta.env` support
+- ✅ Monorepo cascading for [Nx](https://nx.dev) and [Turborepo](https://turborepo.com/)
+- ✅ Filters sensitive variables with a prefix / regular expression
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Quick start
+
+**1. Add @ngx-env to your Angular project**
+
+```sh
+ng add @ngx-env/builder
+```
+
+This updates your `angular.json` to use the `@ngx-env/builder` builders. If you
+still build with Webpack, use the `application` → `@ngx-env/builder:application`
+mapping that `ng add` sets up for you.
+
+**2. Define environment variables in a `.env` file**
+
+```sh
+# .env
+NG_APP_VERSION=$npm_package_version
+NG_APP_API_URL=https://api.example.com
+NG_APP_ENABLE_SENTRY=false
+```
+
+:::tip
+Only variables prefixed with `NG_APP_` are exposed to your Angular app. This
+keeps secrets out of your client bundle by default.
+:::
+
+**3. Use the variables in TypeScript**
+
+```ts
+@Component({
+  selector: 'app-footer',
+  template: `{{ version }} — {{ commit }}`,
+})
+export class FooterComponent {
+  version = import.meta.env.NG_APP_VERSION; // recommended
+  commit = process.env.NG_APP_COMMIT; // also supported
+}
+```
+
+**4. …and in `index.html`**
+
+```html
+<head>
+  <title>My App %NG_APP_VERSION%</title>
+</head>
+```
+
+**5. Run your usual Angular commands**
+
+```sh
+npm start
+NG_APP_ENABLE_SENTRY=true npm run build
+```
+
+## Defining variables
+
+You can set `NG_APP_*` variables from the command line or from `.env` files.
+
+<Tabs>
+<TabItem label="Linux / macOS">
+
+```sh
+NG_APP_BRANCH_NAME=$GITHUB_HEAD_REF ng build
+```
+
+</TabItem>
+<TabItem label="Windows (PowerShell)">
+
+```powershell
+$env:NG_APP_BRANCH_NAME="main"; ng build
+```
+
+</TabItem>
+<TabItem label="Windows (cmd.exe)">
+
+```bat
+set "NG_APP_BRANCH_NAME=main" && ng build
+```
+
+</TabItem>
+</Tabs>
+
+`.env` files are loaded with priorities, so you can layer environment-specific
+values on top of shared defaults:
+
+```sh
+.env                # committed defaults
+.env.local          # local overrides (git-ignored)
+.env.production     # loaded for production builds
+.env.production.local
+```
+
+See [loading priorities](/getting-started/loading-priorities/) for the full order.
+
+## TypeScript autocompletion
+
+`ng add` generates a `src/env.d.ts` file. Declare your variables there to get
+autocompletion and type-checking on `import.meta.env`:
+
+```ts
+// src/env.d.ts
+declare interface ImportMetaEnv {
+  readonly NG_APP_VERSION: string;
+  readonly NG_APP_API_URL: string;
+}
+```
+
+## Monorepo support ✨
+
+In an Nx or Turborepo workspace, `.env` files cascade from the workspace root down
+to each application, so shared configuration lives in one place and each app can
+override it.
+
+```sh
+workspace
+├── .env                      # API_BASE shared by every app
+├── apps
+│   └── my-ng-app
+│       └── .env              # NG_APP_* specific to this app
+└── nx.json
+```
+
+Read the [Monorepo Setup guide](/getting-started/monorepo-setup/) for details.
+
+## Try it online
+
+- [v22 with the vite / esbuild builder](https://stackblitz.com/edit/ngx-env-3ey8js?file=src%2Fapp.component.ts)
+- [v16 with the Webpack builder](https://stackblitz.com/edit/ngx-env?file=src%2Fapp.component.ts)
+
+## Learn more
+
+The full README — runtime variables, Docker, custom builders and known issues —
+lives in the [package repository](https://github.com/chihab/dotenv-run/tree/main/packages/angular).
