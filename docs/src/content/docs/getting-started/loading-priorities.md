@@ -1,5 +1,6 @@
 ---
 title: Loading Priorities
+description: How dotenv-run layers .env, .env.local and environment-specific files like .env.production, and the order variables are resolved.
 ---
 
 `@dotenv-run/cli` uses [dotenv](https://github.com/motdotla/dotenv) to support loading environment variables from `.env` files.

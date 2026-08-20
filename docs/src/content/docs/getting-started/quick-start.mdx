@@ -1,0 +1,167 @@
+---
+title: Quick Start
+description: Get started with dotenv-run in minutes — Angular (@ngx-env/builder), the CLI (@dotenv-run/cli) or the programmatic core (@dotenv-run/core).
+---
+
+Pick the package that matches how you build your app. They all read the same
+`.env` files and share the same options, so you can mix and match.
+
+import { Tabs, TabItem, LinkCard } from '@astrojs/starlight/components';
+
+<Tabs>
+<TabItem label="Angular (ngx-env)">
+
+The most popular way to use `.env` files in **Angular**. It supports the modern
+`application`/esbuild builder as well as Webpack, and requires no configuration.
+
+**1. Add it to your Angular project**
+
+```sh
+ng add @ngx-env/builder
+```
+
+**2. Define `NG_APP_*` variables in a `.env` file**
+
+```sh
+# .env
+NG_APP_API_URL=https://api.example.com
+NG_APP_VERSION=$npm_package_version
+```
+
+Only variables prefixed with `NG_APP_` are exposed to your app.
+
+**3. Use them in your code**
+
+```ts
+@Component({
+  selector: 'app-footer',
+  template: `{{ version }} — {{ apiUrl }}`,
+})
+export class FooterComponent {
+  apiUrl = import.meta.env.NG_APP_API_URL; // recommended
+  version = process.env.NG_APP_VERSION; // also supported
+}
+```
+
+…or directly in `index.html`:
+
+```html
+<title>My App %NG_APP_VERSION%</title>
+```
+
+**4. Run Angular as usual**
+
+```sh
+npm start
+```
+
+<LinkCard title="Full Angular guide →" href="/integrations/angular/" />
+
+</TabItem>
+<TabItem label="CLI (dotenv-run)">
+
+Run **any command** with your `.env` variables loaded into `process.env` — no
+code changes required.
+
+**1. Install**
+
+```sh
+npm install -D @dotenv-run/cli
+```
+
+**2. Create a `.env` file**
+
+```sh
+# .env
+API_HOST=api-sandbox.com
+API_INSTANCE=$USER-instance
+API_BASE=https://$API_INSTANCE.$API_HOST/
+```
+
+Notice how `API_BASE` expands the other variables.
+
+**3. Run your command**
+
+```sh
+npx dotenv-run -- printenv
+✔ /sample/.env
+API_HOST=api-sandbox.com
+API_INSTANCE=chihab-instance
+API_BASE=https://chihab-instance.api-sandbox.com/
+```
+
+Override any value from the command line, and layer environment-specific files
+with `NODE_ENV`:
+
+```sh
+NODE_ENV=prod npx dotenv-run -- npm start
+✔ /sample/.env.prod   # loaded because NODE_ENV=prod
+✔ /sample/.env
+```
+
+<LinkCard title="Full CLI guide →" href="/integrations/cli/" />
+
+</TabItem>
+<TabItem label="Core (programmatic)">
+
+The engine behind every integration. Use `@dotenv-run/core` to load `.env` files
+from your own scripts or to build a custom integration.
+
+**1. Install**
+
+```sh
+npm install @dotenv-run/core
+```
+
+**2. Load your variables**
+
+```js
+// index.js
+import { env } from '@dotenv-run/core';
+
+env({
+  root: '../..',      // walk up to the workspace root (monorepo)
+  prefix: '^API_',    // only inject API_* variables
+  verbose: true,      // print which .env files were loaded
+});
+
+console.log(process.env.API_USERS);
+```
+
+Given these files:
+
+```sh
+.env       # API_USERS=$API_BASE/v1/users
+.env.dev   # API_BASE=https://localhost:3000
+.env.prod  # API_BASE=https://dotenv-run.app
+```
+
+then:
+
+```sh
+NODE_ENV=dev node index.js
+https://localhost:3000/v1/users
+
+NODE_ENV=prod node index.js
+https://dotenv-run.app/v1/users
+```
+
+<LinkCard title="Full Core guide →" href="/integrations/core/" />
+
+</TabItem>
+</Tabs>
+
+## Using a bundler instead?
+
+`dotenv-run` ships plugins that share the exact same behaviour as the CLI —
+`.env.*` files, variable expansion and monorepo cascading all work the same way.
+
+import { CardGrid } from '@astrojs/starlight/components';
+
+<CardGrid>
+	<LinkCard title="Vite" href="/integrations/vite/" />
+	<LinkCard title="Webpack" href="/integrations/webpack/" />
+	<LinkCard title="Rollup" href="/integrations/rollup/" />
+	<LinkCard title="esbuild" href="/integrations/esbuild/" />
+	<LinkCard title="Node.js preload" href="/integrations/loader/" />
+</CardGrid>

@@ -1,5 +1,6 @@
 ---
 title: Webpack
+description: Load .env environment variables in Webpack with @dotenv-run/webpack — shared .env.* files, expansion and monorepo cascading.
 ---
 
 ## install

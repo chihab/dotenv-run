@@ -1,51 +1,52 @@
-# Starlight Starter Kit: Basics
+# dotenv-run docs
 
-```
-npm create astro@latest -- --template starlight
-```
+The documentation site for [dotenv-run](https://github.com/chihab/dotenv-run),
+built with [Astro Starlight](https://starlight.astro.build/).
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/basics)
+## Local development
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+All commands are run from this `docs/` directory:
 
-## 🚀 Project Structure
+| Command           | Action                                       |
+| :---------------- | :------------------------------------------- |
+| `pnpm install`    | Install dependencies                         |
+| `pnpm dev`        | Start the local dev server at `localhost:4321` |
+| `pnpm build`      | Build the production site to `./dist/`       |
+| `pnpm preview`    | Preview the production build locally         |
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+Content lives in `src/content/docs/` — every `.md` / `.mdx` file becomes a page.
+The sidebar and site-wide SEO metadata are configured in `astro.config.mjs`.
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   ├── docs/
-│   │   └── config.ts
-│   └── env.d.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
-```
+## Deployment (Cloudflare Pages)
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+The site is deployed to **Cloudflare Pages** by
+[`.github/workflows/docs.yml`](../.github/workflows/docs.yml):
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+- **Push to `main`** → production deployment.
+- **Pull request** → preview deployment, with the preview URL posted as a
+  sticky comment on the PR.
 
-Static assets, like favicons, can be placed in the `public/` directory.
+### One-time setup
 
-## 🧞 Commands
+1. Create a Cloudflare Pages project named **`dotenv-run`** (Direct Upload —
+   the GitHub workflow builds and uploads, so no build command is needed on
+   Cloudflare's side):
 
-All commands are run from the root of the project, from a terminal:
+   ```sh
+   npx wrangler pages project create dotenv-run --production-branch main
+   ```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+2. Add two **repository secrets** (Settings → Secrets and variables → Actions):
 
-## 👀 Want to learn more?
+   | Secret                 | Where to find it                                             |
+   | :--------------------- | :---------------------------------------------------------- |
+   | `CLOUDFLARE_API_TOKEN` | Cloudflare dashboard → My Profile → API Tokens (use the "Edit Cloudflare Workers"/Pages template, or a token with **Pages: Edit**). |
+   | `CLOUDFLARE_ACCOUNT_ID`| Cloudflare dashboard → Workers & Pages → Account ID.        |
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+   Until both secrets are present the workflow safely no-ops (it will not fail
+   PR checks).
+
+3. The production URL is `https://dotenv-run.pages.dev`. If you attach a custom
+   domain in Cloudflare, update the `site` constant in `astro.config.mjs` and
+   the `Sitemap:` line in `public/robots.txt` so canonical URLs and the sitemap
+   stay correct for SEO.

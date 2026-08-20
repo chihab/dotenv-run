@@ -1,39 +1,113 @@
-name: Deploy to GitHub Pages
+name: Docs (Cloudflare Pages)
+
+# Builds the Astro docs site and deploys it to Cloudflare Pages.
+#   - Pushes to `main`  -> production deployment
+#   - Pull requests      -> preview deployment + a sticky comment with the URL
+#
+# One-time setup (see docs/README.md):
+#   1. Create a Cloudflare Pages project named `dotenv-run`
+#      (Direct Upload / Wrangler, no build command needed on Cloudflare's side).
+#   2. Add two repository secrets:
+#         CLOUDFLARE_API_TOKEN   (Pages: Edit permission)
+#         CLOUDFLARE_ACCOUNT_ID
+#   Until those secrets exist the workflow no-ops instead of failing.
 
 on:
-  # Trigger the workflow every time you push to the `main` branch
-  # Using a different branch name? Replace `main` with your branch’s name
   push:
     branches: [main]
-  # Allows you to run this workflow manually from the Actions tab on GitHub.
-  workflow_dispatch:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/docs.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/docs.yml'
 
-# Allow this job to clone the repo and create a page deployment
 permissions:
   contents: read
-  pages: write
-  id-token: write
+  pull-requests: write
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout your repository using git
-        uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v2
-        with:
-          node-version: 20
-          path: ./docs # The root location of your Astro project inside the repository. (optional)
-          package-manager: pnpm@10 # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
-
   deploy:
-    needs: build
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    # Skip PRs from forks — they cannot access the Cloudflare secrets.
+    if: >-
+      github.event_name == 'push' ||
+      github.event.pull_request.head.repo.full_name == github.repository
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Check for Cloudflare credentials
+        id: creds
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::Cloudflare credentials are not set — skipping deploy. Add CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID repository secrets to enable docs previews."
+          fi
+
+      - name: Checkout
+        if: steps.creds.outputs.ready == 'true'
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        if: steps.creds.outputs.ready == 'true'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        if: steps.creds.outputs.ready == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        if: steps.creds.outputs.ready == 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Build docs
+        if: steps.creds.outputs.ready == 'true'
+        run: pnpm --filter @dotenv-run/docs build
+
+      # Invoke Wrangler via npx instead of cloudflare/wrangler-action, which
+      # tries to `pnpm add wrangler` at the workspace root and fails on this
+      # pnpm monorepo (ERR_PNPM_ADDING_TO_ROOT). npx runs it in isolation.
+      - name: Deploy to Cloudflare Pages
+        if: steps.creds.outputs.ready == 'true'
+        id: deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -o pipefail
+          branch="${{ github.head_ref || github.ref_name }}"
+          npx --yes wrangler@3 pages deploy docs/dist \
+            --project-name=dotenv-run \
+            --branch="$branch" 2>&1 | tee deploy.log
+          url=$(grep -oiE 'https://[a-z0-9._-]+\.pages\.dev' deploy.log | tail -1)
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Comment preview URL
+        if: steps.creds.outputs.ready == 'true' && github.event_name == 'pull_request' && steps.deploy.outputs.url != ''
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: docs-preview
+          message: |
+            ### 📚 Docs preview
+
+            Your changes to the documentation site are deployed:
+
+            | | |
+            | --- | --- |
+            | **Preview URL** | ${{ steps.deploy.outputs.url }} |
+            | **Commit** | `${{ github.event.pull_request.head.sha }}` |
+
+            _This comment updates automatically on every push to the PR._

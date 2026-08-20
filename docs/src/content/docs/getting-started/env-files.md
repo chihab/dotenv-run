@@ -1,5 +1,6 @@
 ---
 title: .env files
+description: How dotenv-run discovers and loads .env files, and how to structure them for local, development and production environments.
 ---
 
 A .env file is a simple text file that stores environment variables. Environment variables are key-value pairs that are used to configure applications and services. They can be used to store things like database passwords, API keys, and other sensitive information.

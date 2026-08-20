@@ -1,5 +1,6 @@
 ---
-title: CLI
+title: CLI · @dotenv-run/cli
+description: Run any command with your .env environment variables loaded into process.env using the dotenv-run CLI — with .env.* files, variable expansion and monorepo support.
 ---
 
 `@dotenv-run/cli` is a standalone CLI that can be used to run a script with environment variables defined in a `.env` file.
