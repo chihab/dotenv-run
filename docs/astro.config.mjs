@@ -14,10 +14,6 @@ export default defineConfig({
 			title: 'dotenv-run',
 			description:
 				'Load .env environment variables in Angular, Node.js, Vite, Webpack, Rollup and esbuild — with first-class monorepo support (Nx, Turborepo).',
-			logo: {
-				src: './public/favicon.svg',
-				alt: 'dotenv-run',
-			},
 			favicon: '/favicon.svg',
 			social: {
 				github: 'https://github.com/chihab/dotenv-run',
