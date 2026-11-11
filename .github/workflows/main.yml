@@ -7,7 +7,9 @@ on:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-latest
+    # Pinned: the locked Playwright (1.57.0) cannot install browsers on
+    # ubuntu-26.04, which ubuntu-latest now resolves to. Needs Playwright >= 1.61.
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
