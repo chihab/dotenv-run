@@ -27,6 +27,7 @@
   },
   "scripts": {
     "dev": "tsc -w",
+    "test": "vitest",
     "build": "tsc && ts-node tools/schema-copy-run.ts",
     "copy-dist": "ts-node tools/schema-dist.ts"
   },
