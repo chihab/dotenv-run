@@ -12,6 +12,7 @@ import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { getEnvironment } from "../utils/get-environment";
 import { indexHtmlTransformerLegacy } from "../utils/index-html-transform-legacy";
 import { getProjectCwd } from "../utils/project";
+import { isLocalized } from "../utils/write-ngx-env-runtime";
 
 export const executeWithEnv = (
   options: BrowserBuilderOptions & NgxEnvSchema,
@@ -38,7 +39,7 @@ export const executeWithEnv = (
               "browser"
             ),
             null, // no ssr support with browser-esbuild,
-            Array.isArray(options.localize) ? options.localize : [],
+            isLocalized(options.localize),
             raw,
             dotEnvOptions.runtime
           );

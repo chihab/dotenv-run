@@ -10,6 +10,7 @@ import { getEnvironment } from "../utils/get-environment";
 import { indexHtmlTransformerLegacy } from "../utils/index-html-transform-legacy";
 import { getProjectCwd } from "../utils/project";
 import { plugin } from "../utils/webpack-plugin";
+import { isLocalized } from "../utils/write-ngx-env-runtime";
 
 export const executeWithEnv = (
   options: BrowserBuilderOptions & NgxEnvSchema,
@@ -29,7 +30,7 @@ export const executeWithEnv = (
           indexHtmlTransformerLegacy(
             join(context.workspaceRoot, options.outputPath.toString()),
             null, // no ssr support with browser,
-            Array.isArray(options.localize) ? options.localize : [],
+            isLocalized(options.localize),
             raw,
             options.ngxEnv.runtime
           );

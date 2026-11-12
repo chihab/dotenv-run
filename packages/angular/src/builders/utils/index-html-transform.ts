@@ -1,4 +1,5 @@
 import type { Dict } from "@dotenv-run/core";
+import { injectRuntimeScript } from "./inject-runtime-script";
 import { replaceHtmlVars } from "./replace-html-vars";
 
 export function indexHtmlTransformer(
@@ -8,14 +9,13 @@ export function indexHtmlTransformer(
   runtime = false
 ) {
   const html = replaceHtmlVars(content, raw);
-  return runtime
+  if (!runtime) {
+    return html;
+  }
+  return devServer
     ? html.replace(
         /<head>/,
-        devServer
-          ? `<head><script>globalThis._NGX_ENV_ = ${JSON.stringify(
-              raw
-            )}</script>`
-          : `<head><script src="/ngx-env.js"></script>`
+        `<head><script>globalThis._NGX_ENV_ = ${JSON.stringify(raw)}</script>`
       )
-    : html;
+    : injectRuntimeScript(html);
 }

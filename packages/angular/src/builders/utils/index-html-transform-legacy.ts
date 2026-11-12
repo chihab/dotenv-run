@@ -1,13 +1,14 @@
 import { type Dict } from "@dotenv-run/core";
 import { readFileSync, writeFileSync } from "fs";
 import * as glob from "glob";
+import { injectRuntimeScript } from "./inject-runtime-script";
 import { replaceHtmlVars } from "./replace-html-vars";
 import { writeRuntimeFile } from "./write-ngx-env-runtime";
 
 export function indexHtmlTransformerLegacy(
   browserOutputDir: string,
   serverOutputDir: string | null,
-  locales: string[] = [],
+  localized: boolean,
   raw: Dict,
   runtime = false
 ) {
@@ -19,12 +20,7 @@ export function indexHtmlTransformerLegacy(
       try {
         writeFileSync(
           filePath,
-          runtime
-            ? content.replace(
-                /<head>/,
-                `<head><script src="/ngx-env.js"></script>`
-              )
-            : content
+          runtime ? injectRuntimeScript(content) : content
         );
       } catch (e) {
         console.log(`❌ Failed to replace variables in ${filePath} ❌`);
@@ -39,12 +35,7 @@ export function indexHtmlTransformerLegacy(
       try {
         writeFileSync(
           filePath,
-          runtime
-            ? content.replace(
-                /<head>/,
-                `<head><script src="/ngx-env.js"></script>`
-              )
-            : content
+          runtime ? injectRuntimeScript(content) : content
         );
       } catch (e) {
         console.log(`❌ Failed to replace variables in ${filePath} ❌`);
@@ -53,6 +44,6 @@ export function indexHtmlTransformerLegacy(
     });
   }
   if (runtime) {
-    writeRuntimeFile(browserOutputDir, locales, raw);
+    writeRuntimeFile(browserOutputDir, localized, raw);
   }
 }
