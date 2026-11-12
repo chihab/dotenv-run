@@ -1,5 +1,28 @@
 # @ngx-env/builder
 
+## 22.1.0
+
+### Minor Changes
+
+- a9da0fa: Runtime mode now injects `ngx-env.js` right after `<base href>` with a relative src, so it resolves against the base href.
+
+  Before, the tag was always the root-absolute `/ngx-env.js` at the start of `<head>`, which failed for apps served under a sub-path (`--base-href /app/`) and for localized builds. Documents without a `<base href>` keep the root-absolute `/ngx-env.js`.
+
+  Localized builds (`localize: true` or a list of locales) now write `ngx-env.js` next to every locale's `index.html`, plus the root one if there is one.
+
+  **This changes the URL the browser requests.** If you overwrite `ngx-env.js` at deploy time, or rewrite the script tag in `index.html`, check your scripts: with a base href, the file is now loaded from `<base href>ngx-env.js` instead of `/ngx-env.js`, and localized builds have one file per locale.
+
+### Patch Changes
+
+- 51eff47: Bump `glob` from `^10.4.5` to `^11.1.0` to resolve CVE-2025-64756.
+
+  The builder only uses the `glob` library API (`glob.sync`) and never the
+  vulnerable `-c/--cmd` CLI, so it was not exploitable in practice — but the
+  `^10.4.5` range still permitted affected versions and tripped security
+  scanners (e.g. Amazon Inspector). Upgrading to the patched `11.1.0` line
+  clears the advisory. `glob.sync` remains available, so no code changes were
+  required.
+
 ## 20.1.1
 
 ### Patch Changes
