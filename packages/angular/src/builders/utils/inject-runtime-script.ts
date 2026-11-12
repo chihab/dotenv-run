@@ -1,4 +1,4 @@
-const BASE_TAG = /<base\s[^>]*>/i;
+const BASE_TAG = /<base\s[^>]*\bhref\s*=[^>]*>/i;
 
 /**
  * Injects the runtime `ngx-env.js` script.
@@ -11,6 +11,9 @@ const BASE_TAG = /<base\s[^>]*>/i;
  */
 export function injectRuntimeScript(html: string): string {
   return BASE_TAG.test(html)
-    ? html.replace(BASE_TAG, (base) => `${base}<script src="ngx-env.js"></script>`)
+    ? html.replace(
+        BASE_TAG,
+        (base) => `${base}<script src="ngx-env.js"></script>`
+      )
     : html.replace(/<head>/, `<head><script src="/ngx-env.js"></script>`);
 }

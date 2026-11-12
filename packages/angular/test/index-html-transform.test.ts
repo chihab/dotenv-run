@@ -28,6 +28,14 @@ describe("indexHtmlTransformer with runtime", () => {
     );
   });
 
+  it("keeps the root-absolute script when the base tag has no href", () => {
+    const html = `<html><head><base target="_blank"><title>App</title></head></html>`;
+
+    expect(indexHtmlTransformer(html, raw, false, true)).toBe(
+      `<html><head><script src="/ngx-env.js"></script><base target="_blank"><title>App</title></head></html>`
+    );
+  });
+
   it("inlines the variables on the dev server", () => {
     const html = `<head><base href="/"></head>`;
 

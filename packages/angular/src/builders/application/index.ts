@@ -10,7 +10,7 @@ import { join } from "path";
 import { from, switchMap, tap } from "rxjs";
 import { NgxEnvSchema } from "../ngx-env/ngx-env-schema";
 import { getEnvironment } from "../utils/get-environment";
-import { writeRuntimeFile } from "../utils/write-ngx-env-runtime";
+import { isLocalized, writeRuntimeFile } from "../utils/write-ngx-env-runtime";
 import { getProjectCwd } from "../utils/project";
 import { indexHtmlTransformer } from "../utils/index-html-transform";
 
@@ -48,7 +48,7 @@ export const executeWithEnv = (
             );
             writeRuntimeFile(
               join(outputDir, "browser"),
-              Array.isArray(options.localize) ? options.localize : [],
+              isLocalized(options.localize),
               raw
             );
           }

@@ -8,7 +8,7 @@ import { writeRuntimeFile } from "./write-ngx-env-runtime";
 export function indexHtmlTransformerLegacy(
   browserOutputDir: string,
   serverOutputDir: string | null,
-  locales: string[] = [],
+  localized: boolean,
   raw: Dict,
   runtime = false
 ) {
@@ -44,6 +44,6 @@ export function indexHtmlTransformerLegacy(
     });
   }
   if (runtime) {
-    writeRuntimeFile(browserOutputDir, locales, raw);
+    writeRuntimeFile(browserOutputDir, localized, raw);
   }
 }
